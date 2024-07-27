@@ -1,0 +1,45 @@
+body {
+    height: 100vh;
+}
+
+#scenario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.circle {
+    background-color: red;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: bounce 2s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(-500px); /* Comienza desde arriba */
+    }
+    20% {
+        transform: translateY(0); /* Caída */
+    }
+    30% {
+        transform: translateY(-150px); /* Primer rebote */
+    }
+    50% {
+        transform: translateY(0); /* Vuelve a la posición original */
+    }
+    60% {
+        transform: translateY(-100px); /* Segundo rebote */
+    }
+    75% {
+        transform: translateY(0); /* Vuelve a la posición original */
+    }
+    85% {
+        transform: translateY(-50px); /* Tercer rebote */
+    }
+    100% {
+        transform: translateY(0); /* Vuelve a la posición original */
+    }
+}
