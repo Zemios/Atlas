@@ -1,15 +1,70 @@
 @import url("https://use.typekit.net/npd8ime.css");
+@import 'node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
+
+:root {
+    --light: #ffffff;
+    --dark: #131313;
+    --initial-background-color: var(--dark);
+    --final-background-color: var(--light);
+
+    --text-color: var(--dark);
+}
 
 html, body {
     height: 100%;
     overflow: hidden;
-    background-color: #131313;
+    background-color: var(--final-background-color);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "muli", sans-serif;
     font-weight: 200;
     scroll-behavior: smooth;
+    animation: body-color 7.5s steps(1);
+    transition: 200ms background-color;
+}
+
+.lightmode-button-container {
+    position: fixed;
+    right: 0;
+    background-color: var(--initial-background-color);
+    z-index: 2;
+    padding-left: .5em;
+    padding-bottom: .5em;
+    border-bottom-left-radius: 2em;
+    transition: 200ms;
+    margin-right: -5em;
+    animation: initial-appear 500ms normal 7.5s forwards;
+}
+
+.lightmode-button-container:hover, .lightmode-button-container:focus {
+    border-bottom-left-radius: 3em;
+    font-size: 1.05em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    transition: 200ms;
+}
+.lightmode-expanding-circle {
+    width: 0em;
+    height: 0em;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    border-bottom-left-radius: 3em;
+    position: absolute;
+    background-color: var(--final-background-color);
+    transition: 1s;
+}
+.lightmode-expanding-circle-animation {
+    animation: lightmode-expanding-circle 1s ease-in-out forwards;
+}
+
+.lightmode-button-container button {
+    padding: 1em;
+    background-color: transparent;
+    color: var(--final-background-color);
+    font-size: 1em;
+    border: 0;
 }
 
 .animated-ball-container {
@@ -24,17 +79,19 @@ html, body {
 .animated-ball {
     width: 2em;
     height: 2em;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--final-background-color);
     border-radius: 50%;
     position: absolute;
     animation: bounce 2.5s normal forwards;
 }
 .animated-ball-shadow-1 {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--final-background-color);
+    opacity: 50%;
     animation: bounce 2.5s 0.025s normal forwards;
 }
 .animated-ball-shadow-2 {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: var(--final-background-color);
+    opacity: 25%;
     animation: bounce 2.5s 0.050s normal forwards;
 }
 
@@ -44,7 +101,7 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #fff;
+    color: var(--final-background-color);
     position: relative;
     overflow: hidden;
 }
@@ -62,10 +119,10 @@ html, body {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: var(--final-background-color);
     width: 0px;
     height: 0px;
-    color: #131313;
+    color: var(--initial-background-color);
     animation: expaned-circle 5s ease-out forwards;
     animation-delay: 2.5s;
     position: absolute;
@@ -76,7 +133,7 @@ html, body {
 }
 
 .animated-z span {
-    text-shadow: 0px 0px 0.2em #fff, 0px 0px 0.4em #fff, 0px 0px 0.6em #fff, 0px 0px 0.8em #fff, 0px 0px 1em #fff;
+    text-shadow: 0px 0px 0.2em var(--final-background-color), 0px 0px 0.4em var(--final-background-color), 0px 0px 0.6em var(--final-background-color), 0px 0px 0.8em var(--final-background-color), 0px 0px 1em var(--final-background-color);
 }
 
 @media (width < 1024px) {

@@ -1,3 +1,27 @@
+@import '../global.css';
+@keyframes body-color { 
+    0% { background-color: var(--initial-background-color); }
+    100% { background-color: var(--final-background-color); }
+}
+@keyframes initial-appear {
+    0% {
+        margin-right: -5em;
+    }
+    100% {
+        margin-right: 0;
+    }
+}
+@keyframes lightmode-expanding-circle {
+    0% {
+        width: 0em;
+        height: 0em;
+    }
+    100% {
+        width: 3000px;
+        height: 3000px;
+        display: none;
+    }
+}
 @keyframes bounce {
     0% {
         transform: translateY(-300px);
@@ -42,8 +66,8 @@
         opacity: 1;
         transform: scale(1.2);
         filter: blur(0);
-        color: #131313;
-        text-shadow: 0px 0px 0.2em #fff, 0px 0px 0.4em #fff, 0px 0px 0.6em #fff, 0px 0px 0.8em #fff, 0px 0px 1em #fff;
+        color: var(--initial-background-color);
+        text-shadow: 0px 0px 0.2em var(--final-background-color), 0px 0px 0.4em var(--final-background-color), 0px 0px 0.6em var(--final-background-color), 0px 0px 0.8em var(--final-background-color), 0px 0px 1em var(--final-background-color);
     }
 }
 
@@ -70,7 +94,8 @@
     }
 
     100% {
-        width: 2000px;
-        height: 2000px;
+        width: 3500px;
+        height: 3500px;
+        display: none;
     }
 }

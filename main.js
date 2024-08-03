@@ -1,7 +1,13 @@
+import { toggleLightMode } from "./scripts/button-interactions.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+    const lightModeButton = document.getElementById("lightmode-button");
     const title = document.querySelector('.animated-title');
     const letters = title.querySelectorAll('span');
     
+    lightModeButton.addEventListener("click", () => {
+        toggleLightMode();
+    })
     letters.forEach((letter, index) => {
         const angle = (360 / letters.length) * index;
         const radius = 100; // Puedes ajustar este valor para cambiar la distancia de las letras desde el centro
