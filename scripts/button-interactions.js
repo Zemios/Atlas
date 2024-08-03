@@ -1,6 +1,9 @@
 export function toggleLightMode() {
     const root = document.documentElement;
     const expanding_circle = document.getElementById("lightmode-expanding-circle")
+    const button = document.getElementById('lightmode-button')
+    button.firstElementChild.classList.toggle('bi-sun-fill')
+    button.firstElementChild.classList.toggle('bi-moon-fill')
     var lightColor = getComputedStyle(root).getPropertyValue('--light');
     var darkColor = getComputedStyle(root).getPropertyValue('--dark');
 
