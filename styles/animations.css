@@ -3,6 +3,14 @@
     0% { background-color: var(--initial-background-color); }
     100% { background-color: var(--final-background-color); }
 }
+@keyframes initial-appear {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
 @keyframes lightmode-expanding-circle {
     0% {
         width: 0em;
