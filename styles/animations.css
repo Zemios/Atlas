@@ -5,10 +5,10 @@
 }
 @keyframes initial-appear {
     0% {
-        opacity: 0%;
+        margin-right: -5em;
     }
     100% {
-        opacity: 100%;
+        margin-right: 0;
     }
 }
 @keyframes lightmode-expanding-circle {

@@ -33,7 +33,7 @@ html, body {
     padding-bottom: .5em;
     border-bottom-left-radius: 2em;
     transition: 200ms;
-    opacity: 0%;
+    margin-right: -5em;
     animation: initial-appear 500ms normal 7.5s forwards;
 }
 
