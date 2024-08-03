@@ -42,6 +42,20 @@ html, body {
     padding-bottom: 1em;
     transition: 200ms;
 }
+.lightmode-expanding-circle {
+    width: 0em;
+    height: 0em;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    border-bottom-left-radius: 3em;
+    position: absolute;
+    background-color: var(--final-background-color);
+    transition: 1s;
+}
+.lightmode-expanding-circle-animation {
+    animation: lightmode-expanding-circle 1s ease-in-out forwards;
+}
 
 .lightmode-button-container button {
     padding: 1em;

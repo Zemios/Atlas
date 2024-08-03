@@ -3,6 +3,17 @@
     0% { background-color: var(--initial-background-color); }
     100% { background-color: var(--final-background-color); }
 }
+@keyframes lightmode-expanding-circle {
+    0% {
+        width: 0em;
+        height: 0em;
+    }
+    100% {
+        width: 3000px;
+        height: 3000px;
+        display: none;
+    }
+}
 @keyframes bounce {
     0% {
         transform: translateY(-300px);
@@ -75,8 +86,8 @@
     }
 
     100% {
-        width: 4000px;
-        height: 4000px;
+        width: 3500px;
+        height: 3500px;
         display: none;
     }
 }
