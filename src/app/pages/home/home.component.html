@@ -126,9 +126,10 @@
                 <h3 class="mb-4 text-xl font-bold">
                   {{ course.title }}
                 </h3>
-                <p class="mb-4 w-auto text-gray-300 sm:w-56">
-                  {{ course.content }}
-                </p>
+                <ul class="mb-4 w-auto text-center gap-1 text-gray-300 sm:w-56">
+                  <!-- TODO: aqui da un error si se hace con un for -->
+                  {{ course.content.modules[0] }}, {{ course.content.modules[1] }}, {{ course.content.modules[2] }}.
+                </ul>
                 <a href="#" class="font-bold text-blue-400 hover:underline">Ver más</a>
               </div>
             }
