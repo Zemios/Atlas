@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,13 @@ export class ConnectionService {
 
   constructor(private http: HttpClient) { }
 
-  checkBackendConnection(): Observable<any> {
-    return this.http.get(this.backendUrl);
+  checkBackendConnection(): Observable<boolean> {
+    return this.http.get(this.backendUrl).pipe(
+      map(() => true),
+      catchError(() => {
+        return [false];
+      })
+    );
   }
+
 }

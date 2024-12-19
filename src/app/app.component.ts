@@ -22,8 +22,10 @@ export class AppComponent implements OnInit {
   checkConnection(): void {
     this.connectionService.checkBackendConnection().subscribe({
       next: (response) => {
-        this.backendStatus = true
-        console.log('Conexión exitosa:', response);
+        this.backendStatus = response;
+        if (!this.backendStatus) {
+          this.filterPages();
+        }
       },
       error: (err) => {
         this.backendStatus = false;

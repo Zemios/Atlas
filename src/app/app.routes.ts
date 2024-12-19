@@ -15,12 +15,14 @@ import { HelpComponent } from './pages/help/help.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { LearningComponent } from './pages/learning/learning.component';
 import { CourseComponent } from './pages/learning/course/course.component';
+import { backendStatusGuard } from './guards/backend-status.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: '', component: MaintenanceComponent },
   {
     path: 'news',
+    canActivate: [backendStatusGuard],
     children: [
       { path: '', component: NewsComponent },
       { path: 'article/:id', component: ArticleComponent },
@@ -28,6 +30,7 @@ export const routes: Routes = [
   },
   {
     path: 'learning',
+    canActivate: [backendStatusGuard],
     children: [
       { path: '', component: LearningComponent },
       { path: 'course/:id', component: CourseComponent },
@@ -35,6 +38,7 @@ export const routes: Routes = [
   },
   {
     path: 'projects',
+    canActivate: [backendStatusGuard],
     children: [
       { path: '', component: ProjectsComponent },
       { path: 'project/:id', component: ProjectComponent },
@@ -43,6 +47,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   {
     path: 'explore',
+    canActivate: [backendStatusGuard],
     children: [
       { path: '', component: ExploreComponent },
       { path: 'post/:id', component: PostComponent },
@@ -50,9 +55,9 @@ export const routes: Routes = [
   },
   { path: 'help', component: HelpComponent },
 
-  { path: 'sign-in', component: SigninComponent },
-  { path: 'sign-up', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'sign-in', component: SigninComponent, canActivate: [backendStatusGuard] },
+  { path: 'sign-up', component: SignupComponent, canActivate: [backendStatusGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [backendStatusGuard] },
 
   { path: '404', component: Error404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' },
