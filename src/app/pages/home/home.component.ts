@@ -7,6 +7,7 @@ import { CoursesInterface } from '../../interfaces/courses-interface';
 import { ProjectsService } from '../../services/projects.service';
 import { ProjectInterface } from '../../interfaces/project-interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConnectionService } from '../../services/connection.service';
 
 @Component({
   selector: 'app-home',
@@ -47,6 +48,23 @@ export class HomeComponent {
       url: '/explore',
     },
   ];
+  constructor(private connectionService: ConnectionService) { }
+  backendStatus: boolean = false;
+
+  ngOnInit(): void {
+    this.checkConnection();
+  }
+
+  checkConnection(): void {
+    this.connectionService.checkBackendConnection().subscribe({
+      next: (response) => {
+        this.backendStatus = response;
+      },
+      error: () => {
+        this.backendStatus = false;
+      },
+    });
+  }
 
   private readonly newsSvc = inject(NewsService);
   private readonly coursesSvc = inject(CoursesService);

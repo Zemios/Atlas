@@ -14,20 +14,22 @@
       <p class="mb-6 text-lg opacity-80 md:text-xl">
         {{ 'home.header.description' | translate }}
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-3 text-center">
-        <a
+      @if (backendStatus) {
+        <div class="flex flex-wrap items-center justify-center gap-3 text-center">
+          <a
           routerLink="/explore"
           class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"
-        >
+          >
           {{ 'home.buttons.explore' | translate }}
         </a>
-        <a
+          <a
           routerLink="/sign-in"
           class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
-        >
+          >
           {{ 'home.buttons.join' | translate }}
         </a>
       </div>
+      }
     </div>
     <div class="order-2 flex justify-center px-3 sm:px-0 md:order-1 xl:order-2">
       <img src="images/title.svg" alt="Banner Image" class="banner-image h-20 transform transition-transform duration-500 hover:scale-105" />
@@ -91,7 +93,7 @@
     }
   </div>
   <!-- Noticias o posts ¿ -->
-  @if (mainNews.length) {
+  @if (mainNews.length && backendStatus) {
     <div class="flex flex-col justify-center px-4 py-24">
       <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
       <!-- ¿ Un efecto de carrusel estaria increible -->
@@ -113,7 +115,7 @@
   }
 
   <div class="bg-white">
-    @if (lastCourses.length) {
+    @if (lastCourses.length && backendStatus) {
       <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
         <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
           <h2>Amplia tus conocimientos</h2>
@@ -137,7 +139,7 @@
         </div>
       </div>
     }
-    @if (lastProjects.length) {
+    @if (lastProjects.length && backendStatus) {
       <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
         <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
           @for (project of lastProjects; track $index) {
@@ -176,14 +178,25 @@
       Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
     </p>
 
-    <div class="mb-10 text-center">
-      <a
-        routerLink="/sign-up"
-        class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
-      >
-        Crear perfil
-      </a>
-    </div>
+    @if (backendStatus) {
+      <div class="mb-10 text-center">
+        <a
+          routerLink="/sign-up"
+          class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+        >
+          Crear perfil
+        </a>
+      </div>
+    } @else {
+      <div class="mb-10 text-center">
+        <a
+          routerLink="/contact"
+          class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+        >
+          Contáctanos
+        </a>
+      </div>
+    }
 
     <div class="flex flex-col items-center justify-center gap-12 text-center lg:flex-row">
       <div class="mb-6 flex gap-8 lg:mb-0">
