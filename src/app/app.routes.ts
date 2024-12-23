@@ -16,6 +16,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { LearningComponent } from './pages/learning/learning.component';
 import { CourseComponent } from './pages/learning/course/course.component';
 import { backendStatusGuard } from './guards/backend-status.guard';
+import { ConsultingComponent } from './pages/consulting/consulting.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,6 +55,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'help', component: HelpComponent },
+  { path: 'consulting', component: ConsultingComponent },
 
   { path: 'sign-in', component: SigninComponent, canActivate: [backendStatusGuard] },
   { path: 'sign-up', component: SignupComponent, canActivate: [backendStatusGuard] },
