@@ -6,7 +6,7 @@ import { catchError, map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ConnectionService {
-  private backendUrl = 'https://localhost:3000/api';
+  private backendUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
