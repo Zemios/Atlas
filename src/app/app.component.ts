@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   checkConnection(): void {
     this.connectionService.checkBackendConnection().subscribe({
       next: (response) => {
-        this.backendStatus = response;
+        this.backendStatus = response.isConnected;
         if (!this.backendStatus) {
           this.filterPages();
         }

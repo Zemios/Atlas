@@ -58,7 +58,7 @@ export class HomeComponent {
   checkConnection(): void {
     this.connectionService.checkBackendConnection().subscribe({
       next: (response) => {
-        this.backendStatus = response;
+        this.backendStatus = response.isConnected;
       },
       error: () => {
         this.backendStatus = false;
