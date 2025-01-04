@@ -26,7 +26,6 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      console.log({ email })
       this.loginService.loginUser({ email, password }).subscribe(
         (response) => {
           console.log('Usuario logueado con éxito:', response);
