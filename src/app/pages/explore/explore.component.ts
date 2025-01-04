@@ -14,6 +14,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './explore.component.scss',
 })
 export class ExploreComponent {
+  private readonly postsSvc = inject(PostsService);
   publishModal = false;
   togglePublishModal() {
     this.publishModal = !this.publishModal;
@@ -28,6 +29,6 @@ export class ExploreComponent {
       this.closePublishModal();
     }
   }
-  private readonly postsSvc = inject(PostsService);
+
   posts: Observable<PostInterface[]> = this.postsSvc.show();
 }

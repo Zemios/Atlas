@@ -12,7 +12,8 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './post.component.scss',
 })
 export class PostComponent {
+  private readonly postsSvc = inject(PostsService);
   route = inject(ActivatedRoute);
   id: string | null = this.route.snapshot.paramMap.get('id');
-  post: Observable<PostInterface> | undefined = inject(PostsService).get(Number(this.id));
+  post: Observable<PostInterface> = this.postsSvc.get(Number(this.id));
 }
