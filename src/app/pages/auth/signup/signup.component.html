@@ -1,24 +1,33 @@
 <div class="banner flex items-center justify-center bg-gray-100 px-3 py-2">
   <div class="w-full max-w-lg rounded-lg bg-white p-8 shadow-lg">
     <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Crear una cuenta</h2>
-    <form>
+    <form [formGroup]="registerForm" (submit)="createAccount($event)" class="text-neutral-700">
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="name">Nombre de Usuario</label>
-        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" id="name" placeholder="Ingresa tu nombre de usuario" required />
+        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text" id="name" formControlName="name" placeholder="Ingresa tu nombre de usuario" required />
       </div>
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="email">Correo Electrónico</label>
-        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" id="email" placeholder="Ingresa tu correo" required />
+        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+         type="email" id="email" formControlName="email" placeholder="Ingresa tu correo" required />
       </div>
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="password">Contraseña</label>
-        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" id="password" placeholder="Crea una contraseña" required />
+        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+         type="password" id="password" formControlName="password" placeholder="Crea una contraseña" required />
       </div>
       <div class="mb-6">
         <label class="mb-2 block font-bold text-gray-700" for="confirm-password">Confirmar Contraseña</label>
-        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" id="confirm-password" placeholder="Confirma tu contraseña" required />
+        <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+         type="password" id="confirm-password" formControlName="confirmPassword" placeholder="Confirma tu contraseña" required />
       </div>
-      <button class="w-full transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">Crear Cuenta</button>
+      @if (passwordMismatch) {
+        <div class="text-red-500 mb-4">
+          Las contraseñas no coinciden.
+        </div>
+      }
+      <button class="w-full transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700" type="submit">Crear Cuenta</button>
     </form>
     <div class="mt-6 text-center">
       <p class="text-gray-700">
