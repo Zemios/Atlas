@@ -22,7 +22,7 @@
           >
           {{ 'home.buttons.explore' | translate }}
         </a>
-        @if (isAuthenticated) {
+        @if (!isAuthenticated) {
           <a
           routerLink="/login"
           class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
@@ -184,30 +184,32 @@
 
 
   <div class="flex flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-24">
-    <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
+    @if (!isAuthenticated) {
+      <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
 
-    <p class="mb-8 text-center text-lg text-white drop-shadow-lg md:text-xl">
-      Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
-    </p>
+      <p class="mb-8 text-center text-lg text-white drop-shadow-lg md:text-xl">
+        Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
+      </p>
 
-    @if (backendStatus) {
-      <div class="mb-10 text-center">
-        <a
-          routerLink="/register"
-          class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
-        >
-          Crear perfil
-        </a>
-      </div>
-    } @else {
-      <div class="mb-10 text-center">
-        <a
-          routerLink="/contact"
-          class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
-        >
-          Contáctanos
-        </a>
-      </div>
+      @if (backendStatus) {
+        <div class="mb-10 text-center">
+          <a
+            routerLink="/register"
+            class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+          >
+            Crear perfil
+          </a>
+        </div>
+      } @else {
+        <div class="mb-10 text-center">
+          <a
+            routerLink="/contact"
+            class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+          >
+            Contáctanos
+          </a>
+        </div>
+      }
     }
 
     <div class="flex flex-col items-center justify-center gap-12 text-center lg:flex-row">
