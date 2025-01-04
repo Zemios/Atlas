@@ -29,7 +29,7 @@ export class LoginComponent {
       this.loginService.loginUser({ email, password }).subscribe(
         (response) => {
           console.log('Usuario logueado con éxito:', response);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
         (error) => {
           console.error('Error en el inicio de sesión:', error);
