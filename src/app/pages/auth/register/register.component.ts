@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { RegisterService } from '../../../services/register.service';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-register',
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
