@@ -25,12 +25,12 @@ export class LoginComponent {
     event.preventDefault();
 
     if (this.loginForm.valid) {
-      const userData = this.loginForm.value;
-
-      this.loginService.loginUser(userData).subscribe(
+      const { email, password } = this.loginForm.value;
+      console.log({ email })
+      this.loginService.loginUser({ email, password }).subscribe(
         (response) => {
           console.log('Usuario logueado con éxito:', response);
-          this.router.navigate(['/dashboard']); // Redirigir a otra página
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           console.error('Error en el inicio de sesión:', error);

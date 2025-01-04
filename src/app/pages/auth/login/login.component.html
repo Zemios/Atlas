@@ -1,7 +1,7 @@
 <div class="banner flex items-center justify-center bg-gray-100 px-3 py-2">
   <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
     <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Iniciar Sesión</h2>
-    <form [formGroup]="loginForm" (submit)="onSubmit($event)">
+    <form [formGroup]="loginForm" (submit)="onSubmit($event)" class="text-neutral-700">
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="email">Correo Electrónico</label>
         <input class="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -31,7 +31,7 @@
       </div>
 
       @if (loginError !== '') {
-        <div  class="text-red-500 text-center">{{ loginError }}</div>
+        <div  class="text-red-500 text-center mb-2">{{ loginError }}</div>
       }
       <button type="submit" class="w-full transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
         Iniciar Sesión
