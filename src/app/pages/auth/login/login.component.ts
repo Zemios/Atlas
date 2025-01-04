@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../../services/login.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   loginError: string = '';
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -26,7 +26,7 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.loginService.loginUser({ email, password }).subscribe(
+      this.authService.login({ email, password }).subscribe(
         (response) => {
           console.log('Usuario logueado con éxito:', response);
           this.router.navigate(['/']);

@@ -6,10 +6,14 @@ import { API_URL } from '../app.config';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthService {
   constructor(private http: HttpClient) { }
 
-  loginUser(userData: any): Observable<any> {
+  login(userData: any): Observable<any> {
     return this.http.post(API_URL + '/auth/login', userData);
+  }
+
+  register(user: { name: string; email: string; password: string }): Observable<any> {
+    return this.http.post(API_URL + '/auth/register', user);
   }
 }
