@@ -93,7 +93,7 @@
     }
   </div>
   <!-- Noticias o posts ¿ -->
-  @if (mainNews.length && backendStatus) {
+  @if (mainNews | async; as mainNews) {
     <div class="flex flex-col justify-center px-4 py-24">
       <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
       <!-- ¿ Un efecto de carrusel estaria increible -->
@@ -139,7 +139,7 @@
         </div>
       </div>
     }
-    @if (lastProjects.length && backendStatus) {
+    @if (lastProjects | async; as lastProjects) {
       <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
         <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
           @for (project of lastProjects; track $index) {

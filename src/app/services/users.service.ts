@@ -1,54 +1,33 @@
 import { Injectable } from '@angular/core';
 import { UserInterface } from '../interfaces/user-interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API_URL } from '../app.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  constructor() {}
-  users: UserInterface[] = [
-    {
-      id: 1,
-      name: 'Juan Pérez',
-      email: 'juan@example.com',
-      registration_date: new Date(),
-      password: 'hashed_password1',
-      about_me: 'Desarrollador Frontend',
-      role: 'admin',
-    },
-    {
-      id: 2,
-      name: 'Ana Gómez',
-      email: 'ana@example.com',
-      registration_date: new Date(),
-      password: 'hashed_password2',
-      about_me: 'Desarrolladora Backend',
-      role: 'user',
-    },
-    {
-      id: 3,
-      name: 'Luis Martínez',
-      email: 'luis@example.com',
-      registration_date: new Date(),
-      password: 'hashed_password3',
-      about_me: 'Fullstack Developer',
-      role: 'user',
-    },
-  ];
-  data = this.users;
-  show(): Array<UserInterface> {
-    return this.data;
+  constructor(private http: HttpClient) { }
+  route = '/users/';
+
+  show(): Observable<UserInterface[]> {
+    return this.http.get<UserInterface[]>(API_URL + this.route);
   }
 
-  get(id: number) {
-    return this.data.find((item) => item.id === id);
+  get(id: number): Observable<UserInterface> {
+    return this.http.get<UserInterface>(API_URL + this.route + id);
   }
 
-  delete(id: number) {
-    return id;
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(API_URL + this.route + id);
   }
 
-  update(id: number) {
-    return id;
+  update(id: number, user: UserInterface): Observable<UserInterface> {
+    return this.http.put<UserInterface>(API_URL + this.route + id, user);
+  }
+
+  create(user: UserInterface): Observable<UserInterface> {
+    return this.http.post<UserInterface>(API_URL + this.route, user);
   }
 }

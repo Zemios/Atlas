@@ -8,10 +8,12 @@ import { ProjectsService } from '../../services/projects.service';
 import { ProjectInterface } from '../../interfaces/project-interface';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConnectionService } from '../../services/connection.service';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, TranslateModule],
+  imports: [RouterLink, TranslateModule, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -69,7 +71,7 @@ export class HomeComponent {
   private readonly newsSvc = inject(NewsService);
   private readonly coursesSvc = inject(CoursesService);
   private readonly projectsSvc = inject(ProjectsService);
-  mainNews: Array<NewsInterface> = this.newsSvc.show();
+  mainNews: Observable<NewsInterface[]> = this.newsSvc.show();
   lastCourses: Array<CoursesInterface> = this.coursesSvc.show();
-  lastProjects: Array<ProjectInterface> = this.projectsSvc.show();
+  lastProjects: Observable<ProjectInterface[]> = this.projectsSvc.show();
 }
