@@ -42,12 +42,9 @@ export class RegisterComponent {
       };
 
       this.authService.register(user).subscribe(
-        (response) => {
-          console.log('Usuario registrado:', response);
-          this.router.navigate(['/login']);
-        },
-        (error) => {
-          console.error('Error al registrar el usuario:', error);
+        {
+          next: () => { this.router.navigate(['/login']) },
+          error: () => { }
         }
       );
     } else {
