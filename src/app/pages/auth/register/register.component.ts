@@ -6,10 +6,10 @@ import { RegisterService } from '../../../services/register.service';
 @Component({
   selector: 'app-signup',
   imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class SignupComponent {
+export class RegisterComponent {
   registerForm: FormGroup;
   passwordMismatch: boolean = false;
 
@@ -44,7 +44,7 @@ export class SignupComponent {
       this.registerService.registerUser(user).subscribe(
         (response) => {
           console.log('Usuario registrado:', response);
-          this.router.navigate(['/sign-in']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           console.error('Error al registrar el usuario:', error);

@@ -21,7 +21,7 @@ export class HomeComponent {
       title: 'Únete a la Comunidad',
       description: 'Regístrate en nuestra plataforma y crea tu perfil.',
       icon: 'group.svg',
-      url: '/sign-up',
+      url: '/register',
     },
     {
       title: 'Conecta con Otros Juniors',

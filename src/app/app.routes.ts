@@ -4,8 +4,8 @@ import { NewsComponent } from './pages/news/news.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MaintenanceComponent } from './pages/maintenance/maintenance.component';
-import { SigninComponent } from './pages/auth/signin/signin.component';
-import { SignupComponent } from './pages/auth/signup/signup.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
 import { ProfileComponent } from './pages/auth/profile/profile.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { PostComponent } from './pages/explore/post/post.component';
@@ -52,8 +52,8 @@ export const routes: Routes = [
   { path: 'help', component: HelpComponent },
   { path: 'consulting', component: ConsultingComponent },
 
-  { path: 'sign-in', component: SigninComponent },
-  { path: 'sign-up', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
 
   { path: '404', component: Error404Component },
