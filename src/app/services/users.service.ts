@@ -10,7 +10,7 @@ import { API_URL } from '../app.config';
 export class UsersService {
   constructor(private http: HttpClient) { }
   route = '/users/';
-
+  isAuthenticated: boolean = false; /* TODO: TESTING; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
   show(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(API_URL + this.route);
   }
@@ -29,5 +29,9 @@ export class UsersService {
 
   create(user: UserInterface): Observable<UserInterface> {
     return this.http.post<UserInterface>(API_URL + this.route, user);
+  }
+
+  checkAuth() {
+    return this.isAuthenticated
   }
 }

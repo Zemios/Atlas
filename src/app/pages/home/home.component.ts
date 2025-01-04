@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ConnectionService } from '../../services/connection.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -50,11 +51,18 @@ export class HomeComponent {
       url: '/explore',
     },
   ];
-  constructor(private connectionService: ConnectionService) { }
+
+  isAuthenticated: boolean = false;
   backendStatus: boolean = false;
+
+  constructor(private connectionService: ConnectionService, private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.checkConnection();
+    this.checkUserAuth();
+    if (!this.backendStatus || this.isAuthenticated) {
+      this.joinUsList.shift()
+    }
   }
 
   checkConnection(): void {
@@ -66,6 +74,10 @@ export class HomeComponent {
         this.backendStatus = false;
       },
     });
+  }
+
+  checkUserAuth(): void {
+    this.isAuthenticated = this.usersService.checkAuth()
   }
 
   private readonly newsSvc = inject(NewsService);

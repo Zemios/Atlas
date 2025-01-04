@@ -22,12 +22,14 @@
           >
           {{ 'home.buttons.explore' | translate }}
         </a>
+        @if (isAuthenticated) {
           <a
           routerLink="/login"
           class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
           >
           {{ 'home.buttons.join' | translate }}
         </a>
+        }
       </div>
       }
     </div>
@@ -117,6 +119,7 @@
       }
     }
     <div class="bg-white">
+      <!-- TODO: Añadir un if de si el usuario ha iniciado sesion -->
       @if (lastCourses.length) {
         <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
           <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
