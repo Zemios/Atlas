@@ -9,27 +9,29 @@
         <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
       }
     </div>
-    @for (post of posts; track $index) {
-      <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
-        <div class="p-6">
-          <h3 class="mb-4 text-2xl font-bold text-blue-800">
-            {{ post.title }}
-          </h3>
-          <p class="mb-4 text-gray-700">
-            {{ post.content }}
-          </p>
-          <div class="flex items-center gap-4">
-            <div class="flex-shrink-0">
-              <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 object-cover w-12 rounded-full border-2 border-gray-300" />
+    @if (posts | async; as posts) {
+      @for (post of posts; track $index) {
+        <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
+          <div class="p-6">
+            <h3 class="mb-4 text-2xl font-bold text-blue-800">
+              {{ post.title }}
+            </h3>
+            <p class="mb-4 text-gray-700">
+              {{ post.content }}
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0">
+                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 object-cover w-12 rounded-full border-2 border-gray-300" />
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-700">Nombre del Autor</p>
+                <p class="text-sm text-gray-500">{{ post.creation_date }}</p>
+              </div>
             </div>
-            <div>
-              <p class="text-sm font-semibold text-gray-700">Nombre del Autor</p>
-              <p class="text-sm text-gray-500">{{ post.creation_date }}</p>
-            </div>
+            <a routerLink="/explore/post/{{ post.id }}" class="mt-4 block text-blue-500 hover:underline">Ver más detalles</a>
           </div>
-          <a routerLink="/explore/post/{{ post.id }}" class="mt-4 block text-blue-500 hover:underline">Ver más detalles</a>
         </div>
-      </div>
+      }
     }
   </div>
 </div>

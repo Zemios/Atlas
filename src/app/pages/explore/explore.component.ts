@@ -3,10 +3,12 @@ import { RouterLink } from '@angular/router';
 import { PublishComponent } from './publish/publish.component';
 import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent],
+  imports: [RouterLink, PublishComponent, AsyncPipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
@@ -27,5 +29,5 @@ export class ExploreComponent {
     }
   }
   private readonly postsSvc = inject(PostsService);
-  posts: Array<PostInterface> = this.postsSvc.show();
+  posts: Observable<PostInterface[]> = this.postsSvc.show();
 }
