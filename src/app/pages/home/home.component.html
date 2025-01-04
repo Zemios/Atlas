@@ -93,83 +93,88 @@
     }
   </div>
   <!-- Noticias o posts ¿ -->
-  @if (mainNews | async; as mainNews) {
-    <div class="flex flex-col justify-center px-4 py-24">
-      <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
-      <!-- ¿ Un efecto de carrusel estaria increible -->
-      <!-- TODO: PrimeNG tiene unos carruseles muy bonitos pero estan en beta para angular 19 -->
-      <div class="flex flex-wrap justify-center gap-6 flex-row">
-        @for (news of mainNews; track $index) {
-          @if ($index < 3) {
-            <!-- Esto esta bien, TODO: pero no deberia ser necesario ya que no tiene sentido que cargue todas las noticias para solo mostrar 3  -->
-            <div class="flex max-w-96 transform flex-col items-center justify-start rounded-2xl bg-white px-6 pb-6 text-center text-blue-800 shadow-lg transition-transform hover:scale-105">
-              <img src="{{ news.image }}" onerror="this.src='error.svg'" alt="Imagen noticia" class="my-6 rounded-2xl object-contain" />
-              <p class="mb-2 text-2xl font-semibold">{{ news.title }}</p>
-              <p class="mb-4 text-gray-600">{{ news.content }}</p>
-              <a routerLink="/news/article/{{ news.id }}" class="mt-auto font-medium text-blue-500 hover:underline">Leer más</a>
-            </div>
-          }
-        }
-      </div>
-    </div>
-  }
-
-  <div class="bg-white">
-    @if (lastCourses.length && backendStatus) {
-      <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
-        <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
-          <h2>Amplia tus conocimientos</h2>
-          <p class="text-lg text-neutral-500">Visita nuestros cursos gratuitos!</p>
-        </div>
-        <div class="flex h-auto w-full flex-row flex-wrap justify-around gap-2">
-          @for (course of lastCourses; track $index) {
+  @if (backendStatus) {
+    @if (mainNews | async; as mainNews) {
+      <div class="flex flex-col justify-center px-4 py-24">
+        <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
+        <!-- ¿ Un efecto de carrusel estaria increible -->
+        <!-- TODO: PrimeNG tiene unos carruseles muy bonitos pero estan en beta para angular 19 -->
+        <div class="flex flex-wrap justify-center gap-6 flex-row">
+          @for (news of mainNews; track $index) {
             @if ($index < 3) {
-              <div class="flex flex-grow transform flex-col items-center w-1/3 justify-between rounded-2xl bg-gray-800 p-6 text-center text-white transition-all">
-                <h3 class="mb-4 text-xl font-bold">
-                  {{ course.title }}
-                </h3>
-                <ul class="mb-4 w-auto text-center gap-1 text-gray-300 sm:w-56">
-                  <!-- TODO: aqui da un error si se hace con un for -->
-                  {{ course.content.modules[0] }}, {{ course.content.modules[1] }}, {{ course.content.modules[2] }}.
-                </ul>
-                <a href="#" class="font-bold text-blue-400 hover:underline">Ver más</a>
+              <!-- Esto esta bien, TODO: pero no deberia ser necesario ya que no tiene sentido que cargue todas las noticias para solo mostrar 3  -->
+              <div class="flex max-w-96 transform flex-col items-center justify-start rounded-2xl bg-white px-6 pb-6 text-center text-blue-800 shadow-lg transition-transform hover:scale-105">
+                <img src="{{ news.image }}" onerror="this.src='error.svg'" alt="Imagen noticia" class="my-6 rounded-2xl object-contain" />
+                <p class="mb-2 text-2xl font-semibold">{{ news.title }}</p>
+                <p class="mb-4 text-gray-600">{{ news.content }}</p>
+                <a routerLink="/news/article/{{ news.id }}" class="mt-auto font-medium text-blue-500 hover:underline">Leer más</a>
               </div>
             }
           }
         </div>
       </div>
     }
-    @if (lastProjects | async; as lastProjects) {
-      <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
-        <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
-          @for (project of lastProjects; track $index) {
-            @if ($index < 3) {
-              <div 
-                routerLink="/projects/project/{{project.id}}" 
-                class="relative flex transform flex-grow cursor-pointer flex-col items-center justify-center rounded-2xl p-6 text-center text-white transition-all bg-gray-800"
-                style="background-image: url('{{ project.image }}'); background-size: cover; background-position: center;">
-                <img 
-                  src="{{ project.image }}" 
-                  onerror="this.parentElement.style.backgroundImage='url(\'error.svg\')'; this.style.display='none';" 
-                  class="hidden" alt="Project Image" />
-    
-                <div class="relative z-10 bg-gray-900 flex justify-center items-center flex-col bg-opacity-95 w-full p-6 rounded-lg">
-                  <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
-                  <p class="mb-4 text-gray-300 w-auto max-w-56">{{ project.description }}</p>
-                  <ul class="m-0 flex list-none">
-                    <!-- TODO: Colaboradores -->
+    <div class="bg-white">
+      @if (lastCourses.length) {
+        <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
+          <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
+            <h2>Amplia tus conocimientos</h2>
+            <p class="text-lg text-neutral-500">Visita nuestros cursos gratuitos!</p>
+          </div>
+          <div class="flex h-auto w-full flex-row flex-wrap justify-around gap-2">
+            @for (course of lastCourses; track $index) {
+              @if ($index < 3) {
+                <div class="flex flex-grow transform flex-col items-center w-1/3 justify-between rounded-2xl bg-gray-800 p-6 text-center text-white transition-all">
+                  <h3 class="mb-4 text-xl font-bold">
+                    {{ course.title }}
+                  </h3>
+                  <ul class="mb-4 w-auto text-center gap-1 text-gray-300 sm:w-56">
+                    <!-- TODO: aqui da un error si se hace con un for -->
+                    {{ course.content.modules[0] }}, {{ course.content.modules[1] }}, {{ course.content.modules[2] }}.
                   </ul>
+                  <a href="#" class="font-bold text-blue-400 hover:underline">Ver más</a>
                 </div>
-              </div>
+              }
             }
-          }
+          </div>
         </div>
-        <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
-          <h2>Colaboremos juntos</h2>
-          <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
-        </div>
-      </div>
-    }    
+        @if (lastProjects | async; as lastProjects) {
+          <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
+            <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
+              @for (project of lastProjects; track $index) {
+                @if ($index < 3) {
+                  <div 
+                    routerLink="/projects/project/{{project.id}}" 
+                    class="relative flex transform flex-grow cursor-pointer flex-col items-center justify-center rounded-2xl p-6 text-center text-white transition-all bg-gray-800"
+                    style="background-image: url('{{ project.image }}'); background-size: cover; background-position: center;">
+                    <img 
+                      src="{{ project.image }}" 
+                      onerror="this.parentElement.style.backgroundImage='url(\'error.svg\')'; this.style.display='none';" 
+                      class="hidden" alt="Project Image" />
+        
+                    <div class="relative z-10 bg-gray-900 flex justify-center items-center flex-col bg-opacity-95 w-full p-6 rounded-lg">
+                      <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
+                      <p class="mb-4 text-gray-300 w-auto max-w-56">{{ project.description }}</p>
+                      <ul class="m-0 flex list-none">
+                        <!-- TODO: Colaboradores -->
+                      </ul>
+                    </div>
+                  </div>
+                }
+              }
+            </div>
+            <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
+              <h2>Colaboremos juntos</h2>
+              <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
+            </div>
+          </div>
+        }    
+      } 
+    </div>
+  }
+      
+
+
 
   <div class="flex flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-24">
     <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
