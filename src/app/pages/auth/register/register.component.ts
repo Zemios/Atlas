@@ -43,7 +43,7 @@ export class RegisterComponent {
 
       this.authService.register(user).subscribe(
         {
-          next: () => { this.router.navigate(['/login']) },
+          next: () => { this.router.navigate(['/']) },
           error: () => { }
         }
       );
