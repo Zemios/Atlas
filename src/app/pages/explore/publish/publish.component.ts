@@ -11,6 +11,8 @@ import { PostsService } from '../../../services/posts.service';
 export class PublishComponent {
   @Output() closeModalEvent = new EventEmitter();
   publishForm: FormGroup;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private postsService: PostsService) {
     this.publishForm = this.fb.group({
@@ -28,10 +30,16 @@ export class PublishComponent {
       const post = this.publishForm.value;
       this.postsService.create(post).subscribe({
         next: () => {
-          this.closeModal();
+          this.successMessage = 'Publicación creada con éxito.';
+          this.errorMessage = null;
+          this.publishForm.reset();
+          setTimeout(() => {
+            this.closeModal();
+          }, 2000);
         },
-        error: (err) => {
-          console.error('Error al crear la publicación:', err);
+        error: () => {
+          this.errorMessage = 'Hubo un error al crear la publicación.';
+          this.successMessage = null;
         },
       });
     } else {
