@@ -31,5 +31,11 @@ export class ExploreComponent {
     }
   }
 
+  deletePost(postId: number) {
+    this.postsSvc.delete(postId).subscribe(() => {
+      this.posts = this.postsSvc.show();
+    });
+  }
+
   posts: Observable<PostInterface[]> = this.postsSvc.show();
 }
