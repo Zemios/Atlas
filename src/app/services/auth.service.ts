@@ -10,10 +10,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(userData: any): Observable<any> {
-    return this.http.post(API_URL + '/auth/login', userData);
+    return this.http.post(API_URL + '/auth/login', userData, { withCredentials: true });
   }
 
   register(user: { name: string; email: string; password: string }): Observable<any> {
-    return this.http.post(API_URL + '/auth/register', user);
+    return this.http.post(API_URL + '/auth/register', user, { withCredentials: true });
+  }
+
+  checkAuth(): Observable<{ isAuthenticated: boolean }> {
+    return this.http.get<{ isAuthenticated: boolean }>(API_URL + '/auth/check', { withCredentials: true });
   }
 }

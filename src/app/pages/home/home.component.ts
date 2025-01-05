@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ConnectionService } from '../../services/connection.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -55,7 +55,7 @@ export class HomeComponent {
   isAuthenticated: boolean = false;
   backendStatus: boolean = false;
 
-  constructor(private connectionService: ConnectionService, private usersService: UsersService) { }
+  constructor(private connectionService: ConnectionService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.checkConnection();
@@ -77,7 +77,15 @@ export class HomeComponent {
   }
 
   checkUserAuth(): void {
-    this.isAuthenticated = this.usersService.checkAuth()
+    this.authService.checkAuth().subscribe({
+      next: (response) => {
+        this.isAuthenticated = response.isAuthenticated;
+      },
+      error: (err) => {
+        console.error('Error checking auth', err);
+        this.isAuthenticated = false;
+      }
+    });
   }
 
   private readonly newsSvc = inject(NewsService);
