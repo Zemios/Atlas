@@ -17,7 +17,7 @@ export class AuthService {
     return this.http.post(API_URL + '/auth/register', user, { withCredentials: true });
   }
 
-  checkAuth(): Observable<{ isAuthenticated: boolean }> {
-    return this.http.get<{ isAuthenticated: boolean }>(API_URL + '/auth/check', { withCredentials: true });
+  checkAuth(): Observable<{ isAuthenticated: boolean, role: string }> {
+    return this.http.get<{ isAuthenticated: boolean, role: string }>(API_URL + '/auth/check', { withCredentials: true });
   }
 }

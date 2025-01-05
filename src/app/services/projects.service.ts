@@ -11,7 +11,7 @@ export class ProjectsService {
   constructor(private http: HttpClient) { }
   route = '/projects/';
   show(): Observable<ProjectInterface[]> {
-    return this.http.get<ProjectInterface[]>(API_URL + this.route);
+    return this.http.get<ProjectInterface[]>(API_URL + this.route, { withCredentials: true });
   }
 
   get(id: number): Observable<ProjectInterface> {
