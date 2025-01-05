@@ -5,10 +5,11 @@ import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent, AsyncPipe],
+  imports: [RouterLink, PublishComponent, AsyncPipe, RelativeTimePipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
