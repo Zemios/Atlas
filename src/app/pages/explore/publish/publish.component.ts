@@ -45,21 +45,11 @@ export class PublishComponent {
 
   showSnackbar(message: string, type: 'success' | 'error') {
     let config: MatSnackBarConfig = {
-      duration: 3000,
+      duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
       panelClass: type === 'success' ? ['custom-snackbar', 'snackbar-success'] : ['custom-snackbar', 'snackbar-error'],
     };
-    const snackbarRef = this._snackBar.open(message, '', config);
-
-    snackbarRef.afterOpened().subscribe(() => {
-      const snackBarContainer = document.querySelector('.custom-snackbar');
-      if (snackBarContainer) {
-        const closeButton = document.createElement('button');
-        closeButton.innerHTML = `<i class="bi bi-x-circle-fill snackbar-close-icon"></i>`;
-        closeButton.onclick = () => snackbarRef.dismiss();
-        snackBarContainer.appendChild(closeButton);
-      }
-    });
+    this._snackBar.open(message, '', config);
   }
 }

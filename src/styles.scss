@@ -63,33 +63,29 @@ app-root {
 // @media (width >= 1920px) {
 // }
 
+/* Contenedor del snackbar */
 .custom-snackbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  box-shadow:  0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   font-size: 16px;
   color: white;
 }
 
+.custom-snackbar div {
+  box-shadow: unset;
+}
+
 .snackbar-success {
-  background-color: #28a745; /* Verde éxito */
+  background-color: #28a745;
 }
 
 .snackbar-error {
-  background-color: #dc3545; /* Rojo error */
+  background-color: #dc3545;
 }
 
-.snackbar-close-icon {
-  cursor: pointer;
-  color: white;
-  font-size: 1.5rem;
-  margin-left: 16px;
-  transition: color 0.3s ease;
-}
-
-.snackbar-close-icon:hover {
-  color: #ffcccc;
-}
+// .custom-snackbar span {
+//   padding: 4px 8px;
+// }
