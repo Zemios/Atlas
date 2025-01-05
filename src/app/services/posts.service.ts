@@ -9,20 +9,22 @@ import { Observable } from 'rxjs';
 })
 export class PostsService {
   constructor(private http: HttpClient) { }
-  route = '/posts/'
+
+  private route = '/posts/';
+
   show(): Observable<PostInterface[]> {
-    return this.http.get<PostInterface[]>(API_URL + this.route);
+    return this.http.get<PostInterface[]>(API_URL + this.route, { withCredentials: true });
   }
 
   get(id: number): Observable<PostInterface> {
-    return this.http.get<PostInterface>(API_URL + this.route + id,);
+    return this.http.get<PostInterface>(API_URL + this.route + id, { withCredentials: true });
   }
 
-  delete(id: number) {
-    return this.http.delete(API_URL + this.route + id,);
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(API_URL + this.route + id, { withCredentials: true });
   }
 
-  update(id: number) {
-    return id;
+  create(postData: { title: string; content: string }): Observable<PostInterface> {
+    return this.http.post<PostInterface>(API_URL + this.route, postData, { withCredentials: true });
   }
 }
