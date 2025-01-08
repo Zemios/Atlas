@@ -4,19 +4,36 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConnectionService } from './services/connection.service';
+import { AuthService } from './services/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-root',
   imports: [MenuComponent, FooterComponent, RouterOutlet, TranslateModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor(private connectionService: ConnectionService) { }
+  constructor(private connectionService: ConnectionService, private authService: AuthService) { }
   backendStatus: boolean = false;
 
   ngOnInit(): void {
     this.checkConnection();
+
+    this.authService.refreshToken().subscribe({
+      next: (response) => {
+        console.log('Token refreshed successfully', response);
+      },
+      error: (error) => {
+        console.error('Error refreshing token', error);
+      }
+    });
   }
 
   checkConnection(): void {
