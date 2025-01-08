@@ -1,3 +1,5 @@
+import { UserInterface } from './../../interfaces/user-interface';
+import { AuthService } from './../../services/auth.service';
 import { Component, HostListener, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -12,14 +14,24 @@ export class MenuComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   menuVisibility = false;
   isDropdownOpen = false;
+  user: UserInterface = new Object as UserInterface
 
   constructor(
     public router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
+    this.authService.getActualUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   translateText(lang: string) {

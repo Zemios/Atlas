@@ -12,6 +12,12 @@
     }
   </ul>
 
+  @if (user.id) {
+    <div class="flex items-center justify-between gap-4 px-4 py-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <img src="error.svg" class="w-12 h-12 rounded-full object-cover" routerLink="/profile" alt="User Profile Picture" title="Profile">
+      <p class="font-semibold text-gray-800">{{ user.name }}</p>
+    </div>
+  }
 </div>
 <div class="fixed z-20 flex w-full items-center justify-start gap-5 bg-white px-5 py-5 text-neutral-700 md:hidden">
   <button (click)="toggleMenu()" (keypress)="toggleMenu()">
@@ -37,14 +43,6 @@
   }
   <img src="images/title.svg" routerLink="/" class="h-6 cursor-pointer" alt="Logo" />
 </div>
-
-<!-- TODO: @if (user | Async) {
-  <div class="flex gap-3 justify-between items-center px-2 py-1 rounded-full shadow-md">
-    <img src="{{user.image}}" class="rounded-full" routerLink="/profile" alt="User Profile Picture" title="Profile">
-    <p>{{user.name}}</p>
-  </div>
-} -->
-
 
 <!-- * TODO: Meter numero de usuarios simultaneos -->
  <!-- TODO: cuando todas las traducciones esten añadidas descomentar esto vvv -->
