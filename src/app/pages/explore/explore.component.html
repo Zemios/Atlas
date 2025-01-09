@@ -2,9 +2,11 @@
   <h2 class="mb-8 text-center text-4xl font-bold text-blue-800">Foro de la Comunidad</h2>
   <div class="mx-auto max-w-4xl">
     <div class="mb-6 text-right">
-      <button (click)="togglePublishModal()" modal-content class="transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        Crear Publicación
-      </button>
+      <button (click)="togglePublishModal()" modal-content 
+      class="transform fixed top-10 mt-6 md:top-12 md:mt-8 xl:top-14 xl:mt-12 pt-5 end-0 m-3
+      rounded-br-lg rounded-bl-lg bg-blue-800 px-4 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
+      Publicar
+    </button>
       @if (publishModal) {
         <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
       }
