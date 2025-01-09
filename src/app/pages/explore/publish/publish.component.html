@@ -3,7 +3,7 @@
     <button
       (click)="closeModal()" 
       type="button" 
-      class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+      class="absolute z-10 p-3 top-0 right-0 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
       <i class="bi bi-x-circle text-xl text-red-600"></i>
     </button>
 
@@ -16,11 +16,12 @@
               id="contenido"
               formControlName="content"
               class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              style="field-sizing: content;"
               rows="5"
-              placeholder="¿Qué tal van tus commits hoy?"
+              [placeholder]="this.placeholder"
               required
             ></textarea>
-            @if (publishForm.get('content')?.invalid && publishForm.get('content')?.touched) {
+            @if (publishForm.get('content')?.invalid && submitted) {
               <div class="text-red-600 text-sm mt-2">
                 @if (publishForm.get('content')?.hasError('required')) {
                   <div>El contenido es obligatorio.</div>
