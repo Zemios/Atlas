@@ -110,7 +110,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.loadPosts();
-      }, 2020);
+      }, 200);
     }
   }
 
