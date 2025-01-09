@@ -12,7 +12,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class MenuComponent {
   logout() {
-    throw new Error('Method not implemented.');
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   menuVisibility = false;
