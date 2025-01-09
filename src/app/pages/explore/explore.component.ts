@@ -17,6 +17,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ExploreComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private authService: AuthService) { }
+  private readonly postsSvc = inject(PostsService);
+  posts: Observable<PostInterface[]> = this.postsSvc.show();
+  isAuthenticated: boolean = false;
+  publishModal = false;
   ngOnInit() {
     this.authService.checkAuth().subscribe({
       next: (res) => {
@@ -34,9 +38,6 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     }
   }
 
-  isAuthenticated: boolean = false;
-  private readonly postsSvc = inject(PostsService);
-  publishModal = false;
   togglePublishModal() {
     if (this.isAuthenticated) {
       this.publishModal = !this.publishModal;
@@ -49,6 +50,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/login']);
     }
   }
+
   closePublishModal() {
     this.publishModal = false;
   }
@@ -65,12 +67,11 @@ export class ExploreComponent implements OnInit, AfterViewInit {
       this.posts = this.postsSvc.show();
     });
   }
+
   setFocus() {
     const textarea = document.querySelector('textarea');
     if (textarea) {
       (textarea as HTMLTextAreaElement).focus();
     }
   }
-
-  posts: Observable<PostInterface[]> = this.postsSvc.show();
 }
