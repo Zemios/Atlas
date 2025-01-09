@@ -1,42 +1,34 @@
 <div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
-  <div class="relative mx-3 w-96 rounded-2xl bg-white p-8 shadow-2xl" modal-content>
+  <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl" modal-content>
     <button
-      type="button"
-      (click)="closeModal()"
-      class="absolute -right-2 -top-2 flex items-center justify-center rounded-full bg-white px-3 py-2 text-red-400 transition duration-300 ease-in-out hover:text-red-700"
-    >
-      <i class="bi bi-x-circle-fill text-3xl"></i>
+      (click)="closeModal()" 
+      type="button" 
+      class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+      <i class="bi bi-x-circle text-xl text-red-600"></i>
     </button>
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-600">Crear Publicación</h2>
 
-    <form [formGroup]="publishForm" (submit)="sendPost()">
-      <div class="mb-6">
-        <label for="titulo" class="rounded-md p-1 text-lg font-semibold text-neutral-900">Título</label>
-        <input
-          type="text"
-          id="titulo"
-          formControlName="title"
-          class="mt-3 w-full rounded-lg border border-gray-300 p-3 text-neutral-700 transition duration-300 ease-in-out focus:ring focus:ring-blue-300"
-          placeholder="Escribe el título de la publicación"
-          required
-        />
-      </div>
+    <div class="flex items-start space-x-4">
+      <img class="h-12 w-12 object-cover rounded-full" src="error.svg" alt="User Avatar"/>
+      <div class="w-full">
+        <form [formGroup]="publishForm" (submit)="sendPost()">
+          <div class="mb-4">
+            <textarea
+              id="contenido"
+              formControlName="content"
+              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              rows="5"
+              placeholder="¿Qué tal van tus commits hoy?"
+              required
+            ></textarea>
+          </div>
 
-      <div class="mb-6">
-        <label for="contenido" class="block rounded-md p-1 text-lg font-semibold text-neutral-900">Contenido</label>
-        <textarea
-          id="contenido"
-          formControlName="content"
-          class="mt-3 w-full resize-none rounded-lg border border-gray-300 p-3 text-neutral-700 transition duration-300 ease-in-out focus:ring focus:ring-blue-300"
-          rows="5"
-          placeholder="Escribe el contenido de la publicación"
-          required
-        ></textarea>
+          <div class="flex justify-end items-center">
+            <button type="submit" class="rounded-full bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600">
+              Publicar
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div class="mt-6 flex flex-wrap items-center justify-around gap-4">
-        <button type="submit" class="transform rounded-lg bg-blue-500 px-5 py-3 font-semibold text-white shadow-lg transition hover:scale-110 hover:bg-blue-600">Publicar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

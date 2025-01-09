@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PublishComponent } from './publish/publish.component';
 import { PostInterface } from '../../interfaces/post-interface';
@@ -15,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
 })
-export class ExploreComponent implements OnInit {
+export class ExploreComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private authService: AuthService) { }
   ngOnInit() {
     this.authService.checkAuth().subscribe({
@@ -27,12 +27,24 @@ export class ExploreComponent implements OnInit {
       }
     })
   }
+
+  ngAfterViewInit() {
+    if (this.publishModal) {
+      this.setFocus();
+    }
+  }
+
   isAuthenticated: boolean = false;
   private readonly postsSvc = inject(PostsService);
   publishModal = false;
   togglePublishModal() {
     if (this.isAuthenticated) {
       this.publishModal = !this.publishModal;
+      if (this.publishModal) {
+        setTimeout(() => {
+          this.setFocus();
+        }, 0);
+      }
     } else {
       this.router.navigate(['/login']);
     }
@@ -52,6 +64,12 @@ export class ExploreComponent implements OnInit {
     this.postsSvc.delete(postId).subscribe(() => {
       this.posts = this.postsSvc.show();
     });
+  }
+  setFocus() {
+    const textarea = document.querySelector('textarea');
+    if (textarea) {
+      (textarea as HTMLTextAreaElement).focus();
+    }
   }
 
   posts: Observable<PostInterface[]> = this.postsSvc.show();

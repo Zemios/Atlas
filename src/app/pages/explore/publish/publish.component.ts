@@ -21,7 +21,6 @@ export class PublishComponent {
     private _snackBar: MatSnackBar
   ) {
     this.publishForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(255)]],
       content: ['', [Validators.required, Validators.maxLength(500)]],
     });
   }
