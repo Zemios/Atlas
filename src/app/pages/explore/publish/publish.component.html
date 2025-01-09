@@ -7,7 +7,7 @@
       <i class="bi bi-x-circle text-xl text-red-600"></i>
     </button>
 
-    <div class="flex items-start text-start space-x-4">
+    <div class="flex items-start text-start w-auto space-x-4">
       <img class="h-12 w-12 object-cover rounded-full" src="error.svg" alt="User Avatar"/>
       <div class="w-full">
         <form [formGroup]="publishForm" (submit)="sendPost()">
@@ -15,7 +15,7 @@
             <textarea
               id="contenido"
               formControlName="content"
-              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none break-all max-h-60"
               style="field-sizing: content;"
               rows="5"
               [placeholder]="this.placeholder"
