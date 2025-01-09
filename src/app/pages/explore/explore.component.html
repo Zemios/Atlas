@@ -11,7 +11,6 @@
         <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
       }
     </div>
-    @if (posts | async; as posts) {
       @for (post of posts; track $index) {
         <div class="mb-6 rounded-lg bg-white shadow-lg z-0 flex items-start justify-between">
           <a routerLink="/explore/post/{{ post.id }}" class="block p-6">
@@ -35,6 +34,8 @@
           }
         </div>
       }
-    }    
   </div>
+  @if (loading) {
+    <div class="text-center text-neutral-700 py-6">Cargando más posts...</div>
+  }
 </div>

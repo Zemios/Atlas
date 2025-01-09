@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PostsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private route = '/posts/';
 
-  show(): Observable<PostInterface[]> {
-    return this.http.get<PostInterface[]>(API_URL + this.route, { withCredentials: true });
+  show(page: number = 1, limit: number = 10): Observable<PostInterface[]> {
+    return this.http.get<PostInterface[]>(API_URL + this.route + `?page=${page}&limit=${limit}`, { withCredentials: true });
   }
 
   get(id: number): Observable<PostInterface> {

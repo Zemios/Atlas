@@ -1,44 +1,50 @@
-import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PublishComponent } from './publish/publish.component';
 import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent, AsyncPipe, RelativeTimePipe],
+  imports: [RouterLink, PublishComponent, RelativeTimePipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
 })
 export class ExploreComponent implements OnInit, AfterViewInit {
-  constructor(private router: Router, private authService: AuthService) { }
-  private readonly postsSvc = inject(PostsService);
-  posts: Observable<PostInterface[]> = this.postsSvc.show();
+  posts: PostInterface[] = [];
+  page: number = 1;
+  limit: number = 10;
+  lastScrollTop: number = 0;
+  loading: boolean = false;
   isAuthenticated: boolean = false;
   currentUserId: number = 0;
   publishModal = false;
+  timeout: any;
+
+  constructor(private router: Router, private authService: AuthService, private postsSvc: PostsService) { }
+
   ngOnInit() {
+    this.loadPosts();
     this.authService.checkAuth().subscribe({
       next: (res) => {
-        this.isAuthenticated = res.isAuthenticated
+        this.isAuthenticated = res.isAuthenticated;
         this.authService.getActualUser().subscribe({
           next: (res) => {
-            this.currentUserId = res.id
+            this.currentUserId = res.id;
           },
           error: (err) => {
-            console.error(err)
+            console.error(err);
           }
-        })
+        });
       },
       error: (err) => {
         console.log(err);
       }
-    })
+    });
+    window.addEventListener('scroll', this.onScroll.bind(this));
   }
 
   ngAfterViewInit() {
@@ -63,6 +69,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   closePublishModal() {
     this.publishModal = false;
   }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
@@ -71,9 +78,46 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     }
   }
 
+  loadPosts() {
+    if (this.loading) return;
+
+    this.loading = true;
+    this.postsSvc.show(this.page, this.limit).subscribe({
+      next: (newPosts) => {
+        if (newPosts.length > 0) {
+          this.posts = [...this.posts, ...newPosts];
+          this.page++;
+        }
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      },
+    });
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const nearBottom = (scrollPosition + windowHeight) >= (documentHeight * 0.9);
+    const scrollingDown = window.scrollY > this.lastScrollTop;
+    this.lastScrollTop = window.scrollY;
+
+    if (nearBottom && scrollingDown && !this.loading) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.loadPosts();
+      }, 2020);
+    }
+  }
+
+
   deletePost(postId: number) {
     this.postsSvc.delete(postId).subscribe(() => {
-      this.posts = this.postsSvc.show();
+      this.posts = this.posts.filter(post => post.id !== postId);
     });
   }
 
