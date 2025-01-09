@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { UserInterface } from '../../../interfaces/user-interface';
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +9,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  user: any;
+  user: UserInterface = new Object() as UserInterface;
   constructor(private authService: AuthService) {
     this.authService.getActualUser().subscribe({
       next: (user) => {
