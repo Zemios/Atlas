@@ -20,11 +20,20 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   private readonly postsSvc = inject(PostsService);
   posts: Observable<PostInterface[]> = this.postsSvc.show();
   isAuthenticated: boolean = false;
+  currentUserId: number = 0;
   publishModal = false;
   ngOnInit() {
     this.authService.checkAuth().subscribe({
       next: (res) => {
         this.isAuthenticated = res.isAuthenticated
+        this.authService.getActualUser().subscribe({
+          next: (res) => {
+            this.currentUserId = res.id
+          },
+          error: (err) => {
+            console.error(err)
+          }
+        })
       },
       error: (err) => {
         console.log(err);
