@@ -8,7 +8,7 @@ import { UserInterface } from '../interfaces/user-interface';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(userData: any): Observable<any> {
     return this.http.post(API_URL + '/auth/login', userData, { withCredentials: true });
@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post(API_URL + '/auth/refresh', {}, { withCredentials: true });
   }
 
-  getActualUser() {
+  getActualUser(): Observable<UserInterface> {
     return this.http.get<UserInterface>(API_URL + '/auth/profile', { withCredentials: true });
   }
   checkAuth(): Observable<{ isAuthenticated: boolean; role: string }> {
