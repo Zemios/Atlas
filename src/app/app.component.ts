@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
-  ) {}
+  ) { }
   backendStatus: boolean = false;
 
   ngOnInit(): void {
@@ -69,11 +69,11 @@ export class AppComponent implements OnInit {
       url: '',
       icon: 'house-fill',
     },
-    {
-      title: 'Noticias',
-      url: 'news',
-      icon: 'newspaper',
-    },
+    // {
+    //   title: 'Noticias',
+    //   url: 'news',
+    //   icon: 'newspaper',
+    // },
     {
       title: 'Foro',
       url: 'explore',

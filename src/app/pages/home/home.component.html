@@ -138,36 +138,36 @@
               }
             </div>
           </div>
-          @if (lastProjects | async; as lastProjects) {
-            @if (lastProjects.length) {
-              <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
-                <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
-                  @for (project of lastProjects; track $index) {
-                    @if ($index < 3) {
-                      <div
-                        routerLink="/projects/project/{{ project.id }}"
-                        class="relative flex flex-grow transform cursor-pointer flex-col items-center justify-center rounded-2xl bg-gray-800 p-6 text-center text-white transition-all"
-                        style="background-image: url('{{ project.image }}'); background-size: cover; background-position: center;"
-                      >
-                        <img src="{{ project.image }}" onerror="this.parentElement.style.backgroundImage='url(\'error.svg\')'; this.style.display='none';" class="hidden" alt="Project Image" />
+        }
+        @if (lastProjects | async; as lastProjects) {
+          @if (lastProjects.length) {
+            <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
+              <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
+                @for (project of lastProjects; track $index) {
+                  @if ($index < 3) {
+                    <div
+                      routerLink="/projects/project/{{ project.id }}"
+                      class="relative flex flex-grow transform cursor-pointer flex-col items-center justify-center rounded-2xl bg-gray-800 p-6 text-center text-white transition-all"
+                      style="background-image: url('{{ project.image }}'); background-size: cover; background-position: center;"
+                    >
+                      <img src="{{ project.image }}" onerror="this.parentElement.style.backgroundImage='url(\'error.svg\')'; this.style.display='none';" class="hidden" alt="Project Image" />
 
-                        <div class="relative z-10 flex w-full flex-col items-center justify-center rounded-lg bg-gray-900 bg-opacity-95 p-6">
-                          <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
-                          <p class="mb-4 w-auto max-w-56 text-gray-300">{{ project.description }}</p>
-                          <ul class="m-0 flex list-none">
-                            <!-- TODO: Colaboradores -->
-                          </ul>
-                        </div>
+                      <div class="relative z-10 flex w-full flex-col items-center justify-center rounded-lg bg-gray-900 bg-opacity-95 p-6">
+                        <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
+                        <p class="mb-4 w-auto max-w-56 text-gray-300">{{ project.description }}</p>
+                        <ul class="m-0 flex list-none">
+                          <!-- TODO: Colaboradores -->
+                        </ul>
                       </div>
-                    }
+                    </div>
                   }
-                </div>
-                <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
-                  <h2>Colaboremos juntos</h2>
-                  <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
-                </div>
+                }
               </div>
-            }
+              <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
+                <h2>Colaboremos juntos</h2>
+                <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
+              </div>
+            </div>
           }
         }
       }
