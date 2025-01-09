@@ -11,6 +11,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
+  logout() {
+    throw new Error('Method not implemented.');
+  }
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   menuVisibility = false;
   isDropdownOpen = false;
