@@ -18,19 +18,19 @@ export class MenuComponent {
       },
       error: (error) => {
         console.error(error);
-      }
-    })
+      },
+    });
   }
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   menuVisibility = false;
   isDropdownOpen = false;
-  user: UserInterface = new Object as UserInterface
+  user: UserInterface = new Object() as UserInterface;
 
   constructor(
     public router: Router,
     private translate: TranslateService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
@@ -40,8 +40,8 @@ export class MenuComponent {
       },
       error: (error) => {
         console.error(error);
-      }
-    })
+      },
+    });
   }
 
   translateText(lang: string) {
@@ -77,7 +77,7 @@ export class MenuComponent {
       this.menuVisibility = false;
     }
     if (this.isDropdownOpen) {
-      this.isDropdownOpen = false
+      this.isDropdownOpen = false;
     }
   }
 }

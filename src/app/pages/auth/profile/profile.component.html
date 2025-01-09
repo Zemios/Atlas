@@ -3,48 +3,48 @@
     <div class="h-48 bg-blue-800"></div>
     <div class="p-6">
       @if (user.id) {
-      <div class="flex items-center">
-        <img src="foto" onerror="this.src='error.svg'" alt="Foto de Perfil" class="-mt-12 h-24 w-24 rounded-full border-4 object-cover border-white" />
-        <div class="ml-4">
-          <h3 class="text-3xl font-bold text-gray-800">{{user.name}}</h3>
-          <p class="text-gray-500">{{user.title}}</p>
+        <div class="flex items-center">
+          <img src="foto" onerror="this.src='error.svg'" alt="Foto de Perfil" class="-mt-12 h-24 w-24 rounded-full border-4 border-white object-cover" />
+          <div class="ml-4">
+            <h3 class="text-3xl font-bold text-gray-800">{{ user.name }}</h3>
+            <p class="text-gray-500">{{ user.title }}</p>
+          </div>
         </div>
-      </div>
-      <div class="mt-8">
-        @if (user.about_me) {
-          <h4 class="mb-4 text-2xl font-bold text-gray-800">Acerca de mí</h4>
-          <p class="text-gray-700">
-            {{user.about_me}}
-          </p>
+        <div class="mt-8">
+          @if (user.about_me) {
+            <h4 class="mb-4 text-2xl font-bold text-gray-800">Acerca de mí</h4>
+            <p class="text-gray-700">
+              {{ user.about_me }}
+            </p>
+          }
+        </div>
+        <div class="mt-8">
+          @if (user.projects) {
+            <h4 class="mb-4 text-2xl font-bold text-gray-800">Proyectos Participados</h4>
+            <ul class="list-inside list-disc">
+              <!--TODO: -->
+              <!-- Repetir este bloque por cada proyecto -->
+              <li>
+                <a href="#" class="text-blue-500 hover:underline">Nombre del Proyecto</a>
+                - Rol en el proyecto
+              </li>
+              <!-- Fin de bloque de proyecto -->
+            </ul>
+          }
+        </div>
+        @if (user.courses) {
+          <div class="mt-8">
+            <h4 class="mb-4 text-2xl font-bold text-gray-800">Cursos Completados</h4>
+            <ul class="list-inside list-disc">
+              <!-- Repetir este bloque por cada curso -->
+              <li>
+                <a href="#" class="text-blue-500 hover:underline">Nombre del Curso</a>
+              </li>
+              <!-- Fin de bloque de curso -->
+            </ul>
+          </div>
         }
-      </div>
-      <div class="mt-8">
-        @if (user.projects) {
-        <h4 class="mb-4 text-2xl font-bold text-gray-800">Proyectos Participados</h4>
-        <ul class="list-inside list-disc">
-          <!--TODO: -->
-          <!-- Repetir este bloque por cada proyecto -->
-          <li>
-            <a href="#" class="text-blue-500 hover:underline">Nombre del Proyecto</a>
-            - Rol en el proyecto
-          </li>
-          <!-- Fin de bloque de proyecto -->
-        </ul>
       }
-      </div>
-      @if (user.courses) {
-      <div class="mt-8">
-        <h4 class="mb-4 text-2xl font-bold text-gray-800">Cursos Completados</h4>
-        <ul class="list-inside list-disc">
-          <!-- Repetir este bloque por cada curso -->
-          <li>
-            <a href="#" class="text-blue-500 hover:underline">Nombre del Curso</a>
-          </li>
-          <!-- Fin de bloque de curso -->
-        </ul>
-      </div>
-      }
-    }
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@ export class ProfileComponent {
       },
       error: (error) => {
         console.error(error);
-      }
-    })
+      },
+    });
   }
 }

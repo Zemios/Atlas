@@ -1,6 +1,6 @@
 <!-- ¿ TODO: Deberiamos quitar todas las opciones que no esten disponibles por falta de backend -->
 <!-- ¿ tambien habria que añadir la parte de perfil pero no de momento -->
-<div class="fixed z-20 hidden w-full justify-around items-center bg-white px-16 py-5 md:flex md:px-5 lg:px-28">
+<div class="fixed z-20 hidden w-full items-center justify-around bg-white px-16 py-5 md:flex md:px-5 lg:px-28">
   <div>
     <img src="images/logo.svg" routerLink="/" class="w-12 cursor-pointer" alt="Logo" />
   </div>
@@ -13,16 +13,18 @@
   </ul>
 
   @if (user.id) {
-    <div class="relative flex items-center justify-between gap-4 xl:px-4 xl:py-3 bg-white rounded-full border-2 border-white xl:border-0 xl:shadow-lg transition-shadow duration-300 cursor-pointer"
-         (click)="toggleDropdown()">
-      <img src="error.svg" class="w-12 h-12 rounded-full object-cover" alt="User Profile Picture">
-      <p class="font-semibold hidden xl:flex text-gray-700">{{ user.name }}</p>
-  
+    <div
+      class="relative flex cursor-pointer items-center justify-between gap-4 rounded-full border-2 border-white bg-white transition-shadow duration-300 xl:border-0 xl:px-4 xl:py-3 xl:shadow-lg"
+      (click)="toggleDropdown()"
+    >
+      <img src="error.svg" class="h-12 w-12 rounded-full object-cover" alt="User Profile Picture" />
+      <p class="hidden font-semibold text-gray-700 xl:flex">{{ user.name }}</p>
+
       @if (isDropdownOpen) {
-        <ul class="absolute right-0 top-full text-neutral-700 mt-5 text-lg bg-white w-48 rounded-b-lg shadow-lg z-10">
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" routerLink="/profile">Perfil</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" routerLink="/options">Opciones</li>
-          <li class="px-4 py-2 hover:bg-red-100 cursor-pointer text-red-600" (click)="logout()">Cerrar sesión</li>
+        <ul class="absolute right-0 top-full z-10 mt-5 w-48 rounded-b-lg bg-white text-lg text-neutral-700 shadow-lg">
+          <li class="cursor-pointer px-4 py-2 hover:bg-gray-100" routerLink="/profile">Perfil</li>
+          <li class="cursor-pointer px-4 py-2 hover:bg-gray-100" routerLink="/options">Opciones</li>
+          <li class="cursor-pointer px-4 py-2 text-red-600 hover:bg-red-100" (click)="logout()">Cerrar sesión</li>
         </ul>
       }
     </div>
@@ -49,21 +51,21 @@
         </li>
       }
       <li
-      routerLink="/profile"
-      class="last:pb- w-full animate-fade-in-down cursor-pointer px-5 py-2 opacity-0 last:rounded-b-3xl hover:bg-blue-400 hover:text-white"
-      [class.bg-blue-700]="this.router.url === '/profile'"
-      [class.text-white]="this.router.url === '/profile'"
-      [style]="'animation-delay: ' + 6 * 0.05 + 's;'"
-    >
-      <p class="px-2"><i class="bi bi-person-fill"></i> Perfil</p>
-    </li>
+        routerLink="/profile"
+        class="last:pb- w-full animate-fade-in-down cursor-pointer px-5 py-2 opacity-0 last:rounded-b-3xl hover:bg-blue-400 hover:text-white"
+        [class.bg-blue-700]="this.router.url === '/profile'"
+        [class.text-white]="this.router.url === '/profile'"
+        [style]="'animation-delay: ' + 6 * 0.05 + 's;'"
+      >
+        <p class="px-2"><i class="bi bi-person-fill"></i> Perfil</p>
+      </li>
     </ul>
   }
   <img src="images/title.svg" routerLink="/" class="h-6 cursor-pointer" alt="Logo" />
 </div>
 
 <!-- * TODO: Meter numero de usuarios simultaneos -->
- <!-- TODO: cuando todas las traducciones esten añadidas descomentar esto vvv -->
+<!-- TODO: cuando todas las traducciones esten añadidas descomentar esto vvv -->
 <!-- <div class=" absolute flex flex-col gap-1 end-4 md:end-24 top-20 shadow-md z-10 md:z-0 md:mt-1 bg-white -mt-2 p-2 rounded-b-full">
   <button class="text-neutral-700 px-1 flex pt-1 " (click)="toggleDropdown()"><i class="bi bi-globe text-xl" ></i></button>
   @if (isDropdownOpen) {

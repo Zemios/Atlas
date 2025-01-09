@@ -1,140 +1,111 @@
 <div class="flex flex-col">
-    <!-- Sección Banner -->
-    <div class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg px-6 py-24 text-white md:px-20 xl:flex-row bg-gradient-to-r from-gray-800 to-blue-900">
-      <div class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1">
-        <h1 class="mb-4 text-4xl font-extrabold leading-tight md:text-5xl">
-          Servicios de Consultoría en Desarrollo Web
-        </h1>
-        <h2 class="mb-6 text-xl font-semibold opacity-80 md:text-2xl">
-          Soluciones a medida para empresas
-        </h2>
-        <p class="mb-6 text-lg opacity-80 md:text-xl">
-          Desde páginas web hasta sistemas completos de software, impulsamos la innovación y el crecimiento de su negocio con tecnologías de vanguardia.
-        </p>
-        <div class="flex flex-wrap items-center justify-center gap-3 text-center">
-          <a
-            routerLink="/contact"
-            class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"
-          >
-            Contáctanos
-          </a>
-          <!-- <a
+  <!-- Sección Banner -->
+  <div class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg bg-gradient-to-r from-gray-800 to-blue-900 px-6 py-24 text-white md:px-20 xl:flex-row">
+    <div class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1">
+      <h1 class="mb-4 text-4xl font-extrabold leading-tight md:text-5xl">Servicios de Consultoría en Desarrollo Web</h1>
+      <h2 class="mb-6 text-xl font-semibold opacity-80 md:text-2xl">Soluciones a medida para empresas</h2>
+      <p class="mb-6 text-lg opacity-80 md:text-xl">Desde páginas web hasta sistemas completos de software, impulsamos la innovación y el crecimiento de su negocio con tecnologías de vanguardia.</p>
+      <div class="flex flex-wrap items-center justify-center gap-3 text-center">
+        <a routerLink="/contact" class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"> Contáctanos </a>
+        <!-- <a
             routerLink="/projects"
             class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
           >
             Ver Proyectos
           </a> -->
-        </div>
-      </div>
-      <div class="order-2 flex justify-center px-3 sm:px-0 md:order-1 xl:order-2">
-        <img src="images/title.svg" routerLink="/" alt="Consulting Banner" class="banner-image h-20 transform transition-transform duration-500 hover:scale-105" />
       </div>
     </div>
-  
-    <!-- Sección de Servicios -->
-    <div class="bg-white px-6 py-16">
-      <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">
-        Nuestros Servicios
-      </h2>
-      <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
-        Ofrecemos un amplio rango de servicios para empresas que buscan potenciar su presencia digital y mejorar sus procesos.
-      </p>
-      <div class="flex justify-center flex-wrap text-gray-700 md:grid-cols-3 gap-8 text-center">
-        <div class="flex flex-col items-center w-full max-w-lg p-3">
-          <i class="bi bi-code-slash text-9xl text-primary mb-4 text-blue-700"></i>
-          <h3 class="text-2xl font-semibold mb-2">Desarrollo Web</h3>
-          <p class="px-3">Ofrecemos soluciones de desarrollo web modernas y escalables para tu empresa o proyecto personal.</p>
-        </div>
-        <div class="flex flex-col items-center w-full max-w-lg p-3">
-          <i class="bi bi-brush text-9xl text-primary mb-4 text-blue-700"></i>
-          <h3 class="text-2xl font-semibold mb-2">Diseño UI/UX</h3>
-          <p class="px-3">Diseñamos interfaces intuitivas y atractivas para mejorar la experiencia del usuario y su interacción con las aplicaciones.</p>
-        </div>
-        <div class="flex flex-col items-center w-full max-w-lg p-3">
-          <i class="bi bi-lightbulb text-9xl text-primary mb-4 text-blue-700"></i>
-          <h3 class="text-2xl font-semibold mb-2">Consultoría Técnica</h3>
-          <p class="px-3">Brindamos asesoría técnica para guiarte en la toma de decisiones clave y mejorar la eficiencia tecnológica de tus proyectos.</p>
-        </div>
-      </div>
+    <div class="order-2 flex justify-center px-3 sm:px-0 md:order-1 xl:order-2">
+      <img src="images/title.svg" routerLink="/" alt="Consulting Banner" class="banner-image h-20 transform transition-transform duration-500 hover:scale-105" />
     </div>
-    <div class="bg-gray-100 px-6 py-16">
-        <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">¿Por qué elegirnos?</h2>
-        <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
-          Nos destacamos por nuestra dedicación, experiencia técnica y enfoque personalizado. Aportamos soluciones tecnológicas de alto valor que se ajustan a las necesidades de cada cliente.
-        </p>
-        <div class="flex flex-wrap text-gray-700 justify-center gap-8 text-center">
-          <div class="max-w-xs">
-                <i class="bi bi-people text-9xl text-blue-700 mb-4"></i>
-                <h3 class="text-2xl font-semibold my-2">Enfoque Personalizado</h3>
-                <p>Nos tomamos el tiempo para entender a fondo las necesidades de cada cliente y ofrecer soluciones a medida.</p>
-          </div>
-            <div class="max-w-xs">
-                <i class="bi bi-speedometer text-9xl text-blue-700 mb-4"></i>
-                <h3 class="text-2xl font-semibold my-2">Rápido y Eficiente</h3>
-                <p>Ofrecemos servicios ágiles, sin sacrificar calidad ni atención al detalle, garantizando la entrega en tiempo y forma.</p>
-            </div>
-            <div class="max-w-xs">
-                <i class="bi bi-award text-9xl text-blue-700 mb-4"></i>
-                <h3 class="text-2xl font-semibold my-2">Calidad Garantizada</h3>
-                <p>Nos comprometemos con altos estándares de calidad en cada uno de nuestros desarrollos, utilizando las últimas tecnologías.</p>
-            </div>
-        </div>
-    </div>      
-    <div class="bg-gray-900 px-6 py-24 text-white text-center">
-        <h2 class="text-4xl font-bold mb-8">Nuestra Visión</h2>
-        <p class="text-xl mb-4">
-            Creemos en un futuro lleno de oportunidades, construimos soluciones innovadoras para facilitar el éxito de los desarrolladores y empresas.
-        </p>
-        <p class="text-xl">
-            Nuestro objetivo es impulsar a las nuevas generaciones de profesionales con herramientas, proyectos y colaboración de alta calidad.
-        </p>
-    </div>
-    <div class="bg-white px-6 py-16">
-        <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Tecnologías que utilizamos</h2>
-        <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
-          Trabajamos con tecnologías líderes en el mercado para garantizar la calidad y el rendimiento de nuestras soluciones.
-        </p>
-        <div class="flex flex-wrap justify-center items-stretch gap-8 text-center">
-          <div class="max-w-xs flex flex-col items-center justify-between gap-3 text-neutral-900">
-            <img src="icons/angular-icon.svg" class="max-w-44 max-h-52">
-            <h3 class="text-2xl font-semibold mb-2 text-red-700">Angular</h3>
-            <p>Desarrollamos aplicaciones web rápidas, interactivas y escalables para llevar tu negocio al siguiente nivel.</p>
-          </div>
-          <div class="max-w-xs flex flex-col items-center justify-between gap-3 text-neutral-900">
-            <img src="icons/nestjs-icon.svg" class="max-w-44 max-h-52">
-            <h3 class="text-2xl font-semibold mb-2 text-red-700">NestJS</h3>
-            <p>Creamos APIs robustas y eficientes para asegurar el rendimiento y escalabilidad de tu infraestructura backend.</p>
-          </div>
-        </div>
-      </div>      
-    <div class="bg-gray-100 px-6 py-16">
-        <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Preguntas Frecuentes</h2>
-        <div class="max-w-3xl mx-auto text-gray-800">
-          <div class="mb-6">
-            <h3 class="text-xl font-semibold mb-2">¿Qué tipo de soluciones ofrecen?</h3>
-            <p>Ofrecemos soluciones de desarrollo web, diseño UX/UI, consultoría técnica, análisis SEO y asesoramiento en tecnologías.</p>
-          </div>
-          <div class="mb-6">
-            <h3 class="text-xl font-semibold mb-2">¿Cuánto tiempo tarda un proyecto?</h3>
-            <p>El tiempo de entrega depende del alcance del proyecto, pero garantizamos plazos ajustados sin comprometer la calidad.</p>
-          </div>
-          <div class="mb-6">
-            <h3 class="text-xl font-semibold mb-2">¿Qué tecnologías utilizan?</h3>
-            <p>Trabajamos con tecnologías modernas como Angular, NestJS, TypeScript, Node.js, TailwindCSS, entre otras.</p>
-          </div>
-        </div>
-      </div>
-    <div class="bg-blue-800 px-6 py-24 text-white text-center">
-        <h2 class="mb-6 text-3xl font-bold md:text-4xl">¿Listo para llevar su empresa al siguiente nivel?</h2>
-        <p class="mb-8 text-lg opacity-80 md:text-xl">
-          Contáctenos y juntos crearemos la solución tecnológica perfecta para su negocio.
-        </p>
-        <a
-          routerLink="/contact"
-          class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"
-        >
-          Contáctanos
-        </a>
-      </div>
   </div>
-  
+
+  <!-- Sección de Servicios -->
+  <div class="bg-white px-6 py-16">
+    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Nuestros Servicios</h2>
+    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">Ofrecemos un amplio rango de servicios para empresas que buscan potenciar su presencia digital y mejorar sus procesos.</p>
+    <div class="flex flex-wrap justify-center gap-8 text-center text-gray-700 md:grid-cols-3">
+      <div class="flex w-full max-w-lg flex-col items-center p-3">
+        <i class="bi bi-code-slash text-primary mb-4 text-9xl text-blue-700"></i>
+        <h3 class="mb-2 text-2xl font-semibold">Desarrollo Web</h3>
+        <p class="px-3">Ofrecemos soluciones de desarrollo web modernas y escalables para tu empresa o proyecto personal.</p>
+      </div>
+      <div class="flex w-full max-w-lg flex-col items-center p-3">
+        <i class="bi bi-brush text-primary mb-4 text-9xl text-blue-700"></i>
+        <h3 class="mb-2 text-2xl font-semibold">Diseño UI/UX</h3>
+        <p class="px-3">Diseñamos interfaces intuitivas y atractivas para mejorar la experiencia del usuario y su interacción con las aplicaciones.</p>
+      </div>
+      <div class="flex w-full max-w-lg flex-col items-center p-3">
+        <i class="bi bi-lightbulb text-primary mb-4 text-9xl text-blue-700"></i>
+        <h3 class="mb-2 text-2xl font-semibold">Consultoría Técnica</h3>
+        <p class="px-3">Brindamos asesoría técnica para guiarte en la toma de decisiones clave y mejorar la eficiencia tecnológica de tus proyectos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-gray-100 px-6 py-16">
+    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">¿Por qué elegirnos?</h2>
+    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
+      Nos destacamos por nuestra dedicación, experiencia técnica y enfoque personalizado. Aportamos soluciones tecnológicas de alto valor que se ajustan a las necesidades de cada cliente.
+    </p>
+    <div class="flex flex-wrap justify-center gap-8 text-center text-gray-700">
+      <div class="max-w-xs">
+        <i class="bi bi-people mb-4 text-9xl text-blue-700"></i>
+        <h3 class="my-2 text-2xl font-semibold">Enfoque Personalizado</h3>
+        <p>Nos tomamos el tiempo para entender a fondo las necesidades de cada cliente y ofrecer soluciones a medida.</p>
+      </div>
+      <div class="max-w-xs">
+        <i class="bi bi-speedometer mb-4 text-9xl text-blue-700"></i>
+        <h3 class="my-2 text-2xl font-semibold">Rápido y Eficiente</h3>
+        <p>Ofrecemos servicios ágiles, sin sacrificar calidad ni atención al detalle, garantizando la entrega en tiempo y forma.</p>
+      </div>
+      <div class="max-w-xs">
+        <i class="bi bi-award mb-4 text-9xl text-blue-700"></i>
+        <h3 class="my-2 text-2xl font-semibold">Calidad Garantizada</h3>
+        <p>Nos comprometemos con altos estándares de calidad en cada uno de nuestros desarrollos, utilizando las últimas tecnologías.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-gray-900 px-6 py-24 text-center text-white">
+    <h2 class="mb-8 text-4xl font-bold">Nuestra Visión</h2>
+    <p class="mb-4 text-xl">Creemos en un futuro lleno de oportunidades, construimos soluciones innovadoras para facilitar el éxito de los desarrolladores y empresas.</p>
+    <p class="text-xl">Nuestro objetivo es impulsar a las nuevas generaciones de profesionales con herramientas, proyectos y colaboración de alta calidad.</p>
+  </div>
+  <div class="bg-white px-6 py-16">
+    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Tecnologías que utilizamos</h2>
+    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">Trabajamos con tecnologías líderes en el mercado para garantizar la calidad y el rendimiento de nuestras soluciones.</p>
+    <div class="flex flex-wrap items-stretch justify-center gap-8 text-center">
+      <div class="flex max-w-xs flex-col items-center justify-between gap-3 text-neutral-900">
+        <img src="icons/angular-icon.svg" class="max-h-52 max-w-44" />
+        <h3 class="mb-2 text-2xl font-semibold text-red-700">Angular</h3>
+        <p>Desarrollamos aplicaciones web rápidas, interactivas y escalables para llevar tu negocio al siguiente nivel.</p>
+      </div>
+      <div class="flex max-w-xs flex-col items-center justify-between gap-3 text-neutral-900">
+        <img src="icons/nestjs-icon.svg" class="max-h-52 max-w-44" />
+        <h3 class="mb-2 text-2xl font-semibold text-red-700">NestJS</h3>
+        <p>Creamos APIs robustas y eficientes para asegurar el rendimiento y escalabilidad de tu infraestructura backend.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-gray-100 px-6 py-16">
+    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Preguntas Frecuentes</h2>
+    <div class="mx-auto max-w-3xl text-gray-800">
+      <div class="mb-6">
+        <h3 class="mb-2 text-xl font-semibold">¿Qué tipo de soluciones ofrecen?</h3>
+        <p>Ofrecemos soluciones de desarrollo web, diseño UX/UI, consultoría técnica, análisis SEO y asesoramiento en tecnologías.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="mb-2 text-xl font-semibold">¿Cuánto tiempo tarda un proyecto?</h3>
+        <p>El tiempo de entrega depende del alcance del proyecto, pero garantizamos plazos ajustados sin comprometer la calidad.</p>
+      </div>
+      <div class="mb-6">
+        <h3 class="mb-2 text-xl font-semibold">¿Qué tecnologías utilizan?</h3>
+        <p>Trabajamos con tecnologías modernas como Angular, NestJS, TypeScript, Node.js, TailwindCSS, entre otras.</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-blue-800 px-6 py-24 text-center text-white">
+    <h2 class="mb-6 text-3xl font-bold md:text-4xl">¿Listo para llevar su empresa al siguiente nivel?</h2>
+    <p class="mb-8 text-lg opacity-80 md:text-xl">Contáctenos y juntos crearemos la solución tecnológica perfecta para su negocio.</p>
+    <a routerLink="/contact" class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"> Contáctanos </a>
+  </div>
+</div>

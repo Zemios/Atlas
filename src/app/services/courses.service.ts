@@ -5,7 +5,7 @@ import { CoursesInterface } from '../interfaces/courses-interface';
   providedIn: 'root',
 })
 export class CoursesService {
-  constructor() { }
+  constructor() {}
   courses: CoursesInterface[] = [
     {
       id: 1,

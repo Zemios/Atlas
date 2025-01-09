@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { PostsService } from '../../../services/posts.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-publish',
   imports: [ReactiveFormsModule],
@@ -16,7 +15,11 @@ export class PublishComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private postsService: PostsService, private _snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private postsService: PostsService,
+    private _snackBar: MatSnackBar
+  ) {
     this.publishForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(255)]],
       content: ['', [Validators.required, Validators.maxLength(500)]],

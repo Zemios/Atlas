@@ -13,7 +13,11 @@ export class LoginComponent {
   loginForm: FormGroup;
   loginError: string = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -26,12 +30,16 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login({ email, password }).subscribe(
-        {
-          next: () => { this.router.navigate(['/']) },
-          error: () => { this.loginError = 'Correo o contraseña incorrectos.' }
-        }
-      );
-    } else { this.loginError = 'Por favor, completa todos los campos correctamente.' }
+      this.authService.login({ email, password }).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.loginError = 'Correo o contraseña incorrectos.';
+        },
+      });
+    } else {
+      this.loginError = 'Por favor, completa todos los campos correctamente.';
+    }
   }
 }

@@ -8,7 +8,7 @@ import { API_URL } from '../app.config';
   providedIn: 'root',
 })
 export class LikesService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   route = '/likes/';
 
   show(): Observable<LikeInterface[]> {

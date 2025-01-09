@@ -35,7 +35,7 @@
 
   <div class="bg-gray-100 px-6 py-16 shadow-lg">
     <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Noticias Relevantes</h2>
-    <div class="flex flex-wrap justify-center gap-6 flex-row">
+    <div class="flex flex-row flex-wrap justify-center gap-6">
       @if (news | async; as news) {
         @for (article of news; track $index) {
           <div class="items-between flex max-w-96 transform flex-col justify-start rounded-2xl bg-white px-6 py-6 text-center text-blue-800 shadow-lg transition-transform hover:scale-105">

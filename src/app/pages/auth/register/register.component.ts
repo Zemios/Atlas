@@ -13,12 +13,16 @@ export class RegisterComponent {
   registerForm: FormGroup;
   passwordMismatch: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
     });
   }
 
@@ -41,12 +45,12 @@ export class RegisterComponent {
         password: this.registerForm.value.password.trim(),
       };
 
-      this.authService.register(user).subscribe(
-        {
-          next: () => { this.router.navigate(['/']) },
-          error: () => { }
-        }
-      );
+      this.authService.register(user).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: () => {},
+      });
     } else {
       console.log('Formulario inválido');
     }

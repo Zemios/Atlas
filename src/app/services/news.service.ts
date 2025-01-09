@@ -8,7 +8,7 @@ import { API_URL } from '../app.config';
   providedIn: 'root',
 })
 export class NewsService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   route = '/news/';
 
   show(): Observable<NewsInterface[]> {

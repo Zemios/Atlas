@@ -55,13 +55,16 @@ export class HomeComponent {
   isAuthenticated: boolean = false;
   backendStatus: boolean = false;
 
-  constructor(private connectionService: ConnectionService, private authService: AuthService) { }
+  constructor(
+    private connectionService: ConnectionService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.checkConnection();
     this.checkUserAuth();
     if (!this.backendStatus || this.isAuthenticated) {
-      this.joinUsList.shift()
+      this.joinUsList.shift();
     }
   }
 
@@ -84,7 +87,7 @@ export class HomeComponent {
       error: (err) => {
         console.error('Error checking auth', err);
         this.isAuthenticated = false;
-      }
+      },
     });
   }
 

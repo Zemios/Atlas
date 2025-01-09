@@ -11,16 +11,21 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 @Component({
   selector: 'app-root',
   imports: [MenuComponent, FooterComponent, RouterOutlet, TranslateModule],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor(private connectionService: ConnectionService, private authService: AuthService) { }
+  constructor(
+    private connectionService: ConnectionService,
+    private authService: AuthService
+  ) {}
   backendStatus: boolean = false;
 
   ngOnInit(): void {
@@ -32,7 +37,7 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error refreshing token', error);
-      }
+      },
     });
   }
 

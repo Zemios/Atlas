@@ -14,16 +14,14 @@
         <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
           <div class="p-6">
             <!-- @if (post.user_id === currentUserId) { -->
-              <button (click)="deletePost(post.id)" class="bg-red-500 text-white px-4 py-2 rounded">
-                Borrar Publicación
-              </button>
+            <button (click)="deletePost(post.id)" class="rounded bg-red-500 px-4 py-2 text-white">Borrar Publicación</button>
             <!-- } -->
             <p class="mb-4 text-gray-700">
               {{ post.content }}
             </p>
             <div class="flex items-center gap-4">
               <div class="flex-shrink-0">
-                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 object-cover w-12 rounded-full border-2 border-gray-300" />
+                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
               </div>
               <div>
                 <p class="text-sm font-semibold text-gray-700">Nombre del Autor</p>

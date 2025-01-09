@@ -8,7 +8,7 @@ import { API_URL } from '../app.config';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   route = '/users/';
   show(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(API_URL + this.route);
@@ -29,5 +29,4 @@ export class UsersService {
   create(user: UserInterface): Observable<UserInterface> {
     return this.http.post<UserInterface>(API_URL + this.route, user);
   }
-
 }

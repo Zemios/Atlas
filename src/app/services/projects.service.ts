@@ -8,7 +8,7 @@ import { API_URL } from '../app.config';
   providedIn: 'root',
 })
 export class ProjectsService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   route = '/projects/';
   show(): Observable<ProjectInterface[]> {
     return this.http.get<ProjectInterface[]>(API_URL + this.route, { withCredentials: true });

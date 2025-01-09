@@ -9,5 +9,5 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class FooterComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
 }
