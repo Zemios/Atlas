@@ -66,7 +66,7 @@ app-root {
 // @media (width >= 1920px) {
 // }
 
-/* Contenedor del snackbar */
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface { background-color: unset !important; }
 .custom-snackbar {
   display: flex;
   align-items: center;

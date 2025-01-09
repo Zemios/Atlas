@@ -7,7 +7,7 @@
       <i class="bi bi-x-circle text-xl text-red-600"></i>
     </button>
 
-    <div class="flex items-start space-x-4">
+    <div class="flex items-start text-start space-x-4">
       <img class="h-12 w-12 object-cover rounded-full" src="error.svg" alt="User Avatar"/>
       <div class="w-full">
         <form [formGroup]="publishForm" (submit)="sendPost()">
@@ -20,8 +20,24 @@
               placeholder="¿Qué tal van tus commits hoy?"
               required
             ></textarea>
+            @if (publishForm.get('content')?.invalid && publishForm.get('content')?.touched) {
+              <div class="text-red-600 text-sm mt-2">
+                @if (publishForm.get('content')?.hasError('required')) {
+                  <div>El contenido es obligatorio.</div>
+                } 
+                @else if (publishForm.get('content')?.hasError('maxlength')) {
+                  <div>El contenido no puede superar los 500 caracteres.</div>
+                }
+              </div>
+            }
           </div>
-
+          @if (publishForm.get('content')?.value.length > 0) {
+            <div class="flex justify-between items-center">
+              <span [class]="{'text-red-600': publishForm.get('content')?.value.length > 500, 'text-gray-600': publishForm.get('content')?.value.length <= 500}">
+                {{ publishForm.get('content')?.value.length }}/500
+              </span>
+            </div>
+          }
           <div class="flex justify-end items-center">
             <button type="submit" class="rounded-full bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600">
               Publicar

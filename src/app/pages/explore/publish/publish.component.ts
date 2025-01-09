@@ -38,7 +38,8 @@ export class PublishComponent {
           this.publishForm.reset();
           this.closeModal();
         },
-        error: () => {
+        error: (error) => {
+          console.log(error)
           this.showSnackbar('Error al crear la publicación', 'error');
         },
       });
