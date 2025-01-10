@@ -4,6 +4,7 @@ import { UserInterface } from '../../../interfaces/user-interface';
 import { UsersService } from '../../../services/users.service';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { Router } from '@angular/router';
+import { IMAGES_URL } from '../../../app.config';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent {
   user: UserInterface = new Object() as UserInterface;
   profileEditModal = false;
+  IMAGES_URL = IMAGES_URL;
 
   constructor(
     private authService: AuthService,

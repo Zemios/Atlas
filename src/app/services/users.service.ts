@@ -23,14 +23,14 @@ export class UsersService {
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(API_URL + this.route + id);
+    return this.http.delete<void>(API_URL + this.route + id, { withCredentials: true });
   }
 
-  update(user: UserInterface): Observable<UserInterface> {
+  update(userData: FormData): Observable<UserInterface> {
     return this.authService.getActualUser().pipe(
       switchMap((currentUser) => {
         const userId = currentUser.id;
-        return this.http.put<UserInterface>(API_URL + this.route + userId, user);
+        return this.http.put<UserInterface>(API_URL + this.route + userId, userData, { withCredentials: true });
       }),
       catchError((error) => {
         console.error('Error en la actualización del perfil', error);

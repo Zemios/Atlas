@@ -1,3 +1,4 @@
+import { IMAGES_URL } from './../../../../app.config';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,6 +15,9 @@ import { UserInterface } from '../../../../interfaces/user-interface';
 })
 export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
+  IMAGES_URL = IMAGES_URL;
+  updated_profile_picture: string = '';
+
   @Input() user: UserInterface | undefined;
   @Output() close = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
@@ -24,7 +28,7 @@ export class ProfileEditComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private usersService: UsersService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
   ) {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(255)]],
@@ -84,7 +88,7 @@ export class ProfileEditComponent implements OnInit {
 
       reader.onload = () => {
         if (this.user) {
-          this.user.profile_picture = reader.result as string;
+          this.updated_profile_picture = reader.result as string;
         }
       };
 
