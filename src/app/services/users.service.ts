@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { UserInterface } from '../interfaces/user-interface';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 import { API_URL } from '../app.config';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
   route = '/users/';
   show(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(API_URL + this.route);
@@ -22,8 +26,17 @@ export class UsersService {
     return this.http.delete<void>(API_URL + this.route + id);
   }
 
-  update(id: number, user: UserInterface): Observable<UserInterface> {
-    return this.http.put<UserInterface>(API_URL + this.route + id, user);
+  update(user: UserInterface): Observable<UserInterface> {
+    return this.authService.getActualUser().pipe(
+      switchMap((currentUser) => {
+        const userId = currentUser.id;
+        return this.http.put<UserInterface>(API_URL + this.route + userId, user);
+      }),
+      catchError((error) => {
+        console.error('Error en la actualización del perfil', error);
+        throw error;
+      })
+    );
   }
 
   create(user: UserInterface): Observable<UserInterface> {

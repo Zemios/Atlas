@@ -1,29 +1,68 @@
-<h2 mat-dialog-title>Editar Perfil</h2>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <mat-dialog-content>
-    <mat-form-field class="full-width">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
+<div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
+  <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl" modal-content>
+    <button
+      (click)="closeModal()" 
+      type="button" 
+      class="absolute z-10 p-3 top-0 right-0 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+      <i class="bi bi-x-circle text-xl text-red-600"></i>
+    </button>
 
-    <mat-form-field class="full-width">
-      <mat-label>Título</mat-label>
-      <input matInput formControlName="title" />
-    </mat-form-field>
+    <div class="flex items-start text-start w-auto space-x-4">
+      <img class="h-12 w-12 object-cover rounded-full" [src]="user.profile_picture || 'default-avatar.svg'" alt="User Avatar"/>
+      <div class="w-full">
+        <form [formGroup]="profileForm" (submit)="updateProfile()">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              class="w-full border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              [placeholder]="'Ingresa tu nombre'"
+              required
+            />
+          </div>
+          
+          <div class="mb-4">
+            <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+            <input
+              id="title"
+              formControlName="title"
+              type="text"
+              class="w-full border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              [placeholder]="'Ingresa tu título (opcional)'"
+            />
+          </div>
 
-    <mat-form-field class="full-width">
-      <mat-label>Acerca de mí</mat-label>
-      <textarea matInput formControlName="about_me"></textarea>
-    </mat-form-field>
+          <div class="mb-4">
+            <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto de perfil</label>
+            <input
+              id="profile_picture"
+              formControlName="profile_picture"
+              type="file"
+              class="w-full border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              (change)="onFileChange($event)"
+            />
+          </div>
 
-    <mat-form-field class="full-width">
-      <mat-label>Foto de Perfil</mat-label>
-      <input type="file" (change)="onFileChange($event)" />
-    </mat-form-field>
-  </mat-dialog-content>
+          <div class="mb-4">
+            <label for="about_me" class="block text-sm font-medium text-gray-700">Acerca de mí</label>
+            <textarea
+              id="about_me"
+              formControlName="about_me"
+              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              [placeholder]="'Escribe algo sobre ti (opcional)'"
+              rows="4"
+            ></textarea>
+          </div>
 
-  <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button type="submit" [disabled]="!profileForm.valid">Guardar</button>
-  </mat-dialog-actions>
-</form>
+          <div class="flex justify-end items-center">
+            <button type="submit" class="rounded-full bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600">
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

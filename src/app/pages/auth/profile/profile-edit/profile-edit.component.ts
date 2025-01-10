@@ -1,50 +1,100 @@
-import { Component, Inject } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserInterface } from '../../../../interfaces/user-interface';
-import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../../../services/auth.service';
+import { UsersService } from '../../../../services/users.service';
 
 @Component({
   selector: 'app-profile-edit',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatDialogModule, MatInputModule, MatButtonModule],
+  imports: [ReactiveFormsModule],
   providers: [],
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent {
+export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
-
+  user: any;
+  submitted: boolean = false;
+  selectedFile: File | null = null;
   constructor(
-    public dialogRef: MatDialogRef<ProfileEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserInterface,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private usersService: UsersService,
+    private _snackBar: MatSnackBar
   ) {
     this.profileForm = this.fb.group({
-      name: [this.data.name, [Validators.required, Validators.maxLength(50)]],
-      title: [this.data.title, [Validators.required, Validators.maxLength(50)]],
-      about_me: [this.data.about_me, [Validators.maxLength(280)]],
-      photo: [null]
+      name: ['', [Validators.required, Validators.maxLength(255)]],
+      title: ['', [Validators.maxLength(255)]],
+      about_me: ['', [Validators.maxLength(500)]],
+      profile_picture: [''],
     });
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  ngOnInit(): void {
+    this.authService.getActualUser().subscribe((user) => {
+      this.user = user;
+      this.profileForm.patchValue({
+        name: this.user.name,
+        title: this.user.title || '',
+        about_me: this.user.about_me || '',
+      });
+    });
   }
 
-  onSubmit(): void {
-    if (this.profileForm.valid) {
-      this.dialogRef.close(this.profileForm.value); // Envía los datos del formulario al cerrar
+  get f() {
+    return this.profileForm.controls;
+  }
+
+  updateProfile() {
+    this.submitted = true;
+
+    if (this.profileForm.invalid) {
+      return;
     }
+
+    const updatedProfile = { ...this.profileForm.value };
+
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('profile_picture', this.selectedFile);
+    }
+
+    this.usersService.update(updatedProfile).subscribe({
+      next: () => {
+        this.showSnackbar('Perfil actualizado con éxito', 'success');
+        this.submitted = false;
+      },
+      error: (error) => {
+        console.error(error);
+        this.showSnackbar('Error al actualizar el perfil', 'error');
+      },
+    });
   }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
+
     if (file) {
-      this.profileForm.patchValue({
-        photo: file
-      });
+      this.selectedFile = file;
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.user.profile_picture = reader.result as string;
+      };
+
+      reader.readAsDataURL(file);
     }
+  }
+
+  closeModal() {
+    console.log('no')
+  }
+  showSnackbar(message: string, type: 'success' | 'error') {
+    this._snackBar.open(message, '', {
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: type === 'success' ? ['snackbar-success'] : ['snackbar-error'],
+    });
   }
 }
