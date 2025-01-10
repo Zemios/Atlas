@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../../services/auth.service';
@@ -16,8 +16,10 @@ export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
   @Input() user: UserInterface | undefined;
   @Output() close = new EventEmitter<void>();
-  submitted: boolean = false;
+  @ViewChild('fileInput') fileInput: ElementRef | undefined;
   selectedFile: File | null = null;
+  submitted: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -93,6 +95,17 @@ export class ProfileEditComponent implements OnInit {
   closeModal() {
     this.close.emit();
   }
+
+  removeProfilePicture(): void {
+    if (this.user) {
+      this.user.profile_picture = undefined;
+      this.profileForm.patchValue({
+        profile_picture: null,
+      });
+      this.selectedFile = null;
+    }
+  }
+
   showSnackbar(message: string, type: 'success' | 'error') {
     this._snackBar.open(message, '', {
       duration: 2000,
