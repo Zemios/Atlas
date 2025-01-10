@@ -49,10 +49,6 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  get f() {
-    return this.profileForm.controls;
-  }
-
   updateProfile() {
     this.submitted = true;
 
