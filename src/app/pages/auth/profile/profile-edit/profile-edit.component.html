@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Editar Perfil</h2>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Acerca de mí</mat-label>
+      <textarea matInput formControlName="about_me"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Foto de Perfil</mat-label>
+      <input type="file" (change)="onFileChange($event)" />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button type="submit" [disabled]="!profileForm.valid">Guardar</button>
+  </mat-dialog-actions>
+</form>
