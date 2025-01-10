@@ -8,7 +8,7 @@
     </button>
 
     <div class="flex items-start text-start w-auto space-x-4">
-      <img class="h-12 w-12 object-cover rounded-full" [src]="user.profile_picture || 'default-avatar.svg'" alt="User Avatar"/>
+      <img class="h-12 w-12 object-cover rounded-full" [src]="user?.profile_picture || 'default-avatar.svg'" alt="User Avatar"/>
       <div class="w-full">
         <form [formGroup]="profileForm" (submit)="updateProfile()">
           <div class="mb-4">

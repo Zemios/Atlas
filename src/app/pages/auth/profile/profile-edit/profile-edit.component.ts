@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../../services/auth.service';
 import { UsersService } from '../../../../services/users.service';
+import { UserInterface } from '../../../../interfaces/user-interface';
 
 @Component({
   selector: 'app-profile-edit',
@@ -13,7 +14,8 @@ import { UsersService } from '../../../../services/users.service';
 })
 export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
-  user: any;
+  @Input() user: UserInterface | undefined;
+  @Output() close = new EventEmitter<void>();
   submitted: boolean = false;
   selectedFile: File | null = null;
   constructor(
@@ -79,7 +81,9 @@ export class ProfileEditComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = () => {
-        this.user.profile_picture = reader.result as string;
+        if (this.user) {
+          this.user.profile_picture = reader.result as string;
+        }
       };
 
       reader.readAsDataURL(file);
@@ -87,7 +91,7 @@ export class ProfileEditComponent implements OnInit {
   }
 
   closeModal() {
-    console.log('no')
+    this.close.emit();
   }
   showSnackbar(message: string, type: 'success' | 'error') {
     this._snackBar.open(message, '', {

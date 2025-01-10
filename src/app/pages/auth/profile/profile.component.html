@@ -9,7 +9,20 @@
             <h3 class="text-3xl font-bold text-gray-800">{{ user.name }}</h3>
             <p class="text-gray-500">{{ user.title }}</p>
           </div>
-          <button mat-button (click)="openEditDialog()" class="ml-auto">Editar Perfil</button>
+          <button (click)="openProfileEditModal()" class="btn-edit-profile">Editar perfil</button>
+
+          @if (profileEditModal) {
+            <div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
+              <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl" modal-content>
+                <button (click)="closeProfileEditModal()" 
+                type="button" 
+                class="absolute z-10 p-3 top-0 right-0 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+                  <i class="bi bi-x-circle text-xl text-red-600"></i>
+                </button>
+                <app-profile-edit [user]="user" (close)="closeProfileEditModal()"></app-profile-edit> <!-- Puedes pasar el usuario y manejar el cierre -->
+              </div>
+            </div>
+          }
         </div>
         <div class="mt-8">
           @if (user.about_me) {
