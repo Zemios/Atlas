@@ -111,7 +111,7 @@ export class ProfileEditComponent implements OnInit {
       duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
-      panelClass: type === 'success' ? ['snackbar-success'] : ['snackbar-error'],
+      panelClass: type === 'success' ? ['custom-snackbar', 'snackbar-success'] : ['custom-snackbar', 'snackbar-error'],
     });
   }
 }
