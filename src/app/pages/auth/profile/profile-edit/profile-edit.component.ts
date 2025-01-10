@@ -56,14 +56,17 @@ export class ProfileEditComponent implements OnInit {
       return;
     }
 
-    const updatedProfile = { ...this.profileForm.value };
+    const formData = new FormData();
+
+    Object.keys(this.profileForm.value).forEach(key => {
+      formData.append(key, this.profileForm.value[key]);
+    });
 
     if (this.selectedFile) {
-      const formData = new FormData();
       formData.append('profile_picture', this.selectedFile);
     }
 
-    this.usersService.update(updatedProfile).subscribe({
+    this.usersService.update(formData).subscribe({
       next: () => {
         this.showSnackbar('Perfil actualizado con éxito', 'success');
         this.submitted = false;
