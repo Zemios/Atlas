@@ -31,7 +31,7 @@ export class ProfileEditComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {
     this.profileForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(255)]],
+      name: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(1)]],
       title: ['', [Validators.maxLength(255)]],
       about_me: ['', [Validators.maxLength(500)]],
       profile_picture: [''],
@@ -47,12 +47,60 @@ export class ProfileEditComponent implements OnInit {
         about_me: this.user.about_me || '',
       });
     });
+    this.profileForm.get('name')?.valueChanges.subscribe(value => {
+      if (value) {
+        const transformedValue = value.replace(/\s+/g, '');
+        this.profileForm.get('name')?.setValue(transformedValue, { emitEvent: false });
+      }
+    });
   }
 
   updateProfile() {
     this.submitted = true;
 
     if (this.profileForm.invalid) {
+      const name: string | null = this.profileForm.get('name')?.value;
+      const title: string | null = this.profileForm.get('title')?.value;
+      const about_me: string | null = this.profileForm.get('about_me')?.value;
+
+      if (this.profileForm.get('name')?.invalid) {
+        console.log(name)
+        if (name?.replace('/\s+/g', '') == '') {
+          this.showSnackbar('Nombre no puede estar vacio', 'error')
+          return
+        } else if (name) {
+          if (name.length > 255) {
+            this.showSnackbar('Nombre no puede tener mas de 255 caracteres', 'error')
+            return
+          }
+        }
+        this.showSnackbar('Error en el campo "Nombre"', 'error')
+        return
+      }
+
+      if (this.profileForm.get('title')?.invalid) {
+        if (title) {
+          if (title.length > 255) {
+            this.showSnackbar('Título no puede tener mas de 255 caracteres', 'error')
+            return
+          }
+        }
+        this.showSnackbar('Error en el campo "Título"', 'error')
+        return
+      }
+
+      if (this.profileForm.get('about_me')?.invalid) {
+        if (about_me) {
+          if (about_me.length > 500) {
+            this.showSnackbar('Descripción no puede tener mas de 500 caracteres', 'error')
+            return
+          }
+        }
+        this.showSnackbar('Error en el campo "Descripción"', 'error')
+        return
+      }
+
+      this.showSnackbar('Error en los campos del formulario', 'error')
       return;
     }
 
