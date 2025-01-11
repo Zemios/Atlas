@@ -3,6 +3,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, HostListener, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IMAGES_URL } from '../../app.config';
 
 @Component({
   selector: 'app-menu',
@@ -25,12 +26,13 @@ export class MenuComponent {
   menuVisibility = false;
   isDropdownOpen = false;
   user: UserInterface = new Object() as UserInterface;
+  IMAGES_URL = IMAGES_URL;
 
   constructor(
     public router: Router,
     private translate: TranslateService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');

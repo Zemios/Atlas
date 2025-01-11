@@ -17,7 +17,7 @@
       class="relative flex cursor-pointer items-center justify-between gap-4 rounded-full border-2 border-white bg-white transition-shadow duration-300 xl:border-0 xl:px-4 xl:py-3 xl:shadow-lg"
       (click)="toggleDropdown()"
     >
-      <img src="error.svg" class="h-12 w-12 rounded-full object-cover" alt="User Profile Picture" />
+      <img src="{{IMAGES_URL + user.profile_picture}}" onerror="src='error.svg'" class="h-12 w-12 rounded-full object-cover" alt="User Profile Picture" />
       <p class="hidden font-semibold text-gray-700 xl:flex">{{ user.name }}</p>
 
       @if (isDropdownOpen) {
