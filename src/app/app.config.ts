@@ -13,7 +13,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export const API_URL = 'http://localhost:3000';
-export const IMAGES_URL = 'http://localhost:3000/profile-pics/';
+export const IMAGES_URL = API_URL + '/profile-pics/';
 
 export const appConfig: ApplicationConfig = {
   providers: [
