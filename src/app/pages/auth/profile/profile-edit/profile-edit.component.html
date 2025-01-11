@@ -34,6 +34,7 @@
           #fileInput
           class="absolute h-full w-full inset-0 opacity-0 cursor-pointer"
           (change)="onFileChange($event)"
+          accept=".jpg, .jpeg, .png"
         />
         @if (user?.profile_picture) {
           <button 

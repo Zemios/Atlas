@@ -82,6 +82,17 @@ export class ProfileEditComponent implements OnInit {
     const file = event.target.files[0];
 
     if (file) {
+      const allowedTypes = ['image/jpeg', 'image/png'];
+      const maxSizeInMB = 2;
+      if (!allowedTypes.includes(file.type)) {
+        this.showSnackbar('Formato de archivo no permitido', 'error');
+        return
+      }
+      if (file.size > maxSizeInMB * 1024 * 1024) {
+        this.showSnackbar('El archivo es demasiado grande', 'error');
+        return
+      }
+
       this.selectedFile = file;
       const reader = new FileReader();
 
