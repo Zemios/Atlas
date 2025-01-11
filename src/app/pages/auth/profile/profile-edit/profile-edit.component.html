@@ -9,18 +9,18 @@
 
     <div class="flex lg:flex-row flex-col items-center lg:items-start text-start w-auto h-full space-x-4">
       <div class="relative w-32 h-32 lg:h-24 group">
-        @if (user?.profile_picture?.length) {
-          <img 
-            class="h-full w-full object-cover rounded-full border-2 border-gray-200 transition duration-300 ease-in-out group-hover:opacity-50"
-              [src]="IMAGES_URL + user?.profile_picture"
-            onerror="src = 'error.svg'"
-            alt="User Avatar"
-            (click)="fileInput.click()"
-          />
-        } @else {
+        @if (updated_profile_picture) {
           <img 
             class="h-full w-full object-cover rounded-full border-2 border-gray-200 transition duration-300 ease-in-out group-hover:opacity-50"
               [src]="updated_profile_picture"
+            onerror="src = 'error.svg'"
+            alt="User Avatar"
+            (click)="fileInput.click()"
+        />
+        } @else {
+          <img 
+            class="h-full w-full object-cover rounded-full border-2 border-gray-200 transition duration-300 ease-in-out group-hover:opacity-50"
+              [src]="IMAGES_URL + user?.profile_picture"
             onerror="src = 'error.svg'"
             alt="User Avatar"
             (click)="fileInput.click()"
@@ -36,10 +36,10 @@
           (change)="onFileChange($event)"
           accept=".jpg, .jpeg, .png"
         />
-        @if (user?.profile_picture) {
+        @if (user?.profile_picture || updated_profile_picture) {
           <button 
             type="button" 
-            class="absolute top-0 right-0 p-2 bg-white rounded-full text-gray-500 hover:text-gray-700 focus:outline-none"
+            class="absolute top-0 right-0 p-2 py-1 bg-white rounded-full text-gray-500 hover:text-gray-700 focus:outline-none"
             (click)="removeProfilePicture()"
           >
             <i class="bi bi-x-circle text-xl text-red-600"></i>

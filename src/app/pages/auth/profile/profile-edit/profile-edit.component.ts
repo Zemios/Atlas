@@ -16,7 +16,7 @@ import { UserInterface } from '../../../../interfaces/user-interface';
 export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
   IMAGES_URL = IMAGES_URL;
-  updated_profile_picture: string = '';
+  updated_profile_picture: string | undefined;
 
   @Input() user: UserInterface | undefined;
   @Output() close = new EventEmitter<void>();
@@ -161,6 +161,7 @@ export class ProfileEditComponent implements OnInit {
   removeProfilePicture(): void {
     if (this.user) {
       this.user.profile_picture = undefined;
+      this.updated_profile_picture = undefined;
       this.profileForm.patchValue({
         profile_picture: null,
       });
