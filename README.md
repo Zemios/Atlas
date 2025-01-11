@@ -73,4 +73,4 @@ Las contribuciones a Zemios son bienvenidas. Si deseas colaborar, por favor sigu
 
 ## Licencia
 
-Este proyecto está licenciado bajo la [MIT License](LICENSE).
+Este proyecto está licenciado bajo la [Creative Commons Attribution-NonCommercial-NoDerivatives (CC BY-NC-ND)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en).

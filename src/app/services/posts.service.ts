@@ -1,49 +1,30 @@
 import { Injectable } from '@angular/core';
 import { PostInterface } from '../interfaces/post-interface';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../app.config';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  constructor() {}
-  posts: PostInterface[] = [
-    {
-      id: 1,
-      user_id: 1,
-      title: 'Introducción a TypeScript',
-      content: 'TypeScript es un superconjunto de JS...',
-      creation_date: new Date(),
-    },
-    {
-      id: 2,
-      user_id: 2,
-      title: 'Guía de Hooks en React',
-      content: 'Los hooks son una nueva adición...',
-      creation_date: new Date(),
-    },
-    {
-      id: 3,
-      user_id: 3,
-      title: 'Cómo usar MongoDB con Node.js',
-      content: 'En esta guía veremos cómo conectar...',
-      creation_date: new Date(),
-    },
-  ];
+  constructor(private http: HttpClient) { }
 
-  data = this.posts;
-  show(): Array<PostInterface> {
-    return this.data;
+  private route = '/posts/';
+
+  show(page: number = 1, limit: number = 10): Observable<PostInterface[]> {
+    return this.http.get<PostInterface[]>(API_URL + this.route + `?page=${page}&limit=${limit}`, { withCredentials: true });
   }
 
-  get(id: number) {
-    return this.data.find((item) => item.id === id);
+  get(id: number): Observable<PostInterface> {
+    return this.http.get<PostInterface>(API_URL + this.route + id, { withCredentials: true });
   }
 
-  delete(id: number) {
-    return id;
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(API_URL + this.route + id, { withCredentials: true });
   }
 
-  update(id: number) {
-    return id;
+  create(postData: { title: string; content: string }): Observable<PostInterface> {
+    return this.http.post<PostInterface>(API_URL + this.route, postData, { withCredentials: true });
   }
 }

@@ -4,4 +4,10 @@ export interface PostInterface {
   title: string;
   content: string;
   creation_date: Date;
+  user: {
+    name: string;
+    id: number;
+  };
+  likes: [];
+  comments: [];
 }

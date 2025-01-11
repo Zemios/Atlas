@@ -1,0 +1,96 @@
+<div class="fixed inset-0 mt-5 flex items-center justify-center bg-gray-700 bg-opacity-75">
+  <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-6 shadow-2xl" modal-content>
+    <button
+      (click)="closeModal()" 
+      type="button" 
+      class="absolute z-10 p-3 top-0 right-0 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+      <i class="bi bi-x-circle text-xl text-red-600"></i>
+    </button>
+
+    <div class="flex lg:flex-row flex-col items-center lg:items-start text-start w-auto h-full space-x-4">
+      <div class="relative w-32 h-32 lg:h-24 group">
+        @if (updated_profile_picture) {
+          <img 
+            class="h-full w-full object-cover rounded-full border-2 border-gray-200 transition duration-300 ease-in-out group-hover:opacity-50"
+              [src]="updated_profile_picture"
+            onerror="src = 'error.svg'"
+            alt="User Avatar"
+            (click)="fileInput.click()"
+        />
+        } @else {
+          <img 
+            class="h-full w-full object-cover rounded-full border-2 border-gray-200 transition duration-300 ease-in-out group-hover:opacity-50"
+              [src]="IMAGES_URL + user?.profile_picture"
+            onerror="src = 'error.svg'"
+            alt="User Avatar"
+            (click)="fileInput.click()"
+          />
+        }
+        <div class="absolute inset-0 flex items-center justify-center rounded-full bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition duration-300">
+          <i class="bi bi-pencil-square text-2xl"></i>
+        </div>
+        <input
+          type="file"
+          #fileInput
+          class="absolute h-full w-full inset-0 opacity-0 cursor-pointer"
+          (change)="onFileChange($event)"
+          accept=".jpg, .jpeg, .png"
+        />
+        @if (user?.profile_picture || updated_profile_picture) {
+          <button 
+            type="button" 
+            class="absolute top-0 right-0 p-2 py-1 bg-white rounded-full text-gray-500 hover:text-gray-700 focus:outline-none"
+            (click)="removeProfilePicture()"
+          >
+            <i class="bi bi-x-circle text-xl text-red-600"></i>
+          </button>
+        }
+      </div>
+
+      <div class="w-full">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Editar Perfil</h3>
+        <form [formGroup]="profileForm" (submit)="updateProfile()">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              class="w-full border-none p-3 text-lg text-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+              [placeholder]="'Ingresa tu nombre'"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
+            <input
+              id="title"
+              formControlName="title"
+              type="text"
+              class="w-full border-none p-3 text-lg text-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+              [placeholder]="'Ingresa tu título (opcional)'"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="about_me" class="block text-sm font-medium text-gray-700">Acerca de mí</label>
+            <textarea
+              id="about_me"
+              formControlName="about_me"
+              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+              [placeholder]="'Escribe algo sobre ti (opcional)'"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end items-center">
+            <button type="submit" class="rounded-full bg-blue-500 px-6 py-3 font-semibold text-white transition duration-300 ease-in-out hover:bg-blue-600">
+              Guardar cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,34 +2,40 @@
   <h2 class="mb-8 text-center text-4xl font-bold text-blue-800">Foro de la Comunidad</h2>
   <div class="mx-auto max-w-4xl">
     <div class="mb-6 text-right">
-      <button (click)="togglePublishModal()" class="transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-        Crear Publicación
-      </button>
+      <button (click)="togglePublishModal()" modal-content 
+      class="transform fixed top-10 mt-6 md:top-12 md:mt-8 xl:top-14 xl:mt-12 pt-5 end-0 m-3
+      rounded-br-lg rounded-bl-lg bg-blue-800 px-4 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
+      Publicar
+    </button>
       @if (publishModal) {
         <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
       }
     </div>
-    @for (post of posts; track $index) {
-      <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
-        <div class="p-6">
-          <h3 class="mb-4 text-2xl font-bold text-blue-800">
-            {{ post.title }}
-          </h3>
-          <p class="mb-4 text-gray-700">
-            {{ post.content }}
-          </p>
-          <div class="flex items-center gap-4">
-            <div class="flex-shrink-0">
-              <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 object-cover w-12 rounded-full border-2 border-gray-300" />
+      @for (post of posts; track $index) {
+        <div class="mb-6 rounded-lg bg-white shadow-lg z-0 flex items-start justify-between">
+          <a routerLink="/explore/post/{{ post.id }}" class="block p-6">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="flex-shrink-0">
+                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-700">{{post.user.name}}</p>
+                <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
+              </div>
             </div>
-            <div>
-              <p class="text-sm font-semibold text-gray-700">Nombre del Autor</p>
-              <p class="text-sm text-gray-500">{{ post.creation_date }}</p>
-            </div>
-          </div>
-          <a routerLink="/explore/post/{{ post.id }}" class="mt-4 block text-blue-500 hover:underline">Ver más detalles</a>
+            <p class="my-2 text-gray-700 break-all">{{ post.content }}</p>
+          </a>
+          
+          @if (currentUserId === post.user.id) {
+            <button (click)="deletePost(post.id)" 
+              class="mt-2 me-3 flex items-center justify-center rounded-full bg-transparent transition duration-300 ease-in-out">
+              <i class="bi bi-trash text-xl text-red-600"></i>
+            </button>
+          }
         </div>
-      </div>
-    }
+      }
   </div>
+  @if (loading) {
+    <div class="text-center text-neutral-700 py-6">Cargando más posts...</div>
+  }
 </div>

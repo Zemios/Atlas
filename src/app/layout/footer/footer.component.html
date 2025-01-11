@@ -9,19 +9,28 @@
         Patreon
     </a>
 </div> -->
-<div class="mx-10 my-10 flex flex-col items-center justify-between rounded-lg bg-yellow-500 px-8 py-6 text-center text-white shadow-lg md:flex-row md:text-left">
-  <div class="mb-4 md:mb-0 md:mr-6">
-    <p class="text-lg font-medium">¿Te gustaría apoyarnos? Haz una pequeña donación y ayuda a que Zemios crezca.</p>
+@if (this.router.url !== '/consulting') {
+  <div class="mx-10 my-10 flex flex-col items-center justify-between rounded-lg bg-yellow-500 px-8 py-6 text-center text-white shadow-lg md:flex-row md:text-left">
+    <div class="mb-4 md:mb-0 md:mr-6">
+      <p class="text-lg font-medium">¿Te gustaría apoyarnos? Haz una pequeña donación y ayuda a que Zemios crezca.</p>
+    </div>
+    <a
+      href="https://www.buymeacoffee.com/zemios"
+      target="_blank"
+      class="duration-50 items-center rounded-full bg-white px-6 py-2 text-center font-bold text-yellow-600 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+    >
+      <i class="bi bi-heart-fill mr-2 text-red-500"></i>
+      Haz una Donación
+    </a>
   </div>
-  <a
-    href="https://www.buymeacoffee.com/zemios"
-    target="_blank"
-    class="duration-50 items-center rounded-full bg-white px-6 py-2 text-center font-bold text-yellow-600 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
-  >
-    <i class="bi bi-heart-fill mr-2 text-red-500"></i>
-    Haz una Donación
-  </a>
-</div>
+  <div class="mb-3 bg-black py-8 text-center text-white">
+    <div class="container mx-auto">
+      <h2 class="mb-4 text-3xl font-bold">¿Eres una empresa?</h2>
+      <p class="mb-6 text-lg">Descubre cómo podemos ayudarte a impulsar tu negocio con soluciones tecnológicas innovadoras.</p>
+      <a routerLink="/consulting" class="rounded bg-white px-8 py-3 font-semibold text-black transition duration-300 hover:bg-gray-200"> Conoce nuestra visión </a>
+    </div>
+  </div>
+}
 <div class="flex flex-wrap items-center justify-center gap-3 p-4 text-neutral-700 sm:p-10 lg:flex-row lg:flex-nowrap lg:justify-around">
   <div class="order-2 flex max-w-96 flex-col items-center justify-start gap-2 lg:order-1">
     <a href="mailto:info@zemios.com" class="flex px-2 font-bold hover:text-blue-400">info&#64;zemios.com</a>
@@ -50,4 +59,4 @@
     </ul>
   </div>
 </div>
-<p class="flex justify-center pb-2 text-center">&#169; 2024 Zemios. Todos los derechos reservados.</p>
+<p class="flex justify-center pb-5 text-center">&#169; 2024 Zemios. Todos los derechos reservados.</p>

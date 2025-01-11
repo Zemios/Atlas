@@ -1,10 +1,6 @@
 <div class="flex flex-col">
-  <div
-    class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg px-6 py-24 text-white md:px-20 xl:flex-row"
-  >
-    <div
-      class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1"
-    >
+  <div class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg px-6 py-24 text-white md:px-20 xl:flex-row">
+    <div class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1">
       <h1 class="mb-4 text-4xl font-extrabold leading-tight md:text-5xl">
         {{ 'home.header.title' | translate }}
       </h1>
@@ -14,20 +10,18 @@
       <p class="mb-6 text-lg opacity-80 md:text-xl">
         {{ 'home.header.description' | translate }}
       </p>
-      <div class="flex flex-wrap items-center justify-center gap-3 text-center">
-        <a
-          routerLink="/explore"
-          class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"
-        >
-          {{ 'home.buttons.explore' | translate }}
-        </a>
-        <a
-          routerLink="/sign-in"
-          class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
-        >
-          {{ 'home.buttons.join' | translate }}
-        </a>
-      </div>
+      @if (backendStatus) {
+        <div class="flex flex-wrap items-center justify-center gap-3 text-center">
+          <a routerLink="/explore" class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100">
+            {{ 'home.buttons.explore' | translate }}
+          </a>
+          @if (!isAuthenticated) {
+            <a routerLink="/login" class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105">
+              {{ 'home.buttons.join' | translate }}
+            </a>
+          }
+        </div>
+      }
     </div>
     <div class="order-2 flex justify-center px-3 sm:px-0 md:order-1 xl:order-2">
       <img src="images/title.svg" alt="Banner Image" class="banner-image h-20 transform transition-transform duration-500 hover:scale-105" />
@@ -41,10 +35,7 @@
       {{ 'home.main.description' | translate }}
     </p>
     <div class="mb-6 flex justify-center gap-4">
-      <a
-        routerLink="/contact"
-        class="transform rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800"
-      >
+      <a routerLink="/contact" class="transform rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800">
         {{ 'home.buttons.learn-more' | translate }}
       </a>
     </div>
@@ -91,102 +82,126 @@
     }
   </div>
   <!-- Noticias o posts ¿ -->
-  @if (mainNews.length) {
-    <div class="flex flex-col justify-center px-4 py-24">
-      <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
-      <!-- ¿ Un efecto de carrusel estaria increible -->
-      <!-- TODO: PrimeNG tiene unos carruseles muy bonitos pero estan en beta para angular 19 -->
-      <div class="flex flex-wrap justify-center gap-6 flex-row">
-        @for (news of mainNews; track $index) {
-          @if ($index < 3) {
-            <!-- Esto esta bien, TODO: pero no deberia ser necesario ya que no tiene sentido que cargue todas las noticias para solo mostrar 3  -->
-            <div class="flex max-w-96 transform flex-col items-center justify-start rounded-2xl bg-white px-6 pb-6 text-center text-blue-800 shadow-lg transition-transform hover:scale-105">
-              <img src="{{ news.image }}" onerror="this.src='error.svg'" alt="Imagen noticia" class="my-6 rounded-2xl object-contain" />
-              <p class="mb-2 text-2xl font-semibold">{{ news.title }}</p>
-              <p class="mb-4 text-gray-600">{{ news.content }}</p>
-              <a routerLink="/news/article/{{ news.id }}" class="mt-auto font-medium text-blue-500 hover:underline">Leer más</a>
+  @if (backendStatus) {
+    @if (mainNews | async; as mainNews) {
+      @if (mainNews.length) {
+        <div class="flex flex-col justify-center px-4 py-24">
+          <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Noticias relevantes</h2>
+          <!-- ¿ Un efecto de carrusel estaria increible -->
+          <!-- TODO: PrimeNG tiene unos carruseles muy bonitos pero estan en beta para angular 19 -->
+          <div class="flex flex-row flex-wrap justify-center gap-6">
+            @for (news of mainNews; track $index) {
+              @if ($index < 3) {
+                <!-- Esto esta bien, TODO: pero no deberia ser necesario ya que no tiene sentido que cargue todas las noticias para solo mostrar 3  -->
+                <div class="flex max-w-96 transform flex-col items-center justify-start rounded-2xl bg-white px-6 pb-6 text-center text-blue-800 shadow-lg transition-transform hover:scale-105">
+                  <img src="{{ news.image }}" onerror="this.src='error.svg'" alt="Imagen noticia" class="my-6 rounded-2xl object-contain" />
+                  <p class="mb-2 text-2xl font-semibold">{{ news.title }}</p>
+                  <p class="mb-4 text-gray-600">{{ news.content }}</p>
+                  <a routerLink="/news/article/{{ news.id }}" class="mt-auto font-medium text-blue-500 hover:underline">Leer más</a>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      }
+    }
+    <div class="bg-white">
+      @if (isAuthenticated) {
+        @if (lastCourses.length) {
+          <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
+            <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
+              <h2>Amplia tus conocimientos</h2>
+              <p class="text-lg text-neutral-500">Visita nuestros cursos gratuitos!</p>
+            </div>
+            <div class="flex h-auto w-full flex-row flex-wrap justify-around gap-2">
+              @for (course of lastCourses; track $index) {
+                @if ($index < 3) {
+                  <div class="flex w-1/3 flex-grow transform flex-col items-center justify-between rounded-2xl bg-gray-800 p-6 text-center text-white transition-all">
+                    <h3 class="mb-4 text-xl font-bold">
+                      {{ course.title }}
+                    </h3>
+                    <ul class="mb-4 w-auto gap-1 text-center text-gray-300 sm:w-56">
+                      <!-- TODO: aqui da un error si se hace con un for -->
+                      {{
+                        course.content.modules[0]
+                      }},
+                      {{
+                        course.content.modules[1]
+                      }},
+                      {{
+                        course.content.modules[2]
+                      }}.
+                    </ul>
+                    <a href="#" class="font-bold text-blue-400 hover:underline">Ver más</a>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+        @if (lastProjects | async; as lastProjects) {
+          @if (lastProjects.length) {
+            <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
+              <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
+                @for (project of lastProjects; track $index) {
+                  @if ($index < 3) {
+                    <div
+                      routerLink="/projects/project/{{ project.id }}"
+                      class="relative flex flex-grow transform cursor-pointer flex-col items-center justify-center rounded-2xl bg-gray-800 p-6 text-center text-white transition-all"
+                      style="background-image: url('{{ project.image }}'); background-size: cover; background-position: center;"
+                    >
+                      <img src="{{ project.image }}" onerror="this.parentElement.style.backgroundImage='url(\'error.svg\')'; this.style.display='none';" class="hidden" alt="Project Image" />
+
+                      <div class="relative z-10 flex w-full flex-col items-center justify-center rounded-lg bg-gray-900 bg-opacity-95 p-6">
+                        <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
+                        <p class="mb-4 w-auto max-w-56 text-gray-300">{{ project.description }}</p>
+                        <ul class="m-0 flex list-none">
+                          <!-- TODO: Colaboradores -->
+                        </ul>
+                      </div>
+                    </div>
+                  }
+                }
+              </div>
+              <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
+                <h2>Colaboremos juntos</h2>
+                <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
+              </div>
             </div>
           }
         }
-      </div>
+      }
     </div>
   }
 
-  <div class="bg-white">
-    @if (lastCourses.length) {
-      <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
-        <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
-          <h2>Amplia tus conocimientos</h2>
-          <p class="text-lg text-neutral-500">Visita nuestros cursos gratuitos!</p>
-        </div>
-        <div class="flex h-auto w-full flex-row flex-wrap justify-around gap-2">
-          @for (course of lastCourses; track $index) {
-            @if ($index < 3) {
-              <div class="flex flex-grow transform flex-col items-center w-1/3 justify-between rounded-2xl bg-gray-800 p-6 text-center text-white transition-all">
-                <h3 class="mb-4 text-xl font-bold">
-                  {{ course.title }}
-                </h3>
-                <p class="mb-4 w-auto text-gray-300 sm:w-56">
-                  {{ course.content }}
-                </p>
-                <a href="#" class="font-bold text-blue-400 hover:underline">Ver más</a>
-              </div>
-            }
-          }
-        </div>
-      </div>
-    }
-    @if (lastProjects.length) {
-      <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
-        <div class="order-2 flex h-auto w-full flex-row flex-wrap justify-around gap-2 lg:order-1">
-          @for (project of lastProjects; track $index) {
-            @if ($index < 3) {
-              <div routerLink="/projects/project/{{project.id}}" 
-                class="relative flex transform flex-grow cursor-pointer flex-col items-center justify-between rounded-2xl bg-gray-800 p-6 text-center text-white transition-all">
-                <img src="{{ project.image }}" onerror="this.src='error.svg'" class="absolute top-0 h-full w-full rounded-2xl object-cover opacity-0 hover:opacity-100" alt="Proyect Image" />
-                <h3 class="mb-4 text-xl font-bold text-blue-700">{{ project.name }}</h3>
-                <p class="mb-4 w-auto text-gray-300 sm:w-56">{{ project.description }}</p>
-                <ul class="m-0 flex list-none">
-                  <!--TODO:-->
-                  <!-- @for (collaborator of project.collaborator; track $index) {
-                    <li
-                      class="-ms-5 rounded-full border-2 border-gray-800 text-gray-300"
-                    >
-                      <img
-                        src="{{ collaborator.image }}"
-                        alt="{{ collaborator.name }} photo"
-                        class="h-12 w-12 rounded-full object-cover"
-                      />
-                    </li>
-                  } -->
-                </ul>
-              </div>
-            }
-          }
-        </div>
-        <div class="order-1 m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:order-2 lg:mb-auto">
-          <h2>Colaboremos juntos</h2>
-          <p class="text-lg text-neutral-500">Únete a nuestros últimos proyectos!</p>
-        </div>
-      </div>
-    }
-  </div>
-
   <div class="flex flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-24">
-    <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
+    @if (!isAuthenticated) {
+      <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
 
-    <p class="mb-8 text-center text-lg text-white drop-shadow-lg md:text-xl">
-      Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
-    </p>
+      <p class="mb-8 text-center text-lg text-white drop-shadow-lg md:text-xl">
+        Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
+      </p>
 
-    <div class="mb-10 text-center">
-      <a
-        routerLink="/sign-up"
-        class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
-      >
-        Crear perfil
-      </a>
-    </div>
+      @if (backendStatus) {
+        <div class="mb-10 text-center">
+          <a
+            routerLink="/register"
+            class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+          >
+            Crear perfil
+          </a>
+        </div>
+      } @else {
+        <div class="mb-10 text-center">
+          <a
+            routerLink="/contact"
+            class="duration-50 inline-flex transform items-center rounded-full bg-white px-6 py-2 text-lg font-bold text-neutral-700 shadow-md transition-transform hover:scale-105 hover:bg-gray-100"
+          >
+            Contáctanos
+          </a>
+        </div>
+      }
+    }
 
     <div class="flex flex-col items-center justify-center gap-12 text-center lg:flex-row">
       <div class="mb-6 flex gap-8 lg:mb-0">

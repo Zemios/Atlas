@@ -1,38 +1,40 @@
 <div class="min-h-screen bg-gray-100 px-6 py-12">
   <h2 class="mb-8 text-center text-4xl font-bold text-blue-800">Proyectos de la Comunidad</h2>
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-    @for (project of projects; track $index) {
-      <div routerLink="/projects/project/{{ project.id }}" class="cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg">
-        <img src="{{ project.image }}" onerror="this.src='error.svg'" alt="Project Image" class="h-48 w-full object-cover" />
-        <div class="p-6">
-          <div class="mb-4 flex items-center justify-between">
-            <h3 class="text-2xl font-bold text-blue-800">
-              {{ project.name }}
-            </h3>
-            <div class="flex items-center space-x-4">
-              @if (project.github_link) {
-                <a href="{{ project.github_link }}" target="_blank" class="flex gap-2 rounded-full bg-blue-500 px-3 py-2 text-white hover:bg-blue-700"><i class="bi bi-github"></i></a>
-              }
-              @if (project.website_link) {
-                <a href="{{ project.website_link }}" target="_blank" class="flex gap-2 rounded-full bg-green-500 px-3 py-2 text-white hover:bg-green-700"><i class="bi bi-box-arrow-up-right"></i></a>
-              }
+    @if (projects | async; as projects) {
+      @for (project of projects; track $index) {
+        <div routerLink="/projects/project/{{ project.id }}" class="cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg">
+          <img src="{{ project.image }}" onerror="this.src='error.svg'" alt="Project Image" class="h-48 w-full object-cover" />
+          <div class="p-6">
+            <div class="mb-4 flex items-center justify-between">
+              <h3 class="text-2xl font-bold text-blue-800">
+                {{ project.name }}
+              </h3>
+              <div class="flex items-center space-x-4">
+                @if (project.github_link) {
+                  <a href="{{ project.github_link }}" target="_blank" class="flex gap-2 rounded-full bg-blue-500 px-3 py-2 text-white hover:bg-blue-700"><i class="bi bi-github"></i></a>
+                }
+                @if (project.website_link) {
+                  <a href="{{ project.website_link }}" target="_blank" class="flex gap-2 rounded-full bg-green-500 px-3 py-2 text-white hover:bg-green-700"><i class="bi bi-box-arrow-up-right"></i></a>
+                }
+              </div>
             </div>
-          </div>
-          <p class="mb-4 text-gray-700">
-            {{ project.subtitle }}
-          </p>
-          <div class="flex items-center gap-4">
-            <!-- Repetir este bloque por cada colaborador -->
-            <div class="flex-shrink-0">
-              <img src="foto" onerror="this.src='error.svg'" alt="Colaborador" class="h-12 w-12 object-cover rounded-full border-2 border-gray-300" />
-            </div>
-            <div>
-              <p class="text-sm font-semibold text-gray-700">Nombre del creador</p>
-              <p class="text-sm text-gray-500">Creador</p>
+            <p class="mb-4 text-gray-700">
+              {{ project.subtitle }}
+            </p>
+            <div class="flex items-center gap-4">
+              <!-- Repetir este bloque por cada colaborador -->
+              <div class="flex-shrink-0">
+                <img src="foto" onerror="this.src='error.svg'" alt="Colaborador" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-700">Nombre del creador</p>
+                <p class="text-sm text-gray-500">Creador</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     }
   </div>
 </div>

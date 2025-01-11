@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
 import { LikeInterface } from '../interfaces/like-interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API_URL } from '../app.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LikesService {
-  constructor() {}
-  likes: LikeInterface[] = [
-    { id: 1, user_id: 1, post_id: 1, news_id: 1 },
-    { id: 2, user_id: 2, post_id: 2, news_id: 2 },
-    { id: 3, user_id: 3, post_id: 3, news_id: 3 },
-  ];
-  data = this.likes;
-  show(): Array<LikeInterface> {
-    return this.data;
+  constructor(private http: HttpClient) {}
+  route = '/likes/';
+
+  show(): Observable<LikeInterface[]> {
+    return this.http.get<LikeInterface[]>(API_URL + this.route);
   }
 
-  get(id: number) {
-    return this.data.find((item) => item.id === id);
+  get(id: number): Observable<LikeInterface> {
+    return this.http.get<LikeInterface>(API_URL + this.route + id);
   }
 
-  delete(id: number) {
-    return id;
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(API_URL + this.route + id);
   }
 
-  update(id: number) {
-    return id;
+  update(id: number, like: LikeInterface): Observable<LikeInterface> {
+    return this.http.put<LikeInterface>(API_URL + this.route + id, like);
+  }
+
+  create(like: LikeInterface): Observable<LikeInterface> {
+    return this.http.post<LikeInterface>(API_URL + this.route, like);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -9,4 +9,5 @@ import { RouterLink } from '@angular/router';
 })
 export class FooterComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
+  constructor(public router: Router) {}
 }
