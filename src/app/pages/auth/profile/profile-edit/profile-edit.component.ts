@@ -20,6 +20,7 @@ export class ProfileEditComponent implements OnInit {
 
   @Input() user: UserInterface | undefined;
   @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
   selectedFile: File | null = null;
   submitted: boolean = false;
@@ -122,6 +123,7 @@ export class ProfileEditComponent implements OnInit {
       next: () => {
         this.showSnackbar('Perfil actualizado con éxito', 'success');
         this.submitted = false;
+        this.save.emit();
       },
       error: (error) => {
         console.error(error);

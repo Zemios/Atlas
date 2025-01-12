@@ -36,6 +36,18 @@ export class ProfileComponent {
     this.profileEditModal = !this.profileEditModal;
   }
 
+  saveProfileEdit() {
+    this.profileEditModal = false;
+    this.authService.getActualUser().subscribe({
+      next: (user) => {
+        this.user = user
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
   closeProfileEditModal() {
     this.profileEditModal = false;
   }
