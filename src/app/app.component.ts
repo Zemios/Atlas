@@ -39,6 +39,18 @@ export class AppComponent implements OnInit {
         console.error('Error refreshing token', error);
       },
     });
+    this.authService.getActualUser().subscribe({
+      next: (user) => {
+        if (user) {
+          console.log('Usuario cargado desde la cookie JWT:', user);
+        } else {
+          console.log('No se ha encontrado un usuario autenticado al recargar.');
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar el usuario:', error);
+      }
+    });
   }
 
   checkConnection(): void {
