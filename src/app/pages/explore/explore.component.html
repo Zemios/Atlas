@@ -16,7 +16,7 @@
           <a routerLink="/explore/post/{{ post.id }}" class="block p-6">
             <div class="flex items-center gap-4 mb-4">
               <div class="flex-shrink-0">
-                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+                <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
               </div>
               <div>
                 <p class="text-sm font-semibold text-gray-700">{{post.user.name}}</p>

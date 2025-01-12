@@ -1,3 +1,4 @@
+import { IMAGES_URL } from './../../app.config';
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PublishComponent } from './publish/publish.component';
@@ -15,6 +16,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ExploreComponent implements OnInit, AfterViewInit {
   posts: PostInterface[] = [];
+  IMAGES_URL = IMAGES_URL;
   page: number = 1;
   limit: number = 10;
   lastScrollTop: number = 0;

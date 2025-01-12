@@ -7,6 +7,7 @@ export interface PostInterface {
   user: {
     name: string;
     id: number;
+    profile_picture: string;
   };
   likes: [];
   comments: [];
