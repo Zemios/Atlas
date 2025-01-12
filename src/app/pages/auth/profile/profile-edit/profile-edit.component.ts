@@ -105,6 +105,8 @@ export class ProfileEditComponent implements OnInit {
       return;
     }
 
+    this.formData = new FormData();
+
     Object.keys(this.profileForm.value).forEach(key => {
       const value = this.profileForm.value[key];
       if (value !== null && value !== '' && key !== 'profile_picture') {
