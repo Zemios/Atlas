@@ -36,19 +36,15 @@ export class MenuComponent {
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
-    this.authService.currentUser.subscribe({
-      next: (user) => {
-        if (!user) {
-          console.error('No se ha encontrado un usuario autenticado.');
-          this.user = null;
-          return;
-        }
-        this.user = user;
-      },
-      error: (error) => {
-        console.error('Error al obtener el usuario:', error);
+    this.authService.currentUser.subscribe((user) => {
+      console.log(user)
+      this.user = user;
+      if (!user) {
+        console.error('No se ha encontrado un usuario autenticado.');
+        return;
       }
-    });
+    },
+    );
   }
 
   translateText(lang: string) {

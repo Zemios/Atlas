@@ -48,11 +48,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http.post(API_URL + '/auth/refresh', {}, { withCredentials: true }).pipe(
-      tap((response: any) => {
-        this.currentUserSubject.next(response.user);
-      })
-    );
+    return this.http.post(API_URL + '/auth/refresh', {}, { withCredentials: true })
   }
 
   getActualUser(): Observable<UserInterface> {
@@ -74,7 +70,6 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(API_URL + '/auth/logout', {}, { withCredentials: true }).pipe(
       tap(() => {
-        // Actualizamos el BehaviorSubject para indicar que no hay usuario autenticado
         this.currentUserSubject.next(null);
       }),
       catchError((error) => {
