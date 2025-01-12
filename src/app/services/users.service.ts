@@ -30,7 +30,7 @@ export class UsersService {
     return this.authService.getCurrentUser().pipe(
       switchMap((currentUser) => {
         if (!currentUser) {
-          return throwError(() => new Error('No se ha encontrado un usuario autenticado.'));
+          return throwError(() => new Error('User authenticated not found.'));
         }
         const userId = currentUser.id;
         return this.http.put<UserInterface>(API_URL + this.route + userId, formData, { withCredentials: true });

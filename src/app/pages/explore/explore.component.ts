@@ -36,7 +36,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
         this.authService.currentUser.subscribe({
           next: (user) => {
             if (!user) {
-              console.error('No se ha encontrado un usuario autenticado.');
+              console.error('User authenticated not found.');
               this.currentUserId = null;
               return;
             }

@@ -47,7 +47,7 @@ export class PublishComponent implements OnInit {
       next: (user) => {
         if (!user) {
           this.actualUserImage = undefined;
-          console.error('No se ha encontrado un usuario autenticado.');
+          console.error('User authenticated not found.');
           return;
         }
         this.actualUserImage = user.profile_picture;

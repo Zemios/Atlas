@@ -25,7 +25,7 @@ export class ProfileComponent {
     this.authService.currentUser.subscribe({
       next: (user) => {
         if (!user) {
-          console.error('No se ha encontrado un usuario autenticado.');
+          console.error('User authenticated not found.');
           return;
         }
         this.user = user;
@@ -45,7 +45,7 @@ export class ProfileComponent {
     this.authService.currentUser.subscribe({
       next: (user) => {
         if (!user) {
-          console.error('No se ha encontrado un usuario autenticado.');
+          console.error('User authenticated not found.');
           this.user = null;
           return;
         }

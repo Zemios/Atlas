@@ -32,23 +32,19 @@ export class AppComponent implements OnInit {
     this.checkConnection();
 
     this.authService.refreshToken().subscribe({
-      next: (response) => {
-        console.log('Token refreshed successfully', response);
-      },
+      next: () => { },
       error: (error) => {
         console.error('Error refreshing token', error);
       },
     });
     this.authService.getActualUser().subscribe({
       next: (user) => {
-        if (user) {
-          console.log('Usuario cargado desde la cookie JWT:', user);
-        } else {
-          console.log('No se ha encontrado un usuario autenticado al recargar.');
+        if (!user) {
+          console.log('User authenticated not found');
         }
       },
       error: (error) => {
-        console.error('Error al cargar el usuario:', error);
+        console.error('Error loading an user:', error);
       }
     });
   }
@@ -64,7 +60,7 @@ export class AppComponent implements OnInit {
       error: (err) => {
         this.backendStatus = false;
         this.filterPages();
-        console.error('Error al conectar con el backend:', err);
+        console.error('Error connecting to backend:', err);
       },
     });
   }
