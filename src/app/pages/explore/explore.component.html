@@ -8,7 +8,7 @@
       Publicar
     </button>
       @if (publishModal) {
-        <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
+        <app-publish (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-publish>
       }
     </div>
       @for (post of posts; track $index) {

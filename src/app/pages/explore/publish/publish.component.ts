@@ -11,6 +11,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 })
 export class PublishComponent implements OnInit {
   @Output() closeModalEvent = new EventEmitter();
+  @Output() postCreatedEvent = new EventEmitter();
   publishForm: FormGroup;
   successMessage: string | null = null;
   errorMessage: string | null = null;
@@ -54,6 +55,7 @@ export class PublishComponent implements OnInit {
           this.showSnackbar('Publicación creada con éxito', 'success');
           this.publishForm.reset();
           this.submitted = false;
+          this.postCreatedEvent.emit();
           this.closeModal();
         },
         error: (error) => {

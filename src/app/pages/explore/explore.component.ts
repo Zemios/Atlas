@@ -117,6 +117,12 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   }
 
 
+  onPostCreated() {
+    this.page = 1;
+    this.posts = [];
+    this.loadPosts();
+  }
+
   deletePost(postId: number) {
     this.postsSvc.delete(postId).subscribe(() => {
       this.posts = this.posts.filter(post => post.id !== postId);
