@@ -43,8 +43,12 @@ export class PublishComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getActualUser().subscribe({
+    this.authService.currentUser.subscribe({
       next: (user) => {
+        if (!user) {
+          console.error('No se ha encontrado un usuario autenticado.');
+          return;
+        }
         this.actualUserImage = user.profile_picture;
       },
       error: (error) => {

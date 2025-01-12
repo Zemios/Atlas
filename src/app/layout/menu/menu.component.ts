@@ -25,7 +25,7 @@ export class MenuComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   menuVisibility = false;
   isDropdownOpen = false;
-  user: UserInterface = new Object() as UserInterface;
+  user: UserInterface | null = null;
   IMAGES_URL = IMAGES_URL;
 
   constructor(
@@ -36,13 +36,17 @@ export class MenuComponent {
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
-    this.authService.getActualUser().subscribe({
+    this.authService.currentUser.subscribe({
       next: (user) => {
+        if (!user) {
+          console.error('No se ha encontrado un usuario autenticado.');
+          return;
+        }
         this.user = user;
       },
       error: (error) => {
-        console.error(error);
-      },
+        console.error('Error al obtener el usuario:', error);
+      }
     });
   }
 

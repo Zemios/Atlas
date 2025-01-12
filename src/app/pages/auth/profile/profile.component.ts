@@ -22,8 +22,12 @@ export class ProfileComponent {
     private usersService: UsersService,
     private router: Router
   ) {
-    this.authService.getActualUser().subscribe({
+    this.authService.currentUser.subscribe({
       next: (user) => {
+        if (!user) {
+          console.error('No se ha encontrado un usuario autenticado.');
+          return;
+        }
         this.user = user;
       },
       error: (error) => {
@@ -38,8 +42,12 @@ export class ProfileComponent {
 
   saveProfileEdit() {
     this.profileEditModal = false;
-    this.authService.getActualUser().subscribe({
+    this.authService.currentUser.subscribe({
       next: (user) => {
+        if (!user) {
+          console.error('No se ha encontrado un usuario autenticado.');
+          return;
+        }
         this.user = user
       },
       error: (error) => {

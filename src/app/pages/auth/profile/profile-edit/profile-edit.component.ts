@@ -40,7 +40,11 @@ export class ProfileEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getActualUser().subscribe((user) => {
+    this.authService.currentUser.subscribe((user) => {
+      if (!user) {
+        console.error('No se ha encontrado un usuario autenticado.');
+        return;
+      }
       this.user = user;
       this.profileForm.patchValue({
         name: this.user.name,

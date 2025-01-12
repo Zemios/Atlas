@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserInterface } from '../interfaces/user-interface';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { API_URL } from '../app.config';
 import { AuthService } from './auth.service';
 
@@ -27,8 +27,11 @@ export class UsersService {
   }
 
   update(formData: FormData): Observable<UserInterface> {
-    return this.authService.getActualUser().pipe(
+    return this.authService.getCurrentUser().pipe(
       switchMap((currentUser) => {
+        if (!currentUser) {
+          return throwError(() => new Error('No se ha encontrado un usuario autenticado.'));
+        }
         const userId = currentUser.id;
         return this.http.put<UserInterface>(API_URL + this.route + userId, formData, { withCredentials: true });
       }),
