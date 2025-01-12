@@ -55,6 +55,7 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
+  formData = new FormData();
   updateProfile() {
     this.submitted = true;
 
@@ -104,17 +105,18 @@ export class ProfileEditComponent implements OnInit {
       return;
     }
 
-    const formData = new FormData();
-
     Object.keys(this.profileForm.value).forEach(key => {
-      formData.append(key, this.profileForm.value[key]);
+      const value = this.profileForm.value[key];
+      if (value !== null && value !== '' && key !== 'profile_picture') {
+        this.formData.append(key, value);
+      }
     });
 
     if (this.selectedFile) {
-      formData.append('profile_picture', this.selectedFile);
+      this.formData.append('profile_picture', this.selectedFile);
     }
 
-    this.usersService.update(formData).subscribe({
+    this.usersService.update(this.formData).subscribe({
       next: () => {
         this.showSnackbar('Perfil actualizado con éxito', 'success');
         this.submitted = false;
@@ -160,6 +162,7 @@ export class ProfileEditComponent implements OnInit {
 
   removeProfilePicture(): void {
     if (this.user) {
+      this.formData.append('profile_picture', '');
       this.user.profile_picture = undefined;
       this.updated_profile_picture = undefined;
       this.profileForm.patchValue({
