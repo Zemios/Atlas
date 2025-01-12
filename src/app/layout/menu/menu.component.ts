@@ -36,14 +36,9 @@ export class MenuComponent {
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
-    this.authService.currentUser.subscribe((user) => {
+    this.authService.subscribeToCurrentUser((user) => {
       this.user = user;
-      if (!user) {
-        console.error('User authenticated not found.');
-        return;
-      }
-    },
-    );
+    })
   }
 
   translateText(lang: string) {

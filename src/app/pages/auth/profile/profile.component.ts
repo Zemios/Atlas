@@ -22,18 +22,9 @@ export class ProfileComponent {
     private usersService: UsersService,
     private router: Router
   ) {
-    this.authService.currentUser.subscribe({
-      next: (user) => {
-        if (!user) {
-          console.error('User authenticated not found.');
-          return;
-        }
-        this.user = user;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.authService.subscribeToCurrentUser((user) => {
+      this.user = user;
+    })
   }
 
   toggleProfileEditModal() {

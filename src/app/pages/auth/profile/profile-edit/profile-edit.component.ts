@@ -40,9 +40,8 @@ export class ProfileEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.currentUser.subscribe((user) => {
+    this.authService.subscribeToCurrentUser((user) => {
       if (!user) {
-        console.error('User authenticated not found.');
         this.user = null;
         return;
       }
@@ -52,7 +51,7 @@ export class ProfileEditComponent implements OnInit {
         title: this.user.title || '',
         about_me: this.user.about_me || '',
       });
-    });
+    })
     this.profileForm.get('name')?.valueChanges.subscribe(value => {
       if (value) {
         const transformedValue = value.replace(/\s+/g, '');

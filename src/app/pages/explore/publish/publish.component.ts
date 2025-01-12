@@ -43,18 +43,8 @@ export class PublishComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.currentUser.subscribe({
-      next: (user) => {
-        if (!user) {
-          this.actualUserImage = undefined;
-          console.error('User authenticated not found.');
-          return;
-        }
-        this.actualUserImage = user.profile_picture;
-      },
-      error: (error) => {
-        console.error(error);
-      },
+    this.authService.subscribeToCurrentUser((user) => {
+      this.actualUserImage = user?.profile_picture;
     })
     const randomIndex = Math.floor(Math.random() * this.placeholders.length);
     this.placeholder = this.placeholders[randomIndex];

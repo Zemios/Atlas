@@ -22,7 +22,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   lastScrollTop: number = 0;
   loading: boolean = false;
   isAuthenticated: boolean = false;
-  currentUserId: number | null = null;
+  currentUserId: number | undefined;
   publishModal = false;
   timeout: any;
 
@@ -33,19 +33,9 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     this.authService.checkAuth().subscribe({
       next: (res) => {
         this.isAuthenticated = res.isAuthenticated;
-        this.authService.currentUser.subscribe({
-          next: (user) => {
-            if (!user) {
-              console.error('User authenticated not found.');
-              this.currentUserId = null;
-              return;
-            }
-            this.currentUserId = user.id;
-          },
-          error: (err) => {
-            console.error(err);
-          }
-        });
+        this.authService.subscribeToCurrentUser((user) => {
+          this.currentUserId = user?.id;
+        })
       },
       error: (err) => {
         console.log(err);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { API_URL } from '../app.config';
 import { UserInterface } from '../interfaces/user-interface';
@@ -65,6 +65,15 @@ export class AuthService {
 
   checkAuth(): Observable<{ isAuthenticated: boolean; role: string }> {
     return this.http.get<{ isAuthenticated: boolean; role: string }>(API_URL + '/auth/check', { withCredentials: true });
+  }
+
+  subscribeToCurrentUser(callback: (user: UserInterface | null) => void): Subscription {
+    return this.currentUser.subscribe((user) => {
+      if (!user) {
+        console.error('Authenticated User not found');
+      }
+      callback(user);
+    });
   }
 
   logout(): Observable<any> {
