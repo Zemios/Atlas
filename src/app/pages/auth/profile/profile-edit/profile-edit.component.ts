@@ -55,7 +55,6 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  formData = new FormData();
   updateProfile() {
     this.submitted = true;
 
@@ -104,21 +103,22 @@ export class ProfileEditComponent implements OnInit {
       this.showSnackbar('Error en los campos del formulario', 'error')
       return;
     }
-
-    this.formData = new FormData();
+    const formData = new FormData();
 
     Object.keys(this.profileForm.value).forEach(key => {
       const value = this.profileForm.value[key];
       if (value !== null && value !== '' && key !== 'profile_picture') {
-        this.formData.append(key, value);
+        formData.append(key, value);
       }
     });
 
     if (this.selectedFile) {
-      this.formData.append('profile_picture', this.selectedFile);
+      formData.append('profile_picture', this.selectedFile);
+    } else {
+      formData.delete('profile_picture');
     }
 
-    this.usersService.update(this.formData).subscribe({
+    this.usersService.update(formData).subscribe({
       next: () => {
         this.showSnackbar('Perfil actualizado con éxito', 'success');
         this.submitted = false;
@@ -164,7 +164,7 @@ export class ProfileEditComponent implements OnInit {
 
   removeProfilePicture(): void {
     if (this.user) {
-      this.formData.append('profile_picture', '');
+
       this.user.profile_picture = undefined;
       this.updated_profile_picture = undefined;
       this.profileForm.patchValue({
