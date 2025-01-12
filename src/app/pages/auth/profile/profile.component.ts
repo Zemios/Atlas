@@ -42,7 +42,7 @@ export class ProfileComponent {
 
   saveProfileEdit() {
     this.profileEditModal = false;
-    this.authService.currentUser.subscribe({
+    this.authService.getActualUser().subscribe({
       next: (user) => {
         if (!user) {
           console.error('User authenticated not found.');
