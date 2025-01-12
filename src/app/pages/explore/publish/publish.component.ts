@@ -1,7 +1,9 @@
+import { IMAGES_URL } from './../../../app.config';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostsService } from '../../../services/posts.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-publish',
@@ -12,6 +14,8 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class PublishComponent implements OnInit {
   @Output() closeModalEvent = new EventEmitter();
   @Output() postCreatedEvent = new EventEmitter();
+  actualUserImage: string | undefined;
+  IMAGES_URL = IMAGES_URL;
   publishForm: FormGroup;
   successMessage: string | null = null;
   errorMessage: string | null = null;
@@ -30,6 +34,7 @@ export class PublishComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService,
+    private authService: AuthService,
     private _snackBar: MatSnackBar
   ) {
     this.publishForm = this.fb.group({
@@ -38,6 +43,14 @@ export class PublishComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getActualUser().subscribe({
+      next: (user) => {
+        this.actualUserImage = user.profile_picture;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    })
     const randomIndex = Math.floor(Math.random() * this.placeholders.length);
     this.placeholder = this.placeholders[randomIndex];
   }
