@@ -74,8 +74,14 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(API_URL + '/auth/logout', {}, { withCredentials: true }).pipe(
       tap(() => {
+        // Actualizamos el BehaviorSubject para indicar que no hay usuario autenticado
         this.currentUserSubject.next(null);
+      }),
+      catchError((error) => {
+        console.error('Error al cerrar sesión:', error);
+        return throwError(error);
       })
     );
   }
+
 }

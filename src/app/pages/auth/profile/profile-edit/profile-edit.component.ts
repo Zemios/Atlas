@@ -18,7 +18,7 @@ export class ProfileEditComponent implements OnInit {
   IMAGES_URL = IMAGES_URL;
   updated_profile_picture: string | undefined;
 
-  @Input() user: UserInterface | undefined;
+  @Input() user: UserInterface | null = null;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
@@ -43,6 +43,7 @@ export class ProfileEditComponent implements OnInit {
     this.authService.currentUser.subscribe((user) => {
       if (!user) {
         console.error('No se ha encontrado un usuario autenticado.');
+        this.user = null;
         return;
       }
       this.user = user;

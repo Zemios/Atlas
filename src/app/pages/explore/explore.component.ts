@@ -22,7 +22,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   lastScrollTop: number = 0;
   loading: boolean = false;
   isAuthenticated: boolean = false;
-  currentUserId: number = 0;
+  currentUserId: number | null = null;
   publishModal = false;
   timeout: any;
 
@@ -37,6 +37,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
           next: (user) => {
             if (!user) {
               console.error('No se ha encontrado un usuario autenticado.');
+              this.currentUserId = null;
               return;
             }
             this.currentUserId = user.id;

@@ -13,7 +13,7 @@ import { IMAGES_URL } from '../../../app.config';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  user: UserInterface = new Object() as UserInterface;
+  user: UserInterface | null = null;
   profileEditModal = false;
   IMAGES_URL = IMAGES_URL;
 
@@ -46,6 +46,7 @@ export class ProfileComponent {
       next: (user) => {
         if (!user) {
           console.error('No se ha encontrado un usuario autenticado.');
+          this.user = null;
           return;
         }
         this.user = user

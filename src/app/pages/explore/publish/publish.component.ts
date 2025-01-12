@@ -46,6 +46,7 @@ export class PublishComponent implements OnInit {
     this.authService.currentUser.subscribe({
       next: (user) => {
         if (!user) {
+          this.actualUserImage = undefined;
           console.error('No se ha encontrado un usuario autenticado.');
           return;
         }

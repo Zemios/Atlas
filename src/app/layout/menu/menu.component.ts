@@ -40,6 +40,7 @@ export class MenuComponent {
       next: (user) => {
         if (!user) {
           console.error('No se ha encontrado un usuario autenticado.');
+          this.user = null;
           return;
         }
         this.user = user;
