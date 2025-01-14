@@ -26,7 +26,7 @@
                 <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
               </div>
             </div>
-            <p class="my-2 text-gray-700 break-all" [innerHTML]="post.content | highlightCode | newlineToBr "></p>
+            <p class="my-2 text-gray-700 break-all" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr"></p>
           </a>
           
           @if (currentUserId === post.user.id) {
