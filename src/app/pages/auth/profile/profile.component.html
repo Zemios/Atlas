@@ -19,7 +19,7 @@
           @if (profileEditModal) {
             <div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
               <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl" modal-content>
-                <app-profile-edit [user]="user" (close)="closeProfileEditModal()"></app-profile-edit>
+                <app-profile-edit [user]="user" (close)="closeProfileEditModal()" (save)="saveProfileEdit()"></app-profile-edit>
               </div>
             </div>
           }

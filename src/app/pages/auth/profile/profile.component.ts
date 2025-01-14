@@ -13,7 +13,7 @@ import { IMAGES_URL } from '../../../app.config';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  user: UserInterface = new Object() as UserInterface;
+  user: UserInterface | null = null;
   profileEditModal = false;
   IMAGES_URL = IMAGES_URL;
 
@@ -22,18 +22,30 @@ export class ProfileComponent {
     private usersService: UsersService,
     private router: Router
   ) {
-    this.authService.getActualUser().subscribe({
-      next: (user) => {
-        this.user = user;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.authService.subscribeToCurrentUser((user) => {
+      this.user = user;
+    })
   }
 
   toggleProfileEditModal() {
     this.profileEditModal = !this.profileEditModal;
+  }
+
+  saveProfileEdit() {
+    this.profileEditModal = false;
+    this.authService.getActualUser().subscribe({
+      next: (user) => {
+        if (!user) {
+          console.error('User authenticated not found.');
+          this.user = null;
+          return;
+        }
+        this.user = user
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   closeProfileEditModal() {

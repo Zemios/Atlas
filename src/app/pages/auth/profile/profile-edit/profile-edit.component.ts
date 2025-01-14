@@ -18,8 +18,9 @@ export class ProfileEditComponent implements OnInit {
   IMAGES_URL = IMAGES_URL;
   updated_profile_picture: string | undefined;
 
-  @Input() user: UserInterface | undefined;
+  @Input() user: UserInterface | null = null;
   @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
   selectedFile: File | null = null;
   submitted: boolean = false;
@@ -39,14 +40,18 @@ export class ProfileEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getActualUser().subscribe((user) => {
+    this.authService.subscribeToCurrentUser((user) => {
+      if (!user) {
+        this.user = null;
+        return;
+      }
       this.user = user;
       this.profileForm.patchValue({
         name: this.user.name,
         title: this.user.title || '',
         about_me: this.user.about_me || '',
       });
-    });
+    })
     this.profileForm.get('name')?.valueChanges.subscribe(value => {
       if (value) {
         const transformedValue = value.replace(/\s+/g, '');
@@ -103,21 +108,26 @@ export class ProfileEditComponent implements OnInit {
       this.showSnackbar('Error en los campos del formulario', 'error')
       return;
     }
-
     const formData = new FormData();
 
     Object.keys(this.profileForm.value).forEach(key => {
-      formData.append(key, this.profileForm.value[key]);
+      const value = this.profileForm.value[key];
+      if (value !== null && value !== '' && key !== 'profile_picture') {
+        formData.append(key, value);
+      }
     });
 
     if (this.selectedFile) {
       formData.append('profile_picture', this.selectedFile);
+    } else {
+      formData.delete('profile_picture');
     }
 
     this.usersService.update(formData).subscribe({
       next: () => {
         this.showSnackbar('Perfil actualizado con éxito', 'success');
         this.submitted = false;
+        this.save.emit();
       },
       error: (error) => {
         console.error(error);
@@ -160,6 +170,7 @@ export class ProfileEditComponent implements OnInit {
 
   removeProfilePicture(): void {
     if (this.user) {
+
       this.user.profile_picture = undefined;
       this.updated_profile_picture = undefined;
       this.profileForm.patchValue({

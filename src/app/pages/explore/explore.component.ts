@@ -1,3 +1,4 @@
+import { IMAGES_URL } from './../../app.config';
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PublishComponent } from './publish/publish.component';
@@ -15,12 +16,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ExploreComponent implements OnInit, AfterViewInit {
   posts: PostInterface[] = [];
+  IMAGES_URL = IMAGES_URL;
   page: number = 1;
   limit: number = 10;
   lastScrollTop: number = 0;
   loading: boolean = false;
   isAuthenticated: boolean = false;
-  currentUserId: number = 0;
+  currentUserId: number | undefined;
   publishModal = false;
   timeout: any;
 
@@ -31,14 +33,9 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     this.authService.checkAuth().subscribe({
       next: (res) => {
         this.isAuthenticated = res.isAuthenticated;
-        this.authService.getActualUser().subscribe({
-          next: (res) => {
-            this.currentUserId = res.id;
-          },
-          error: (err) => {
-            console.error(err);
-          }
-        });
+        this.authService.subscribeToCurrentUser((user) => {
+          this.currentUserId = user?.id;
+        })
       },
       error: (err) => {
         console.log(err);
@@ -114,6 +111,12 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  onPostCreated() {
+    this.page = 1;
+    this.posts = [];
+    this.loadPosts();
+  }
 
   deletePost(postId: number) {
     this.postsSvc.delete(postId).subscribe(() => {

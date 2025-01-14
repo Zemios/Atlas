@@ -3,20 +3,23 @@
   <div class="mx-auto max-w-4xl">
     <div class="mb-6 text-right">
       <button (click)="togglePublishModal()" modal-content 
-      class="transform fixed top-10 mt-6 md:top-12 md:mt-8 xl:top-14 xl:mt-12 pt-5 end-0 m-3
-      rounded-br-lg rounded-bl-lg bg-blue-800 px-4 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-      Publicar
-    </button>
+      class="fixed right-1/2 lg:right-0 bottom-10 mr-3
+      rounded-full bg-blue-500 px-3 lg:px-6 py-3 text-lg font-semibold text-white 
+      shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-blue-600 
+      hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-300">
+        <p class="hidden lg:flex">Publicar</p>
+        <i class="flex lg:hidden bi bi-plus-lg"></i>
+      </button>
       @if (publishModal) {
-        <app-publish (closeModalEvent)="togglePublishModal()"></app-publish>
+        <app-publish (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-publish>
       }
     </div>
       @for (post of posts; track $index) {
         <div class="mb-6 rounded-lg bg-white shadow-lg z-0 flex items-start justify-between">
-          <a routerLink="/explore/post/{{ post.id }}" class="block p-6">
+          <a routerLink="/explore/post/{{ post.id }}" class="p-6 flex-grow">
             <div class="flex items-center gap-4 mb-4">
               <div class="flex-shrink-0">
-                <img src="foto" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+                <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
               </div>
               <div>
                 <p class="text-sm font-semibold text-gray-700">{{post.user.name}}</p>
