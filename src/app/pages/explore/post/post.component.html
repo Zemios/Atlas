@@ -15,8 +15,7 @@
           </div>
         </div>
         <div class="mb-8 text-lg text-gray-700">
-          <p>
-            {{ post.content }}
+          <p [innerHTML]="post.content | newlineToBr">
           </p>
         </div>
       </div>

@@ -6,10 +6,11 @@ import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
 import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
 import { AuthService } from '../../services/auth.service';
+import { NewlineToBrPipe } from '../../pipes/newline-to-br.pipe';
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent, RelativeTimePipe],
+  imports: [RouterLink, PublishComponent, RelativeTimePipe, NewlineToBrPipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
