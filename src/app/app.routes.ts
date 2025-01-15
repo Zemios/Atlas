@@ -16,6 +16,8 @@ import { Error404Component } from './pages/error404/error404.component';
 import { LearningComponent } from './pages/learning/learning.component';
 import { CourseComponent } from './pages/learning/course/course.component';
 import { ConsultingComponent } from './pages/consulting/consulting.component';
+import { TestingComponent } from './pages/testing/testing.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -55,6 +57,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+
+  { path: 'testing', component: TestingComponent, canActivate: [AdminGuard] },
 
   { path: '404', component: Error404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' },

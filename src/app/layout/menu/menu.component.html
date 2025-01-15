@@ -22,6 +22,9 @@
 
       @if (isDropdownOpen) {
         <ul class="absolute right-0 top-full z-10 mt-5 w-48 rounded-b-lg bg-white text-lg text-neutral-700 shadow-lg">
+          @if (user.role === 'admin') {
+            <li class="cursor-pointer px-4 py-2 text-yellow-600 hover:bg-yellow-100" routerLink="/testing" >Testing</li>
+          }
           <li class="cursor-pointer px-4 py-2 hover:bg-gray-100" routerLink="/profile">Perfil</li>
           <li class="cursor-pointer px-4 py-2 hover:bg-gray-100" routerLink="/options">Opciones</li>
           <li class="cursor-pointer px-4 py-2 text-red-600 hover:bg-red-100 rounded-b-lg" (click)="logout()">Cerrar sesión</li>
