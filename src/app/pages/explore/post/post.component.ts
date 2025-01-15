@@ -5,10 +5,12 @@ import { PostsService } from '../../../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { NewlineToBrPipe } from '../../../pipes/newline-to-br.pipe';
+import { HighlightCodePipe } from "../../../pipes/highlight-code.pipe";
+import { HtmlToTextPipe } from "../../../pipes/html-to-text.pipe";
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, NewlineToBrPipe],
+  imports: [AsyncPipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
