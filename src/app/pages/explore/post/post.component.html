@@ -15,9 +15,7 @@
           </div>
         </div>
         <div class="mb-8 text-lg text-gray-700">
-          <p>
-            {{ post.content }}
-          </p>
+          <p class="my-2 text-gray-700 break-all" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr"></p>
         </div>
       </div>
     </div>

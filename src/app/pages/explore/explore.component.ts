@@ -6,10 +6,14 @@ import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
 import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
 import { AuthService } from '../../services/auth.service';
+import { NewlineToBrPipe } from '../../pipes/newline-to-br.pipe';
+import { HighlightCodePipe } from "../../pipes/highlight-code.pipe";
+import { DomSanitizer } from '@angular/platform-browser';
+import { HtmlToTextPipe } from "../../pipes/html-to-text.pipe";
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent, RelativeTimePipe],
+  imports: [RouterLink, PublishComponent, RelativeTimePipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',
@@ -26,7 +30,12 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   publishModal = false;
   timeout: any;
 
-  constructor(private router: Router, private authService: AuthService, private postsSvc: PostsService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private postsSvc: PostsService,
+    public sanitizer: DomSanitizer,
+  ) { }
 
   ngOnInit() {
     this.loadPosts();
