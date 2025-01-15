@@ -9,7 +9,7 @@ export class HighlightCodePipe implements PipeTransform {
     const regex = /``([\s\S]*?)``/g;
     const highlighted = content.replace(regex, (match, codeContent) => {
       const highlightedCode = hljs.highlightAuto(codeContent.trim()).value;
-      return `<pre class="bg-gray-100 p-3 rounded"><code>${highlightedCode}</code></pre>`;
+      return `<pre class="bg-gray-100 p-3 rounded overflow-x-auto"><code>${highlightedCode}</code></pre>`;
     });
 
     return highlighted;
