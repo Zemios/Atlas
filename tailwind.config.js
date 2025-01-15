@@ -33,6 +33,28 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          '.break-anywhere': {
+            'overflow-wrap': 'anywhere',
+          },
+        },
+        ['responsive', 'hover']
+      );
+
+      addUtilities(
+        {
+          '@supports not (overflow-wrap: anywhere)': {
+            '.break-anywhere': {
+              'word-break': 'break-word',
+            },
+          },
+        },
+        ['responsive', 'hover']
+      );
+    },
+  ],
 }
 
