@@ -32,9 +32,9 @@ export class ProfileEditComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {
     this.profileForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(1)]],
-      title: ['', [Validators.maxLength(255)]],
-      about_me: ['', [Validators.maxLength(500)]],
+      name: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(1)]],
+      title: ['', [Validators.maxLength(50)]],
+      about_me: ['', [Validators.maxLength(280)]],
       profile_picture: [''],
     });
   }
@@ -74,8 +74,8 @@ export class ProfileEditComponent implements OnInit {
           this.showSnackbar('Nombre no puede estar vacio', 'error')
           return
         } else if (name) {
-          if (name.length > 255) {
-            this.showSnackbar('Nombre no puede tener mas de 255 caracteres', 'error')
+          if (name.length > 20) {
+            this.showSnackbar('Nombre no puede tener mas de 20 caracteres', 'error')
             return
           }
         }
@@ -85,8 +85,8 @@ export class ProfileEditComponent implements OnInit {
 
       if (this.profileForm.get('title')?.invalid) {
         if (title) {
-          if (title.length > 255) {
-            this.showSnackbar('Título no puede tener mas de 255 caracteres', 'error')
+          if (title.length > 50) {
+            this.showSnackbar('Título no puede tener mas de 50 caracteres', 'error')
             return
           }
         }
@@ -96,8 +96,8 @@ export class ProfileEditComponent implements OnInit {
 
       if (this.profileForm.get('about_me')?.invalid) {
         if (about_me) {
-          if (about_me.length > 500) {
-            this.showSnackbar('Descripción no puede tener mas de 500 caracteres', 'error')
+          if (about_me.length > 280) {
+            this.showSnackbar('Descripción no puede tener mas de 280 caracteres', 'error')
             return
           }
         }

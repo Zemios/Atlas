@@ -19,7 +19,7 @@ export class RegisterComponent {
     private router: Router
   ) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
       confirmPassword: ['', [Validators.required]],
@@ -49,7 +49,7 @@ export class RegisterComponent {
         next: () => {
           this.router.navigate(['/']);
         },
-        error: () => {},
+        error: () => { },
       });
     } else {
       console.log('Formulario inválido');
