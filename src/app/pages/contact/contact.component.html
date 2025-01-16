@@ -22,7 +22,7 @@
         @for (member of teamList; track $index) {
           <a [href]="member.url" target="_blank" class="w-44">
             <div class="flex flex-col items-center">
-              <img [src]="member.photo" onerror="this.src='error.svg'" alt="Miembro del equipo" class="mb-4 h-24 w-24 rounded-full" />
+              <img [src]="member.photo" loading="lazy" onerror="this.src='error.svg'" alt="Miembro del equipo" class="mb-4 h-24 w-24 rounded-full" />
               <p class="text-lg font-semibold text-blue-800">
                 {{ member.name }}
               </p>

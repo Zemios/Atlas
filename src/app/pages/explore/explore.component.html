@@ -19,7 +19,7 @@
           <a routerLink="/explore/post/{{ post.id }}" class="p-6 flex-grow flex flex-col gap-4">
             <div class="flex justify-between items-center gap-4">
               <div class="flex items-center gap-4">
-                <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+                <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" loading="lazy" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
                 <div>
                   <p class="text-sm font-semibold text-gray-700 break-anywhere">{{post.user.name}}</p>
                   <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
@@ -41,6 +41,6 @@
       }
   </div>
   @if (loading) {
-    <div class="text-center text-neutral-700 py-6">Cargando más posts...</div>
+    <app-loading />
   }
 </div>
