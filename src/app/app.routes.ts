@@ -61,7 +61,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: ProfileComponent },
       { path: ':id', component: ProfileComponent },
-    ]
+    ],
   },
 
   { path: 'profile/:id', component: ProfileComponent },

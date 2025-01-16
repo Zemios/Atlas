@@ -32,13 +32,13 @@ export class MenuComponent {
     public router: Router,
     private translate: TranslateService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
     this.authService.subscribeToCurrentUser((user) => {
       this.user = user;
-    })
+    });
   }
 
   translateText(lang: string) {

@@ -11,7 +11,7 @@ import { UserInterface } from '../interfaces/user-interface';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
   public currentUser = this.currentUserSubject.asObservable();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCurrentUser(): Observable<UserInterface | null> {
     return this.currentUser;
@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http.post(API_URL + '/auth/refresh', {}, { withCredentials: true })
+    return this.http.post(API_URL + '/auth/refresh', {}, { withCredentials: true });
   }
 
   getActualUser(): Observable<UserInterface> {
@@ -87,5 +87,4 @@ export class AuthService {
       })
     );
   }
-
 }

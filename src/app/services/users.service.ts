@@ -12,7 +12,7 @@ export class UsersService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {}
   route = '/users/';
   show(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(API_URL + this.route);

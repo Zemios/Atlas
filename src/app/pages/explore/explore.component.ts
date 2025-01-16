@@ -7,10 +7,10 @@ import { PostsService } from '../../services/posts.service';
 import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
 import { AuthService } from '../../services/auth.service';
 import { NewlineToBrPipe } from '../../pipes/newline-to-br.pipe';
-import { HighlightCodePipe } from "../../pipes/highlight-code.pipe";
+import { HighlightCodePipe } from '../../pipes/highlight-code.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
-import { HtmlToTextPipe } from "../../pipes/html-to-text.pipe";
-import { SanitizeHtmlPipe } from "../../pipes/sanitize-html.pipe";
+import { HtmlToTextPipe } from '../../pipes/html-to-text.pipe';
+import { SanitizeHtmlPipe } from '../../pipes/sanitize-html.pipe';
 
 @Component({
   selector: 'app-explore',
@@ -37,8 +37,8 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     private router: Router,
     private authService: AuthService,
     private postsSvc: PostsService,
-    public sanitizer: DomSanitizer,
-  ) { }
+    public sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.loadPosts();
@@ -47,11 +47,11 @@ export class ExploreComponent implements OnInit, AfterViewInit {
         this.isAuthenticated = res.isAuthenticated;
         this.authService.subscribeToCurrentUser((user) => {
           this.currentUserId = user?.id;
-        })
+        });
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
@@ -111,7 +111,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    const nearBottom = (scrollPosition + windowHeight) >= (documentHeight * 0.9);
+    const nearBottom = scrollPosition + windowHeight >= documentHeight * 0.9;
     const scrollingDown = window.scrollY > this.lastScrollTop;
     this.lastScrollTop = window.scrollY;
 
@@ -122,7 +122,6 @@ export class ExploreComponent implements OnInit, AfterViewInit {
       }, 200);
     }
   }
-
 
   onPostCreated() {
     this.page = 1;
@@ -143,7 +142,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   deletePostConfirmed() {
     if (this.postToDeleteId !== null) {
       this.postsSvc.delete(this.postToDeleteId).subscribe(() => {
-        this.posts = this.posts.filter(post => post.id !== this.postToDeleteId);
+        this.posts = this.posts.filter((post) => post.id !== this.postToDeleteId);
         this.closeDeleteModal();
       });
     }

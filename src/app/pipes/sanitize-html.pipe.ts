@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'sanitizeHtml'
+  name: 'sanitizeHtml',
 })
 export class SanitizeHtmlPipe implements PipeTransform {
-
   private dangerousClasses = ['absolute', 'relative', 'fixed', 'sticky', 'z-', 'top-', 'left-', 'right-', 'bottom-'];
 
   transform(htmlContent: string): string {
@@ -13,13 +12,13 @@ export class SanitizeHtmlPipe implements PipeTransform {
 
     const elementsWithClasses = div.querySelectorAll('[class]');
 
-    elementsWithClasses.forEach(element => {
+    elementsWithClasses.forEach((element) => {
       const classList = element.getAttribute('class');
 
       if (classList) {
         const safeClasses = classList
           .split(' ')
-          .filter(className => !this.isDangerousClass(className))
+          .filter((className) => !this.isDangerousClass(className))
           .join(' ');
 
         element.setAttribute('class', safeClasses);
@@ -30,6 +29,6 @@ export class SanitizeHtmlPipe implements PipeTransform {
   }
 
   private isDangerousClass(className: string): boolean {
-    return this.dangerousClasses.some(dangerous => className.startsWith(dangerous));
+    return this.dangerousClasses.some((dangerous) => className.startsWith(dangerous));
   }
 }

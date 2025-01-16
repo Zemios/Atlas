@@ -11,7 +11,7 @@ import { UserInterface } from '../../../../interfaces/user-interface';
   imports: [ReactiveFormsModule],
   providers: [],
   templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.scss']
+  styleUrls: ['./profile-edit.component.scss'],
 })
 export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
@@ -29,7 +29,7 @@ export class ProfileEditComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private usersService: UsersService,
-    private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar
   ) {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(1)]],
@@ -51,8 +51,8 @@ export class ProfileEditComponent implements OnInit {
         title: this.user.title || '',
         about_me: this.user.about_me || '',
       });
-    })
-    this.profileForm.get('name')?.valueChanges.subscribe(value => {
+    });
+    this.profileForm.get('name')?.valueChanges.subscribe((value) => {
       if (value) {
         const transformedValue = value.replace(/\s+/g, '');
         this.profileForm.get('name')?.setValue(transformedValue, { emitEvent: false });
@@ -69,48 +69,47 @@ export class ProfileEditComponent implements OnInit {
       const about_me: string | null = this.profileForm.get('about_me')?.value;
 
       if (this.profileForm.get('name')?.invalid) {
-        console.log(name)
         if (name?.replace('/\s+/g', '') == '') {
-          this.showSnackbar('Nombre no puede estar vacio', 'error')
-          return
+          this.showSnackbar('Nombre no puede estar vacio', 'error');
+          return;
         } else if (name) {
           if (name.length > 20) {
-            this.showSnackbar('Nombre no puede tener mas de 20 caracteres', 'error')
-            return
+            this.showSnackbar('Nombre no puede tener mas de 20 caracteres', 'error');
+            return;
           }
         }
-        this.showSnackbar('Error en el campo "Nombre"', 'error')
-        return
+        this.showSnackbar('Error en el campo "Nombre"', 'error');
+        return;
       }
 
       if (this.profileForm.get('title')?.invalid) {
         if (title) {
           if (title.length > 50) {
-            this.showSnackbar('Título no puede tener mas de 50 caracteres', 'error')
-            return
+            this.showSnackbar('Título no puede tener mas de 50 caracteres', 'error');
+            return;
           }
         }
-        this.showSnackbar('Error en el campo "Título"', 'error')
-        return
+        this.showSnackbar('Error en el campo "Título"', 'error');
+        return;
       }
 
       if (this.profileForm.get('about_me')?.invalid) {
         if (about_me) {
           if (about_me.length > 280) {
-            this.showSnackbar('Descripción no puede tener mas de 280 caracteres', 'error')
-            return
+            this.showSnackbar('Descripción no puede tener mas de 280 caracteres', 'error');
+            return;
           }
         }
-        this.showSnackbar('Error en el campo "Descripción"', 'error')
-        return
+        this.showSnackbar('Error en el campo "Descripción"', 'error');
+        return;
       }
 
-      this.showSnackbar('Error en los campos del formulario', 'error')
+      this.showSnackbar('Error en los campos del formulario', 'error');
       return;
     }
     const formData = new FormData();
 
-    Object.keys(this.profileForm.value).forEach(key => {
+    Object.keys(this.profileForm.value).forEach((key) => {
       const value = this.profileForm.value[key];
       if (value !== null && value !== '' && key !== 'profile_picture') {
         formData.append(key, value);
@@ -144,11 +143,11 @@ export class ProfileEditComponent implements OnInit {
       const maxSizeInMB = 2;
       if (!allowedTypes.includes(file.type)) {
         this.showSnackbar('Formato de archivo no permitido', 'error');
-        return
+        return;
       }
       if (file.size > maxSizeInMB * 1024 * 1024) {
         this.showSnackbar('El archivo es demasiado grande', 'error');
-        return
+        return;
       }
 
       this.selectedFile = file;
@@ -170,7 +169,6 @@ export class ProfileEditComponent implements OnInit {
 
   removeProfilePicture(): void {
     if (this.user) {
-
       this.user.profile_picture = undefined;
       this.updated_profile_picture = undefined;
       this.profileForm.patchValue({

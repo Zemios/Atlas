@@ -27,7 +27,7 @@ export class PublishComponent implements OnInit {
     '¿Has visto nuestros cursos?',
     '¿Por qué te encanta Zemios?',
     'Comparte algo que te inspire últimamente...',
-    'Compartir algo es mejor que desplegar un viernes'
+    'Compartir algo es mejor que desplegar un viernes',
   ];
   placeholder: string = '';
 
@@ -45,7 +45,7 @@ export class PublishComponent implements OnInit {
   ngOnInit() {
     this.authService.subscribeToCurrentUser((user) => {
       this.actualUserImage = user?.profile_picture;
-    })
+    });
     const randomIndex = Math.floor(Math.random() * this.placeholders.length);
     this.placeholder = this.placeholders[randomIndex];
   }

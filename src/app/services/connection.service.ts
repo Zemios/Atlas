@@ -10,7 +10,7 @@ import { API_URL } from '../app.config';
 export class ConnectionService {
   private backendUrl = API_URL + '/ping';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   checkBackendConnection(): Observable<{ isConnected: boolean; message: string }> {
     return this.http.get(this.backendUrl, { observe: 'response' }).pipe(

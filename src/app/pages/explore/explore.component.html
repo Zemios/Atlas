@@ -2,56 +2,54 @@
   <h2 class="mb-8 text-center text-4xl font-bold text-blue-800">Foro de la Comunidad</h2>
   <div class="mx-auto max-w-4xl">
     <div class="mb-6 text-right">
-      <button (click)="togglePublishModal()" modal-content 
-      class="fixed right-1/2 lg:right-0 bottom-10 mr-3
-      rounded-full bg-blue-500 px-3 lg:px-6 py-3 text-lg font-semibold text-white 
-      shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-blue-600 
-      hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-300">
+      <button
+        (click)="togglePublishModal()"
+        modal-content
+        class="fixed bottom-10 right-1/2 mr-3 transform rounded-full bg-blue-500 px-3 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-110 
+        hover:bg-blue-600 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-300 lg:right-0 lg:px-6"
+      >
         <p class="hidden lg:flex">Publicar</p>
-        <i class="flex lg:hidden bi bi-plus-lg"></i>
+        <i class="bi bi-plus-lg flex lg:hidden"></i>
       </button>
       @if (publishModal) {
         <app-publish (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-publish>
       }
     </div>
-      @for (post of posts; track $index) {
-        <div class="mb-6 rounded-lg bg-white shadow-lg z-0 flex items-start justify-between">
-          <div routerLink="/explore/post/{{ post.id }}" class="p-6 flex-grow flex flex-col gap-4">
-            <div class="flex justify-between items-center gap-4">
-              <div class="flex items-center gap-4 cursor-pointer" routerLink="/profile/{{post.user.id}}" (click)="$event.stopPropagation();">
-                <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" loading="lazy" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
-                <div>
-                  <p class="text-sm font-semibold text-gray-700 break-anywhere">{{post.user.name}}</p>
-                  <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
-                </div>
+    @for (post of posts; track $index) {
+      <div class="z-0 mb-6 flex items-start justify-between rounded-lg bg-white shadow-lg">
+        <div routerLink="/explore/post/{{ post.id }}" class="flex flex-grow flex-col gap-4 p-6">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex cursor-pointer items-center gap-4" routerLink="/profile/{{ post.user.id }}" (click)="$event.stopPropagation()">
+              <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" loading="lazy" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+              <div>
+                <p class="text-sm font-semibold text-gray-700 break-anywhere">{{ post.user.name }}</p>
+                <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
               </div>
-              @if (currentUserId === post.user.id) {
-                <button (click)="showDeleteModal(post.id); $event.stopPropagation()" 
-                  class="flex items-center justify-center rounded-full bg-transparent transition duration-300 ease-in-out">
-                  <i class="bi bi-trash text-xl text-red-600"></i>
-                </button>
-              }
             </div>
-            <p class="my-2 text-gray-700 break-anywhere cursor-pointer" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr | sanitizeHtml "></p>
+            @if (currentUserId === post.user.id) {
+              <button (click)="showDeleteModal(post.id); $event.stopPropagation()" class="flex items-center justify-center rounded-full bg-transparent transition duration-300 ease-in-out">
+                <i class="bi bi-trash text-xl text-red-600"></i>
+              </button>
+            }
           </div>
-          
-          
+          <p class="my-2 cursor-pointer text-gray-700 break-anywhere" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr | sanitizeHtml"></p>
         </div>
-      }
+      </div>
+    }
 
-      @if (isDeleteModalVisible) {
-        <div class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-          <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 text-center">
-            <h3 class="text-xl font-semibold text-gray-700 mb-4">¿Estás seguro de que deseas eliminar este post?</h3>
-            <div class="flex justify-between gap-4">
-              <button (click)="deletePostConfirmed()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Eliminar</button>
-              <button (click)="closeDeleteModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400">Cancelar</button>
-            </div>
+    @if (isDeleteModalVisible) {
+      <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="w-1/3 rounded-lg bg-white p-6 text-center shadow-lg">
+          <h3 class="mb-4 text-xl font-semibold text-gray-700">¿Estás seguro de que deseas eliminar este post?</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button (click)="deletePostConfirmed()" class="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700">Eliminar</button>
+            <button (click)="closeDeleteModal()" class="rounded-lg bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">Cancelar</button>
           </div>
         </div>
-      }
+      </div>
+    }
   </div>
   @if (loading) {
-    <img src="loading.svg" class="w-8 h-8 fill-blue-600">
+    <img src="loading.svg" class="h-8 w-8 fill-blue-600" />
   }
 </div>

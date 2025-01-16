@@ -25,14 +25,14 @@ export class AppComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
-  ) { }
+  ) {}
   backendStatus: boolean = false;
 
   ngOnInit(): void {
     this.checkConnection();
 
     this.authService.refreshToken().subscribe({
-      next: () => { },
+      next: () => {},
       error: (error) => {
         console.error('Error refreshing token', error);
       },
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading an user:', error);
-      }
+      },
     });
   }
 

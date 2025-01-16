@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import hljs from 'highlight.js';
 
 @Pipe({
-  name: 'highlightCode'
+  name: 'highlightCode',
 })
 export class HighlightCodePipe implements PipeTransform {
   transform(content: string): string {
