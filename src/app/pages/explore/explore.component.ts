@@ -26,7 +26,11 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   publishModal = false;
   timeout: any;
 
-  constructor(private router: Router, private authService: AuthService, private postsSvc: PostsService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private postsSvc: PostsService
+  ) {}
 
   ngOnInit() {
     this.loadPosts();
@@ -35,11 +39,11 @@ export class ExploreComponent implements OnInit, AfterViewInit {
         this.isAuthenticated = res.isAuthenticated;
         this.authService.subscribeToCurrentUser((user) => {
           this.currentUserId = user?.id;
-        })
+        });
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
@@ -99,7 +103,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    const nearBottom = (scrollPosition + windowHeight) >= (documentHeight * 0.9);
+    const nearBottom = scrollPosition + windowHeight >= documentHeight * 0.9;
     const scrollingDown = window.scrollY > this.lastScrollTop;
     this.lastScrollTop = window.scrollY;
 
@@ -111,7 +115,6 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   onPostCreated() {
     this.page = 1;
     this.posts = [];
@@ -120,7 +123,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
 
   deletePost(postId: number) {
     this.postsSvc.delete(postId).subscribe(() => {
-      this.posts = this.posts.filter(post => post.id !== postId);
+      this.posts = this.posts.filter((post) => post.id !== postId);
     });
   }
 

@@ -1,48 +1,46 @@
 <div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
   <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl" modal-content>
     <button
-      (click)="closeModal()" 
-      type="button" 
-      class="absolute z-10 p-3 top-0 right-0 flex items-center justify-center rounded-full bg-transparent text-gray-500 transition duration-300 ease-in-out hover:text-gray-700">
+      (click)="closeModal()"
+      type="button"
+      class="absolute right-0 top-0 z-10 flex items-center justify-center rounded-full bg-transparent p-3 text-gray-500 transition duration-300 ease-in-out hover:text-gray-700"
+    >
       <i class="bi bi-x-circle text-xl text-red-600"></i>
     </button>
 
-    <div class="flex items-start text-start w-auto space-x-4">
-      <img class="h-12 w-12 object-cover rounded-full" [src]="IMAGES_URL + actualUserImage" onerror="src='error.svg'" alt="User Avatar"/>
+    <div class="flex w-auto items-start space-x-4 text-start">
+      <img class="h-12 w-12 rounded-full object-cover" [src]="IMAGES_URL + actualUserImage" onerror="src='error.svg'" alt="User Avatar" />
       <div class="w-full">
         <form [formGroup]="publishForm" (submit)="sendPost()">
           <div class="mb-4">
             <textarea
               id="contenido"
               formControlName="content"
-              class="w-full resize-none border-none p-3 text-lg text-neutral-700 focus:outline-none break-all max-h-60"
-              style="field-sizing: content;"
+              class="max-h-60 w-full resize-none break-all border-none p-3 text-lg text-neutral-700 focus:outline-none"
+              style="field-sizing: content"
               rows="5"
               [placeholder]="this.placeholder"
               required
             ></textarea>
             @if (publishForm.get('content')?.invalid && submitted) {
-              <div class="text-red-600 text-sm mt-2">
+              <div class="mt-2 text-sm text-red-600">
                 @if (publishForm.get('content')?.hasError('required')) {
                   <div>El contenido es obligatorio.</div>
-                } 
-                @else if (publishForm.get('content')?.hasError('maxlength')) {
+                } @else if (publishForm.get('content')?.hasError('maxlength')) {
                   <div>El contenido no puede superar los 500 caracteres.</div>
                 }
               </div>
             }
           </div>
           @if (publishForm.get('content')?.value.length > 0) {
-            <div class="flex justify-between items-center">
-              <span [class]="{'text-red-600': publishForm.get('content')?.value.length > 500, 'text-gray-600': publishForm.get('content')?.value.length <= 500}">
+            <div class="flex items-center justify-between">
+              <span [class]="{ 'text-red-600': publishForm.get('content')?.value.length > 500, 'text-gray-600': publishForm.get('content')?.value.length <= 500 }">
                 {{ publishForm.get('content')?.value.length }}/500
               </span>
             </div>
           }
-          <div class="flex justify-end items-center">
-            <button type="submit" class="rounded-full bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600">
-              Publicar
-            </button>
+          <div class="flex items-center justify-end">
+            <button type="submit" class="rounded-full bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600">Publicar</button>
           </div>
         </form>
       </div>

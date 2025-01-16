@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PostsService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private route = '/posts/';
 

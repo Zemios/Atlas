@@ -24,7 +24,7 @@ export class ProfileComponent {
   ) {
     this.authService.subscribeToCurrentUser((user) => {
       this.user = user;
-    })
+    });
   }
 
   toggleProfileEditModal() {
@@ -40,11 +40,11 @@ export class ProfileComponent {
           this.user = null;
           return;
         }
-        this.user = user
+        this.user = user;
       },
       error: (error) => {
         console.error(error);
-      }
+      },
     });
   }
 

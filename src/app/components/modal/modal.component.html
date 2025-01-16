@@ -1,0 +1,34 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
+  <div class="relative mx-3 w-full max-w-lg rounded-lg bg-white p-4 shadow-2xl">
+    <!-- Botón de cerrar -->
+    <button
+      (click)="close()"
+      type="button"
+      class="absolute right-0 top-0 z-10 flex items-center justify-center rounded-full bg-transparent p-3 text-gray-500 transition duration-300 ease-in-out hover:text-gray-700"
+    >
+      <i class="bi bi-x-circle text-xl text-red-600"></i>
+    </button>
+
+    <!-- Contenido del modal -->
+    <div class="w-auto text-start">
+      <h2 class="mb-4 text-lg font-bold">{{ title }}</h2>
+      <p class="mb-4 text-gray-700">{{ description }}</p>
+
+      <!-- ng-content para contenido dinámico -->
+      <ng-content></ng-content>
+
+      <!-- Acciones del modal -->
+      <div class="flex justify-end space-x-4">
+        <button *ngIf="cancelButtonText" (click)="close()" class="rounded-full bg-gray-300 px-4 py-2 text-gray-700 transition hover:bg-gray-400">
+          {{ cancelButtonText }}
+        </button>
+        <button *ngIf="confirmButtonText" (click)="confirm()" class="rounded-full bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600">
+          {{ confirmButtonText }}
+        </button>
+        <button *ngIf="!confirmButtonText && acceptButtonText" (click)="accept()" class="rounded-full bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">
+          {{ acceptButtonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
