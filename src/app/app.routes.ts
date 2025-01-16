@@ -56,7 +56,15 @@ export const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  {
+    path: 'profile',
+    children: [
+      { path: '', component: ProfileComponent },
+      { path: ':id', component: ProfileComponent },
+    ]
+  },
+
+  { path: 'profile/:id', component: ProfileComponent },
 
   { path: 'testing', component: TestingComponent, canActivate: [AdminGuard] },
 

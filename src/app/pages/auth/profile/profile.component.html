@@ -11,10 +11,12 @@
               <p class="text-gray-500 break-anywhere">{{ user.title }}</p>
             </div>
           </div>
-          <button (click)="openProfileEditModal()" class="rounded-full bg-blue-500 px-3 lg:px-6 py-3 font-semibold text-white transition duration-300 ease-in-out hover:bg-blue-600">
-            <p class="hidden lg:flex">Editar perfil</p>
-            <i class="flex lg:hidden bi bi-pencil-square"></i>
-          </button>
+          @if (isEdit) {
+            <button (click)="openProfileEditModal()" class="rounded-full bg-blue-500 px-3 lg:px-6 py-3 font-semibold text-white transition duration-300 ease-in-out hover:bg-blue-600">
+              <p class="hidden lg:flex">Editar perfil</p>
+              <i class="flex lg:hidden bi bi-pencil-square"></i>
+            </button>
+          }
 
           @if (profileEditModal) {
             <div class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-75">
