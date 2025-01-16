@@ -17,7 +17,7 @@
       @for (post of posts; track $index) {
         <div class="mb-6 rounded-lg bg-white shadow-lg z-0 flex items-start justify-between">
           <a routerLink="/explore/post/{{ post.id }}" class="p-6 flex-grow flex flex-col gap-4">
-            <div class="flex justify-between gap-4">
+            <div class="flex justify-between items-center gap-4">
               <div class="flex items-center gap-4">
                 <img [src]="IMAGES_URL + post.user.profile_picture" onerror="this.src='error.svg'" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
                 <div>
@@ -27,7 +27,7 @@
               </div>
               @if (currentUserId === post.user.id) {
                 <button (click)="deletePost(post.id)" 
-                  class="mt-2 me-3 flex items-center justify-center self-end rounded-full bg-transparent transition duration-300 ease-in-out">
+                  class="flex items-center justify-center rounded-full bg-transparent transition duration-300 ease-in-out">
                   <i class="bi bi-trash text-xl text-red-600"></i>
                 </button>
               }
