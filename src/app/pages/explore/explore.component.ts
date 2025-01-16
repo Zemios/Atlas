@@ -30,6 +30,8 @@ export class ExploreComponent implements OnInit, AfterViewInit {
   currentUserId: number | undefined;
   publishModal = false;
   timeout: any;
+  isDeleteModalVisible: boolean = false;
+  postToDeleteId: number | null = null;
 
   constructor(
     private router: Router,
@@ -128,10 +130,23 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     this.loadPosts();
   }
 
-  deletePost(postId: number) {
-    this.postsSvc.delete(postId).subscribe(() => {
-      this.posts = this.posts.filter(post => post.id !== postId);
-    });
+  showDeleteModal(postId: number) {
+    this.postToDeleteId = postId;
+    this.isDeleteModalVisible = true;
+  }
+
+  closeDeleteModal() {
+    this.isDeleteModalVisible = false;
+    this.postToDeleteId = null;
+  }
+
+  deletePostConfirmed() {
+    if (this.postToDeleteId !== null) {
+      this.postsSvc.delete(this.postToDeleteId).subscribe(() => {
+        this.posts = this.posts.filter(post => post.id !== this.postToDeleteId);
+        this.closeDeleteModal();
+      });
+    }
   }
 
   setFocus() {
