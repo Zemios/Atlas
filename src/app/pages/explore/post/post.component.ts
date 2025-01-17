@@ -1,6 +1,6 @@
 import { IMAGES_URL } from './../../../app.config';
 import { Observable } from 'rxjs';
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { PostInterface } from '../../../interfaces/post-interface';
 import { PostsService } from '../../../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
@@ -25,11 +25,15 @@ export class PostComponent {
   commentForm: FormGroup;
   pageComment: number = 1;
   limitComment: number = 5;
+  loadingComments: boolean = false;
+  lastScrollTopComment: number = 0;
+  timeout: any;
   commentModal = false;
   submitted: boolean = false;
 
   constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) {
     this.loadComments()
+    window.addEventListener('scroll', this.onScrollComment.bind(this)); // Detecta el scroll
     this.commentForm = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(1)]]
     });
@@ -62,6 +66,9 @@ export class PostComponent {
 
   loadComments() {
     if (this.id && this.pageComment && this.limitComment) {
+      if (this.loadingComments) return;
+
+      this.loadingComments = true;
       this.postsSvc.getComments(parseInt(this.id), this.pageComment, this.limitComment).subscribe({
         next: (newComments) => {
           console.log(newComments)
@@ -69,15 +76,34 @@ export class PostComponent {
             this.comments = [...this.comments, ...newComments];
             this.pageComment++;
           }
+          this.loadingComments = false;
         },
         error: (error) => {
           console.error('Error al cargar los comentarios', error);
+          this.loadingComments = false;
         }
       });
     }
   }
 
+  @HostListener('window:scroll', [])
+  onScrollComment(): void {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const nearBottom = scrollPosition + windowHeight >= documentHeight * 0.9;
+    const scrollingDown = window.scrollY > this.lastScrollTopComment;
+    this.lastScrollTopComment = window.scrollY;
 
+    if (nearBottom && scrollingDown && !this.loadingComments) {
+      clearTimeout(this.timeout);
+      this.loadingComments = true
+      this.timeout = setTimeout(() => {
+        this.loadingComments = false
+        this.loadComments();
+      }, 200)
+    }
+  }
   showSnackbar(message: string, type: 'success' | 'error') {
     let config: MatSnackBarConfig = {
       duration: 2000,

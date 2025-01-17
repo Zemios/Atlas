@@ -38,7 +38,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private postsSvc: PostsService,
     public sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadPosts();
@@ -117,7 +117,9 @@ export class ExploreComponent implements OnInit, AfterViewInit {
 
     if (nearBottom && scrollingDown && !this.loading) {
       clearTimeout(this.timeout);
+      this.loading = true
       this.timeout = setTimeout(() => {
+        this.loading = false
         this.loadPosts();
       }, 200);
     }

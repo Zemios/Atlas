@@ -21,8 +21,8 @@
     </div>
     <div class="mx-auto mt-8 max-w-3xl">
       <h3 class="mb-4 text-2xl font-bold text-blue-800">Respuestas</h3>
-      <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
-        <textarea formControlName="content" rows="4" class="w-full p-2 border rounded-lg text-gray-700" placeholder="Escribe tu comentario aquí"></textarea>
+      <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="mb-8 flex flex-col items-end">
+        <textarea formControlName="content" rows="4" class="w-full p-2 border rounded-lg text-gray-700 resize-none" placeholder="Escribe tu comentario aquí"></textarea>
         
         <button type="submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" [disabled]="commentForm.invalid">
           Enviar Comentario
@@ -31,23 +31,28 @@
       
       
       <!-- Repetir este bloque por cada respuesta -->
-      @for (comment of comments; track $index) {
-        <div>
-          <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
-            <div class="p-6">
-              <div class="mb-4 flex items-center gap-4">
-                <img [src]="IMAGES_URL + comment.user.profile_picture" onerror="this.src='error.svg'" loading="lazy" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
-                <div>
-                  <p class="text-sm font-semibold text-gray-700">{{ comment.user.name }}</p>
-                  <p class="text-sm text-gray-500">{{ comment.creation_date | relativeTime }}</p>
+      <div class="flex flex-col">
+        @for (comment of comments; track $index) {
+          <div>
+            <div class="mb-6 overflow-hidden rounded-lg bg-white shadow-lg">
+              <div class="p-6">
+                <div class="mb-4 flex items-center gap-4">
+                  <img [src]="IMAGES_URL + comment.user.profile_picture" 
+                  onerror="this.src='error.svg'" loading="lazy" alt="Autor" class="h-12 w-12 rounded-full border-2 border-gray-300 object-cover" />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-700 break-anywhere">{{ comment.user.name }}</p>
+                    <p class="text-sm text-gray-500 break-anywhere">{{ comment.creation_date | relativeTime }}</p>
+                  </div>
                 </div>
+                <p class="my-2 break-anywhere text-gray-700" [innerHTML]="comment.content | htmlToText | highlightCode | newlineToBr"></p>
               </div>
-              <p class="text-gray-700">{{ comment.content }}</p>
             </div>
           </div>
-        </div>
-      }      
-      <!-- Fin de bloque de respuesta -->
+        } 
+        @if (loadingComments) {
+          <img src="loading.svg" class="h-8 w-8 mx-auto" />
+        }   
+      </div>
     </div>
   </div>
 }
