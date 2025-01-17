@@ -1,3 +1,5 @@
+import { CommentInterface } from "./comment-interface";
+
 export interface PostInterface {
   id: number;
   title: string;
@@ -9,5 +11,5 @@ export interface PostInterface {
     profile_picture: string;
   };
   likes: [];
-  comments: [];
+  comments: CommentInterface[];
 }

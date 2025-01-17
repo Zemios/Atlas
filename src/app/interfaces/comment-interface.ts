@@ -1,7 +1,11 @@
+// Definición de CommentInterface
 export interface CommentInterface {
   id: number;
-  post_id: number;
-  user_id: number;
   content: string;
   creation_date: Date;
+  user: {
+    id: number;
+    name: string;
+    profile_picture: string;
+  };
 }
