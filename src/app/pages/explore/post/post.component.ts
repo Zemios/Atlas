@@ -12,7 +12,6 @@ import { RelativeTimePipe } from "../../../pipes/relative-time.pipe";
 import { CommentInterface } from '../../../interfaces/comment-interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -29,14 +28,11 @@ export class PostComponent {
   commentModal = false;
   submitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private authService: AuthService, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private activatedRoute: ActivatedRoute) {
     this.loadComments()
     this.commentForm = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(1)]]
     });
-  }
-  toggleCommentModal() {
-    this.commentModal = !this.commentModal;
   }
 
   submitComment() {
@@ -45,19 +41,14 @@ export class PostComponent {
     if (this.commentForm.valid) {
       const comment = this.commentForm.value;
       comment.post_id = parseInt(this.activatedRoute.snapshot.params['id']);
-      this.authService.getCurrentUser().subscribe({
-        next: (user) => {
-          comment.user_id = user?.id
-        }
-      })
-      console.log(comment)
       this.postsSvc.createComment(comment).subscribe({
         next: () => {
           this.showSnackbar('Comentario creado con éxito', 'success');
           this.commentForm.reset();
           this.submitted = false;
-          this.comments.push(comment); // Añadir el comentario al array de comentarios
-          this.toggleCommentModal();   // Cerrar modal si es necesario
+          this.pageComment = 1;
+          this.comments = [];
+          this.loadComments();
         },
         error: (error) => {
           console.log(error);
