@@ -12,6 +12,7 @@ import { RelativeTimePipe } from "../../../pipes/relative-time.pipe";
 import { CommentInterface } from '../../../interfaces/comment-interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -28,7 +29,7 @@ export class PostComponent {
   commentModal = false;
   submitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private authService: AuthService, private activatedRoute: ActivatedRoute) {
     this.loadComments()
     this.commentForm = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(1)]]
@@ -43,6 +44,12 @@ export class PostComponent {
 
     if (this.commentForm.valid) {
       const comment = this.commentForm.value;
+      comment.post_id = parseInt(this.activatedRoute.snapshot.params['id']);
+      this.authService.getCurrentUser().subscribe({
+        next: (user) => {
+          comment.user_id = user?.id
+        }
+      })
       console.log(comment)
       this.postsSvc.createComment(comment).subscribe({
         next: () => {
