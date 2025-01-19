@@ -63,4 +63,26 @@
       }
     </div>
   </div>
+  @if (posts.length) {
+    <div class="my-6 mx-auto max-w-4xl ">
+      @for (post of posts; track $index) {
+        <div class="mt-6 rounded-lg bg-white shadow">
+          <div class="p-6">
+            <p class="text-sm font-semibold text-gray-700 break-anywhere">{{ post.content }}</p>
+            <p class="mt-2 text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
+          </div>
+        </div>
+        @if (loading) {
+          <div class="mt-4 text-center">
+            <img src="loading.svg" class="h-8 w-8" />
+          </div>
+        }
+      }
+    </div>
+  } 
+  @else {
+    <div class="mt-4 text-center text-gray-600">
+      No hay publicaciones aún.
+    </div>
+  }
 </div>

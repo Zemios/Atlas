@@ -16,6 +16,9 @@ export class PostsService {
   getComments(postId: number, page: number, limit: number): Observable<CommentInterface[]> {
     return this.http.get<CommentInterface[]>(API_URL + this.route + `${postId}/comments?page=${page}&limit=${limit}`);
   }
+  getUserPosts(userId: number, page: number, limit: number): Observable<PostInterface[]> {
+    return this.http.get<PostInterface[]>(API_URL + this.route + `user/${userId}?page=${page}&limit=${limit}`);
+  }
   createComment(commentData: CommentInterface): Observable<CommentInterface> {
     return this.http.post<CommentInterface>(`${API_URL}/comments`, commentData, { withCredentials: true });
   }
