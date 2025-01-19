@@ -8,10 +8,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IMAGES_URL } from '../../../app.config';
 import { PostInterface } from '../../../interfaces/post-interface';
 import { RelativeTimePipe } from "../../../pipes/relative-time.pipe";
+import { HtmlToTextPipe } from "../../../pipes/html-to-text.pipe";
+import { HighlightCodePipe } from "../../../pipes/highlight-code.pipe";
+import { NewlineToBrPipe } from "../../../pipes/newline-to-br.pipe";
+import { SanitizeHtmlPipe } from "../../../pipes/sanitize-html.pipe";
 
 @Component({
   selector: 'app-profile',
-  imports: [ProfileEditComponent, RelativeTimePipe],
+  imports: [ProfileEditComponent, RelativeTimePipe, HtmlToTextPipe, HighlightCodePipe, NewlineToBrPipe, SanitizeHtmlPipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
@@ -92,7 +96,14 @@ export class ProfileComponent implements OnInit {
     }
   }
   loadUserPosts(): void {
-    if (this.userId) {
+    if (this.userId || this.user) {
+      if (this.user) {
+        this.userId = this.user.id
+      }
+      if (!this.userId) {
+        console.error('User ID not found.');
+        return;
+      }
       this.loading = true;
       this.postsService.getUserPosts(this.userId, this.page, this.limit).subscribe({
         next: (posts) => {

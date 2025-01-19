@@ -69,8 +69,8 @@
         <div class="mt-6 rounded-lg bg-white shadow">
           <div class="p-6">
             <p class="text-sm font-semibold text-gray-700 break-anywhere">{{ user?.name }}</p>
-            <p class="text-sm text-gray-700 break-anywhere">{{ post.content }}</p>
-            <p class="mt-2 text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
+            <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
+            <p class="my-2 cursor-pointer text-gray-700 break-anywhere" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr | sanitizeHtml"></p>
           </div>
         </div>
         @if (loading) {
