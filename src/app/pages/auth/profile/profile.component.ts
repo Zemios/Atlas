@@ -1,5 +1,5 @@
 import { PostsService } from './../../../services/posts.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { UserInterface } from '../../../interfaces/user-interface';
 import { UsersService } from '../../../services/users.service';
@@ -29,6 +29,8 @@ export class ProfileComponent implements OnInit {
   userId: number | null = null;
   page: number = 1;
   limit: number = 10;
+  lastScrollTop: number = 0;
+  timeout: any;
 
   constructor(
     private authService: AuthService,
@@ -116,6 +118,24 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         },
       });
+    }
+  }
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const nearBottom = scrollPosition + windowHeight >= documentHeight * 0.9;
+    const scrollingDown = window.scrollY > this.lastScrollTop;
+    this.lastScrollTop = window.scrollY;
+
+    if (nearBottom && scrollingDown && !this.loading) {
+      clearTimeout(this.timeout);
+      this.loading = true;
+      this.timeout = setTimeout(() => {
+        this.loading = false;
+        this.loadUserPosts();
+      }, 200);
     }
   }
 }
