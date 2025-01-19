@@ -22,7 +22,7 @@ export class ProfileEditComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
-  selectedFile: File | null = null;
+  selectedFile: File | string | null = null;
   submitted: boolean = false;
 
   constructor(
@@ -118,6 +118,8 @@ export class ProfileEditComponent implements OnInit {
 
     if (this.selectedFile) {
       formData.append('profile_picture', this.selectedFile);
+    } else if (typeof (this.selectedFile) === 'string') {
+      formData.append('profile_picture', this.selectedFile);
     } else {
       formData.delete('profile_picture');
     }
@@ -169,12 +171,12 @@ export class ProfileEditComponent implements OnInit {
 
   removeProfilePicture(): void {
     if (this.user) {
-      this.user.profile_picture = undefined;
-      this.updated_profile_picture = undefined;
+      this.user.profile_picture = 'default.svg';
+      this.updated_profile_picture = 'default.svg';
       this.profileForm.patchValue({
-        profile_picture: null,
+        profile_picture: 'default.svg',
       });
-      this.selectedFile = null;
+      this.selectedFile = 'default.svg';
     }
   }
 
