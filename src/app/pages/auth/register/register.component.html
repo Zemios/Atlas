@@ -1,7 +1,7 @@
 <div class="banner flex items-center justify-center bg-gray-100 px-3 py-2">
   <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
     <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Crear una cuenta</h2>
-    <form [formGroup]="registerForm" (submit)="createAccount($event)" class="text-neutral-700">
+    <form [formGroup]="registerForm" (submit)="createAccount($event)" class="text-neutral-700 flex flex-col">
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="name">Nombre de Usuario</label>
         <input
@@ -58,7 +58,7 @@
           <div class="text-sm text-red-500">Las contraseñas no coinciden.</div>
         }
       </div>
-      <button class="w-full transform rounded-lg bg-blue-800 px-4 py-2 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700" type="submit">Crear Cuenta</button>
+      <button class="button" type="submit">Crear Cuenta</button>
     </form>
     <div class="mt-6 text-center">
       <p class="text-gray-700">

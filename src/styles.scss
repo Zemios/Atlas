@@ -3,6 +3,16 @@
 @import 'highlight.js/styles/github.css';
 @tailwind base;
 @tailwind components;
+
+.button {
+  @apply rounded-full bg-blue-900 hover:bg-blue-800 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 ;
+
+  &-highlight {
+    @apply rounded-full bg-blue-500 hover:bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+  }
+}
+
+
 @tailwind utilities;
 
 html,

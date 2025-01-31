@@ -24,7 +24,7 @@
       <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="mb-8 flex flex-col items-end">
         <textarea formControlName="content" rows="4" class="w-full p-2 border rounded-lg text-gray-700 resize-none" placeholder="Escribe tu comentario aquí"></textarea>
         
-        <button type="submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" [disabled]="commentForm.invalid">
+        <button type="submit" class="mt-2 button" [disabled]="commentForm.invalid">
           Enviar Comentario
         </button>
       </form>

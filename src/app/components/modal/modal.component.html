@@ -20,17 +20,17 @@
       <!-- Acciones del modal -->
       <div class="flex justify-end space-x-4">
         @if (cancelButtonText) {
-          <button (click)="close()" class="rounded-full bg-gray-300 px-4 py-2 text-gray-700 transition hover:bg-gray-400">
+          <button (click)="close()" class="rounded-full bg-gray-300 px-4 py-2 text-gray-700 transition-transform duration-75 hover:scale-105 hover:bg-gray-400">
             {{ cancelButtonText }}
           </button>
         }
         @if (confirmButtonText) {
-          <button (click)="confirm()" class="rounded-full bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600">
+          <button (click)="confirm()" class="button-highlight">
             {{ confirmButtonText }}
           </button>
         }
         @if (!confirmButtonText && acceptButtonText) {
-          <button (click)="accept()" class="rounded-full bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">
+          <button (click)="accept()" class="rounded-full bg-green-500 px-4 py-2 text-white transition-transform duration-75 hover:scale-105 hover:bg-green-600">
             {{ acceptButtonText }}
           </button>
         }
