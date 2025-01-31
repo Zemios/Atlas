@@ -15,7 +15,7 @@
       }
     </div>
     @for (post of posts; track $index) {
-      <div class="z-0 mb-6 flex items-start justify-between rounded-lg bg-white shadow-lg">
+      <div class="mb-6 flex items-start justify-between rounded-lg bg-white shadow-lg relative">
         <div routerLink="/explore/post/{{ post.id }}" class="flex flex-grow flex-col gap-4 p-6">
           <div class="flex items-center justify-between gap-4">
             <div class="flex cursor-pointer items-center gap-4" routerLink="/profile/{{ post.user.id }}" (click)="$event.stopPropagation()">
@@ -26,7 +26,7 @@
               </div>
             </div>
             @if (currentUserId === post.user.id) {
-              <button (click)="showDeleteModal(post.id); $event.stopPropagation()" class="flex items-center justify-center rounded-full bg-transparent transition duration-300 ease-in-out">
+              <button (click)="showDeleteModal(post.id); $event.stopPropagation()" class="button-close">
                 <i class="bi bi-trash text-xl text-red-600"></i>
               </button>
             }

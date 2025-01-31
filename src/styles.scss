@@ -10,6 +10,18 @@
   &-highlight {
     @apply rounded-full bg-blue-500 hover:bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
   }
+
+  &-white {
+    @apply rounded-full bg-white hover:bg-gray-100 px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 ;
+
+    &-outline {
+      @apply rounded-full bg-transparent border-2 border-white px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+    }
+  }
+
+  &-close {
+    @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent py-3 px-4 transition duration-75 hover:scale-105
+  }
 }
 
 
