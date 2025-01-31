@@ -11,14 +11,14 @@ export class ContactComponent {
   teamList = [
     {
       name: 'Ismael',
-      title: 'CEO y Desarrollador',
-      photo: 'images/pfp/ismaelPhoto.webp',
+      title: 'Founder',
+      photo: 'images/pfp/ismael_photo.webp',
       url: 'https://www.linkedin.com/in/ismmargar/',
     },
     {
       name: 'Eliceo',
-      title: 'Desarrollador',
-      photo: 'images/pfp/eliceoPhoto.webp',
+      title: 'Co-Founder',
+      photo: 'images/pfp/eliceo_photo.webp',
       url: 'https://www.linkedin.com/in/eliceo-león-237877280/',
     },
   ];
