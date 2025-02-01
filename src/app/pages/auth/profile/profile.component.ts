@@ -12,10 +12,11 @@ import { HtmlToTextPipe } from "../../../pipes/html-to-text.pipe";
 import { HighlightCodePipe } from "../../../pipes/highlight-code.pipe";
 import { NewlineToBrPipe } from "../../../pipes/newline-to-br.pipe";
 import { SanitizeHtmlPipe } from "../../../pipes/sanitize-html.pipe";
+import { LoadingComponent } from "../../../components/utils/loading/loading.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [ProfileEditComponent, RelativeTimePipe, HtmlToTextPipe, HighlightCodePipe, NewlineToBrPipe, SanitizeHtmlPipe],
+  imports: [ProfileEditComponent, RelativeTimePipe, HtmlToTextPipe, HighlightCodePipe, NewlineToBrPipe, SanitizeHtmlPipe, LoadingComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })

@@ -11,10 +11,11 @@ import { HighlightCodePipe } from '../../pipes/highlight-code.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HtmlToTextPipe } from '../../pipes/html-to-text.pipe';
 import { SanitizeHtmlPipe } from '../../pipes/sanitize-html.pipe';
+import { LoadingComponent } from "../../components/utils/loading/loading.component";
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PostModalComponent, RelativeTimePipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, SanitizeHtmlPipe],
+  imports: [RouterLink, PostModalComponent, RelativeTimePipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, SanitizeHtmlPipe, LoadingComponent],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',

@@ -49,10 +49,8 @@
             </div>
           </div>
         } 
-        @if (loadingComments) {
-          <div class="mt-4 flex justify-center">
-            <img src="loading.svg" class="h-8 w-8" />
-          </div>
+        @if (loading) {
+          <app-loading text="Cargando comentarios..."></app-loading>
         }   
       </div>
     </div>

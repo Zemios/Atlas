@@ -18,8 +18,10 @@ import { CourseComponent } from './pages/learning/course/course.component';
 import { ConsultingComponent } from './pages/consulting/consulting.component';
 import { TestingComponent } from './pages/testing/testing.component';
 import { AdminGuard } from './guards/admin.guard';
+import { LoadingComponent } from './components/utils/loading/loading.component';
 
 export const routes: Routes = [
+  { path: 'loading', component: LoadingComponent },
   { path: '', component: HomeComponent },
   { path: '', component: MaintenanceComponent },
   {

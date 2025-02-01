@@ -12,10 +12,11 @@ import { RelativeTimePipe } from "../../../pipes/relative-time.pipe";
 import { CommentInterface } from '../../../interfaces/comment-interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { LoadingComponent } from "../../../components/utils/loading/loading.component";
 
 @Component({
   selector: 'app-post',
-  imports: [AsyncPipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, RelativeTimePipe, ReactiveFormsModule],
+  imports: [AsyncPipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, RelativeTimePipe, ReactiveFormsModule, LoadingComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
@@ -25,7 +26,7 @@ export class PostComponent {
   commentForm: FormGroup;
   pageComment: number = 1;
   limitComment: number = 5;
-  loadingComments: boolean = false;
+  loading: boolean = false;
   lastScrollTopComment: number = 0;
   timeout: any;
   commentModal = false;
@@ -66,9 +67,9 @@ export class PostComponent {
 
   loadComments() {
     if (this.id && this.pageComment && this.limitComment) {
-      if (this.loadingComments) return;
+      if (this.loading) return;
 
-      this.loadingComments = true;
+      this.loading = true;
       this.postsSvc.getComments(parseInt(this.id), this.pageComment, this.limitComment).subscribe({
         next: (newComments) => {
           console.log(newComments)
@@ -76,11 +77,11 @@ export class PostComponent {
             this.comments = [...this.comments, ...newComments];
             this.pageComment++;
           }
-          this.loadingComments = false;
+          this.loading = false;
         },
         error: (error) => {
           console.error('Error al cargar los comentarios', error);
-          this.loadingComments = false;
+          this.loading = false;
         }
       });
     }
@@ -95,11 +96,11 @@ export class PostComponent {
     const scrollingDown = window.scrollY > this.lastScrollTopComment;
     this.lastScrollTopComment = window.scrollY;
 
-    if (nearBottom && scrollingDown && !this.loadingComments) {
+    if (nearBottom && scrollingDown && !this.loading) {
       clearTimeout(this.timeout);
-      this.loadingComments = true
+      this.loading = true
       this.timeout = setTimeout(() => {
-        this.loadingComments = false
+        this.loading = false
         this.loadComments();
       }, 200)
     }
