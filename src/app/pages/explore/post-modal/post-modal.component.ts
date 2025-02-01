@@ -1,4 +1,4 @@
-import { IMAGES_URL } from './../../../app.config';
+import { IMAGES_URL } from '../../../app.config';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostsService } from '../../../services/posts.service';
@@ -6,12 +6,12 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-publish',
+  selector: 'app-post-modal',
   imports: [ReactiveFormsModule],
-  templateUrl: './publish.component.html',
-  styleUrl: './publish.component.scss',
+  templateUrl: './post-modal.component.html',
+  styleUrl: './post-modal.component.scss',
 })
-export class PublishComponent implements OnInit {
+export class PostModalComponent implements OnInit {
   @Output() closeModalEvent = new EventEmitter();
   @Output() postCreatedEvent = new EventEmitter();
   actualUserImage: string | undefined;

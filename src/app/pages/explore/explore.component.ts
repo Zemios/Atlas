@@ -1,7 +1,7 @@
 import { IMAGES_URL } from './../../app.config';
 import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PublishComponent } from './publish/publish.component';
+import { PostModalComponent } from './post-modal/post-modal.component';
 import { PostInterface } from '../../interfaces/post-interface';
 import { PostsService } from '../../services/posts.service';
 import { RelativeTimePipe } from '../../pipes/relative-time.pipe';
@@ -14,7 +14,7 @@ import { SanitizeHtmlPipe } from '../../pipes/sanitize-html.pipe';
 
 @Component({
   selector: 'app-explore',
-  imports: [RouterLink, PublishComponent, RelativeTimePipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, SanitizeHtmlPipe],
+  imports: [RouterLink, PostModalComponent, RelativeTimePipe, NewlineToBrPipe, HighlightCodePipe, HtmlToTextPipe, SanitizeHtmlPipe],
   providers: [],
   templateUrl: './explore.component.html',
   styleUrl: './explore.component.scss',

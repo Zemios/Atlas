@@ -11,7 +11,7 @@
         <i class="bi bi-plus-lg flex lg:hidden"></i>
       </button>
       @if (publishModal) {
-        <app-publish (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-publish>
+        <app-post-modal (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-post-modal>
       }
     </div>
     @for (post of posts; track $index) {
