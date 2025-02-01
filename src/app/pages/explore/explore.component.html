@@ -3,7 +3,7 @@
   <div class="mx-auto max-w-4xl">
     <div class="mb-6 text-right">
       <button
-        (click)="togglePublishModal()"
+        (click)="togglePostModal()"
         modal-content
         class="button-highlight fixed bottom-10 mr-3 px-3 py-3 shadow-lg hover:shadow-2xl text-2xl lg:text-lg right-0 lg:px-6"
       >
@@ -11,7 +11,7 @@
         <i class="bi bi-plus-lg flex lg:hidden"></i>
       </button>
       @if (publishModal) {
-        <app-post-modal (closeModalEvent)="togglePublishModal()" (postCreatedEvent)="onPostCreated()"></app-post-modal>
+        <app-post-modal (closeModalEvent)="togglePostModal()" (postCreatedEvent)="onPostCreated()"></app-post-modal>
       }
     </div>
     @for (post of posts; track $index) {

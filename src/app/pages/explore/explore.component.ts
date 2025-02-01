@@ -62,7 +62,7 @@ export class ExploreComponent implements OnInit, AfterViewInit {
     }
   }
 
-  togglePublishModal() {
+  togglePostModal() {
     if (this.isAuthenticated) {
       this.publishModal = !this.publishModal;
       if (this.publishModal) {
