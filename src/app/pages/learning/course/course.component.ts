@@ -74,24 +74,28 @@ export class CourseComponent implements OnInit {
               type: 'exercise',
               exerciseType: 'multipleChoice',
               question: '¿Cuánto es 2 + 2?',
-              options: ['3', '4', '5']
+              options: ['3', '4', '5'],
+              correctAnswer: '4' // Respuesta correcta
             },
             {
               type: 'exercise',
               exerciseType: 'trueFalse',
-              question: 'El cielo es azul.'
+              question: 'El cielo es azul.',
+              correctAnswer: true // Respuesta correcta
             },
             {
               type: 'exercise',
               exerciseType: 'fillInTheBlank',
-              question: 'Escribe tu nombre:'
+              question: 'Escribe tu nombre:',
+              correctAnswer: 'Ismael' // Respuesta correcta
             },
             {
               type: 'exercise',
               exerciseType: 'slider',
               question: 'Selecciona tu nivel de satisfacción:',
               min: 0,
-              max: 10
+              max: 10,
+              correctAnswer: [7, 8] // Respuestas válidas (puede ser un rango o valores específicos)
             }
           ]
         },
@@ -106,12 +110,30 @@ export class CourseComponent implements OnInit {
           ]
         }
       ]
-    } as const;
+    };
 
     // Aquí puede ser necesario transformar el objeto si necesitas modificarlo,
     // ya que con "as const" todas las propiedades son readonly.
     // Si solo vas a leerlo, puedes asignarlo directamente:
     this.courseData = jsonData as unknown as { modules: Module[] };
+  }
+
+  checkAnswer(contentItem: any, userAnswer: any): void {
+    switch (contentItem.exerciseType) {
+      case 'multipleChoice':
+      case 'trueFalse':
+      case 'fillInTheBlank':
+        contentItem.isCorrect = userAnswer === contentItem.correctAnswer;
+        break;
+
+      case 'slider':
+        // Si la respuesta correcta es un rango o una lista de valores válidos
+        contentItem.isCorrect = contentItem.correctAnswer.includes(Number(userAnswer));
+        break;
+
+      default:
+        contentItem.isCorrect = false;
+    }
   }
 }
 

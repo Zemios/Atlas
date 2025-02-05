@@ -1,66 +1,69 @@
-<!-- course.component.html -->
-<div class="course">
-  <div *ngFor="let module of courseData.modules" class="module">
-    <h2>{{ module.title }}</h2>
-    <div *ngFor="let item of module.content" class="content-item">
-      <ng-container [ngSwitch]="item.type">
-        <!-- Caso lección -->
-        <div *ngSwitchCase="'lesson'">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
+<div *ngFor="let module of courseData.modules">
+  <h2>{{ module.title }}</h2>
+  
+  <div *ngFor="let contentItem of module.content">
+    <ng-container [ngSwitch]="contentItem.type">
+      
+      <!-- Lección -->
+      <div *ngSwitchCase="'lesson'">
+        <h3>{{ contentItem.title }}</h3>
+        <p>{{ contentItem.text }}</p>
+      </div>
+
+      <!-- Ejercicio: Selección múltiple -->
+      <div *ngSwitchCase="'exercise'" [ngSwitch]="contentItem.exerciseType">
+        
+        <!-- Múltiple opción -->
+        <div *ngSwitchCase="'multipleChoice'">
+          <h4>{{ contentItem.question }}</h4>
+          <div *ngFor="let option of contentItem.options">
+            <label>
+              <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, option)">
+              {{ option }}
+            </label>
+          </div>
+          <p *ngIf="contentItem.isCorrect !== undefined">
+            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+          </p>
         </div>
 
-        <!-- Caso ejercicio -->
-        <div *ngSwitchCase="'exercise'">
-          <ng-container [ngSwitch]="item.exerciseType">
-            <!-- Ejercicio de selección múltiple -->
-            <div *ngSwitchCase="'multipleChoice'">
-              <p>{{ item.question }}</p>
-              <div *ngFor="let option of item.options">
-                <label>
-                  <input type="radio" [name]="'mc-' + item.question" />
-                  {{ option }}
-                </label>
-              </div>
-            </div>
-
-            <!-- Ejercicio de verdadero/falso -->
-            <div *ngSwitchCase="'trueFalse'">
-              <p>{{ item.question }}</p>
-              <label>
-                <input type="radio" [name]="'tf-' + item.question" value="true" />
-                Verdadero
-              </label>
-              <label>
-                <input type="radio" [name]="'tf-' + item.question" value="false" />
-                Falso
-              </label>
-            </div>
-
-            <!-- Ejercicio de rellenar (input) -->
-            <div *ngSwitchCase="'fillInTheBlank'">
-              <p>{{ item.question }}</p>
-              <input type="text" placeholder="Escribe tu respuesta" />
-            </div>
-
-            <!-- Ejercicio con slider -->
-            <div *ngSwitchCase="'slider'">
-              <p>{{ item.question }}</p>
-              <input type="range" [min]="item.min" [max]="item.max" />
-            </div>
-
-            <!-- Caso por defecto para ejercicios desconocidos -->
-            <div *ngSwitchDefault>
-              <p>Tipo de ejercicio desconocido.</p>
-            </div>
-          </ng-container>
+        <!-- Verdadero/Falso -->
+        <div *ngSwitchCase="'trueFalse'">
+          <h4>{{ contentItem.question }}</h4>
+          <label>
+            <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, true)">
+            Verdadero
+          </label>
+          <label>
+            <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, false)">
+            Falso
+          </label>
+          <p *ngIf="contentItem.isCorrect !== undefined">
+            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+          </p>
         </div>
 
-        <!-- Caso por defecto para tipos desconocidos -->
-        <div *ngSwitchDefault>
-          <p>Tipo de contenido desconocido.</p>
+        <!-- Completar -->
+        <div *ngSwitchCase="'fillInTheBlank'">
+          <h4>{{ contentItem.question }}</h4>
+          <input type="text" #fillInput>
+          <button (click)="checkAnswer(contentItem, fillInput.value)">Comprobar</button>
+          <p *ngIf="contentItem.isCorrect !== undefined">
+            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+          </p>
         </div>
-      </ng-container>
-    </div>
+
+        <!-- Slider -->
+        <div *ngSwitchCase="'slider'">
+          <h4>{{ contentItem.question }}</h4>
+          <input type="range" [min]="contentItem.min" [max]="contentItem.max" #sliderValue>
+          <button (click)="checkAnswer(contentItem, sliderValue.value)">Comprobar</button>
+          <p *ngIf="contentItem.isCorrect !== undefined">
+            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+          </p>
+        </div>
+
+      </div>
+    </ng-container>
   </div>
 </div>
