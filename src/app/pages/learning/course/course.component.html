@@ -1,69 +1,75 @@
-<div *ngFor="let module of courseData.modules">
-  <h2>{{ module.title }}</h2>
-  
-  <div *ngFor="let contentItem of module.content">
-    <ng-container [ngSwitch]="contentItem.type">
-      
-      <!-- Lección -->
-      <div *ngSwitchCase="'lesson'">
-        <h3>{{ contentItem.title }}</h3>
-        <p>{{ contentItem.text }}</p>
-      </div>
+<div class="flex flex-col gap-3 rounded-xl p-3">
+  <div *ngFor="let module of courseData.modules" class="px-6 py-16 bg-white rounded-xl text-gray-700">
+    <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">{{ module.title }}</h2>
 
-      <!-- Ejercicio: Selección múltiple -->
-      <div *ngSwitchCase="'exercise'" [ngSwitch]="contentItem.exerciseType">
+    <div *ngFor="let contentItem of module.content" class="mb-8">
+      <ng-container [ngSwitch]="contentItem.type">
         
-        <!-- Múltiple opción -->
-        <div *ngSwitchCase="'multipleChoice'">
-          <h4>{{ contentItem.question }}</h4>
-          <div *ngFor="let option of contentItem.options">
-            <label>
-              <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, option)">
-              {{ option }}
-            </label>
+        <!-- Lección -->
+        <div *ngSwitchCase="'lesson'">
+          <h3 class="text-2xl font-semibold text-blue-700 mb-4">{{ contentItem.title }}</h3>
+          <p class="text-lg text-gray-700">{{ contentItem.text }}</p>
+        </div>
+
+        <!-- Ejercicio: Selección múltiple -->
+        <div *ngSwitchCase="'exercise'" [ngSwitch]="contentItem.exerciseType">
+          
+          <!-- Múltiple opción -->
+          <div *ngSwitchCase="'multipleChoice'">
+            <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
+            <div class="mt-4">
+              <div *ngFor="let option of contentItem.options" class="mb-2">
+                <label class="inline-flex items-center text-lg">
+                  <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, option)" class="mr-2">
+                  {{ option }}
+                </label>
+              </div>
+            </div>
+            <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
+              {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+            </p>
           </div>
-          <p *ngIf="contentItem.isCorrect !== undefined">
-            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
-          </p>
-        </div>
 
-        <!-- Verdadero/Falso -->
-        <div *ngSwitchCase="'trueFalse'">
-          <h4>{{ contentItem.question }}</h4>
-          <label>
-            <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, true)">
-            Verdadero
-          </label>
-          <label>
-            <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, false)">
-            Falso
-          </label>
-          <p *ngIf="contentItem.isCorrect !== undefined">
-            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
-          </p>
-        </div>
+          <!-- Verdadero/Falso -->
+          <div *ngSwitchCase="'trueFalse'">
+            <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
+            <div class="mt-4">
+              <label class="inline-flex items-center text-lg">
+                <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, true)" class="mr-2">
+                Verdadero
+              </label>
+              <label class="inline-flex items-center text-lg ml-4">
+                <input type="radio" name="{{ contentItem.question }}" (change)="checkAnswer(contentItem, false)" class="mr-2">
+                Falso
+              </label>
+            </div>
+            <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
+              {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+            </p>
+          </div>
 
-        <!-- Completar -->
-        <div *ngSwitchCase="'fillInTheBlank'">
-          <h4>{{ contentItem.question }}</h4>
-          <input type="text" #fillInput>
-          <button (click)="checkAnswer(contentItem, fillInput.value)">Comprobar</button>
-          <p *ngIf="contentItem.isCorrect !== undefined">
-            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
-          </p>
-        </div>
+          <!-- Completar -->
+          <div *ngSwitchCase="'fillInTheBlank'">
+            <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
+            <input type="text" #fillInput class="w-full mt-4 p-2 border border-gray-300 rounded-lg">
+            <button (click)="checkAnswer(contentItem, fillInput.value)" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg">Comprobar</button>
+            <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
+              {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+            </p>
+          </div>
 
-        <!-- Slider -->
-        <div *ngSwitchCase="'slider'">
-          <h4>{{ contentItem.question }}</h4>
-          <input type="range" [min]="contentItem.min" [max]="contentItem.max" #sliderValue>
-          <button (click)="checkAnswer(contentItem, sliderValue.value)">Comprobar</button>
-          <p *ngIf="contentItem.isCorrect !== undefined">
-            {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
-          </p>
-        </div>
+          <!-- Slider -->
+          <div *ngSwitchCase="'slider'">
+            <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
+            <input type="range" [min]="contentItem.min" [max]="contentItem.max" #sliderValue class="w-full mt-4">
+            <button (click)="checkAnswer(contentItem, sliderValue.value)" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg">Comprobar</button>
+            <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
+              {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
+            </p>
+          </div>
 
-      </div>
-    </ng-container>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>
