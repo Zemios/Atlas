@@ -15,7 +15,7 @@
             <div>
             @switch (contentItem.exerciseType) {
                 @case('multipleChoice') {
-                  <div>
+                  <div class="flex flex-col gap-2">
                     <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
                     <div class="mt-4">
                       <div *ngFor="let option of contentItem.options" class="mb-2">
@@ -32,7 +32,7 @@
                 }
 
                 @case ('trueFalse') {
-                  <div>
+                  <div class="flex flex-col gap-2">
                     <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
                     <div class="mt-4">
                       <label class="inline-flex items-center text-lg">
@@ -51,9 +51,9 @@
                 }
                 
                 @case ('fillInTheBlank') {
-                  <div *ngSwitchCase="'fillInTheBlank'">
+                  <div class="flex flex-col gap-2 items-start">
                     <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
-                    <input type="text" #fillInput class="w-full mt-4 p-2 border border-gray-300 rounded-lg">
+                    <input type="text" #fillInput class="w-auto mt-4 p-2 border border-gray-300 rounded-lg">
                     <button (click)="checkAnswer(contentItem, fillInput.value)" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg">Comprobar</button>
                     <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
                       {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
@@ -62,9 +62,9 @@
                 }
 
                 @case ('slider') {
-                  <div>
+                  <div class="flex flex-col gap-2 items-start.">
                     <h4 class="text-xl font-semibold text-blue-700">{{ contentItem.question }}</h4>
-                    <input type="range" [min]="contentItem.min" [max]="contentItem.max" #sliderValue class="w-full mt-4">
+                    <input type="range" [min]="contentItem.min" [max]="contentItem.max" #sliderValue class="w-auto mt-4">
                     <button (click)="checkAnswer(contentItem, sliderValue.value)" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg">Comprobar</button>
                     <p *ngIf="contentItem.isCorrect !== undefined" class="mt-4 text-lg font-semibold" [ngClass]="{'text-green-600': contentItem.isCorrect, 'text-red-600': !contentItem.isCorrect}">
                       {{ contentItem.isCorrect ? 'Correcto' : 'Incorrecto' }}
