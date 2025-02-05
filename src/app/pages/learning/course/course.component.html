@@ -1,30 +1,66 @@
-<div class="flex h-full w-full flex-col justify-between bg-white p-8 lg:flex-row">
-  <!-- Columna izquierda: Guía del curso -->
-  <div class="mb-8 w-full lg:mb-0 lg:w-1/3 lg:pr-6">
-    <h2 class="mb-6 text-4xl font-bold">Guía del Curso</h2>
-    <ul class="list-inside list-disc text-lg text-gray-700">
-      <li class="mb-4">Introducción al curso</li>
-      <li class="mb-4">Instalación y configuración</li>
-      <li class="mb-4">Temas principales del curso</li>
-      <li class="mb-4">Ejemplos y casos prácticos</li>
-      <li class="mb-4">Conclusión y próximos pasos</li>
-    </ul>
-  </div>
+<!-- course.component.html -->
+<div class="course">
+  <div *ngFor="let module of courseData.modules" class="module">
+    <h2>{{ module.title }}</h2>
+    <div *ngFor="let item of module.content" class="content-item">
+      <ng-container [ngSwitch]="item.type">
+        <!-- Caso lección -->
+        <div *ngSwitchCase="'lesson'">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </div>
 
-  <!-- Columna derecha: Contenido del curso -->
-  <div class="w-full rounded-lg bg-gray-100 p-6 shadow-lg lg:w-2/3 lg:pl-6">
-    <h2 class="mb-4 text-3xl font-semibold">Título del Curso</h2>
-    <p class="mb-6 text-lg">Este curso está diseñado para proporcionarte las herramientas necesarias para dominar el tema en cuestión.</p>
+        <!-- Caso ejercicio -->
+        <div *ngSwitchCase="'exercise'">
+          <ng-container [ngSwitch]="item.exerciseType">
+            <!-- Ejercicio de selección múltiple -->
+            <div *ngSwitchCase="'multipleChoice'">
+              <p>{{ item.question }}</p>
+              <div *ngFor="let option of item.options">
+                <label>
+                  <input type="radio" [name]="'mc-' + item.question" />
+                  {{ option }}
+                </label>
+              </div>
+            </div>
 
-    <div class="mb-6">
-      <h3 class="mb-4 text-2xl font-bold">Lección 1: Introducción</h3>
-      <video class="mb-4 h-auto w-full rounded-md" controls>
-        <source src="video_url.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <p class="text-lg">Aquí va el contenido de la primera lección del curso...</p>
+            <!-- Ejercicio de verdadero/falso -->
+            <div *ngSwitchCase="'trueFalse'">
+              <p>{{ item.question }}</p>
+              <label>
+                <input type="radio" [name]="'tf-' + item.question" value="true" />
+                Verdadero
+              </label>
+              <label>
+                <input type="radio" [name]="'tf-' + item.question" value="false" />
+                Falso
+              </label>
+            </div>
+
+            <!-- Ejercicio de rellenar (input) -->
+            <div *ngSwitchCase="'fillInTheBlank'">
+              <p>{{ item.question }}</p>
+              <input type="text" placeholder="Escribe tu respuesta" />
+            </div>
+
+            <!-- Ejercicio con slider -->
+            <div *ngSwitchCase="'slider'">
+              <p>{{ item.question }}</p>
+              <input type="range" [min]="item.min" [max]="item.max" />
+            </div>
+
+            <!-- Caso por defecto para ejercicios desconocidos -->
+            <div *ngSwitchDefault>
+              <p>Tipo de ejercicio desconocido.</p>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Caso por defecto para tipos desconocidos -->
+        <div *ngSwitchDefault>
+          <p>Tipo de contenido desconocido.</p>
+        </div>
+      </ng-container>
     </div>
-
-    <!-- Otras lecciones seguirían el mismo formato -->
   </div>
 </div>
