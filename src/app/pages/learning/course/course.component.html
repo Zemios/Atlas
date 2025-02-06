@@ -1,8 +1,9 @@
 <div class="flex flex-col gap-3 rounded-xl p-3">
+  @if (courseData) {
   <div *ngFor="let module of courseData.modules" class="px-6 py-16 bg-white rounded-xl text-gray-700">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">{{ module.title }}</h2>
+    <!-- <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">{{ module.title }}</h2> -->
 
-    <div *ngFor="let contentItem of module.content" class="mb-8">
+    <!-- <div *ngFor="let contentItem of module.content" class="mb-8">
          @switch (contentItem.type) {
           @case ('lesson') {
             <div>
@@ -75,6 +76,7 @@
             </div>
           }
          }
-    </div>
+    </div> -->
   </div>
+}
 </div>
