@@ -22,7 +22,13 @@ export class CourseComponent implements OnInit {
       description: "Angular is a JavaScript-based open-source web framework used for developing single-page applications",
       creation_date: new Date(),
       modules: [
-        {}
+        {
+          title: "Module 1",
+          description: "This is module 1",
+          lessons: [{
+            title: "Lesson 1",
+          }]
+        }
       ]
     };
 
