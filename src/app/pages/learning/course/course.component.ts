@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CoursesInterface } from '../../../interfaces/courses-interface';
+import { CoursesInterface, TypeExercise } from '../../../interfaces/courses-interface';
 
 
 @Component({
@@ -10,6 +10,7 @@ import { CoursesInterface } from '../../../interfaces/courses-interface';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent implements OnInit {
+  typeExercise = TypeExercise;
 
   courseData: CoursesInterface | null = null;
 
@@ -27,6 +28,17 @@ export class CourseComponent implements OnInit {
           description: "This is module 1",
           lessons: [{
             title: "Lesson 1",
+            content: "In this lesson we learn Arrays",
+            teachings: [{
+              title: "Teaching 1",
+              exercises: [{
+                title: "Exercise 1",
+                // description: "This is exercise 1",
+                type: this.typeExercise.BOOLEAN,
+                correctAnswer: true
+              }]
+            }],
+            exercises: [],
           }]
         }
       ]
