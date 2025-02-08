@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, Signal } from '@angular/core';
+import { ROUTER_OUTLET_DATA, RouterLink } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { CoursesInterface } from '../../interfaces/courses-interface';
 import { TranslateModule } from '@ngx-translate/core';
-import { ConnectionService } from '../../services/connection.service';
 import { AuthService } from '../../services/auth.service';
+import { backendResponse } from '../../interfaces/backend-status-interface';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  routerOutletData: Signal<backendResponse> = inject(ROUTER_OUTLET_DATA) as Signal<backendResponse>;
+  backendStatus: boolean = this.routerOutletData().status;
+  isAuthenticated: boolean = false;
   joinUsList = [
     {
       title: 'Únete a la Comunidad',
@@ -46,32 +49,18 @@ export class HomeComponent {
     },
   ];
 
-  isAuthenticated: boolean = false;
-  backendStatus: boolean = false;
-
   constructor(
-    private connectionService: ConnectionService,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.checkConnection();
+
     this.checkUserAuth();
     if (!this.backendStatus || this.isAuthenticated) {
       this.joinUsList.shift();
     }
   }
 
-  checkConnection(): void {
-    this.connectionService.checkBackendConnection().subscribe({
-      next: (response) => {
-        this.backendStatus = response.isConnected;
-      },
-      error: () => {
-        this.backendStatus = false;
-      },
-    });
-  }
 
   checkUserAuth(): void {
     this.authService.checkAuth().subscribe({

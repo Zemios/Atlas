@@ -9,7 +9,7 @@ import { IMAGES_URL } from '../../app.config';
   selector: 'app-menu',
   imports: [RouterLink, TranslateModule],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  styleUrls: [],
 })
 export class MenuComponent {
   logout() {
@@ -32,7 +32,7 @@ export class MenuComponent {
     public router: Router,
     private translate: TranslateService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');

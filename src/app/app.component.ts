@@ -7,6 +7,9 @@ import { ConnectionService } from './services/connection.service';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { backendResponse } from './interfaces/backend-status-interface';
+
+
 
 @Component({
   selector: 'app-root',
@@ -22,11 +25,28 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   styleUrls: [],
 })
 export class AppComponent implements OnInit {
+  title = 'Zemios';
+  backendResponse: backendResponse = {
+    status: false,
+    message: '',
+  };
+  isAuthenticated: boolean = false;
+  pages = [
+    {
+      title: 'Inicio',
+      url: '',
+      icon: 'house-fill',
+    },
+    {
+      title: 'Contacto',
+      url: 'contact',
+      icon: 'info-circle-fill',
+    },
+  ];
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
   ) { }
-  backendStatus: boolean = false;
 
   ngOnInit(): void {
     this.checkConnection();
@@ -52,37 +72,23 @@ export class AppComponent implements OnInit {
   checkConnection(): void {
     this.connectionService.checkBackendConnection().subscribe({
       next: (response) => {
-        this.backendStatus = response.isConnected;
-        if (this.backendStatus) {
+        this.backendResponse.status = response.isConnected;
+        if (this.backendResponse) {
           this.filterPages();
         }
       },
       error: (err) => {
-        this.backendStatus = false;
-        this.filterPages();
+        this.backendResponse.status = false;
         console.error('Error connecting to backend:', err);
       },
     });
   }
-  title = 'Zemios';
 
   filterPages(): void {
-    if (this.backendStatus) {
+    if (this.backendResponse) {
       this.pages = this.pages.concat(
         { title: 'Aprendizaje', url: 'learning', icon: 'mortarboard-fill' },
       )
     }
   }
-  pages = [
-    {
-      title: 'Inicio',
-      url: '',
-      icon: 'house-fill',
-    },
-    {
-      title: 'Contacto',
-      url: 'contact',
-      icon: 'info-circle-fill',
-    },
-  ];
 }
