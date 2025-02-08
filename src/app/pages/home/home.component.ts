@@ -14,15 +14,15 @@ import { sharedDataInterface } from '../../interfaces/shared-data-interface';
 })
 export class HomeComponent {
   sharedData: Signal<sharedDataInterface> = inject(ROUTER_OUTLET_DATA) as Signal<sharedDataInterface>;
-  backendStatus: boolean = this.sharedData().backendResponse.status;
-  isAuthenticated: boolean = false;
+  /* TODO: Las funciones getter se ejecutan demasiadas veces. Hay que ver si se puede hacer algo para que solo se ejecuten si detectan que el valor ha cambiado.
+  Actualmente se actualizan un aproximado de 20 veces cada vez que se realiza una acción (Scroll, click, etc.) */
+  get backendStatus(): boolean {
+    return this.sharedData().backendResponse.status;
+  }
+  get isAuthenticated(): boolean {
+    return this.sharedData().user.isAuthenticated;
+  }
   joinUsList = [
-    {
-      title: 'Únete a la Comunidad',
-      description: 'Regístrate en nuestra plataforma y crea tu perfil.',
-      icon: 'group.svg',
-      url: '/register',
-    },
     {
       title: 'Conecta con Otros Juniors',
       description: 'Comparte tus experiencias y aprende de otros programadores como tú.',
@@ -52,26 +52,6 @@ export class HomeComponent {
   constructor(
     private authService: AuthService
   ) { }
-
-  ngOnInit(): void {
-    this.checkUserAuth();
-    if (!this.backendStatus || this.isAuthenticated) {
-      this.joinUsList.shift();
-    }
-  }
-
-
-  checkUserAuth(): void {
-    this.authService.checkAuth().subscribe({
-      next: (response) => {
-        this.isAuthenticated = response.isAuthenticated;
-      },
-      error: (err) => {
-        console.error('Error checking auth', err);
-        this.isAuthenticated = false;
-      },
-    });
-  }
 
   private readonly coursesSvc = inject(CoursesService);
   lastCourses: Array<CoursesInterface> = this.coursesSvc.show();

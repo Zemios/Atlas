@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkConnection();
-
     this.authService.refreshToken().subscribe({
       next: () => { },
       error: (error) => {
@@ -66,6 +65,15 @@ export class AppComponent implements OnInit {
     });
     this.authService.getActualUser().subscribe({
       next: (user) => {
+        this.authService.checkAuth().subscribe({
+          next: (response) => {
+            this.isAuthenticated = response.isAuthenticated;
+            this.sharedData.user.isAuthenticated = this.isAuthenticated;
+          },
+          error: (error) => {
+            console.log(error)
+          }
+        })
         if (!user) {
           console.log('User authenticated not found');
         }
@@ -74,6 +82,7 @@ export class AppComponent implements OnInit {
         console.error('Error loading an user:', error);
       },
     });
+
   }
 
   checkConnection(): void {
