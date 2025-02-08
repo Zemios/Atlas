@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     this.connectionService.checkBackendConnection().subscribe({
       next: (response) => {
         this.backendStatus = response.isConnected;
-        if (!this.backendStatus) {
+        if (this.backendStatus) {
           this.filterPages();
         }
       },
@@ -67,8 +67,10 @@ export class AppComponent implements OnInit {
   title = 'Zemios';
 
   filterPages(): void {
-    if (!this.backendStatus) {
-      this.pages = this.pages.filter((page) => page.title !== 'Foro' && page.title !== 'Proyectos' && page.title !== 'Noticias' && page.title !== 'Cursos');
+    if (this.backendStatus) {
+      this.pages = this.pages.concat(
+        { title: 'Aprendizaje', url: 'learning', icon: 'mortarboard-fill' },
+      )
     }
   }
   pages = [
