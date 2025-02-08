@@ -5,6 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-consulting',
   imports: [RouterLink],
   templateUrl: './consulting.component.html',
-  styleUrl: './consulting.component.scss',
+  styleUrls: [],
 })
-export class ConsultingComponent {}
+export class ConsultingComponent { }

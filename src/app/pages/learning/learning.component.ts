@@ -5,6 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-learning',
   imports: [RouterLink],
   templateUrl: './learning.component.html',
-  styleUrl: './learning.component.scss',
+  styleUrls: [],
 })
-export class LearningComponent {}
+export class LearningComponent { }

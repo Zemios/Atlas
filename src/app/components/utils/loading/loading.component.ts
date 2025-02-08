@@ -6,7 +6,7 @@ import { Component, Input } from "@angular/core";
   standalone: true,
   imports: [],
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss'],
+  styleUrls: [],
 })
 export class LoadingComponent {
 

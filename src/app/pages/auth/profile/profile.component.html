@@ -63,25 +63,4 @@
       }
     </div>
   </div>
-  @if (posts.length) {
-    <div class="my-6 mx-auto max-w-4xl ">
-      @for (post of posts; track $index) {
-        <div class="mt-6 rounded-lg bg-white shadow">
-          <div class="p-6">
-            <p class="text-sm font-semibold text-gray-700 break-anywhere">{{ user?.name }}</p>
-            <p class="text-sm text-gray-500">{{ post.creation_date | relativeTime }}</p>
-            <p class="my-2 cursor-pointer text-gray-700 break-anywhere" [innerHTML]="post.content | htmlToText | highlightCode | newlineToBr | sanitizeHtml"></p>
-          </div>
-        </div>
-      }
-      @if (loading) {
-        <app-loading text="Cargando perfil..."></app-loading>
-      }
-    </div>
-  } 
-  @else {
-    <div class="mt-4 text-center text-gray-600">
-      No hay publicaciones aún.
-    </div>
-  }
 </div>

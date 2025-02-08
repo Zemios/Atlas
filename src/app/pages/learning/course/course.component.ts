@@ -7,7 +7,7 @@ import { CoursesInterface, TypeExercise } from '../../../interfaces/courses-inte
   selector: 'app-course',
   imports: [CommonModule],
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  styleUrls: [],
 })
 export class CourseComponent implements OnInit {
   typeExercise = TypeExercise;

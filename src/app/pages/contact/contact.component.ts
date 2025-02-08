@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-contact',
   imports: [RouterLink],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss',
+  styleUrls: [],
 })
 export class ContactComponent {
   teamList = [

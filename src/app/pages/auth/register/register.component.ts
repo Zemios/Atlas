@@ -7,7 +7,7 @@ import { AuthService } from '../../../services/auth.service';
   selector: 'app-register',
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  styleUrls: [],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -49,7 +49,7 @@ export class RegisterComponent {
         next: () => {
           this.router.navigate(['/']);
         },
-        error: () => {},
+        error: () => { },
       });
     } else {
       console.log('Formulario inválido');

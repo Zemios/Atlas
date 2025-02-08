@@ -19,20 +19,20 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     },
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: [],
 })
 export class AppComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
-  ) {}
+  ) { }
   backendStatus: boolean = false;
 
   ngOnInit(): void {
     this.checkConnection();
 
     this.authService.refreshToken().subscribe({
-      next: () => {},
+      next: () => { },
       error: (error) => {
         console.error('Error refreshing token', error);
       },
@@ -76,26 +76,6 @@ export class AppComponent implements OnInit {
       title: 'Inicio',
       url: '',
       icon: 'house-fill',
-    },
-    // {
-    //   title: 'Noticias',
-    //   url: 'news',
-    //   icon: 'newspaper',
-    // },
-    {
-      title: 'Foro',
-      url: 'explore',
-      icon: 'chat-dots-fill',
-    },
-    /*     {
-          title: 'Cursos',
-          url: 'learning',
-          icon: 'book-half'
-        }, */
-    {
-      title: 'Proyectos',
-      url: 'projects',
-      icon: 'box-fill',
     },
     {
       title: 'Contacto',

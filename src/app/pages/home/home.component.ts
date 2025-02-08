@@ -1,22 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NewsService } from '../../services/news.service';
-import { NewsInterface } from '../../interfaces/news-interface';
 import { CoursesService } from '../../services/courses.service';
 import { CoursesInterface } from '../../interfaces/courses-interface';
-import { ProjectsService } from '../../services/projects.service';
-import { ProjectInterface } from '../../interfaces/project-interface';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConnectionService } from '../../services/connection.service';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, TranslateModule, AsyncPipe],
+  imports: [RouterLink, TranslateModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   joinUsList = [
@@ -58,7 +52,7 @@ export class HomeComponent {
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.checkConnection();
@@ -91,10 +85,6 @@ export class HomeComponent {
     });
   }
 
-  private readonly newsSvc = inject(NewsService);
   private readonly coursesSvc = inject(CoursesService);
-  private readonly projectsSvc = inject(ProjectsService);
-  mainNews: Observable<NewsInterface[]> = this.newsSvc.show();
   lastCourses: Array<CoursesInterface> = this.coursesSvc.show();
-  lastProjects: Observable<ProjectInterface[]> = this.projectsSvc.show();
 }

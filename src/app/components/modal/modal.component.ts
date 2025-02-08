@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   standalone: true,
   imports: [MatButtonModule],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  styleUrls: [],
 })
 export class ModalComponent {
   @Input() title: string = '';
@@ -24,7 +24,7 @@ export class ModalComponent {
   constructor(
     private dialogRef: MatDialogRef<ModalComponent>,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   close() {
     this.closeAction.emit();

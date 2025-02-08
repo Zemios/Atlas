@@ -11,7 +11,7 @@ import { UserInterface } from '../../../../interfaces/user-interface';
   imports: [ReactiveFormsModule],
   providers: [],
   templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.scss'],
+  styleUrls: [],
 })
 export class ProfileEditComponent implements OnInit {
   profileForm: FormGroup;
