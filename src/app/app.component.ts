@@ -111,4 +111,11 @@ export class AppComponent implements OnInit {
       )
     }
   }
+
+  logout() {
+    this.sharedData.user = {
+      userData: undefined,
+      isAuthenticated: false,
+    }
+  }
 }

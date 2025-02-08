@@ -1,6 +1,6 @@
 import { UserInterface } from './../../interfaces/user-interface';
 import { AuthService } from './../../services/auth.service';
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IMAGES_URL } from '../../app.config';
@@ -14,6 +14,7 @@ import { IMAGES_URL } from '../../app.config';
 export class MenuComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
   @Input() user: UserInterface | undefined;
+  @Output() eventLogout = new EventEmitter();
   menuVisibility = false;
   isDropdownOpen = false;
   IMAGES_URL = IMAGES_URL;
@@ -73,6 +74,7 @@ export class MenuComponent {
     this.authService.logout().subscribe({
       next: () => {
         this.router.navigate(['/login']);
+        this.eventLogout.emit()
       },
       error: (error) => {
         console.error(error);
