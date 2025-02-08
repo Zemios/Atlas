@@ -9,7 +9,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { backendResponseInterface } from './interfaces/backend-status-interface';
 import { sharedDataInterface } from './interfaces/shared-data-interface';
-import { UserInterface } from './interfaces/user-interface';
 
 
 
@@ -33,7 +32,6 @@ export class AppComponent implements OnInit {
     message: '',
   };
   isAuthenticated: boolean = false;
-  user: UserInterface | undefined;
   pages = [
     {
       title: 'Inicio',
@@ -59,34 +57,27 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkConnection();
-    this.authService.refreshToken().subscribe({
-      next: () => { },
-      error: (error) => {
-        console.error('Error refreshing token', error);
-      },
-    });
-    this.authService.getActualUser().subscribe({
-      next: (user) => {
-        this.user = user;
-        this.sharedData.user.userData = user;
-        this.authService.checkAuth().subscribe({
-          next: (response) => {
-            this.isAuthenticated = response.isAuthenticated;
-            this.sharedData.user.isAuthenticated = this.isAuthenticated;
-          },
-          error: (error) => {
-            console.log(error)
-          }
-        })
-        if (!user) {
-          console.log('User authenticated not found');
+    if (this.backendResponse.status) {
+      this.authService.getActualUser().subscribe({
+        next: () => {
+          this.authService.refreshToken().subscribe({})
+          this.authService.subscribeToCurrentUser((user) => {
+            this.sharedData.user.userData = user;
+            if (user) {
+              this.authService.checkAuth().subscribe({
+                next: (response) => {
+                  this.isAuthenticated = response.isAuthenticated;
+                  this.sharedData.user.isAuthenticated = this.isAuthenticated;
+                }
+              })
+            }
+          })
+        },
+        error: (err) => {
+          console.error(err);
         }
-      },
-      error: (error) => {
-        console.error('Error loading an user:', error);
-      },
-    });
-
+      })
+    }
   }
 
   checkConnection(): void {
