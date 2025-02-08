@@ -7,7 +7,8 @@ import { ConnectionService } from './services/connection.service';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { backendResponse } from './interfaces/backend-status-interface';
+import { backendResponseInterface } from './interfaces/backend-status-interface';
+import { sharedDataInterface } from './interfaces/shared-data-interface';
 
 
 
@@ -26,7 +27,7 @@ import { backendResponse } from './interfaces/backend-status-interface';
 })
 export class AppComponent implements OnInit {
   title = 'Zemios';
-  backendResponse: backendResponse = {
+  backendResponse: backendResponseInterface = {
     status: false,
     message: '',
   };
@@ -43,6 +44,12 @@ export class AppComponent implements OnInit {
       icon: 'info-circle-fill',
     },
   ];
+  sharedData: sharedDataInterface = {
+    backendResponse: this.backendResponse,
+    user: {
+      isAuthenticated: this.isAuthenticated,
+    },
+  }
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService

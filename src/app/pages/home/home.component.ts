@@ -4,7 +4,7 @@ import { CoursesService } from '../../services/courses.service';
 import { CoursesInterface } from '../../interfaces/courses-interface';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../services/auth.service';
-import { backendResponse } from '../../interfaces/backend-status-interface';
+import { sharedDataInterface } from '../../interfaces/shared-data-interface';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,8 @@ import { backendResponse } from '../../interfaces/backend-status-interface';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  routerOutletData: Signal<backendResponse> = inject(ROUTER_OUTLET_DATA) as Signal<backendResponse>;
-  backendStatus: boolean = this.routerOutletData().status;
+  sharedData: Signal<sharedDataInterface> = inject(ROUTER_OUTLET_DATA) as Signal<sharedDataInterface>;
+  backendStatus: boolean = this.sharedData().backendResponse.status;
   isAuthenticated: boolean = false;
   joinUsList = [
     {
@@ -54,7 +54,6 @@ export class HomeComponent {
   ) { }
 
   ngOnInit(): void {
-
     this.checkUserAuth();
     if (!this.backendStatus || this.isAuthenticated) {
       this.joinUsList.shift();

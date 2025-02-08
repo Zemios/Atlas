@@ -11,11 +11,7 @@ import { UserInterface } from '../interfaces/user-interface';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
   public currentUser = this.currentUserSubject.asObservable();
-  constructor(private http: HttpClient) {}
-
-  getCurrentUser(): Observable<UserInterface | null> {
-    return this.currentUser;
-  }
+  constructor(private http: HttpClient) { }
 
   login(userData: any): Observable<any> {
     return this.http.post(API_URL + '/auth/login', userData, { withCredentials: true }).pipe(
@@ -52,6 +48,7 @@ export class AuthService {
   }
 
   getActualUser(): Observable<UserInterface> {
+    console.log('getActualUser')
     return this.http.get<UserInterface>(API_URL + '/auth/profile', { withCredentials: true }).pipe(
       tap((user) => {
         this.currentUserSubject.next(user);
@@ -64,10 +61,12 @@ export class AuthService {
   }
 
   checkAuth(): Observable<{ isAuthenticated: boolean; role: string }> {
+    console.log('checkAuth')
     return this.http.get<{ isAuthenticated: boolean; role: string }>(API_URL + '/auth/check', { withCredentials: true });
   }
 
   subscribeToCurrentUser(callback: (user: UserInterface | null) => void): Subscription {
+    console.log('subscribeToCurrentUser')
     return this.currentUser.subscribe((user) => {
       if (!user) {
         console.error('Authenticated User not found');

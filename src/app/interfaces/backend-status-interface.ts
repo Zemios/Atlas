@@ -1,4 +1,4 @@
-export interface backendResponse {
+export interface backendResponseInterface {
     status: boolean;
     message: string;
 }
