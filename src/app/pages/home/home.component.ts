@@ -3,14 +3,13 @@ import { ROUTER_OUTLET_DATA, RouterLink } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { CoursesInterface } from '../../interfaces/courses-interface';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../services/auth.service';
 import { sharedDataInterface } from '../../interfaces/shared-data-interface';
 
 @Component({
   selector: 'app-home',
   imports: [RouterLink, TranslateModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: [],
 })
 export class HomeComponent {
   sharedData: Signal<sharedDataInterface> = inject(ROUTER_OUTLET_DATA) as Signal<sharedDataInterface>;
@@ -49,9 +48,7 @@ export class HomeComponent {
     },
   ];
 
-  constructor(
-    private authService: AuthService
-  ) { }
+  constructor() { }
 
   private readonly coursesSvc = inject(CoursesService);
   lastCourses: Array<CoursesInterface> = this.coursesSvc.show();

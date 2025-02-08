@@ -9,7 +9,7 @@ import { UserInterface } from '../interfaces/user-interface';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<UserInterface | null> = new BehaviorSubject<UserInterface | null>(null);
+  private currentUserSubject: BehaviorSubject<UserInterface | undefined> = new BehaviorSubject<UserInterface | undefined>(undefined);
   public currentUser = this.currentUserSubject.asObservable();
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class AuthService {
         this.currentUserSubject.next(user);
       }),
       catchError((error) => {
-        this.currentUserSubject.next(null);
+        this.currentUserSubject.next(undefined);
         return throwError(error);
       })
     );
@@ -37,7 +37,7 @@ export class AuthService {
         this.currentUserSubject.next(user);
       }),
       catchError((error) => {
-        this.currentUserSubject.next(null);
+        this.currentUserSubject.next(undefined);
         return throwError(error);
       })
     );
@@ -54,7 +54,7 @@ export class AuthService {
         this.currentUserSubject.next(user);
       }),
       catchError((error) => {
-        this.currentUserSubject.next(null);
+        this.currentUserSubject.next(undefined);
         return throwError(error);
       })
     );
@@ -65,7 +65,7 @@ export class AuthService {
     return this.http.get<{ isAuthenticated: boolean; role: string }>(API_URL + '/auth/check', { withCredentials: true });
   }
 
-  subscribeToCurrentUser(callback: (user: UserInterface | null) => void): Subscription {
+  subscribeToCurrentUser(callback: (user: UserInterface | undefined) => void): Subscription {
     console.log('subscribeToCurrentUser')
     return this.currentUser.subscribe((user) => {
       if (!user) {
@@ -78,7 +78,7 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(API_URL + '/auth/logout', {}, { withCredentials: true }).pipe(
       tap(() => {
-        this.currentUserSubject.next(null);
+        this.currentUserSubject.next(undefined);
       }),
       catchError((error) => {
         console.error('Error al cerrar sesión:', error);

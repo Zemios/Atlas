@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { backendResponseInterface } from './interfaces/backend-status-interface';
 import { sharedDataInterface } from './interfaces/shared-data-interface';
+import { UserInterface } from './interfaces/user-interface';
 
 
 
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
     message: '',
   };
   isAuthenticated: boolean = false;
+  user: UserInterface | undefined;
   pages = [
     {
       title: 'Inicio',
@@ -65,6 +67,8 @@ export class AppComponent implements OnInit {
     });
     this.authService.getActualUser().subscribe({
       next: (user) => {
+        this.user = user;
+        this.sharedData.user.userData = user;
         this.authService.checkAuth().subscribe({
           next: (response) => {
             this.isAuthenticated = response.isAuthenticated;

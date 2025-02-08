@@ -13,7 +13,7 @@ import { IMAGES_URL } from '../../../app.config';
   styleUrls: [],
 })
 export class ProfileComponent implements OnInit {
-  user: UserInterface | null = null;
+  user: UserInterface | undefined;
   isEdit: boolean = false;
   profileEditModal = false;
   IMAGES_URL = IMAGES_URL;
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
         next: (user) => {
           if (!user) {
             console.error('User authenticated not found.');
-            this.user = null;
+            this.user = undefined;
             return;
           }
           this.user = user;
