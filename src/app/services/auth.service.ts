@@ -58,9 +58,11 @@ export class AuthService {
     return this.http.get<UserInterface>(API_URL + '/auth/profile', { withCredentials: true }).pipe(
       tap((user) => {
         this.currentUserSubject.next(user);
+        this.checkAuth()
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
+        this.checkAuth()
         return throwError(error);
       })
     );
@@ -70,9 +72,11 @@ export class AuthService {
     console.log('checkAuth')
     return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
       tap((response) => {
+        console.log(response)
         this.authResponseSubject.next(response);
       }),
       catchError((error) => {
+        console.log('2123')
         this.authResponseSubject.next(this.authResponseSubject.value);
         return throwError(error);
       })

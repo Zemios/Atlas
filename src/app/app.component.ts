@@ -53,6 +53,7 @@ export class AppComponent implements OnInit {
     if (this.backendResponse.statusCode == 200) {
       this.authService.getActualUser().subscribe({
         next: () => {
+          this.authService.checkAuth().subscribe({})
           this.authService.refreshToken().subscribe({})
         },
         error: (err) => {
