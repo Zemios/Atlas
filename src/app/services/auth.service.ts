@@ -4,13 +4,19 @@ import { Observable, BehaviorSubject, throwError, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { API_URL } from '../app.config';
 import { UserInterface } from '../interfaces/user-interface';
+import { authResponseInterface } from '../interfaces/response-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<UserInterface | undefined> = new BehaviorSubject<UserInterface | undefined>(undefined);
-  public currentUser = this.currentUserSubject.asObservable();
+  private authResponseSubject: BehaviorSubject<authResponseInterface> = new BehaviorSubject<authResponseInterface>({
+    statusCode: 401,
+    message: 'Unauthorized',
+  });
+  public currentUser$: Observable<UserInterface | undefined> = this.currentUserSubject.asObservable();
+  public authResponse$: Observable<authResponseInterface> = this.authResponseSubject.asObservable();
   constructor(private http: HttpClient) { }
 
   login(userData: any): Observable<any> {
@@ -60,18 +66,32 @@ export class AuthService {
     );
   }
 
-  checkAuth(): Observable<{ isAuthenticated: boolean; role: string }> {
+  checkAuth(): Observable<authResponseInterface> {
     console.log('checkAuth')
-    return this.http.get<{ isAuthenticated: boolean; role: string }>(API_URL + '/auth/check', { withCredentials: true });
+    return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
+      tap((response) => {
+        this.authResponseSubject.next(response);
+      }),
+      catchError((error) => {
+        this.authResponseSubject.next(this.authResponseSubject.value);
+        return throwError(error);
+      })
+    );
   }
 
   subscribeToCurrentUser(callback: (user: UserInterface | undefined) => void): Subscription {
     console.log('subscribeToCurrentUser')
-    return this.currentUser.subscribe((user) => {
+    return this.currentUser$.subscribe((user) => {
       if (!user) {
         console.error('Authenticated User not found');
       }
       callback(user);
+    });
+  }
+  subscribeToAuthResponse(callback: (response: authResponseInterface) => void): Subscription {
+    console.log('subscribe auth')
+    return this.authResponse$.subscribe((response) => {
+      callback(response);
     });
   }
 

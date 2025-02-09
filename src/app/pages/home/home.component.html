@@ -1,3 +1,5 @@
+<h2>back:{{backendStatusCode}}</h2>
+<h2>auth: {{authStatusCode}}</h2>
 <div class="flex flex-col">
   <div class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg px-6 py-24 text-white md:px-20 xl:flex-row">
     <div class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1">
@@ -10,12 +12,12 @@
       <p class="mb-6 text-lg opacity-80 md:text-xl">
         {{ 'home.header.description' | translate }}
       </p>
-      @if (backendStatus) {
+      @if (backendStatusCode === 200) {
         <div class="flex flex-wrap items-center justify-center gap-3 text-center">
           <a routerLink="/explore" class="button-white">
             {{ 'home.buttons.explore' | translate }}
           </a>
-          @if (!isAuthenticated) {
+          @if (authStatusCode !== 200) {
             <a routerLink="/login" class="button-white-outline">
               {{ 'home.buttons.join' | translate }}
             </a>
@@ -53,7 +55,7 @@
   </div>
 
   <div class="hidden flex-wrap items-center justify-center gap-0 bg-white py-5 lg:flex xl:gap-4">
-    @if (!(!backendStatus || isAuthenticated)) {
+    @if (!(backendStatusCode !== 200 || authStatusCode === 200)) {
       <div
       class="flex h-72 w-48 transform cursor-pointer flex-col items-center justify-start rounded-xl px-4 text-center transition-transform hover:scale-105 xl:h-80 xl:w-60"
       routerLink="/register"
@@ -97,7 +99,7 @@
   </div>
   <!-- Noticias o posts ¿ -->
     <div class="bg-white">
-      @if (isAuthenticated) {
+      @if (authStatusCode === 200) {
         @if (lastCourses.length) {
           <div class="flex flex-col items-center justify-between px-4 py-12 lg:flex-row">
             <div class="m-auto mb-8 text-center text-3xl font-bold text-neutral-700 md:text-4xl lg:mb-auto">
@@ -135,14 +137,14 @@
     </div>
 
   <div class="flex flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-24">
-    @if (!isAuthenticated) {
+    @if (authStatusCode !== 200) {
       <h2 class="m-auto mb-8 text-3xl font-bold text-white md:text-4xl">Únete a nosotros</h2>
 
       <p class="mb-8 text-center text-lg text-white drop-shadow-lg md:text-xl">
         Forma parte de una comunidad vibrante que comparte conocimientos, oportunidades y proyectos. ¡Juntos podemos crecer y alcanzar nuevas metas!
       </p>
 
-      @if (backendStatus) {
+      @if (backendStatusCode === 200) {
         <div class="mb-10 text-center">
           <a
             routerLink="/register"

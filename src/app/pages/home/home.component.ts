@@ -1,9 +1,10 @@
-import { Component, inject, Signal } from '@angular/core';
-import { ROUTER_OUTLET_DATA, RouterLink } from '@angular/router';
+import { CourseInterface } from './../../interfaces/course-interface';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
-import { CoursesInterface } from '../../interfaces/courses-interface';
 import { TranslateModule } from '@ngx-translate/core';
-import { sharedDataInterface } from '../../interfaces/shared-data-interface';
+import { AuthService } from '../../services/auth.service';
+import { ConnectionService } from '../../services/connection.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,15 @@ import { sharedDataInterface } from '../../interfaces/shared-data-interface';
   styleUrls: [],
 })
 export class HomeComponent {
-  sharedData: Signal<sharedDataInterface> = inject(ROUTER_OUTLET_DATA) as Signal<sharedDataInterface>;
-  /* TODO: Las funciones getter se ejecutan demasiadas veces. Hay que ver si se puede hacer algo para que solo se ejecuten si detectan que el valor ha cambiado.
-  Actualmente se actualizan un aproximado de 20 veces cada vez que se realiza una acción (Scroll, click, etc.) */
-  get backendStatus(): boolean {
-    return this.sharedData().backendResponse.status;
-  }
-  get isAuthenticated(): boolean {
-    return this.sharedData().user.isAuthenticated;
-  }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly connectionService: ConnectionService,
+    private readonly coursesService: CoursesService,
+  ) { }
+
+  lastCourses: CourseInterface[] = [];
+  backendStatusCode: number = 404;
+  authStatusCode: number = 401;
   joinUsList = [
     {
       title: 'Conecta con Otros Juniors',
@@ -48,8 +49,13 @@ export class HomeComponent {
     },
   ];
 
-  constructor() { }
-
-  private readonly coursesSvc = inject(CoursesService);
-  lastCourses: Array<CoursesInterface> = this.coursesSvc.show();
+  ngOnInit(): void {
+    this.lastCourses = this.coursesService.show();
+    this.connectionService.subscribeToBackendResponse((response) => {
+      this.backendStatusCode = response.statusCode
+    });
+    this.authService.subscribeToAuthResponse((response) => {
+      this.authStatusCode = response.statusCode;
+    });
+  }
 }

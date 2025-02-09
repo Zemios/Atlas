@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CoursesInterface, TypeExercise } from '../../../interfaces/courses-interface';
+import { CourseInterface, TypeExercise } from '../../../interfaces/course-interface';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { CoursesInterface, TypeExercise } from '../../../interfaces/courses-inte
 export class CourseComponent implements OnInit {
   typeExercise = TypeExercise;
 
-  courseData: CoursesInterface | null = null;
+  courseData: CourseInterface | null = null;
 
   constructor() { }
 

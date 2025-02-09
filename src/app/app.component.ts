@@ -7,8 +7,7 @@ import { ConnectionService } from './services/connection.service';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { backendResponseInterface } from './interfaces/backend-status-interface';
-import { sharedDataInterface } from './interfaces/shared-data-interface';
+import { backendResponseInterface } from './interfaces/response-interface';
 
 
 
@@ -28,10 +27,9 @@ import { sharedDataInterface } from './interfaces/shared-data-interface';
 export class AppComponent implements OnInit {
   title = 'Zemios';
   backendResponse: backendResponseInterface = {
-    status: false,
-    message: '',
+    statusCode: 404,
+    message: 'Not Found',
   };
-  isAuthenticated: boolean = false;
   pages = [
     {
       title: 'Inicio',
@@ -44,12 +42,7 @@ export class AppComponent implements OnInit {
       icon: 'info-circle-fill',
     },
   ];
-  sharedData: sharedDataInterface = {
-    backendResponse: this.backendResponse,
-    user: {
-      isAuthenticated: this.isAuthenticated,
-    },
-  }
+
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
@@ -57,21 +50,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkConnection();
-    if (this.backendResponse.status) {
+    if (this.backendResponse.statusCode == 200) {
       this.authService.getActualUser().subscribe({
         next: () => {
           this.authService.refreshToken().subscribe({})
-          this.authService.subscribeToCurrentUser((user) => {
-            this.sharedData.user.userData = user;
-            if (user) {
-              this.authService.checkAuth().subscribe({
-                next: (response) => {
-                  this.isAuthenticated = response.isAuthenticated;
-                  this.sharedData.user.isAuthenticated = this.isAuthenticated;
-                }
-              })
-            }
-          })
         },
         error: (err) => {
           console.error('Actual user not found', err);
@@ -82,14 +64,13 @@ export class AppComponent implements OnInit {
 
   checkConnection(): void {
     this.connectionService.checkBackendConnection().subscribe({
-      next: (response) => {
-        this.backendResponse.status = response.isConnected;
-        if (this.backendResponse) {
-          this.filterPages();
-        }
+      next: () => {
+        this.connectionService.subscribeToBackendResponse((response) => {
+          this.backendResponse = response;
+        })
       },
       error: (err) => {
-        this.backendResponse.status = false;
+        this.backendResponse.statusCode = 404;
         console.error('Error connecting to backend:', err);
       },
     });
@@ -104,9 +85,6 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.sharedData.user = {
-      userData: undefined,
-      isAuthenticated: false,
-    }
+    throw new Error('Method not implemented.');
   }
 }
