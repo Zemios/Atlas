@@ -5,13 +5,15 @@ import { CourseInterface } from '../interfaces/course-interface';
   providedIn: 'root',
 })
 export class CoursesService {
-  constructor() { }
-  courses: CourseInterface[] = [{
-    id: 1,
-    title: 'Angular',
-    description: 'Angular is a JavaScript framework for building single-page applications',
-    creation_date: new Date()
-  }];
+  constructor() {}
+  courses: CourseInterface[] = [
+    {
+      id: 1,
+      title: 'Angular',
+      description: 'Angular is a JavaScript framework for building single-page applications',
+      creation_date: new Date(),
+    },
+  ];
   data = this.courses;
   show(): Array<CourseInterface> {
     return this.data;

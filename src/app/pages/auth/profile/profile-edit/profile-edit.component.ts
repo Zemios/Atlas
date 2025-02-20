@@ -118,7 +118,7 @@ export class ProfileEditComponent implements OnInit {
 
     if (this.selectedFile) {
       formData.append('profile_picture', this.selectedFile);
-    } else if (typeof (this.selectedFile) === 'string') {
+    } else if (typeof this.selectedFile === 'string') {
       formData.append('profile_picture', this.selectedFile);
     } else {
       formData.delete('profile_picture');

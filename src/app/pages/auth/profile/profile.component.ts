@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     private usersService: UsersService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

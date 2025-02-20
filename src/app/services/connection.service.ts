@@ -16,7 +16,7 @@ export class ConnectionService {
   });
   private backendResponse$: Observable<backendResponseInterface> = this.backendResponseSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   checkBackendConnection(): Observable<HttpResponse<backendResponseInterface>> {
     return this.http.get<backendResponseInterface>(this.backendUrl, { observe: 'response' }).pipe(
@@ -36,7 +36,7 @@ export class ConnectionService {
 
   subscribeToBackendResponse(callback: (response: backendResponseInterface) => void): Subscription {
     return this.backendResponse$.subscribe((response) => {
-      callback(response)
+      callback(response);
     });
   }
 }

@@ -9,8 +9,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { backendResponseInterface } from './interfaces/response-interface';
 
-
-
 @Component({
   selector: 'app-root',
   imports: [MenuComponent, FooterComponent, RouterOutlet, TranslateModule],
@@ -46,18 +44,18 @@ export class AppComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.checkConnection();
     if (this.backendResponse.statusCode == 200) {
       this.authService.getActualUser().subscribe({
         next: () => {
-          this.authService.checkAuth().subscribe({})
-          this.authService.refreshToken().subscribe({})
+          this.authService.checkAuth().subscribe({});
+          this.authService.refreshToken().subscribe({});
         },
-        error: () => { }
-      })
+        error: () => {},
+      });
     }
   }
 
@@ -66,7 +64,7 @@ export class AppComponent implements OnInit {
       next: () => {
         this.connectionService.subscribeToBackendResponse((response) => {
           this.backendResponse = response;
-        })
+        });
       },
       error: (err) => {
         this.backendResponse.statusCode = 404;
@@ -77,9 +75,7 @@ export class AppComponent implements OnInit {
 
   filterPages(): void {
     if (this.backendResponse) {
-      this.pages = this.pages.concat(
-        { title: 'Aprendizaje', url: 'learning', icon: 'mortarboard-fill' },
-      )
+      this.pages = this.pages.concat({ title: 'Aprendizaje', url: 'learning', icon: 'mortarboard-fill' });
     }
   }
 }

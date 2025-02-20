@@ -7,4 +7,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './error404.component.html',
   styleUrls: [],
 })
-export class Error404Component { }
+export class Error404Component {}

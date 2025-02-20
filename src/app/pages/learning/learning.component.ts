@@ -7,4 +7,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './learning.component.html',
   styleUrls: [],
 })
-export class LearningComponent { }
+export class LearningComponent {}

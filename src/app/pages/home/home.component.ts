@@ -16,8 +16,8 @@ export class HomeComponent {
   constructor(
     private readonly authService: AuthService,
     private readonly connectionService: ConnectionService,
-    private readonly coursesService: CoursesService,
-  ) { }
+    private readonly coursesService: CoursesService
+  ) {}
 
   lastCourses: CourseInterface[] = [];
   backendStatusCode: number = 404;
@@ -52,7 +52,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.lastCourses = this.coursesService.show();
     this.connectionService.subscribeToBackendResponse((response) => {
-      this.backendStatusCode = response.statusCode
+      this.backendStatusCode = response.statusCode;
     });
     this.authService.subscribeToAuthResponse((response) => {
       this.authStatusCode = response.statusCode;

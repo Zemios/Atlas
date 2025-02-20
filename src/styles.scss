@@ -1,29 +1,29 @@
-@use'bootstrap-icons/font/bootstrap-icons.min.css';
+@use 'bootstrap-icons/font/bootstrap-icons.min.css';
+
 // @import 'flag-icons/css/flag-icons.min.css';
 @import 'highlight.js/styles/github.css';
 @tailwind base;
 @tailwind components;
 
 .button {
-  @apply rounded-full bg-blue-900 hover:bg-blue-800 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 ;
+  @apply rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-800;
 
   &-highlight {
-    @apply rounded-full bg-blue-500 hover:bg-blue-600 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+    @apply rounded-full bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-600;
   }
 
   &-white {
-    @apply rounded-full bg-white hover:bg-gray-100 px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 ;
+    @apply rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 hover:bg-gray-100;
 
     &-outline {
-      @apply rounded-full bg-transparent border-2 border-white px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+      @apply rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
     }
   }
 
   &-close {
-    @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent py-3 px-4 transition duration-75 hover:scale-105
+    @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent px-4 py-3 transition duration-75 hover:scale-105;
   }
 }
-
 
 @tailwind utilities;
 
@@ -91,8 +91,8 @@ app-root {
 // }
 
 .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
-  //ignore eslint
-  background-color: unset !important;
+  /* prettier-ignore */
+  background-color: unset !important; // eslint-disable-line declaration-no-important
 }
 
 .custom-snackbar {

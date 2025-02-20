@@ -6,7 +6,6 @@ export interface CourseInterface {
   creation_date: Date;
 }
 
-
 export interface ModuleInterface {
   title: string;
   description?: string;
@@ -19,7 +18,6 @@ export interface LessonInterface {
   teachings?: TeachingInterface[];
   exercises?: ExerciseInterface[];
 }
-
 
 export interface TeachingInterface {
   title: string;
@@ -36,11 +34,11 @@ export interface ExerciseInterface {
 }
 
 export enum TypeExercise {
-  INPUT = "Input",
-  SELECT = "Select",
-  RADIO = "Radio",
-  CHECKBOX = "Checkbox",
-  BOOLEAN = "Boolean",
-  NUMBER = "Number",
-  SLIDER = "Slider",
+  INPUT = 'Input',
+  SELECT = 'Select',
+  RADIO = 'Radio',
+  CHECKBOX = 'Checkbox',
+  BOOLEAN = 'Boolean',
+  NUMBER = 'Number',
+  SLIDER = 'Slider',
 }

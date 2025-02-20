@@ -21,14 +21,14 @@ export class MenuComponent {
   constructor(
     public router: Router,
     private translate: TranslateService,
-    private authService: AuthService,
-  ) { }
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
     this.authService.subscribeToCurrentUser((user) => {
       this.user = user;
-    })
+    });
   }
 
   translateText(lang: string) {
@@ -56,7 +56,7 @@ export class MenuComponent {
     if (this.menuVisibility && (!isMenu || isMenuItem)) {
       this.menuVisibility = false;
     }
-    if (this.isDropdownOpen && (!isDropdown)) {
+    if (this.isDropdownOpen && !isDropdown) {
       this.isDropdownOpen = false;
     }
   }

@@ -27,7 +27,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: ConsultingComponent },
       { path: 'pricing', component: PricingComponent },
-    ]
+    ],
   },
 
   { path: 'login', component: LoginComponent },
@@ -41,7 +41,6 @@ export const routes: Routes = [
   },
 
   { path: 'profile/:id', component: ProfileComponent },
-
 
   { path: '404', component: Error404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' },

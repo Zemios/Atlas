@@ -17,7 +17,7 @@ export class AuthService {
   });
   public currentUser$: Observable<UserInterface | undefined> = this.currentUserSubject.asObservable();
   public authResponse$: Observable<authResponseInterface> = this.authResponseSubject.asObservable();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(userData: any): Observable<any> {
     return this.http.post(API_URL + '/auth/login', userData, { withCredentials: true }).pipe(
@@ -29,7 +29,7 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
-        this.checkAuth().subscribe()
+        this.checkAuth().subscribe();
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -48,7 +48,7 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
-        this.checkAuth().subscribe()
+        this.checkAuth().subscribe();
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -65,16 +65,15 @@ export class AuthService {
     return this.http.get<UserInterface>(API_URL + '/auth/profile', { withCredentials: true }).pipe(
       tap((user) => {
         this.currentUserSubject.next(user);
-        this.checkAuth().subscribe()
+        this.checkAuth().subscribe();
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
-        this.checkAuth().subscribe()
+        this.checkAuth().subscribe();
         return throwError(error);
       })
     );
   }
-
 
   checkAuth(): Observable<authResponseInterface> {
     if (this.currentUserSubject.value) {

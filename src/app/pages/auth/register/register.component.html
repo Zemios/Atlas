@@ -1,7 +1,7 @@
 <div class="banner flex items-center justify-center bg-gray-100 px-3 py-2">
   <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
     <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Crear una cuenta</h2>
-    <form [formGroup]="registerForm" (submit)="createAccount($event)" class="text-neutral-700 flex flex-col">
+    <form [formGroup]="registerForm" (submit)="createAccount($event)" class="flex flex-col text-neutral-700">
       <div class="mb-4">
         <label class="mb-2 block font-bold text-gray-700" for="name">Nombre de Usuario</label>
         <input

@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,7 +23,7 @@ export class ModalComponent {
   constructor(
     private dialogRef: MatDialogRef<ModalComponent>,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   close() {
     this.closeAction.emit();

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CourseInterface, TypeExercise } from '../../../interfaces/course-interface';
 
-
 @Component({
   selector: 'app-course',
   imports: [CommonModule],
@@ -14,34 +13,40 @@ export class CourseComponent implements OnInit {
 
   courseData: CourseInterface | null = null;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     const jsonData = {
       id: 1,
-      title: "Angular",
-      description: "Angular is a JavaScript-based open-source web framework used for developing single-page applications",
+      title: 'Angular',
+      description: 'Angular is a JavaScript-based open-source web framework used for developing single-page applications',
       creation_date: new Date(),
       modules: [
         {
-          title: "Module 1",
-          description: "This is module 1",
-          lessons: [{
-            title: "Lesson 1",
-            content: "In this lesson we learn Arrays",
-            teachings: [{
-              title: "Teaching 1",
-              exercises: [{
-                title: "Exercise 1",
-                // description: "This is exercise 1",
-                type: this.typeExercise.BOOLEAN,
-                correctAnswer: true
-              }]
-            }],
-            exercises: [],
-          }]
-        }
-      ]
+          title: 'Module 1',
+          description: 'This is module 1',
+          lessons: [
+            {
+              title: 'Lesson 1',
+              content: 'In this lesson we learn Arrays',
+              teachings: [
+                {
+                  title: 'Teaching 1',
+                  exercises: [
+                    {
+                      title: 'Exercise 1',
+                      // description: "This is exercise 1",
+                      type: this.typeExercise.BOOLEAN,
+                      correctAnswer: true,
+                    },
+                  ],
+                },
+              ],
+              exercises: [],
+            },
+          ],
+        },
+      ],
     };
 
     this.courseData = jsonData;
@@ -65,6 +70,3 @@ export class CourseComponent implements OnInit {
     }
   }
 }
-
-
-

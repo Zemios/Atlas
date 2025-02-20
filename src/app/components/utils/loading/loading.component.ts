@@ -1,5 +1,4 @@
-import { Component, Input } from "@angular/core";
-
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -9,6 +8,5 @@ import { Component, Input } from "@angular/core";
   styleUrls: [],
 })
 export class LoadingComponent {
-
   @Input() text: string | null = null;
 }

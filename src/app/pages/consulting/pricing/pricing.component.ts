@@ -114,8 +114,6 @@ export class PricingComponent implements OnInit {
   }
 
   updateCurrentPricing(): void {
-    this.currentPricing = this.pricingCategories.find(
-      (category) => category.id === this.selectedCategory
-    );
+    this.currentPricing = this.pricingCategories.find((category) => category.id === this.selectedCategory);
   }
 }

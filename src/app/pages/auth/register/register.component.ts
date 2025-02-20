@@ -49,7 +49,7 @@ export class RegisterComponent {
         next: () => {
           this.router.navigate(['/']);
         },
-        error: () => { },
+        error: () => {},
       });
     } else {
       console.log('Formulario inválido');
