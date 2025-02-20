@@ -13,14 +13,13 @@
         [(ngModel)]="selectedCategory"
         (change)="onCategoryChange()"
       >
-        <option *ngFor="let category of pricingCategories" [value]="category.id">
-          {{ category.name }}
-        </option>
+        @for (category of pricingCategories; track $index) {
+          <option [value]="category.id">
+            {{ category.name }}
+          </option>
+        }
       </select>
     </div>
-  </div>
-
-  <div class="bg-white px-6 py-6 shadow-md">
     <div class="mx-auto max-w-4xl">
       <div class="hidden justify-center space-x-4 md:flex">
         @for (category of pricingCategories; track $index) {
