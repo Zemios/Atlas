@@ -6,16 +6,14 @@
 
   <div class="bg-white px-6 py-6 shadow-md">
     <div class="relative mx-auto max-w-4xl">
-      <label class="mb-2 block text-lg font-semibold text-gray-700">
-        Selecciona una categoría:
-      </label>
+      <label class="mb-2 block text-lg font-semibold text-gray-700"> Selecciona una categoría: </label>
     </div>
     <div class="mx-auto max-w-4xl">
-      <div class="justify-center flex flex-wrap gap-5">
+      <div class="flex flex-wrap justify-center gap-5">
         @for (category of pricingCategories; track $index) {
           <button
             (click)="selectCategory(category.id)"
-            class="rounded-lg px-4 py-2 font-semibold text-white w-64"
+            class="w-64 rounded-lg px-4 py-2 font-semibold text-white"
             [ngClass]="{
               'bg-blue-600': selectedCategory === category.id,
               'bg-gray-400': selectedCategory !== category.id,

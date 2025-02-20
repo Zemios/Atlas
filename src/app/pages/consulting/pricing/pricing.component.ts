@@ -22,7 +22,6 @@ interface PricingCategory {
   styleUrls: [],
 })
 export class PricingComponent implements OnInit {
-
   pricingCategories: PricingCategory[] = [
     {
       id: 'web',
@@ -109,7 +108,6 @@ export class PricingComponent implements OnInit {
     this.selectedCategory = categoryId;
     this.updateCurrentPricing();
   }
-
 
   updateCurrentPricing(): void {
     this.currentPricing = this.pricingCategories.find((category) => category.id === this.selectedCategory);
