@@ -10,6 +10,7 @@ import { LearningComponent } from './pages/learning/learning.component';
 import { CourseComponent } from './pages/learning/course/course.component';
 import { ConsultingComponent } from './pages/consulting/consulting.component';
 import { PricingComponent } from './pages/consulting/pricing/pricing.component';
+import { AboutUsComponent } from './pages/consulting/about-us/about-us.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     path: 'consulting',
     children: [
       { path: '', component: ConsultingComponent },
+      { path: 'contact', component: AboutUsComponent },
       { path: 'pricing', component: PricingComponent },
     ],
   },
