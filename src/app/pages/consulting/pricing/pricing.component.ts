@@ -95,7 +95,6 @@ export class PricingComponent implements OnInit {
         },
       ],
     },
-    // Puedes agregar más categorías según lo requieras...
   ];
 
   selectedCategory: string = 'web';
