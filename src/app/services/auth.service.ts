@@ -26,6 +26,8 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
+        this.checkAuth()
+        /* TODO: No se como volver a asignar el valor de check auth una vez se subscribe, a no se r que sea a mano */
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -41,6 +43,7 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
+        this.checkAuth()
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -72,11 +75,9 @@ export class AuthService {
     console.log('checkAuth')
     return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
       tap((response) => {
-        console.log(response)
         this.authResponseSubject.next(response);
       }),
       catchError((error) => {
-        console.log('2123')
         this.authResponseSubject.next(this.authResponseSubject.value);
         return throwError(error);
       })
@@ -103,6 +104,9 @@ export class AuthService {
     return this.http.post(API_URL + '/auth/logout', {}, { withCredentials: true }).pipe(
       tap(() => {
         this.currentUserSubject.next(undefined);
+        this.authResponseSubject.next({
+          statusCode: 401,
+        });
       }),
       catchError((error) => {
         console.error('Error al cerrar sesión:', error);

@@ -21,7 +21,6 @@ export class ConnectionService {
   checkBackendConnection(): Observable<HttpResponse<backendResponseInterface>> {
     return this.http.get<backendResponseInterface>(this.backendUrl, { observe: 'response' }).pipe(
       map((response: HttpResponse<backendResponseInterface>) => {
-        console.log(response.body)
         this.backendResponseSubject.next(response.body ?? this.backendResponseSubject.value);
         return response;
       }),

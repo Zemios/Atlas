@@ -84,8 +84,4 @@ export class AppComponent implements OnInit {
       )
     }
   }
-
-  logout() {
-    throw new Error('Method not implemented.');
-  }
 }
