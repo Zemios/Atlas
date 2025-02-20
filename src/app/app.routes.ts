@@ -9,6 +9,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { LearningComponent } from './pages/learning/learning.component';
 import { CourseComponent } from './pages/learning/course/course.component';
 import { ConsultingComponent } from './pages/consulting/consulting.component';
+import { PricingComponent } from './pages/consulting/pricing/pricing.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,13 @@ export const routes: Routes = [
   },
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: HelpComponent },
-  { path: 'consulting', component: ConsultingComponent },
+  {
+    path: 'consulting',
+    children: [
+      { path: '', component: ConsultingComponent },
+      { path: 'pricing', component: PricingComponent },
+    ]
+  },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
