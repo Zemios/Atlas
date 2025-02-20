@@ -22,7 +22,10 @@ export class AuthService {
   login(userData: any): Observable<any> {
     return this.http.post(API_URL + '/auth/login', userData, { withCredentials: true }).pipe(
       switchMap(() => {
-        return this.getActualUser();
+        if (!this.currentUserSubject.value) {
+          return this.getActualUser();
+        }
+        return of(this.currentUserSubject.value);
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
@@ -38,7 +41,10 @@ export class AuthService {
   register(user: { name: string; email: string; password: string }): Observable<any> {
     return this.http.post(API_URL + '/auth/register', user, { withCredentials: true }).pipe(
       switchMap(() => {
-        return this.getActualUser();
+        if (!this.currentUserSubject.value) {
+          return this.getActualUser();
+        }
+        return of(this.currentUserSubject.value);
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
@@ -69,6 +75,7 @@ export class AuthService {
     );
   }
 
+
   checkAuth(): Observable<authResponseInterface> {
     if (this.currentUserSubject.value) {
       return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
@@ -87,10 +94,9 @@ export class AuthService {
 
   subscribeToCurrentUser(callback: (user: UserInterface | undefined) => void): Subscription {
     return this.currentUser$.subscribe((user) => {
-      if (!user) {
-        console.error('Authenticated User not found');
+      if (user) {
+        callback(user);
       }
-      callback(user);
     });
   }
   subscribeToAuthResponse(callback: (response: authResponseInterface) => void): Subscription {
