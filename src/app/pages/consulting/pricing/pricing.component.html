@@ -5,27 +5,17 @@
   </div>
 
   <div class="bg-white px-6 py-6 shadow-md">
-    <div class="mx-auto max-w-4xl">
-      <label for="categorySelect" class="mb-2 block text-lg font-semibold text-gray-700"> Selecciona una categoría: </label>
-      <select
-        id="categorySelect"
-        class="block w-full rounded border-gray-300 p-3 text-gray-800 focus:border-blue-500 focus:outline-none md:hidden"
-        [(ngModel)]="selectedCategory"
-        (change)="onCategoryChange()"
-      >
-        @for (category of pricingCategories; track $index) {
-          <option [value]="category.id">
-            {{ category.name }}
-          </option>
-        }
-      </select>
+    <div class="relative mx-auto max-w-4xl">
+      <label class="mb-2 block text-lg font-semibold text-gray-700">
+        Selecciona una categoría:
+      </label>
     </div>
     <div class="mx-auto max-w-4xl">
-      <div class="hidden justify-center space-x-4 md:flex">
+      <div class="justify-around flex flex-wrap gap-3">
         @for (category of pricingCategories; track $index) {
           <button
             (click)="selectCategory(category.id)"
-            class="rounded-lg px-4 py-2 font-semibold text-white"
+            class="rounded-lg px-4 py-2 font-semibold text-white w-64"
             [ngClass]="{
               'bg-blue-600': selectedCategory === category.id,
               'bg-gray-400': selectedCategory !== category.id,
