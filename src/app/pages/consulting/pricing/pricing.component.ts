@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -16,7 +17,7 @@ interface PricingCategory {
 
 @Component({
   selector: 'app-pricing',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   templateUrl: './pricing.component.html',
   styleUrls: [],
 })
@@ -101,6 +102,11 @@ export class PricingComponent implements OnInit {
   currentPricing: PricingCategory | undefined;
 
   ngOnInit(): void {
+    this.updateCurrentPricing();
+  }
+
+  selectCategory(categoryId: string): void {
+    this.selectedCategory = categoryId;
     this.updateCurrentPricing();
   }
 
