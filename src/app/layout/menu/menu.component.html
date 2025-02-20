@@ -6,8 +6,19 @@
   </div>
   <ul class="flex flex-1 items-center justify-center gap-2 text-2xl font-bold text-neutral-700 md:gap-2 lg:gap-5 xl:gap-10">
     @for (page of pages; track $index) {
+      @if (['', 'contact'].includes(page.url) && ['/consulting', '/consulting/pricing', '/consulting/contact'].includes(this.router.url)) {
+        <li>
+          <a class="px-2 hover:text-blue-400" [routerLink]="'consulting/' + page.url" [class.text-blue-800]="this.router.url === '/consulting/' + page.url">{{ page.title }}</a>
+        </li>
+        } @else {
       <li>
         <a class="px-2 hover:text-blue-400" [routerLink]="page.url" [class.text-blue-700]="this.router.url === '/' + page.url">{{ page.title }}</a>
+      </li>
+      }
+    }
+    @if (['/consulting', '/consulting/pricing', '/consulting/contact'].includes(this.router.url)) {
+      <li>
+        <a class="px-2 hover:text-blue-400" [routerLink]="'consulting/pricing'" [class.text-blue-800]="this.router.url === '/consulting/pricing'">Planes</a>
       </li>
     }
   </ul>
@@ -44,9 +55,9 @@
     <!-- ¿ Meter una animacion de desaparicion¿¿¿ -->
     <ul class="absolute start-0 top-1 z-10 mt-16 flex flex-1 select-none flex-col items-start rounded-b-3xl bg-white pt-2 text-2xl font-bold text-neutral-700 shadow-lg">
       @for (page of pages; track $index) {
-        @if (['', 'contact'].includes(page.url) && ['/consulting', '/consulting/pricing'].includes(this.router.url)) {
+        @if (['', 'contact'].includes(page.url) && ['/consulting', '/consulting/pricing', '/consulting/contact'].includes(this.router.url)) {
           <li
-          [routerLink]="'/consulting/' + page.url"
+          [routerLink]="'consulting/' + page.url"
           class="last:pb- w-full animate-fade-in-down cursor-pointer px-5 py-2 opacity-0 last:rounded-b-3xl hover:bg-blue-400 hover:text-white"
           [class.bg-blue-700]="this.router.url === '/' + page.url"
           [class.text-white]="this.router.url === '/' + page.url"
@@ -66,7 +77,7 @@
           </li>
         }
       }
-      @if (!['/consulting', '/consulting/pricing'].includes(this.router.url)) {
+      @if (!['/consulting', '/consulting/pricing', '/consulting/contact'].includes(this.router.url)) {
         <li
           routerLink="/profile"
           class="last:pb- w-full animate-fade-in-down cursor-pointer px-5 py-2 opacity-0 last:rounded-b-3xl hover:bg-blue-400 hover:text-white"
