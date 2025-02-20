@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, throwError, Subscription, of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { API_URL } from '../app.config';
 import { UserInterface } from '../interfaces/user-interface';
@@ -26,8 +26,7 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
-        this.checkAuth()
-        /* TODO: No se como volver a asignar el valor de check auth una vez se subscribe, a no se r que sea a mano */
+        this.checkAuth().subscribe()
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -43,7 +42,7 @@ export class AuthService {
       }),
       tap((user: UserInterface) => {
         this.currentUserSubject.next(user);
-        this.checkAuth()
+        this.checkAuth().subscribe()
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
@@ -57,35 +56,36 @@ export class AuthService {
   }
 
   getActualUser(): Observable<UserInterface> {
-    console.log('getActualUser')
     return this.http.get<UserInterface>(API_URL + '/auth/profile', { withCredentials: true }).pipe(
       tap((user) => {
         this.currentUserSubject.next(user);
-        this.checkAuth()
+        this.checkAuth().subscribe()
       }),
       catchError((error) => {
         this.currentUserSubject.next(undefined);
-        this.checkAuth()
+        this.checkAuth().subscribe()
         return throwError(error);
       })
     );
   }
 
   checkAuth(): Observable<authResponseInterface> {
-    console.log('checkAuth')
-    return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
-      tap((response) => {
-        this.authResponseSubject.next(response);
-      }),
-      catchError((error) => {
-        this.authResponseSubject.next(this.authResponseSubject.value);
-        return throwError(error);
-      })
-    );
+    if (this.currentUserSubject.value) {
+      return this.http.get<authResponseInterface>(API_URL + '/auth/check', { withCredentials: true }).pipe(
+        tap((response) => {
+          this.authResponseSubject.next(response);
+        }),
+        catchError((error) => {
+          this.authResponseSubject.next(this.authResponseSubject.value);
+          return throwError(error);
+        })
+      );
+    } else {
+      return of(this.authResponseSubject.value);
+    }
   }
 
   subscribeToCurrentUser(callback: (user: UserInterface | undefined) => void): Subscription {
-    console.log('subscribeToCurrentUser')
     return this.currentUser$.subscribe((user) => {
       if (!user) {
         console.error('Authenticated User not found');
@@ -94,7 +94,6 @@ export class AuthService {
     });
   }
   subscribeToAuthResponse(callback: (response: authResponseInterface) => void): Subscription {
-    console.log('subscribe auth')
     return this.authResponse$.subscribe((response) => {
       callback(response);
     });

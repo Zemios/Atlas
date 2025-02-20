@@ -56,9 +56,7 @@ export class AppComponent implements OnInit {
           this.authService.checkAuth().subscribe({})
           this.authService.refreshToken().subscribe({})
         },
-        error: (err) => {
-          console.error('Actual user not found', err);
-        }
+        error: () => { }
       })
     }
   }
