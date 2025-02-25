@@ -1,0 +1,47 @@
+.magic-button {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px -5px rgba(6, 148, 193, 0.5);
+  }
+  
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .service-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes grid-animation {
+    0% { transform: rotate(0deg) translate(-50%, -50%); }
+    100% { transform: rotate(360deg) translate(-50%, -50%); }
+  }
+  
+  .cta-button {
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(255, 214, 0, 0.3);
+  }
+  
+  .social-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .price-card {
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
