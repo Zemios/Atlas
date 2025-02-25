@@ -166,33 +166,192 @@
   </div>
 </section>
 
-  <!-- Sección Precios - Estilo Moderno -->
-  <section class="bg-slate-50 py-20">
-    <div class="container mx-auto px-6">
-      <div class="text-center">
-        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
-        <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
-      </div>
+<!-- Sección Precios - Estilo Moderno -->
+<section class="bg-slate-50 py-20">
+  <div class="container mx-auto px-6">
+    <div class="text-center">
+      <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
+      <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
       
-      <div class="grid gap-8 md:grid-cols-3 text-gray-600">
-        <div class="shadow-xl bg-white rounded-3xl p-5 basic transform transition-all hover:scale-105">
-          <div class="p-8">
-            <h3 class="mb-4 text-2xl font-bold">Básico</h3>
-            <div class="mb-6 text-4xl font-bold text-blue-600">
-              999€<span class="text-xl text-gray-500">/mes</span>
-            </div>
-            <ul class="mb-8 space-y-3">
-              <li>✓ Sitio Web Básico</li>
-              <li>✓ 5 Secciones</li>
-              <li>✓ Soporte Email</li>
-            </ul>
-            <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
-          </div>
-        </div>
-        <!-- Repetir para otros planes -->
+      <!-- Selector de Categorías -->
+      <div class="mb-16 flex flex-wrap justify-center gap-4">
+        <button 
+          (click)="setActiveCategory('redes')" 
+          [ngClass]="{'bg-blue-600 text-white': isActiveCategory('redes'), 'bg-white text-gray-600': !isActiveCategory('redes')}"
+          class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105">
+          Redes Sociales
+        </button>
+        <button 
+          (click)="setActiveCategory('web')" 
+          [ngClass]="{'bg-blue-600 text-white': isActiveCategory('web'), 'bg-white text-gray-600': !isActiveCategory('web')}"
+          class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105">
+          Desarrollo Web
+        </button>
+        <button 
+          (click)="setActiveCategory('software')" 
+          [ngClass]="{'bg-blue-600 text-white': isActiveCategory('software'), 'bg-white text-gray-600': !isActiveCategory('software')}"
+          class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105">
+          Software a Medida
+        </button>
       </div>
+
+
+
+      <!-- Categoría Redes Sociales -->
+       @if (isActiveCategory('redes')) {
+
+         <div  class="grid gap-8 md:grid-cols-3 text-gray-600">
+       <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+         <div class="p-8">
+           <h3 class="mb-4 text-2xl font-bold">Básico</h3>
+           <div class="mb-6 text-4xl font-bold text-blue-600">
+             299€<span class="text-xl text-gray-500">/mes</span>
+           </div>
+           <ul class="mb-8 space-y-3">
+             <li>✓ 3 Redes Sociales</li>
+             <li>✓ 15 Publicaciones/mes</li>
+             <li>✓ Informe básico</li>
+           </ul>
+           <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+         </div>
+       </div>
+       
+       <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105 border-2 border-blue-500">
+         <div class="p-8">
+           <h3 class="mb-4 text-2xl font-bold">Estándar</h3>
+           <div class="mb-6 text-4xl font-bold text-blue-600">
+             599€<span class="text-xl text-gray-500">/mes</span>
+           </div>
+           <ul class="mb-8 space-y-3">
+             <li>✓ 5 Redes Sociales</li>
+             <li>✓ 30 Publicaciones/mes</li>
+             <li>✓ Gestión de anuncios</li>
+           </ul>
+           <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+         </div>
+       </div>
+       
+       <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+         <div class="p-8">
+           <h3 class="mb-4 text-2xl font-bold">Premium</h3>
+           <div class="mb-6 text-4xl font-bold text-blue-600">
+             999€<span class="text-xl text-gray-500">/mes</span>
+           </div>
+           <ul class="mb-8 space-y-3">
+             <li>✓ Redes Ilimitadas</li>
+             <li>✓ Contenido diario</li>
+             <li>✓ Estrategia personalizada</li>
+           </ul>
+           <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+         </div>
+       </div>
+         </div>
+       }
+
+       <!-- Categoría Desarrollo Web -->
+       @if (isActiveCategory('web')) {
+
+         <div class="grid gap-8 md:grid-cols-3 text-gray-600">
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Landing Page</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 1.499€<span class="text-xl text-gray-500">/único</span>
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ Diseño personalizado</li>
+                 <li>✓ Optimización SEO</li>
+                 <li>✓ Formulario de contacto</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+             </div>
+           </div>
+           
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105 border-2 border-blue-500">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Web Corporativa</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 3.999€<span class="text-xl text-gray-500">/único</span>
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ Hasta 10 secciones</li>
+                 <li>✓ CMS personalizado</li>
+                 <li>✓ Certificado SSL</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+             </div>
+           </div>
+           
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Tienda Online</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 6.999€<span class="text-xl text-gray-500">/único</span>
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ Hasta 100 productos</li>
+                 <li>✓ Pasarela de pago</li>
+                 <li>✓ Carrito inteligente</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Elegir</button>
+             </div>
+           </div>
+         </div>
+       }
+
+      <!-- Categoría Software a Medida -->
+       @if (isActiveCategory('software')) {
+
+         <div class="grid gap-8 md:grid-cols-3 text-gray-600">
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Sistema Básico</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 Desde 9.999€
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ Desarrollo a medida</li>
+                 <li>✓ 3 módulos básicos</li>
+                 <li>✓ Soporte 6 meses</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Consultar</button>
+             </div>
+           </div>
+           
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105 border-2 border-blue-500">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Sistema Empresarial</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 Desde 19.999€
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ ERP/CRM personalizado</li>
+                 <li>✓ Integración API</li>
+                 <li>✓ Soporte 1 año</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Consultar</button>
+             </div>
+           </div>
+           
+           <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+             <div class="p-8">
+               <h3 class="mb-4 text-2xl font-bold">Solución Premium</h3>
+               <div class="mb-6 text-4xl font-bold text-blue-600">
+                 Personalizado
+               </div>
+               <ul class="mb-8 space-y-3">
+                 <li>✓ Desarrollo completo</li>
+                 <li>✓ Multiplataforma</li>
+                 <li>✓ Soporte 24/7</li>
+               </ul>
+               <button class="w-full bg-blue-600 px-6 py-3 text-white">Contactar</button>
+             </div>
+           </div>
+         </div>
+       }
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Sección CTA Final - Estilo Impactante -->
   <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
