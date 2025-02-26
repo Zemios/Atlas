@@ -1,5 +1,6 @@
-import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import AOS from 'aos'
 // import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,9 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './consulting.component.html',
   styleUrls: ['consulting.component.scss'],
 })
-export class ConsultingComponent {
+export class ConsultingComponent implements OnInit {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  }
   activeCategory: string = 'redes';
 
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) { AOS.init(); }
+  }
   setActiveCategory(category: string): void {
     this.activeCategory = category;
   }
