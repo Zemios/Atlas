@@ -7,6 +7,8 @@ import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/c
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config'
+import Aura from '@primeng/themes/aura';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './i18n/', '.json');
@@ -17,6 +19,11 @@ export const IMAGES_URL = API_URL + '/profile-pics/';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      }
+    }),
     provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
