@@ -29,30 +29,33 @@
       </p>
       
       <!-- Contenedor del equipo -->
-      <div class="relative flex flex-col items-center justify-center gap-12 md:flex-row">
-        <!-- Efecto de fondo -->
-        <div class="absolute -inset-8 -z-10 rounded-3xl bg-gradient-to-r from-blue-50 to-cyan-50 opacity-50 blur-2xl"></div>
+      <div class="relative flex items-center justify-center mx-auto">
         
         <!-- Miembro 1 -->
-        <div class="group relative flex flex-col items-center text-center">
-          <div class="relative mb-6 h-48 w-48 overflow-hidden rounded-2xl shadow-2xl">
-            <img src="images/consulting/pfp/ismael_consulting.png" alt="Ismael Martín" class="h-full w-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-blue-600/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+        <div class="group relative flex flex-col items-center text-center z-20">
+          <div class="relative mb-6 h-96 w-96 overflow-hidden">
+            <img src="images/consulting/pfp/ismael_consulting.png" alt="Ismael Martín" class="absolute z-10 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-600/50 to-transparent opacity-0 rounded-2xl w-4/5 mx-auto h-full transition-opacity group-hover:opacity-100"></div>
           </div>
-          <h3 class="mb-2 text-2xl font-bold text-gray-900">Ismael Martín</h3>
-          <p class="text-lg text-blue-600">Director de Consultoría</p>
-          <div class="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-r from-blue-100 to-cyan-100 opacity-0 transition-all group-hover:opacity-100"></div>
         </div>
 
         <!-- Miembro 2 - Superpuesto -->
-        <div class="group relative -mx-8 mt-24 flex flex-col items-center text-center md:mt-0">
-          <div class="relative mb-6 h-48 w-48 overflow-hidden rounded-2xl shadow-2xl">
-            <img src="images/consulting/pfp/eliceo_consulting.png" alt="Eliceo León" class="h-full w-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-cyan-600/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+        <div class="group relative -mx-8 flex flex-col -ms-52 items-center text-center z-10">
+          <div class="relative mb-6 h-96 w-96 overflow-hidden rounded-2xl">
+            <img src="images/consulting/pfp/eliceo_consulting.png" alt="Eliceo León" class="absolute z-10 h-full w-full object-cover mt-4" />
+            <div class="absolute inset-0 bg-gradient-to-t from-cyan-600/50 to-transparent opacity-0 rounded-2xl w-4/5 mx-auto h-full transition-opacity group-hover:opacity-100"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="w-full flex justify-center">
+        <div class="text-right border-r-2 pr-3">
+           <h3 class="mb-2 text-2xl font-bold text-gray-900">Ismael Martín</h3>
+          <p class="text-lg text-blue-600">Director de Consultoría</p>
+        </div>
+        <div class="text-left border-l-2 pl-3">
           <h3 class="mb-2 text-2xl font-bold text-gray-900">Eliceo León</h3>
           <p class="text-lg text-cyan-600">Socio Director</p>
-          <div class="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-r from-cyan-100 to-blue-100 opacity-0 transition-all group-hover:opacity-100"></div>
         </div>
       </div>
     </div>
