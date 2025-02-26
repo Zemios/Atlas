@@ -9,7 +9,7 @@
         Patreon
     </a>
 </div> -->
-@if (!['/consulting', '/consulting/pricing'].includes(this.router.url)) {
+@if (!this.router.url.startsWith('/consulting')) {
   <div class="mx-10 my-10 flex flex-col items-center justify-between rounded-lg bg-yellow-500 px-8 py-6 text-center text-white shadow-lg md:flex-row md:text-left">
     <div class="mb-4 md:mb-0 md:mr-6">
       <p class="text-lg font-medium">¿Te gustaría apoyarnos? Haz una pequeña donación y ayuda a que Zemios crezca.</p>
