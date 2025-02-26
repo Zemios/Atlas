@@ -1,11 +1,11 @@
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import AOS from 'aos'
-// import { RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-consulting',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './consulting.component.html',
   styleUrls: ['consulting.component.scss'],
 })
