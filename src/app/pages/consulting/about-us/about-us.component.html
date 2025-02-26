@@ -1,42 +1,92 @@
 <div class="flex min-h-screen flex-col">
-  <!-- Sección Principal -->
-  <div class="flex flex-col items-center justify-center bg-gradient-to-r from-gray-800 to-blue-900 px-6 py-24 text-white md:px-20">
-    <h1 class="mb-6 text-center text-4xl font-extrabold leading-tight md:text-5xl">Conoce más sobre nuestra consultoría</h1>
-    <p class="mb-6 text-center text-xl font-semibold opacity-80 md:text-2xl">Brindamos soluciones tecnológicas a medida que impulsan la transformación digital y el crecimiento empresarial.</p>
+  <!-- Sección Principal - Estilo Futurista -->
+  <div class="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 px-6 py-32 text-white md:px-20">
+    <!-- Efecto de partículas -->
+    <div class="absolute inset-0 animate-particle-move bg-blue-900 bg-repeat opacity-20"></div>
+    
+    <h1 class="relative mb-6 text-center text-4xl font-extrabold leading-tight drop-shadow-lg md:text-6xl">
+      <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Transformamos</span><br>
+      Tu Visión Digital
+    </h1>
+    <p class="relative mb-6 text-center text-xl font-semibold opacity-90 md:text-2xl">
+      Soluciones tecnológicas que impulsan la innovación y el crecimiento empresarial
+    </p>
+    <div class="relative mt-8">
+      <a href="#contact" class="inline-block rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+        Descubre Más
+      </a>
+    </div>
   </div>
 
-  <!-- Sección ¿Quiénes somos? -->
-  <div class="bg-white px-6 py-16">
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">¿Quiénes somos?</h2>
-    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
-      Somos un equipo de profesionales en tecnología con experiencia en desarrollo web, consultoría técnica y diseño UX/UI. Nuestro enfoque está en ayudar a las empresas a lograr el éxito mediante
-      soluciones innovadoras y personalizadas.
-    </p>
-    <div class="flex flex-wrap justify-center gap-8 text-center text-gray-700">
-      <div class="flex w-full max-w-xs flex-col items-center p-3">
-        <img src="images/pfp/ismael_photo.webp" alt="Equipo Consultor 1" class="mb-4 h-24 w-24 rounded-xl object-cover" />
-        <h3 class="mb-2 text-2xl font-semibold">Ismael Martín</h3>
-        <p class="text-lg">Director de Consultoría</p>
-      </div>
-      <div class="flex w-full max-w-xs flex-col items-center p-3">
-        <img src="images/pfp/eliceo_photo.webp" alt="Equipo Consultor 2" class="mb-4 h-24 w-24 rounded-xl object-cover" />
-        <h3 class="mb-2 text-2xl font-semibold">Eliceo León</h3>
-        <p class="text-lg">Socio Director</p>
+  <!-- Sección ¿Quiénes somos? - Estilo Moderno -->
+  <div class="bg-white px-6 py-24">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="mb-8 text-center text-4xl font-bold text-gray-900 md:text-5xl">
+        <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Nuestro Equipo</span>
+      </h2>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-600 md:text-xl">
+        Expertos en tecnología con una pasión por crear soluciones que marcan la diferencia
+      </p>
+      
+      <!-- Contenedor del equipo -->
+      <div class="relative flex flex-col items-center justify-center gap-12 md:flex-row">
+        <!-- Efecto de fondo -->
+        <div class="absolute -inset-8 -z-10 rounded-3xl bg-gradient-to-r from-blue-50 to-cyan-50 opacity-50 blur-2xl"></div>
+        
+        <!-- Miembro 1 -->
+        <div class="group relative flex flex-col items-center text-center">
+          <div class="relative mb-6 h-48 w-48 overflow-hidden rounded-2xl shadow-2xl">
+            <img src="images/consulting/pfp/ismael_consulting.png" alt="Ismael Martín" class="h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-600/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+          </div>
+          <h3 class="mb-2 text-2xl font-bold text-gray-900">Ismael Martín</h3>
+          <p class="text-lg text-blue-600">Director de Consultoría</p>
+          <div class="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-r from-blue-100 to-cyan-100 opacity-0 transition-all group-hover:opacity-100"></div>
+        </div>
+
+        <!-- Miembro 2 - Superpuesto -->
+        <div class="group relative -mx-8 mt-24 flex flex-col items-center text-center md:mt-0">
+          <div class="relative mb-6 h-48 w-48 overflow-hidden rounded-2xl shadow-2xl">
+            <img src="images/consulting/pfp/eliceo_consulting.png" alt="Eliceo León" class="h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-cyan-600/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+          </div>
+          <h3 class="mb-2 text-2xl font-bold text-gray-900">Eliceo León</h3>
+          <p class="text-lg text-cyan-600">Socio Director</p>
+          <div class="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-r from-cyan-100 to-blue-100 opacity-0 transition-all group-hover:opacity-100"></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Sección Nuestra Misión -->
-  <div class="bg-gray-900 px-6 py-24 text-center text-white">
-    <h2 class="mb-8 text-4xl font-bold">Nuestra Misión</h2>
-    <p class="mb-4 text-xl">Enfocamos nuestros esfuerzos en ayudar a empresas a integrar la tecnología de forma estratégica para maximizar su potencial.</p>
-    <p class="text-xl">Aportamos soluciones innovadoras que generan un impacto positivo en su negocio y en el mercado.</p>
+  <!-- Sección Nuestra Misión - Estilo Futurista -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 px-6 py-32 text-center text-white">
+    <!-- Efecto de grid animado -->
+    <div class="absolute inset-0 bg-blue-950 bg-[length:40px_40px] opacity-10"></div>
+    
+    <h2 class="relative mb-8 text-4xl font-bold md:text-5xl">
+      <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Nuestra Misión</span>
+    </h2>
+    <p class="relative mx-auto mb-6 max-w-2xl text-xl opacity-90">
+      Integramos tecnología de vanguardia con estrategias innovadoras para maximizar el potencial de tu negocio
+    </p>
+    <p class="relative mx-auto max-w-2xl text-xl opacity-90">
+      Creando soluciones que no solo resuelven problemas, sino que abren nuevas oportunidades
+    </p>
   </div>
 
-  <!-- Sección Contáctanos -->
-  <div class="bg-blue-800 px-6 py-24 text-center text-white">
-    <h2 class="mb-6 text-3xl font-bold md:text-4xl">¿Listo para transformar su negocio?</h2>
-    <p class="mb-8 text-lg opacity-80 md:text-xl">Póngase en contacto con nosotros y descubra cómo podemos ayudarle a llevar su empresa al siguiente nivel con soluciones tecnológicas a medida.</p>
-    <a href="/contact" class="button-white"> Contáctanos </a>
+  <!-- Sección Contáctanos - Estilo Impactante -->
+  <div id="contact" class="relative overflow-hidden bg-gradient-to-tr from-blue-800 to-cyan-700 px-6 py-32 text-center text-white">
+    <!-- Efecto de brillo -->
+    <div class="absolute -inset-24 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent)]"></div>
+    
+    <h2 class="relative mb-6 text-4xl font-bold md:text-5xl">
+      ¿Listo para el <span class="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">Futuro Digital</span>?
+    </h2>
+    <p class="relative mx-auto mb-8 max-w-2xl text-xl opacity-90">
+      Contáctanos hoy mismo y descubre cómo podemos transformar tu negocio con soluciones tecnológicas innovadoras
+    </p>
+    <a href="/contact" class="relative inline-block rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 px-10 py-4 text-lg font-semibold text-gray-900 shadow-lg transition-all hover:scale-105 hover:shadow-xl">
+      Iniciar Transformación
+    </a>
   </div>
 </div>
