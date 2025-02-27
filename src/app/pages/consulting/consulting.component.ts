@@ -70,6 +70,131 @@ export class ConsultingComponent implements OnInit {
     }
   ]
 
+  pricingCategories = [
+    {
+      "id": "redes",
+      "name": "Redes Sociales",
+      "plans": [
+        {
+          "title": "Básico",
+          "price": "159€",
+          "period": "/mes",
+          "features": [
+            "Hasta 3 Redes Sociales",
+            "15 Publicaciones/mes",
+            "Creación de contenido",
+            "Informe básico"
+          ],
+          "buttonText": "Elegir"
+        },
+        {
+          "title": "Estándar",
+          "price": "299€",
+          "period": "/mes",
+          "features": [
+            "Hasta 5 Redes Sociales",
+            "30 Publicaciones/mes",
+            "Gestión de anuncios",
+            "Atención al click"
+          ],
+          "buttonText": "Elegir",
+          "highlighted": true
+        },
+        {
+          "title": "Premium",
+          "price": "499€",
+          "period": "/mes",
+          "features": [
+            "Redes ilimitadas",
+            "Contenido diario",
+            "Estrategia personalizada",
+            "Planes de fidelización"
+          ],
+          "buttonText": "Elegir"
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "name": "Desarrollo Web",
+      "plans": [
+        {
+          "title": "Landing Page",
+          "price": "699€",
+          "period": "/único",
+          "features": [
+            "Diseño personalizado",
+            "Optimización SEO",
+            "Formulario de contacto"
+          ],
+          "buttonText": "Elegir"
+        },
+        {
+          "title": "Web Corporativa",
+          "price": "1.999€",
+          "period": "/único",
+          "features": [
+            "Hasta 10 secciones",
+            "CMS personalizado",
+            "Certificado SSL"
+          ],
+          "buttonText": "Elegir",
+          "highlighted": true
+        },
+        {
+          "title": "Tienda Online",
+          "price": "2.999€",
+          "period": "/único",
+          "features": [
+            "Hasta 100 productos",
+            "Pasarela de pago",
+            "Carrito inteligente"
+          ],
+          "buttonText": "Elegir"
+        }
+      ]
+    },
+    {
+      "id": "software",
+      "name": "Software a Medida",
+      "plans": [
+        {
+          "title": "Sistema Básico",
+          "price": "Desde 999€",
+          "period": "",
+          "features": [
+            "Desarrollo a medida",
+            "3 módulos básicos",
+            "Soporte 6 meses"
+          ],
+          "buttonText": "Consultar"
+        },
+        {
+          "title": "Sistema Empresarial",
+          "price": "Desde 2.999€",
+          "period": "",
+          "features": [
+            "ERP/CRM personalizado",
+            "Integración API",
+            "Soporte 1 año"
+          ],
+          "buttonText": "Consultar",
+          "highlighted": true
+        },
+        {
+          "title": "Solución Premium",
+          "price": "Desde 3.999€",
+          "period": "",
+          "features": [
+            "Desarrollo completo",
+            "Multiplataforma",
+            "Soporte 24/7"
+          ],
+          "buttonText": "Contactar"
+        }
+      ]
+    }
+  ]
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) { AOS.init(); }
@@ -80,5 +205,10 @@ export class ConsultingComponent implements OnInit {
 
   isActiveCategory(category: string): boolean {
     return this.activeCategory === category;
+  }
+
+  getActiveCategoryPlans() {
+    const category = this.pricingCategories.find(cat => cat.id === this.activeCategory);
+    return category ? category.plans : [];
   }
 }
