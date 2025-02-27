@@ -14,6 +14,63 @@ export class ConsultingComponent implements OnInit {
   }
   activeCategory: string = 'redes';
 
+  designCards = [
+    {
+      "icon": "bi bi-bezier2",
+      "title": "Diseño UX/UI",
+      "description": "Interfaces intuitivas centradas en la experiencia del usuario"
+    },
+    {
+      "icon": "bi bi-lightning-charge",
+      "title": "Alto Rendimiento",
+      "description": "Sitios web optimizados para máxima velocidad y eficiencia"
+    },
+    {
+      "icon": "bi bi-shield-check",
+      "title": "Seguridad Integral",
+      "description": "Protección avanzada contra amenazas digitales"
+    },
+    {
+      "icon": "bi bi-graph-up",
+      "title": "SEO Avanzado",
+      "description": "Optimización para motores de búsqueda desde el inicio"
+    },
+    {
+      "icon": "bi bi-phone",
+      "title": "Diseño Mobile",
+      "description": "Experiencias perfectas en dispositivos móviles"
+    },
+    {
+      "icon": "bi bi-gear",
+      "title": "Mantenimiento",
+      "description": "Actualizaciones y soporte técnico continuo"
+    }
+  ]
+
+  socialCards = [
+    {
+      "icon": "bi bi-instagram",
+      "title": "Instagram",
+      "description": "Diseño de feeds y estrategias visuales"
+    },
+    {
+      "icon": "bi bi-facebook",
+      "title": "Facebook",
+      "description": "Gestión de comunidades y campañas ADS"
+    },
+    {
+      "icon": "bi bi-linkedin",
+      "title": "LinkedIn",
+      "description": "Branding corporativo y estrategias B2B"
+    },
+    {
+      "icon": "bi bi-tiktok",
+      "title": "TikTok",
+      "description": "Contenido viral y desafíos creativos"
+    }
+  ]
+
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) { AOS.init(); }
   }

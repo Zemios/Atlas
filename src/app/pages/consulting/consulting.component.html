@@ -30,59 +30,15 @@
         <p class="mb-12 text-lg text-gray-600 md:text-xl">Creamos experiencias digitales memorables con enfoque en la simplicidad y funcionalidad</p>
         
         <div class="grid gap-12 md:grid-cols-3">
-          <!-- Tarjeta 1 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-bezier2 text-4xl text-blue-600"></i>
+          @for (card of designCards; track $index) {
+            <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
+              <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
+                <i class="{{card.icon}} text-4xl text-blue-600"></i>
+              </div>
+              <h3 class="mb-3 text-2xl font-bold text-gray-800">{{card.title}}</h3>
+              <p class="text-gray-600">{{card.description}}</p>
             </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">Diseño UX/UI</h3>
-            <p class="text-gray-600">Interfaces intuitivas centradas en la experiencia del usuario</p>
-          </div>
-
-          <!-- Tarjeta 2 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-lightning-charge text-4xl text-blue-600"></i>
-            </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">Alto Rendimiento</h3>
-            <p class="text-gray-600">Sitios web optimizados para máxima velocidad y eficiencia</p>
-          </div>
-
-          <!-- Tarjeta 3 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-shield-check text-4xl text-blue-600"></i>
-            </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">Seguridad Integral</h3>
-            <p class="text-gray-600">Protección avanzada contra amenazas digitales</p>
-          </div>
-
-          <!-- Tarjeta 4 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-graph-up text-4xl text-blue-600"></i>
-            </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">SEO Avanzado</h3>
-            <p class="text-gray-600">Optimización para motores de búsqueda desde el inicio</p>
-          </div>
-
-          <!-- Tarjeta 5 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-phone text-4xl text-blue-600"></i>
-            </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">Diseño Mobile</h3>
-            <p class="text-gray-600">Experiencias perfectas en dispositivos móviles</p>
-          </div>
-
-          <!-- Tarjeta 6 -->
-          <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
-            <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-              <i class="bi bi-gear text-4xl text-blue-600"></i>
-            </div>
-            <h3 class="mb-3 text-2xl font-bold text-gray-800">Mantenimiento</h3>
-            <p class="text-gray-600">Actualizaciones y soporte técnico continuo</p>
-          </div>
+          }
         </div>
       </div>
     </div>
@@ -136,32 +92,13 @@
     
     <div class="grid gap-8 md:grid-cols-4">
       <!-- Instagram -->
-      <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-10">
-        <i class="bi bi-instagram text-6xl transition-colors duration-300 hover:text-purple-400"></i>
-        <h3 class="mt-4 text-xl font-bold">Instagram</h3>
-        <p>Diseño de feeds y estrategias visuales</p>
-      </div>
-
-      <!-- Facebook -->
-      <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-10">
-        <i class="bi bi-facebook text-6xl transition-colors duration-300 hover:text-blue-500"></i>
-        <h3 class="mt-4 text-xl font-bold">Facebook</h3>
-        <p>Gestión de comunidades y campañas ADS</p>
-      </div>
-
-      <!-- LinkedIn -->
-      <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-10">
-        <i class="bi bi-linkedin text-6xl transition-colors duration-300 hover:text-blue-400"></i>
-        <h3 class="mt-4 text-xl font-bold">LinkedIn</h3>
-        <p>Branding corporativo y estrategias B2B</p>
-      </div>
-
-      <!-- TikTok -->
-      <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-10">
-        <i class="bi bi-tiktok text-6xl transition-colors duration-300 hover:text-pink-200"></i>
-        <h3 class="mt-4 text-xl font-bold">TikTok</h3>
-        <p>Contenido viral y desafíos creativos</p>
-      </div>
+       @for (card of socialCards; track $index) {
+         <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-20">
+           <i class="{{card.icon}} text-6xl transition-colors duration-300 "></i>
+           <h3 class="mt-4 text-xl font-bold">{{card.title}}</h3>
+           <p>{{card.description}}</p>
+         </div>
+       }
     </div>
   </div>
 </section>
