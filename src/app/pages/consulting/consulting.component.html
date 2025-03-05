@@ -3,20 +3,20 @@
     <div class="container mx-auto flex flex-col items-center px-6 py-24 text-center md:flex-row md:text-left">
       <div class="md:w-1/2" data-aos="fade-right">
         <h1 class="mb-6 text-5xl font-bold leading-tight text-white drop-shadow-lg md:text-7xl">
-          <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">Transformamos</span><br>
+          <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">Transformamos</span><br />
           Tu Visión Digital
         </h1>
         <p class="mb-8 text-xl text-blue-100 md:text-2xl">Donde la innovación se encuentra con el diseño impactante</p>
         <div class="space-x-4">
-          <a routerLink="/consulting/contact" class="rounded-full shadow-md shadow-blue-500 bg-blue-500 px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-blue-600">
+          <a routerLink="/consulting/contact" class="rounded-full bg-blue-500 px-8 py-4 text-lg font-semibold text-white shadow-md shadow-blue-500 transition-all hover:bg-blue-600">
             Comenzar Proyecto
           </a>
         </div>
       </div>
-      <div class=" w-3/4 mt-10 md:w-1/2" data-aos="fade-left">
+      <div class="mt-10 w-3/4 md:w-1/2" data-aos="fade-left">
         <div class="floating-element relative mx-auto max-w-xl">
           <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-blue-500 to-blue-600 opacity-50 blur-2xl"></div>
-          <img src="images/consulting/web_development.svg" alt="Diseño Web" class="relative animate-float">
+          <img src="images/consulting/web_development.svg" alt="Diseño Web" class="animate-float relative" />
         </div>
       </div>
     </div>
@@ -26,15 +26,15 @@
       <div class="mx-auto max-w-4xl text-center">
         <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Diseños que <span class="text-blue-600">Capturan Esencias</span></h2>
         <p class="mb-12 text-lg text-gray-600 md:text-xl">Creamos experiencias digitales memorables con enfoque en la simplicidad y funcionalidad</p>
-        
+
         <div class="grid gap-12 md:grid-cols-3">
           @for (card of designCards; track $index) {
-            <div class="shadow-xl bg-white rounded-3xl p-5 transition-all hover:scale-105" data-aos="fade-up">
+            <div class="rounded-3xl bg-white p-5 shadow-xl transition-all hover:scale-105" data-aos="fade-up">
               <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
-                <i class="{{card.icon}} text-4xl text-blue-600"></i>
+                <i class="{{ card.icon }} text-4xl text-blue-600"></i>
               </div>
-              <h3 class="mb-3 text-2xl font-bold text-gray-800">{{card.title}}</h3>
-              <p class="text-gray-600">{{card.description}}</p>
+              <h3 class="mb-3 text-2xl font-bold text-gray-800">{{ card.title }}</h3>
+              <p class="text-gray-600">{{ card.description }}</p>
             </div>
           }
         </div>
@@ -42,94 +42,90 @@
     </div>
   </section>
 
-<section class="corporate-backend-section bg-gradient-to-r from-slate-800 to-slate-900 py-20">
-  <div class="container mx-auto px-6">
-    <div class="grid gap-12 md:grid-cols-2 items-center">
-      <div class="flex justify-center" data-aos="fade-right">
-        <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class="duration-300 hover:scale-105">
-      </div>
-      <div class="text-white" data-aos="fade-left">
-        <h2 class="mb-6 text-4xl font-bold">
-          Soluciones <span class="text-blue-400">Backend</span> & <span class="text-green-400">Software a Medida</span>
-        </h2>
-        <p class="mb-8 text-lg">
-          Desarrollamos sistemas robustos, escalables e integrados que maximizan la eficiencia operativa y la rentabilidad de tu empresa.
-        </p>
-        <ul class="mb-8 space-y-4">
-          @for (softwareProperty of softwareProperties; track $index) {
-            <li class="flex items-center">
-              <svg class="mr-3 h-4 w-4 {{softwareProperty.color}}" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
-              <p>{{softwareProperty.text}}</p>
-            </li>
-          }
-        </ul>
+  <section class="corporate-backend-section bg-gradient-to-r from-slate-800 to-slate-900 py-20">
+    <div class="container mx-auto px-6">
+      <div class="grid items-center gap-12 md:grid-cols-2">
+        <div class="flex justify-center" data-aos="fade-right">
+          <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class="duration-300 hover:scale-105" />
+        </div>
+        <div class="text-white" data-aos="fade-left">
+          <h2 class="mb-6 text-4xl font-bold">Soluciones <span class="text-blue-400">Backend</span> & <span class="text-green-400">Software a Medida</span></h2>
+          <p class="mb-8 text-lg">Desarrollamos sistemas robustos, escalables e integrados que maximizan la eficiencia operativa y la rentabilidad de tu empresa.</p>
+          <ul class="mb-8 space-y-4">
+            @for (softwareProperty of softwareProperties; track $index) {
+              <li class="flex items-center">
+                <svg class="mr-3 h-4 w-4 {{ softwareProperty.color }}" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" /></svg>
+                <p>{{ softwareProperty.text }}</p>
+              </li>
+            }
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <section class="bg-gradient-to-br from-purple-600 to-pink-500 py-20">
+    <div class="container mx-auto px-6 text-center text-white">
+      <h2 class="mb-8 text-4xl font-bold md:text-5xl">Impulso en <span class="text-yellow-300">Redes Sociales</span></h2>
+      <p class="mx-auto mb-12 max-w-2xl text-xl">Creamos estrategias digitales que generan engagement y conversiones</p>
 
-<section class="bg-gradient-to-br from-purple-600 to-pink-500 py-20">
-  <div class="container mx-auto px-6 text-center text-white">
-    <h2 class="mb-8 text-4xl font-bold md:text-5xl">Impulso en <span class="text-yellow-300">Redes Sociales</span></h2>
-    <p class="mx-auto mb-12 max-w-2xl text-xl">Creamos estrategias digitales que generan engagement y conversiones</p>
-    
-    <div class="grid gap-8 md:grid-cols-4">
-       @for (card of socialCards; track $index) {
-         <div class="bg-white bg-opacity-5 p-5 rounded-2xl transition-all hover:scale-105 hover:bg-opacity-20" data-aos="zoom-in">
-           <i class="{{card.icon}} text-6xl transition-colors duration-300 "></i>
-           <h3 class="mt-4 text-xl font-bold">{{card.title}}</h3>
-           <p>{{card.description}}</p>
-         </div>
-       }
-    </div>
-  </div>
-</section>
-
-<section class="bg-slate-50 py-20">
-  <div class="container mx-auto px-6">
-    <div class="text-center">
-      <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
-      <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
-      
-      <div class="mb-16 flex flex-wrap justify-center gap-4">
-        @for (category of pricingCategories; track $index) {
-          <button 
-            (click)="setActiveCategory(category.id)" 
-            [ngClass]="{'bg-blue-600 text-white': isActiveCategory(category.id), 'bg-white text-gray-600': !isActiveCategory(category.id)}"
-            class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105">
-            {{category.name}}
-          </button>
+      <div class="grid gap-8 md:grid-cols-4">
+        @for (card of socialCards; track $index) {
+          <div class="rounded-2xl bg-white bg-opacity-5 p-5 transition-all hover:scale-105 hover:bg-opacity-20" data-aos="zoom-in">
+            <i class="{{ card.icon }} text-6xl transition-colors duration-300 "></i>
+            <h3 class="mt-4 text-xl font-bold">{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+          </div>
         }
       </div>
+    </div>
+  </section>
 
-      @if (activeCategory) {
-        <div class="grid gap-8 md:grid-cols-3 text-gray-600">
-          @for (plan of getActiveCategoryPlans(); track $index) {
-            <div class="shadow-xl bg-white rounded-3xl p-5 hover:scale-105" data-aos="fade-up" attr.data-aos-delay="{{$index*100}}">
-              <div class="p-8">
-                <h3 class="mb-4 text-2xl font-bold">{{plan.title}}</h3>
-                <div class="mb-6 text-4xl font-bold text-blue-600">
-                  {{plan.price}}<span class="text-xl text-gray-500">{{plan.period}}</span>
-                </div>
-                <ul class="mb-8 space-y-3">
-                  @for (feature of plan.features; track $index) {
-                    <li>✓ {{feature}}</li>
-                  }
-                </ul>
-                <button class="w-full bg-blue-600 px-6 py-3 text-white">{{plan.buttonText}}</button>
-              </div>
-            </div>
+  <section class="bg-slate-50 py-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center">
+        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
+        <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
+
+        <div class="mb-16 flex flex-wrap justify-center gap-4">
+          @for (category of pricingCategories; track $index) {
+            <button
+              (click)="setActiveCategory(category.id)"
+              [ngClass]="{ 'bg-blue-600 text-white': isActiveCategory(category.id), 'bg-white text-gray-600': !isActiveCategory(category.id) }"
+              class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105"
+            >
+              {{ category.name }}
+            </button>
           }
         </div>
-      }
+
+        @if (activeCategory) {
+          <div class="grid gap-8 text-gray-600 md:grid-cols-3">
+            @for (plan of getActiveCategoryPlans(); track $index) {
+              <div class="rounded-3xl bg-white p-5 shadow-xl hover:scale-105" data-aos="fade-up" attr.data-aos-delay="{{ $index * 100 }}">
+                <div class="p-8">
+                  <h3 class="mb-4 text-2xl font-bold">{{ plan.title }}</h3>
+                  <div class="mb-6 text-4xl font-bold text-blue-600">
+                    {{ plan.price }}<span class="text-xl text-gray-500">{{ plan.period }}</span>
+                  </div>
+                  <ul class="mb-8 space-y-3">
+                    @for (feature of plan.features; track $index) {
+                      <li>✓ {{ feature }}</li>
+                    }
+                  </ul>
+                  <button class="w-full bg-blue-600 px-6 py-3 text-white">{{ plan.buttonText }}</button>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
     <div class="container mx-auto px-6">
-      <ul class="mb-8 text-4xl font-bold md:text-6xl flex gap-5 justify-center">
+      <ul class="mb-8 flex justify-center gap-5 text-4xl font-bold md:text-6xl">
         <li data-aos="fade-up"><p>¿Listo</p></li>
         <li data-aos="fade-up" data-aos-delay="50"><p>para</p></li>
         <li data-aos="fade-up" data-aos-delay="100"><p class="text-yellow-400">Revolucionar</p></li>
@@ -138,8 +134,11 @@
         <li data-aos="fade-up" data-aos-delay="250"><p>Digital?</p></li>
       </ul>
       <p class="mx-auto mb-12 max-w-2xl text-xl" data-aos="fade-right">Contáctanos hoy mismo y recibe una consultoría gratuita</p>
-      <button routerLink="/consulting/contact" class="shadow-2xl shadow-yellow-400 rounded-full  bg-yellow-400 px-12 py-4 text-lg font-bold text-blue-900 transition-all hover:scale-110"
-        data-aos="zoom-in">
+      <button
+        routerLink="/consulting/contact"
+        class="rounded-full bg-yellow-400 px-12 py-4 text-lg font-bold text-blue-900 shadow-2xl shadow-yellow-400 transition-all hover:scale-110"
+        data-aos="zoom-in"
+      >
         Comenzar Ahora
       </button>
     </div>

@@ -6,12 +6,9 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
   providedIn: 'root',
 })
 export class ConsultingGuard implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const currentUrl = this.router.url;
     const targetUrl = state.url;
 
@@ -19,9 +16,8 @@ export class ConsultingGuard implements CanActivate {
 
     if (isInConsultingPage) {
       if (targetUrl === '/contact') {
-        this.router.navigate(['/consulting/contact'])
-      }
-      else {
+        this.router.navigate(['/consulting/contact']);
+      } else {
         this.router.navigate(['/consulting']);
       }
       return false;

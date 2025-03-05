@@ -21,7 +21,7 @@ export const routes: Routes = [
       { path: '', component: LearningComponent },
       { path: 'course/:id', component: CourseComponent },
     ],
-    canActivate: [ConsultingGuard]
+    canActivate: [ConsultingGuard],
   },
   { path: 'contact', component: ContactComponent, canActivate: [ConsultingGuard] },
   { path: 'help', component: HelpComponent, canActivate: [ConsultingGuard] },
@@ -42,7 +42,7 @@ export const routes: Routes = [
       { path: '', component: ProfileComponent },
       { path: ':id', component: ProfileComponent },
     ],
-    canActivate: [ConsultingGuard]
+    canActivate: [ConsultingGuard],
   },
 
   /* TODO: Esto de aqui??  por qué hay dos?*/
