@@ -196,6 +196,25 @@ export class ConsultingComponent implements OnInit {
     }
   ]
 
+  softwareProperties = [
+    {
+      "text": "ERP & CRM personalizados para una gestión integral.",
+      "color": "text-blue-400"
+    },
+    {
+      "text": "APIs seguras y eficientes para integración continua.",
+      "color": "text-green-400"
+    },
+    {
+      "text": "Arquitectura de microservicios para una escalabilidad sin límites.",
+      "color": "text-yellow-400"
+    },
+    {
+      "text": "Integración de sistemas legacy y soluciones en la nube.",
+      "color": "text-red-400"
+    },
+  ]
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) { AOS.init(); }
   }

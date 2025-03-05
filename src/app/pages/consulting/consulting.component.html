@@ -1,5 +1,4 @@
 <div class="flex flex-col overflow-x-hidden">
-  <!-- Banner Hero - Estilo Futurista -->
   <section class="relative min-h-[91dvh] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
     <div class="container mx-auto flex flex-col items-center px-6 py-24 text-center md:flex-row md:text-left">
       <div class="md:w-1/2" data-aos="fade-right">
@@ -22,7 +21,6 @@
       </div>
     </div>
   </section>
-  <!-- Sección Estilo Minimalista -->
   <section class="bg-white py-20">
     <div class="container mx-auto px-6">
       <div class="mx-auto max-w-4xl text-center">
@@ -44,15 +42,12 @@
     </div>
   </section>
 
-  <!-- Sección Corporativa Backend -->
 <section class="corporate-backend-section bg-gradient-to-r from-slate-800 to-slate-900 py-20">
   <div class="container mx-auto px-6">
     <div class="grid gap-12 md:grid-cols-2 items-center">
-      <!-- Imagen Representativa -->
       <div class="flex justify-center" data-aos="fade-right">
         <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class=" transition-transform duration-300 hover:scale-105">
       </div>
-      <!-- Contenido Técnico -->
       <div class="text-white" data-aos="fade-left">
         <h2 class="mb-6 text-4xl font-bold">
           Soluciones <span class="text-blue-400">Backend</span> & <span class="text-green-400">Software a Medida</span>
@@ -61,22 +56,12 @@
           Desarrollamos sistemas robustos, escalables e integrados que maximizan la eficiencia operativa y la rentabilidad de tu empresa.
         </p>
         <ul class="mb-8 space-y-4">
-          <li class="flex items-center">
-            <svg class="mr-3 h-4 w-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
-            ERP & CRM personalizados para una gestión integral.
-          </li>
-          <li class="flex items-center">
-            <svg class="mr-3 h-4 w-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
-            APIs seguras y eficientes para integración continua.
-          </li>
-          <li class="flex items-center">
-            <svg class="mr-3 h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
-            Arquitectura de microservicios para una escalabilidad sin límites.
-          </li>
-          <li class="flex items-center">
-            <svg class="mr-3 h-4 w-4 text-red-400" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
-            Integración de sistemas legacy y soluciones en la nube.
-          </li>
+          @for (softwareProperty of softwareProperties; track $index) {
+            <li class="flex items-center">
+              <svg class="mr-3 h-4 w-4 {{softwareProperty.color}}" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10"/></svg>
+              <p>{{softwareProperty.text}}</p>
+            </li>
+          }
         </ul>
       </div>
     </div>
@@ -84,14 +69,12 @@
 </section>
 
 
-<!-- Sección Redes Sociales - Estilo Vibrante -->
 <section class="bg-gradient-to-br from-purple-600 to-pink-500 py-20">
   <div class="container mx-auto px-6 text-center text-white">
     <h2 class="mb-8 text-4xl font-bold md:text-5xl">Impulso en <span class="text-yellow-300">Redes Sociales</span></h2>
     <p class="mx-auto mb-12 max-w-2xl text-xl">Creamos estrategias digitales que generan engagement y conversiones</p>
     
     <div class="grid gap-8 md:grid-cols-4">
-      <!-- Instagram -->
        @for (card of socialCards; track $index) {
          <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-20">
            <i class="{{card.icon}} text-6xl transition-colors duration-300 "></i>
@@ -103,14 +86,12 @@
   </div>
 </section>
 
-<!-- Sección Precios - Estilo Moderno -->
 <section class="bg-slate-50 py-20">
   <div class="container mx-auto px-6">
     <div class="text-center">
       <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
       <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
       
-      <!-- Selector de Categorías -->
       <div class="mb-16 flex flex-wrap justify-center gap-4">
         @for (category of pricingCategories; track $index) {
           <button 
@@ -146,7 +127,6 @@
   </div>
 </section>
 
-  <!-- Sección CTA Final - Estilo Impactante -->
   <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
     <div class="container mx-auto px-6">
       <h2 class="mb-8 text-4xl font-bold md:text-6xl">¿Listo para <span class="text-yellow-300">Revolucionar</span> tu Presencia Digital?</h2>
