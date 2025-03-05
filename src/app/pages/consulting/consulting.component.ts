@@ -83,7 +83,6 @@ export class ConsultingComponent implements OnInit {
             "Hasta 3 Redes Sociales",
             "15 Publicaciones/mes",
             "Creación de contenido",
-            "Informe básico"
           ],
           "buttonText": "Elegir"
         },
@@ -95,7 +94,6 @@ export class ConsultingComponent implements OnInit {
             "Hasta 5 Redes Sociales",
             "30 Publicaciones/mes",
             "Gestión de anuncios",
-            "Atención al click"
           ],
           "buttonText": "Elegir",
           "highlighted": true
@@ -107,7 +105,6 @@ export class ConsultingComponent implements OnInit {
           "features": [
             "Redes ilimitadas",
             "Contenido diario",
-            "Estrategia personalizada",
             "Planes de fidelización"
           ],
           "buttonText": "Elegir"

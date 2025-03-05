@@ -29,7 +29,7 @@
         
         <div class="grid gap-12 md:grid-cols-3">
           @for (card of designCards; track $index) {
-            <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105" data-aos="fade-up">
+            <div class="shadow-xl bg-white rounded-3xl p-5 transition-all hover:scale-105" data-aos="fade-up">
               <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
                 <i class="{{card.icon}} text-4xl text-blue-600"></i>
               </div>
@@ -46,7 +46,7 @@
   <div class="container mx-auto px-6">
     <div class="grid gap-12 md:grid-cols-2 items-center">
       <div class="flex justify-center" data-aos="fade-right">
-        <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class=" transition-transform duration-300 hover:scale-105">
+        <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class="duration-300 hover:scale-105">
       </div>
       <div class="text-white" data-aos="fade-left">
         <h2 class="mb-6 text-4xl font-bold">
@@ -76,7 +76,7 @@
     
     <div class="grid gap-8 md:grid-cols-4">
        @for (card of socialCards; track $index) {
-         <div class="bg-white bg-opacity-5 p-5 rounded-2xl transform transition-all hover:scale-105 hover:bg-opacity-20">
+         <div class="bg-white bg-opacity-5 p-5 rounded-2xl transition-all hover:scale-105 hover:bg-opacity-20" data-aos="zoom-in">
            <i class="{{card.icon}} text-6xl transition-colors duration-300 "></i>
            <h3 class="mt-4 text-xl font-bold">{{card.title}}</h3>
            <p>{{card.description}}</p>
@@ -106,7 +106,7 @@
       @if (activeCategory) {
         <div class="grid gap-8 md:grid-cols-3 text-gray-600">
           @for (plan of getActiveCategoryPlans(); track $index) {
-            <div class="shadow-xl bg-white rounded-3xl p-5 transform transition-all hover:scale-105">
+            <div class="shadow-xl bg-white rounded-3xl p-5 hover:scale-105" data-aos="fade-up" attr.data-aos-delay="{{$index*100}}">
               <div class="p-8">
                 <h3 class="mb-4 text-2xl font-bold">{{plan.title}}</h3>
                 <div class="mb-6 text-4xl font-bold text-blue-600">
@@ -129,9 +129,17 @@
 
   <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
     <div class="container mx-auto px-6">
-      <h2 class="mb-8 text-4xl font-bold md:text-6xl">¿Listo para <span class="text-yellow-300">Revolucionar</span> tu Presencia Digital?</h2>
-      <p class="mx-auto mb-12 max-w-2xl text-xl">Contáctanos hoy mismo y recibe una consultoría gratuita</p>
-      <button routerLink="/consulting/contact" class="shadow-2xl shadow-yellow-400 rounded-full transform bg-yellow-400 px-12 py-4 text-lg font-bold text-blue-900 transition-all hover:scale-110">
+      <ul class="mb-8 text-4xl font-bold md:text-6xl flex gap-5 justify-center">
+        <li data-aos="fade-up"><p>¿Listo</p></li>
+        <li data-aos="fade-up" data-aos-delay="50"><p>para</p></li>
+        <li data-aos="fade-up" data-aos-delay="100"><p class="text-yellow-400">Revolucionar</p></li>
+        <li data-aos="fade-up" data-aos-delay="150"><p>tu</p></li>
+        <li data-aos="fade-up" data-aos-delay="200"><p>Presencia</p></li>
+        <li data-aos="fade-up" data-aos-delay="250"><p>Digital?</p></li>
+      </ul>
+      <p class="mx-auto mb-12 max-w-2xl text-xl" data-aos="fade-right">Contáctanos hoy mismo y recibe una consultoría gratuita</p>
+      <button routerLink="/consulting/contact" class="shadow-2xl shadow-yellow-400 rounded-full  bg-yellow-400 px-12 py-4 text-lg font-bold text-blue-900 transition-all hover:scale-110"
+        data-aos="zoom-in">
         Comenzar Ahora
       </button>
     </div>
