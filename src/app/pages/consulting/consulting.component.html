@@ -141,16 +141,16 @@
 
         <!-- Sliders personalizados -->
         <div class="mb-6">
-          <!-- Número de publicaciones -->
-          <div class="mb-4">
-            <label for="publicaciones" class="mb-2 block text-gray-700">Número de publicaciones por mes: {{ customPlan.publicaciones }}</label>
-            <input type="range" id="publicaciones" min="5" max="50" step="5" [(ngModel)]="customPlan.publicaciones" (input)="updatePrice()" class="w-full" />
+          <div class="text-start pt-1 w-fit">
+            <label for="publicaciones" class="block text-gray-700 mb-2">Número de publicaciones por mes: {{ customPlan.publicaciones }}</label>
+            <input type="range" id="publicaciones" min="5" max="50" step="5" [(ngModel)]="customPlan.publicaciones" (input)="updatePrice()"
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 text-blue-500" />
+            <div class="flex justify-between text-xs px-2">
+              <span class="text-gray-500">5</span>
+              <span class="text-gray-500">50</span>
+            </div>
           </div>
-
-          <!-- Precio estimado -->
-          <div class="mb-4">
-            <label for="precio" class="mb-2 block text-gray-700">Precio estimado (en euros): {{ totalPrice }}€</label>
-          </div>
+          
         </div>
 
         <button class="w-full bg-blue-600 px-6 py-3 text-white">Crear Plan Personalizado</button>

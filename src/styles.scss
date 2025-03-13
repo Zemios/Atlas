@@ -48,6 +48,22 @@ app-root {
   grid-template-rows: auto 0 1fr auto;
 }
 
+input[type="range"]::-webkit-slider-thumb {
+  background-color: rgb(37 99 235);
+  border-radius: 50% !important;
+  width: 1em;
+  height: 1em;
+  appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: rgb(37 99 235);
+  border-radius: 50% !important;
+  width: 1em;
+  height: 1em;
+  appearance: none;
+}
+
 .banner {
   min-height: calc(100vh - 76px);
 
