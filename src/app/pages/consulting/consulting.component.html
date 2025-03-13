@@ -122,14 +122,18 @@
       </div>
     </div>
   </section>
-  <section>
-    <!-- Nueva sección: Personaliza tu plan -->
-    <div class="mt-12 p-8 bg-gray-100 rounded-xl shadow-lg">
-      <h2 class="text-3xl font-bold text-gray-800 mb-6">¿No te convence ningún plan? Crea el tuyo personalizado</h2>
+  <section class="flex flex-col justify-center">
+    <div class="container mx-auto px-6 py-20 text-center text-gray-600">
 
-      <!-- Checkboxes para seleccionar características -->
+      <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">Crea tu propio <span class="text-green-400"> plan</span></h2>
+      <p class="mb-12 text-lg text-gray-200">Selecciona las características que deseas</p>
+
+      <div class="my-12 p-8 bg-gray-100 rounded-xl shadow-lg m-auto">
+        <h3 class="mb-4 text-2xl font-bold">Personalizado</h3>
+        <div class="mb-6 text-4xl font-bold text-blue-600">
+          {{ totalPrice }}€<span class="text-xl text-gray-500">/mes</span>
+        </div>
       <div class="mb-6">
-        <h3 class="text-xl font-semibold mb-4">Selecciona las características que deseas:</h3>
         @for (feature of customFeatures; track $index) {
           <div class="flex items-center mb-3">
             <input type="checkbox" [id]="feature.id" [(ngModel)]="feature.selected" (change)="updatePrice()" class="mr-2">
@@ -140,7 +144,7 @@
 
       <!-- Sliders personalizados -->
       <div class="mb-6">
-        <h3 class="text-xl font-semibold mb-4">Ajusta tu plan:</h3>
+
 
         <!-- Número de publicaciones -->
         <div class="mb-4">
@@ -156,6 +160,8 @@
 
       <button class="w-full bg-blue-600 px-6 py-3 text-white">Crear Plan Personalizado</button>
     </div>
+  </div>
+
   </section>
   <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
     <div class="container mx-auto px-6">
