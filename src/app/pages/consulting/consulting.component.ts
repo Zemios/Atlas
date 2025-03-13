@@ -2,15 +2,16 @@ import { isPlatformBrowser, NgClass } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import AOS from 'aos';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-consulting',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, FormsModule],
   templateUrl: './consulting.component.html',
   styleUrls: ['consulting.component.scss'],
 })
 export class ConsultingComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
   activeCategory: string = 'redes';
 
   designCards = [
@@ -175,6 +176,18 @@ export class ConsultingComponent implements OnInit {
     },
   ];
 
+  customFeatures = [
+    { id: 'feature1', name: 'Publicaciones ilimitadas', selected: false, price: 50 },
+    { id: 'feature2', name: 'Gestión de campañas ADS', selected: false, price: 70 },
+    { id: 'feature3', name: 'Análisis de métricas', selected: false, price: 40 },
+  ];
+  customPlan = {
+    publicaciones: 15,
+    precioBase: 100,
+  };
+
+  totalPrice = this.customPlan.precioBase;
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       AOS.init();
@@ -191,5 +204,17 @@ export class ConsultingComponent implements OnInit {
   getActiveCategoryPlans() {
     const category = this.pricingCategories.find((cat) => cat.id === this.activeCategory);
     return category ? category.plans : [];
+  }
+  updatePrice() {
+    this.totalPrice = this.customPlan.precioBase;
+
+    this.customFeatures.forEach((feature) => {
+      if (feature.selected) {
+        this.totalPrice += feature.price;
+      }
+    });
+
+    // Añade un costo adicional basado en el número de publicaciones
+    this.totalPrice += (this.customPlan.publicaciones - 5) * 2; // Por cada publicación extra, sumamos un costo adicional
   }
 }
