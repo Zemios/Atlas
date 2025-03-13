@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['consulting.component.scss'],
 })
 export class ConsultingComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   activeCategory: string = 'redes';
 
   designCards = [
