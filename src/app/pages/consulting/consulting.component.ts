@@ -1,7 +1,7 @@
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import AOS from 'aos';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['consulting.component.scss'],
 })
 export class ConsultingComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
   activeCategory: string = 'redes';
 
   designCards = [
@@ -218,4 +218,8 @@ export class ConsultingComponent implements OnInit {
       // Añade un costo adicional basado en el número de publicaciones
       this.totalPrice += (this.customPlan.publicaciones - 5) * 2; // Por cada publicación extra, sumamos un costo adicional
     } */
+
+  goToContact(plan: string) {
+    this.router.navigate(['/consulting/contact'], { queryParams: { plan } });
+  }
 }
