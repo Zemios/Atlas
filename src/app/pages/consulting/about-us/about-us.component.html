@@ -74,7 +74,7 @@
   </div>
 
   <!-- Sección de Contacto - Formulario -->
-  <div class="relative bg-gray-50 px-6 py-24">
+  <div #formElement class="relative bg-gray-50 px-6 py-24">
     <div class="mx-auto max-w-4xl">
       <div class="mb-16 text-center">
         <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl" data-aos="fade-up">
@@ -83,7 +83,7 @@
         <p class="mx-auto max-w-xl text-xl text-gray-600" data-aos="fade-up">Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas</p>
       </div>
 
-      <form #formElement [formGroup]="contactForm" class="space-y-8 rounded-2xl bg-white p-8 text-gray-700 shadow-2xl" action="https://formspree.io/f/xldjrrzl" method="POST" data-aos="fade-up">
+      <form [formGroup]="contactForm" class="space-y-8 rounded-2xl bg-white p-8 text-gray-700 shadow-2xl" action="https://formspree.io/f/xldjrrzl" method="POST" data-aos="fade-up">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label class="mb-2 block text-sm font-semibold text-gray-700">Nombre completo<span class="text-red-500">*</span></label>
