@@ -83,7 +83,7 @@
         <p class="mx-auto max-w-xl text-xl text-gray-600" data-aos="fade-up">Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas</p>
       </div>
 
-      <form class="space-y-8 rounded-2xl bg-white p-8 text-gray-700 shadow-2xl" action="https://formspree.io/f/xldjrrzl" method="POST" data-aos="fade-up">
+      <form #formElement [formGroup]="contactForm" class="space-y-8 rounded-2xl bg-white p-8 text-gray-700 shadow-2xl" action="https://formspree.io/f/xldjrrzl" method="POST" data-aos="fade-up">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label class="mb-2 block text-sm font-semibold text-gray-700">Nombre completo<span class="text-red-500">*</span></label>
@@ -109,6 +109,7 @@
         <div>
           <label class="mb-2 block text-sm font-semibold text-gray-700">Mensaje<span class="text-red-500">*</span></label>
           <textarea
+            formControlName="message"
             name="message"
             required
             class="h-40 w-full resize-none rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500"
