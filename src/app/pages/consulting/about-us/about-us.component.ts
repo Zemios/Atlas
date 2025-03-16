@@ -28,7 +28,7 @@ export class AboutUsComponent implements AfterViewInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       const queryParams = { id: params['id'], title: params['title'] };
-      if (queryParams) {
+      if (queryParams.id) {
 
         const formMessage = `Estoy interesado en el plan ${queryParams.title} en relación a los servicios de ${queryParams.id}. 
 Agradecería recibir información detallada sobre sus condiciones y beneficios.`;
@@ -49,7 +49,7 @@ Agradecería recibir información detallada sobre sus condiciones y beneficios.`
       /* TODO: Se repite la llamada al queryParams, pero no he encontrado otra forma de solucionarlo ya que si no no realiza el scroll */
       this.route.queryParams.subscribe((params) => {
         const queryParams = { id: params['id'], title: params['title'] };
-        if (queryParams && this.formElement && this.formElement.nativeElement instanceof HTMLElement) {
+        if (queryParams.id && this.formElement && this.formElement.nativeElement instanceof HTMLElement) {
           setTimeout(() => {
             const elementPosition = this.formElement.nativeElement.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
