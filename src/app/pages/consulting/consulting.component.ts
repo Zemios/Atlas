@@ -219,7 +219,7 @@ export class ConsultingComponent implements OnInit {
       this.totalPrice += (this.customPlan.publicaciones - 5) * 2; // Por cada publicación extra, sumamos un costo adicional
     } */
 
-  goToContact(plan: string) {
-    this.router.navigate(['/consulting/contact'], { queryParams: { plan } });
+  goToContact(id: string, title: string) {
+    this.router.navigate(['/consulting/contact'], { queryParams: { id, title } });
   }
 }
