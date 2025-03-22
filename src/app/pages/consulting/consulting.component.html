@@ -100,7 +100,7 @@
         </div>
 
         @if (activeCategory) {
-          <div class="grid gap-8 text-gray-600 md:grid-cols-3">
+          <div class="grid gap-4 lg:gap-8 text-gray-600 md:grid-cols-3">
             @for (plan of getActiveCategoryPlans(); track $index) {
               <div data-aos="fade-up" attr.data-aos-delay="{{ $index * 100 }}" class="flex flex-col justify-end align-bottom">
                 <div class="hover:scale-105 duration-75">
@@ -108,7 +108,7 @@
                     <div class="bg-blue-600 rounded-t-3xl text-white uppercase font-bold text-xs md:text-sm py-1" >Opción más popular</div>
                   }
                   <div [class.border-2]="plan.highlighted" [class.rounded-t-none]="plan.highlighted" class="rounded-3xl shadow-xl border-blue-600 bg-white">
-                    <div class="p-8">
+                    <div class="p-4 lg:p-8">
                       <h3 class="mb-4 text-xl md:text-2xl font-bold">{{ plan.title }}</h3>
                       <div class="mb-6 text-2xl md:text-4xl font-bold text-blue-600">
                         {{ plan.price }}<span class="text-lg md:text-xl text-gray-500">{{ plan.period }}</span>
