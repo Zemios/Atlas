@@ -102,18 +102,26 @@
         @if (activeCategory) {
           <div class="grid gap-8 text-gray-600 md:grid-cols-3">
             @for (plan of getActiveCategoryPlans(); track $index) {
-              <div class="rounded-3xl bg-white p-5 shadow-xl hover:scale-105" data-aos="fade-up" attr.data-aos-delay="{{ $index * 100 }}">
-                <div class="p-8">
-                  <h3 class="mb-4 text-2xl font-bold">{{ plan.title }}</h3>
-                  <div class="mb-6 text-4xl font-bold text-blue-600">
-                    {{ plan.price }}<span class="text-xl text-gray-500">{{ plan.period }}</span>
+              <div data-aos="fade-up" attr.data-aos-delay="{{ $index * 100 }}" class="flex flex-col justify-end align-bottom">
+                <div class="hover:scale-105 duration-75">
+                  @if (plan.highlighted) {
+                    <div class="bg-blue-600 rounded-t-3xl text-white" >Más recomendado</div>
+                  }
+                  <div [class.border-2]="plan.highlighted" [class.rounded-t-none]="plan.highlighted" class="rounded-3xl shadow-xl border-blue-600 bg-white">
+                    <div class="p-8">
+                      <h3 class="mb-4 text-2xl font-bold">{{ plan.title }}</h3>
+                      <div class="mb-6 text-4xl font-bold text-blue-600">
+                        {{ plan.price }}<span class="text-xl text-gray-500">{{ plan.period }}</span>
+                      </div>
+                      <button (click)="goToContact(activeCategory, plan.title)" [class.bg-blue-600]="plan.highlighted" [class.text-white]="plan.highlighted" 
+                        class="w-full mb-8 px-6 py-3 border border-blue-600 font-bold text-blue-600">{{ plan.buttonText }}</button>
+                      <ul class="mb-8 space-y-3">
+                        @for (feature of plan.features; track $index) {
+                          <li>✓ {{ feature }}</li>
+                        }
+                      </ul>
+                    </div>
                   </div>
-                  <ul class="mb-8 space-y-3">
-                    @for (feature of plan.features; track $index) {
-                      <li>✓ {{ feature }}</li>
-                    }
-                  </ul>
-                  <button (click)="goToContact(activeCategory, plan.title)" class="w-full bg-blue-600 px-6 py-3 text-white">{{ plan.buttonText }}</button>
                 </div>
               </div>
             }
