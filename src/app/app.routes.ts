@@ -12,6 +12,7 @@ import { ConsultingComponent } from './pages/consulting/consulting.component';
 import { PricingComponent } from './pages/consulting/pricing/pricing.component';
 import { AboutUsComponent } from './pages/consulting/about-us/about-us.component';
 import { ConsultingGuard } from './guards/consulting.guard';
+import { PlanCustomizationComponent } from './pages/consulting/pricing/plan-customization/plan-customization.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [ConsultingGuard] },
@@ -31,6 +32,7 @@ export const routes: Routes = [
       { path: '', component: ConsultingComponent },
       { path: 'contact', component: AboutUsComponent },
       { path: 'pricing', component: PricingComponent },
+      { path: 'test', component: PlanCustomizationComponent },
     ],
   },
 
