@@ -1,58 +1,55 @@
-<div class="quote-container">
-    <div class="header">
-      <h2>Configurador Web</h2>
-      <div class="price">
-        <p>Precio Estimado</p>
-        <h1>{{ price }} €</h1>
+<div class="max-w-[1200px] bg-white rounded-3xl m-5 p-8">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-4xl font-bold text-blue-700">
+        <i class="bi bi-ui-checks-grid me-2"></i>Configurador Web
+      </h2>
+      <div class="bg-green-100 border-2 border-green-500 p-4 rounded-xl text-right">
+        <p class="m-0 font-semibold text-green-600 text-lg">Precio Estimado</p>
+        <h1 class="m-0 text-5xl text-green-600">{{ price }} €</h1>
       </div>
     </div>
   
-    <div class="grid">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
-        <h3>¿Qué tipo de web necesitas?</h3>
-        <div class="option-group">
-          <div class="option" [class.active]="selectedType === 'landing'" (click)="selectedType = 'landing'">
-            <h4>Landing Page</h4>
-            <p>Desde 500€</p>
-          </div>
-          <div class="option" [class.active]="selectedType === 'corporate'" (click)="selectedType = 'corporate'">
-            <h4>Web Corporativa</h4>
-            <p>Desde 1000€</p>
-          </div>
-          <div class="option" [class.active]="selectedType === 'ecommerce'" (click)="selectedType = 'ecommerce'">
-            <h4>Tienda Online</h4>
-            <p>Desde 2000€</p>
-          </div>
+        <!-- Tipo de web -->
+        <h3 class="text-xl mb-4 text-blue-900">
+          <i class="bi bi-laptop me-2"></i>¿Qué tipo de web necesitas?
+        </h3>
+        <div class="flex flex-wrap gap-4 mb-8">
+            @for (type of typeOptions; track $index) {
+                <div class="option w-full" [class.active]="selectedType === type.id" (click)="selectedType = type.id">
+                  <h4>{{ type.name }}</h4>
+                  <p>Desde {{ type.price }}€</p>
+                </div>
+            }
         </div>
   
-        <h3>¿Quieres diseño personalizado?</h3>
-        <div class="option-group">
-          <div class="option" [class.active]="selectedDesign === 'custom'" (click)="selectedDesign = 'custom'">
-            <h4>¡Sí, por favor!</h4>
-            <p>+300€</p>
-          </div>
-          <div class="option" [class.active]="selectedDesign === 'default'" (click)="selectedDesign = 'default'">
-            <h4>No, diseño básico</h4>
-            <p>Incluido</p>
-          </div>
+        <!-- Diseño personalizado -->
+        <h3 class="text-xl mb-4 text-blue-900">
+          <i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?
+        </h3>
+        <div class="flex flex-wrap gap-4 mb-8">
+            @for (design of designOptions; track $index) {
+                <div class="option w-full" [class.active]="selectedDesign === design.id" (click)="selectedDesign = design.id">
+                  <h4>{{ design.name }}</h4>
+                  <p>{{ design.price > 0 ? '+' + design.price + '€' : 'Incluido' }}</p>
+                </div>
+            }
         </div>
       </div>
   
+      <!-- Extras -->
       <div>
-        <h3>Extras</h3>
-        <div class="option-group">
-          <div class="option" [class.active]="selectedExtras.includes('blog')" (click)="toggleExtra('blog')">
-            <h4>Blog</h4>
-            <p>+200€</p>
-          </div>
-          <div class="option" [class.active]="selectedExtras.includes('admin')" (click)="toggleExtra('admin')">
-            <h4>Panel Admin</h4>
-            <p>+400€</p>
-          </div>
-          <div class="option" [class.active]="selectedExtras.includes('seo')" (click)="toggleExtra('seo')">
-            <h4>SEO Básico</h4>
-            <p>+150€</p>
-          </div>
+        <h3 class="text-xl mb-4 text-blue-900">
+          <i class="bi bi-puzzle me-2"></i>Extras
+        </h3>
+        <div class="flex flex-wrap gap-4 mb-8">
+            @for (extra of extraOptions; track $index) {
+                <div class="option w-full" [class.active]="selectedExtras.includes(extra.id)" (click)="toggleExtra(extra.id)">
+                  <h4>{{ extra.name }}</h4>
+                  <p>+{{ extra.price }}€</p>
+                </div>
+            }
         </div>
       </div>
     </div>

@@ -1,82 +1,16 @@
-.quote-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 2rem;
-    font-family: 'Segoe UI', sans-serif;
-  }
+.option {
+    @apply bg-blue-50 border-2 border-transparent rounded-xl p-6 cursor-pointer w-full text-center transition-all shadow-md hover:bg-blue-100;
   
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+    h4 {
+      @apply m-0 text-xl text-blue-900;
+    }
   
-  .price {
-    background: #dcfce7;
-    border: 2px solid #22c55e;
-    padding: 1rem 1.5rem;
-    border-radius: 1rem;
-    text-align: right;
-  }
-  
-  .price p {
-    margin: 0;
-    font-weight: 600;
-    color: #16a34a;
-    font-size: 1.2rem;
-  }
-  
-  .price h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #16a34a;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-  
-  .option-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1rem 0 2rem;
-  }
-  
-  .option {
-    background: #f0f4ff;
-    border: 2px solid transparent;
-    border-radius: 1rem;
-    padding: 1.2rem;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    text-align: center;
-  }
-  
-  .option:hover {
-    background: #dbeaff;
+    p {
+      @apply mt-2 text-lg text-blue-600;
+    }
   }
   
   .option.active {
-    border-color: #1e40af;
-    background: #dbeafe;
-    box-shadow: 0 0 0 5px rgba(59,130,246,0.4);
-    transform: scale(1.03);
+    @apply border-blue-900 bg-blue-100 shadow-[0_0_0_6px_rgba(59,130,246,0.4)] scale-[1.03];
   }
   
-  .option h4 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: #1e3a8a;
-  }
-  
-  .option p {
-    margin: 0.5rem 0 0;
-    font-size: 1rem;
-    color: #2563eb;
-  }
