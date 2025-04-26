@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class PlanCustomizationComponent {
   selectedType: string = '';
-  selectedDesign: string = '';
+  selectedDesign: string = 'default';
   selectedExtras: string[] = [];
 
   typeOptions = [
@@ -17,10 +17,7 @@ export class PlanCustomizationComponent {
     { id: 'ecommerce', name: 'Tienda Online', price: 2000 },
   ];
 
-  designOptions = [
-    { id: 'custom', name: '¡Sí, por favor!', price: 300 },
-    { id: 'default', name: 'No, diseño básico', price: 0 },
-  ];
+  designPrice = 300;
 
   extraOptions = [
     { id: 'blog', name: 'Blog', price: 200 },
@@ -33,10 +30,7 @@ export class PlanCustomizationComponent {
 
     const type = this.typeOptions.find(t => t.id === this.selectedType);
     if (type) total += type.price;
-
-    const design = this.designOptions.find(d => d.id === this.selectedDesign);
-    if (design) total += design.price;
-
+    if (this.selectedDesign === 'custom') total += this.designPrice;
     this.selectedExtras.forEach(extraId => {
       const extra = this.extraOptions.find(e => e.id === extraId);
       if (extra) total += extra.price;
@@ -45,11 +39,22 @@ export class PlanCustomizationComponent {
     return total;
   }
 
+  selectType(typeId: string) {
+    this.selectedType = this.selectedType === typeId ? '' : typeId;
+  }
+
   toggleExtra(extra: string) {
-    if (this.selectedExtras.includes(extra)) {
-      this.selectedExtras = this.selectedExtras.filter(e => e !== extra);
-    } else {
-      this.selectedExtras.push(extra);
-    }
+    this.selectedExtras = this.selectedExtras.includes(extra)
+      ? this.selectedExtras.filter(e => e !== extra)
+      : [...this.selectedExtras, extra];
+  }
+
+  submit() {
+    console.log({
+      type: this.selectedType,
+      design: this.selectedDesign,
+      extras: this.selectedExtras,
+      total: this.price
+    });
   }
 }

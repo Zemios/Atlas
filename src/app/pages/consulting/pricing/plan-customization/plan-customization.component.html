@@ -1,4 +1,4 @@
-<div class="max-w-[1200px] bg-white rounded-3xl m-5 p-8">
+<div class="max-w-[1200px] bg-white rounded-3xl text-gray-700 m-5 p-8">
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-4xl font-bold text-blue-700">
         <i class="bi bi-ui-checks-grid me-2"></i>Configurador Web
@@ -9,7 +9,7 @@
       </div>
     </div>
   
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 gap-8">
       <div>
         <!-- Tipo de web -->
         <h3 class="text-xl mb-4 text-blue-900">
@@ -25,33 +25,52 @@
         </div>
   
         <!-- Diseño personalizado -->
-        <h3 class="text-xl mb-4 text-blue-900">
-          <i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?
-        </h3>
-        <div class="flex flex-wrap gap-4 mb-8">
-            @for (design of designOptions; track $index) {
-                <div class="option w-full" [class.active]="selectedDesign === design.id" (click)="selectedDesign = design.id">
-                  <h4>{{ design.name }}</h4>
-                  <p>{{ design.price > 0 ? '+' + design.price + '€' : 'Incluido' }}</p>
-                </div>
-            }
-        </div>
+<div>
+  <h3 class="text-xl mb-4 text-blue-900 flex items-center">
+    <i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?
+  </h3>
+  <div class="checkbox-wrapper-14">
+    <input
+      id="design-switch"
+      type="checkbox"
+      class="switch"
+      [checked]="selectedDesign === 'custom'"
+      (change)="selectedDesign = $event.target ? 'custom' : 'default'" />
+    <label for="design-switch">
+      {{ selectedDesign === 'custom' ? 'Sí, ¡diseño personalizado (+' + designPrice + '€)' : 'No, diseño básico (Incluido)' }}
+    </label>
+  </div>
+</div>
+
+<!-- Extras -->
+<div>
+  <h3 class="text-xl mb-4 text-blue-900 flex items-center">
+    <i class="bi bi-puzzle me-2"></i>Extras
+  </h3>
+  <div class="flex flex-wrap gap-6">
+    @for (extra of extraOptions; track $index) {
+      <div class="checkbox-wrapper-13">
+        <input
+          id="extra-{{extra.id}}"
+          type="checkbox"
+          [checked]="selectedExtras.includes(extra.id)"
+          (change)="toggleExtra(extra.id)" />
+        <label for="extra-{{extra.id}}">
+          {{ extra.name }} +{{ extra.price }}€
+        </label>
       </div>
-  
-      <!-- Extras -->
-      <div>
-        <h3 class="text-xl mb-4 text-blue-900">
-          <i class="bi bi-puzzle me-2"></i>Extras
-        </h3>
-        <div class="flex flex-wrap gap-4 mb-8">
-            @for (extra of extraOptions; track $index) {
-                <div class="option w-full" [class.active]="selectedExtras.includes(extra.id)" (click)="toggleExtra(extra.id)">
-                  <h4>{{ extra.name }}</h4>
-                  <p>+{{ extra.price }}€</p>
-                </div>
-            }
-        </div>
-      </div>
+    }
+  </div>
+</div>
+
+<!-- Botón de envío -->
+<div class="text-center">
+  <button
+    class="mt-4 px-6 py-3 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+    (click)="submit()">
+    Enviar configuración
+  </button>
+</div>
     </div>
   </div>
   
