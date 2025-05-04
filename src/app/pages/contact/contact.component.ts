@@ -13,13 +13,13 @@ export class ContactComponent {
       name: 'Ismael',
       title: 'Founder',
       photo: 'images/pfp/ismael_photo.webp',
-      url: 'https://www.linkedin.com/in/ismmargar/',
+      url: 'https://www.linkedin.com/in/ismadev/',
     },
     {
       name: 'Eliceo',
       title: 'Co-Founder',
       photo: 'images/pfp/eliceo_photo.webp',
-      url: 'https://www.linkedin.com/in/eliceo-león-237877280/',
+      url: 'https://www.linkedin.com/in/eliceo-león/',
     },
   ];
 }
