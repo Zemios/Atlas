@@ -17,7 +17,7 @@ export class HomeComponent {
     private readonly authService: AuthService,
     private readonly connectionService: ConnectionService,
     private readonly coursesService: CoursesService
-  ) {}
+  ) { }
 
   lastCourses: CourseInterface[] = [];
   backendStatusCode: number = 404;
@@ -35,12 +35,12 @@ export class HomeComponent {
       icon: 'git-merge.svg',
       url: '/projects',
     },
-    {
-      title: 'Sigue Aprendiendo',
-      description: 'Accede a recursos y cursos para seguir desarrollando tus habilidades.',
-      icon: 'chess-pawn.svg',
-      url: '/learning',
-    },
+    // {
+    //   title: 'Sigue Aprendiendo',
+    //   description: 'Accede a recursos y cursos para seguir desarrollando tus habilidades.',
+    //   icon: 'chess-pawn.svg',
+    //   url: '/learning',
+    // },
     {
       title: 'Abre Nuevas Oportunidades',
       description: 'Haz networking y consigue referencias que te ayuden en tu carrera.',
