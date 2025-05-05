@@ -16,14 +16,14 @@ import { PlanCustomizationComponent } from './pages/consulting/pricing/plan-cust
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [ConsultingGuard] },
-  {
-    path: 'learning',
-    children: [
-      { path: '', component: LearningComponent },
-      { path: 'course/:id', component: CourseComponent },
-    ],
-    canActivate: [ConsultingGuard],
-  },
+  // {
+  //   path: 'learning',
+  //   children: [
+  //     { path: '', component: LearningComponent },
+  //     { path: 'course/:id', component: CourseComponent },
+  //   ],
+  //   canActivate: [ConsultingGuard],
+  // },
   { path: 'contact', component: ContactComponent, canActivate: [ConsultingGuard] },
   { path: 'help', component: HelpComponent, canActivate: [ConsultingGuard] },
   {
@@ -32,23 +32,23 @@ export const routes: Routes = [
       { path: '', component: ConsultingComponent },
       { path: 'contact', component: AboutUsComponent },
       { path: 'pricing', component: PricingComponent },
-      { path: 'test', component: PlanCustomizationComponent },
+      // { path: 'test', component: PlanCustomizationComponent },
     ],
   },
 
-  { path: 'login', component: LoginComponent, canActivate: [ConsultingGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [ConsultingGuard] },
-  {
-    path: 'profile',
-    children: [
-      { path: '', component: ProfileComponent },
-      { path: ':id', component: ProfileComponent },
-    ],
-    canActivate: [ConsultingGuard],
-  },
+  // { path: 'login', component: LoginComponent, canActivate: [ConsultingGuard] },
+  // { path: 'register', component: RegisterComponent, canActivate: [ConsultingGuard] },
+  // {
+  //   path: 'profile',
+  //   children: [
+  //     { path: '', component: ProfileComponent },
+  //     { path: ':id', component: ProfileComponent },
+  //   ],
+  //   canActivate: [ConsultingGuard],
+  // },
 
   /* TODO: Esto de aqui??  por qué hay dos?*/
-  { path: 'profile/:id', component: ProfileComponent },
+  // { path: 'profile/:id', component: ProfileComponent },
 
   { path: '404', component: Error404Component, canActivate: [ConsultingGuard] },
   { path: '**', redirectTo: '404', pathMatch: 'full' },
