@@ -6,12 +6,15 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-consulting',
-  imports: [NgClass, RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './consulting.component.html',
   styleUrls: ['consulting.component.scss'],
 })
 export class ConsultingComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) {}
   activeCategory: string = 'redes';
 
   designCards = [

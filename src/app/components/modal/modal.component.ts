@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal',
@@ -21,6 +21,7 @@ export class ModalComponent {
   @Output() acceptAction = new EventEmitter<void>();
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any /* Inyección de datos */,
     private dialogRef: MatDialogRef<ModalComponent>,
     private dialog: MatDialog
   ) {}

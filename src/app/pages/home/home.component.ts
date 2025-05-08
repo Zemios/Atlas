@@ -17,7 +17,7 @@ export class HomeComponent {
     private readonly authService: AuthService,
     private readonly connectionService: ConnectionService,
     private readonly coursesService: CoursesService
-  ) { }
+  ) {}
 
   lastCourses: CourseInterface[] = [];
   backendStatusCode: number = 404;

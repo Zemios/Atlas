@@ -21,7 +21,7 @@ export class AboutUsComponent implements AfterViewInit {
     private fb: FormBuilder
   ) {
     this.contactForm = this.fb.group({
-      message: ['']
+      message: [''],
     });
   }
 
@@ -29,7 +29,6 @@ export class AboutUsComponent implements AfterViewInit {
     this.route.queryParams.subscribe((params) => {
       const queryParams = { id: params['id'], title: params['title'] };
       if (queryParams.id) {
-
         const formMessage = `Estoy interesado en el plan ${queryParams.title} en relación a los servicios de ${queryParams.id}. 
 Agradecería recibir información detallada sobre sus condiciones y beneficios.`;
 
@@ -54,7 +53,7 @@ Agradecería recibir información detallada sobre sus condiciones y beneficios.`
             const elementPosition = this.formElement.nativeElement.getBoundingClientRect().top + window.scrollY;
             window.scrollTo({
               top: elementPosition,
-              behavior: 'smooth'
+              behavior: 'smooth',
             });
           }, 100);
         }
