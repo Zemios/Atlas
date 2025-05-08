@@ -5,21 +5,21 @@ import { RouterLink } from '@angular/router';
   selector: 'app-contact',
   imports: [RouterLink],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss',
+  styleUrls: [],
 })
 export class ContactComponent {
   teamList = [
     {
       name: 'Ismael',
-      title: 'CEO y Desarrollador',
-      photo: 'images/pfp/ismaelPhoto.webp',
-      url: 'https://www.linkedin.com/in/ismmargar/',
+      title: 'Founder',
+      photo: 'images/pfp/ismael_photo.webp',
+      url: 'https://www.linkedin.com/in/ismadev/',
     },
     {
       name: 'Eliceo',
-      title: 'Desarrollador',
-      photo: 'images/pfp/eliceoPhoto.webp',
-      url: 'https://www.linkedin.com/in/eliceo-león-237877280/',
+      title: 'Co-Founder',
+      photo: 'images/pfp/eliceo_photo.webp',
+      url: 'https://www.linkedin.com/in/eliceo-leon/',
     },
   ];
 }

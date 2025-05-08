@@ -5,6 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-help',
   imports: [RouterLink],
   templateUrl: './help.component.html',
-  styleUrl: './help.component.scss',
+  styleUrls: [],
 })
 export class HelpComponent {}

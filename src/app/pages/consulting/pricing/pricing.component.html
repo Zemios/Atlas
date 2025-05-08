@@ -1,0 +1,53 @@
+<div class="flex flex-col">
+  <div class="bg-blue-600 px-6 py-12 text-center text-white">
+    <h1 class="mb-2 text-4xl font-extrabold">Planes y Precios</h1>
+    <p class="text-lg opacity-90">Soluciones en desarrollo web, software, redes sociales y más</p>
+  </div>
+
+  <div class="bg-white px-6 py-6 shadow-md">
+    <div class="relative mx-auto max-w-4xl">
+      <label class="mb-2 block text-lg font-semibold text-gray-700"> Selecciona una categoría: </label>
+    </div>
+    <div class="mx-auto max-w-4xl">
+      <div class="flex flex-wrap justify-center gap-5">
+        @for (category of pricingCategories; track $index) {
+          <button
+            (click)="selectCategory(category.id)"
+            class="w-64 rounded-lg px-4 py-2 font-semibold text-white"
+            [ngClass]="{
+              'bg-blue-600': selectedCategory === category.id,
+              'bg-gray-400': selectedCategory !== category.id,
+            }"
+          >
+            {{ category.name }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 px-6 py-12">
+    <div class="mx-auto max-w-6xl">
+      @if (currentPricing) {
+        <div class="grid grid-cols-1 md:grid-cols-{{ currentPricing.plans.length }} gap-8">
+          @for (plan of currentPricing.plans; track $index) {
+            <div class="flex transform flex-col rounded-lg bg-white p-6 shadow-lg transition-transform hover:scale-105">
+              <h2 class="mb-4 text-2xl font-bold text-blue-800">{{ plan.name }}</h2>
+              <p class="mb-4 text-4xl font-extrabold text-gray-800">{{ plan.price }}</p>
+              <p class="mb-6 text-lg text-gray-600">{{ plan.description }}</p>
+              <ul class="mb-6 space-y-2">
+                @for (feature of plan.features; track $index) {
+                  <li class="flex items-center">
+                    <i class="bi bi-check-circle mr-2 text-green-500"></i>
+                    <span class="text-gray-700">{{ feature }}</span>
+                  </li>
+                }
+              </ul>
+              <a routerLink="/contact" class="mt-auto block w-full rounded bg-blue-600 py-2 text-center text-white transition-colors hover:bg-blue-700"> Elegir Plan </a>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

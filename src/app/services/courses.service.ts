@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CoursesInterface } from '../interfaces/courses-interface';
+import { CourseInterface } from '../interfaces/course-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
-  constructor() { }
-  courses: CoursesInterface[] = [];
+  constructor() {}
+  courses: CourseInterface[] = [
+    {
+      id: 1,
+      title: 'Angular',
+      description: 'Angular is a JavaScript framework for building single-page applications',
+      creation_date: new Date(),
+    },
+  ];
   data = this.courses;
-  show(): Array<CoursesInterface> {
+  show(): Array<CourseInterface> {
     return this.data;
   }
 

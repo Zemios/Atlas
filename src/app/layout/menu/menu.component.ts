@@ -9,36 +9,26 @@ import { IMAGES_URL } from '../../app.config';
   selector: 'app-menu',
   imports: [RouterLink, TranslateModule],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  styleUrls: [],
 })
 export class MenuComponent {
-  logout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
-  }
   @Input() pages: { title: string; url: string; icon: string }[] = [];
+  user: UserInterface | undefined;
   menuVisibility = false;
   isDropdownOpen = false;
-  user: UserInterface | null = null;
   IMAGES_URL = IMAGES_URL;
 
   constructor(
     public router: Router,
     private translate: TranslateService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
     this.authService.subscribeToCurrentUser((user) => {
       this.user = user;
-    })
+    });
   }
 
   translateText(lang: string) {
@@ -61,13 +51,18 @@ export class MenuComponent {
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
     const isMenu = target.closest('app-menu');
+    const isDropdown = target.closest('#dropdown');
     const isMenuItem = target.closest('li');
     if (this.menuVisibility && (!isMenu || isMenuItem)) {
       this.menuVisibility = false;
     }
+    if (this.isDropdownOpen && !isDropdown) {
+      this.isDropdownOpen = false;
+    }
   }
 
   @HostListener('window:scroll', [])
+  // @HostListener('window:click', [])
   @HostListener('window:touchmove', [])
   closeMenu() {
     if (this.menuVisibility) {
@@ -76,5 +71,15 @@ export class MenuComponent {
     if (this.isDropdownOpen) {
       this.isDropdownOpen = false;
     }
+  }
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

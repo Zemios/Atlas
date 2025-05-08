@@ -12,7 +12,7 @@ export class UsersService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {}
   route = '/users/';
   show(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(API_URL + this.route);
@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   update(formData: FormData): Observable<UserInterface> {
-    return this.authService.getCurrentUser().pipe(
+    return this.authService.getActualUser().pipe(
       switchMap((currentUser) => {
         if (!currentUser) {
           return throwError(() => new Error('User authenticated not found.'));

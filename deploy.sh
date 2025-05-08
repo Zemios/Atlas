@@ -24,7 +24,7 @@ git add .
 git commit -m "Actualización del build"
 git push -u origin main
 
-ssh zemios@zemios.com << 'EOF'
+ssh zemios.com << 'EOF'
   if [ ! -d "/home/zemios/zemios.com" ]; then
     git clone /home/zemios/zemios.com.git /home/zemios/zemios.com
   fi

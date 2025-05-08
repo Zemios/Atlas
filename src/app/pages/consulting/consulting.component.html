@@ -1,111 +1,196 @@
-<div class="flex flex-col">
-  <!-- Sección Banner -->
-  <div class="banner flex flex-col flex-wrap items-center justify-around gap-8 rounded-lg bg-gradient-to-r from-gray-800 to-blue-900 px-6 py-24 text-white md:px-20 xl:flex-row">
-    <div class="order-1 flex max-w-lg flex-col items-center text-center md:order-2 md:items-start md:text-left xl:order-1">
-      <h1 class="mb-4 text-4xl font-extrabold leading-tight md:text-5xl">Servicios de Consultoría en Desarrollo Web</h1>
-      <h2 class="mb-6 text-xl font-semibold opacity-80 md:text-2xl">Soluciones a medida para empresas</h2>
-      <p class="mb-6 text-lg opacity-80 md:text-xl">Desde páginas web hasta sistemas completos de software, impulsamos la innovación y el crecimiento de su negocio con tecnologías de vanguardia.</p>
-      <div class="flex flex-wrap items-center justify-center gap-3 text-center">
-        <a routerLink="/contact" class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"> Contáctanos </a>
-        <!-- <a
-            routerLink="/projects"
-            class="transform rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
-          >
-            Ver Proyectos
-          </a> -->
+<div class="flex flex-col overflow-x-hidden">
+  <section class="relative min-h-[91dvh] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
+    <div class="container mx-auto flex flex-col items-center px-6 py-24 text-center md:flex-row md:text-left">
+      <div class="md:w-1/2" data-aos="fade-right">
+        <h1 class="mb-6 text-2xl font-bold leading-tight text-white drop-shadow-lg sm:text-4xl md:text-6xl">
+          <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-3xl text-transparent sm:text-5xl md:text-7xl">Transformamos</span><br />
+          Tu Visión Digital
+        </h1>
+        <p class="mb-8 text-xl text-blue-100 md:text-2xl">Soluciones tecnológicas que impulsan la innovación y el crecimiento empresarial</p>
+        <div class="space-x-4">
+          <a routerLink="/consulting/contact" class="rounded-full bg-blue-500 px-8 py-4 text-lg font-semibold text-white shadow-md shadow-blue-500 transition-all hover:bg-blue-600">
+            Comenzar Proyecto
+          </a>
+        </div>
+      </div>
+      <div class="mt-10 w-3/4 md:w-1/2" data-aos="fade-left">
+        <div class="floating-element relative mx-auto max-w-xl">
+          <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-blue-500 to-blue-600 opacity-50 blur-2xl"></div>
+          <img src="images/consulting/web_development.svg" alt="Diseño Web" class="animate-float relative" />
+        </div>
       </div>
     </div>
-    <div class="order-2 flex justify-center px-3 sm:px-0 md:order-1 xl:order-2">
-      <img src="images/title.svg" routerLink="/" alt="Consulting Banner" class="banner-image h-20 transform transition-transform duration-500 hover:scale-105" />
-    </div>
-  </div>
+  </section>
+  <section class="bg-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Diseños que <span class="text-blue-600">Capturan Esencias</span></h2>
+        <p class="mb-12 text-lg text-gray-600 md:text-xl">Creamos experiencias digitales memorables con enfoque en la simplicidad y funcionalidad</p>
 
-  <!-- Sección de Servicios -->
-  <div class="bg-white px-6 py-16">
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Nuestros Servicios</h2>
-    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">Ofrecemos un amplio rango de servicios para empresas que buscan potenciar su presencia digital y mejorar sus procesos.</p>
-    <div class="flex flex-wrap justify-center gap-8 text-center text-gray-700 md:grid-cols-3">
-      <div class="flex w-full max-w-lg flex-col items-center p-3">
-        <i class="bi bi-code-slash text-primary mb-4 text-9xl text-blue-700"></i>
-        <h3 class="mb-2 text-2xl font-semibold">Desarrollo Web</h3>
-        <p class="px-3">Ofrecemos soluciones de desarrollo web modernas y escalables para tu empresa o proyecto personal.</p>
-      </div>
-      <div class="flex w-full max-w-lg flex-col items-center p-3">
-        <i class="bi bi-brush text-primary mb-4 text-9xl text-blue-700"></i>
-        <h3 class="mb-2 text-2xl font-semibold">Diseño UI/UX</h3>
-        <p class="px-3">Diseñamos interfaces intuitivas y atractivas para mejorar la experiencia del usuario y su interacción con las aplicaciones.</p>
-      </div>
-      <div class="flex w-full max-w-lg flex-col items-center p-3">
-        <i class="bi bi-lightbulb text-primary mb-4 text-9xl text-blue-700"></i>
-        <h3 class="mb-2 text-2xl font-semibold">Consultoría Técnica</h3>
-        <p class="px-3">Brindamos asesoría técnica para guiarte en la toma de decisiones clave y mejorar la eficiencia tecnológica de tus proyectos.</p>
+        <div class="grid gap-12 md:grid-cols-3">
+          @for (card of designCards; track $index) {
+            <div class="rounded-3xl bg-white p-5 shadow-xl transition-all hover:scale-105" data-aos="fade-up">
+              <div class="mb-4 h-16 w-16 rounded-full bg-blue-100 p-3">
+                <i class="{{ card.icon }} text-4xl text-blue-600"></i>
+              </div>
+              <h3 class="mb-3 text-2xl font-bold text-gray-800">{{ card.title }}</h3>
+              <p class="text-gray-600">{{ card.description }}</p>
+            </div>
+          }
+        </div>
       </div>
     </div>
-  </div>
-  <div class="bg-gray-100 px-6 py-16">
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">¿Por qué elegirnos?</h2>
-    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">
-      Nos destacamos por nuestra dedicación, experiencia técnica y enfoque personalizado. Aportamos soluciones tecnológicas de alto valor que se ajustan a las necesidades de cada cliente.
-    </p>
-    <div class="flex flex-wrap justify-center gap-8 text-center text-gray-700">
-      <div class="max-w-xs">
-        <i class="bi bi-people mb-4 text-9xl text-blue-700"></i>
-        <h3 class="my-2 text-2xl font-semibold">Enfoque Personalizado</h3>
-        <p>Nos tomamos el tiempo para entender a fondo las necesidades de cada cliente y ofrecer soluciones a medida.</p>
-      </div>
-      <div class="max-w-xs">
-        <i class="bi bi-speedometer mb-4 text-9xl text-blue-700"></i>
-        <h3 class="my-2 text-2xl font-semibold">Rápido y Eficiente</h3>
-        <p>Ofrecemos servicios ágiles, sin sacrificar calidad ni atención al detalle, garantizando la entrega en tiempo y forma.</p>
-      </div>
-      <div class="max-w-xs">
-        <i class="bi bi-award mb-4 text-9xl text-blue-700"></i>
-        <h3 class="my-2 text-2xl font-semibold">Calidad Garantizada</h3>
-        <p>Nos comprometemos con altos estándares de calidad en cada uno de nuestros desarrollos, utilizando las últimas tecnologías.</p>
-      </div>
-    </div>
-  </div>
-  <div class="bg-gray-900 px-6 py-24 text-center text-white">
-    <h2 class="mb-8 text-4xl font-bold">Nuestra Visión</h2>
-    <p class="mb-4 text-xl">Creemos en un futuro lleno de oportunidades, construimos soluciones innovadoras para facilitar el éxito de los desarrolladores y empresas.</p>
-    <p class="text-xl">Nuestro objetivo es impulsar a las nuevas generaciones de profesionales con herramientas, proyectos y colaboración de alta calidad.</p>
-  </div>
-  <div class="bg-white px-6 py-16">
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800 md:text-4xl">Tecnologías que utilizamos</h2>
-    <p class="mb-6 text-center text-lg text-gray-700 md:text-xl">Trabajamos con tecnologías líderes en el mercado para garantizar la calidad y el rendimiento de nuestras soluciones.</p>
-    <div class="flex flex-wrap items-stretch justify-center gap-8 text-center">
-      <div class="flex max-w-xs flex-col items-center justify-between gap-3 text-neutral-900">
-        <img src="icons/angular-icon.svg" class="max-h-52 max-w-44" />
-        <h3 class="mb-2 text-2xl font-semibold text-red-700">Angular</h3>
-        <p>Desarrollamos aplicaciones web rápidas, interactivas y escalables para llevar tu negocio al siguiente nivel.</p>
-      </div>
-      <div class="flex max-w-xs flex-col items-center justify-between gap-3 text-neutral-900">
-        <img src="icons/nestjs-icon.svg" class="max-h-52 max-w-44" />
-        <h3 class="mb-2 text-2xl font-semibold text-red-700">NestJS</h3>
-        <p>Creamos APIs robustas y eficientes para asegurar el rendimiento y escalabilidad de tu infraestructura backend.</p>
+  </section>
+
+  <section class="corporate-backend-section bg-gradient-to-r from-slate-800 to-slate-900 py-20">
+    <div class="container mx-auto px-6">
+      <div class="grid items-center gap-12 md:grid-cols-2">
+        <div class="flex justify-center" data-aos="fade-right">
+          <img src="images/consulting/business_plan.svg" alt="Arquitectura de Backend" class="duration-300 hover:scale-105" />
+        </div>
+        <div class="text-white" data-aos="fade-left">
+          <h2 class="mb-6 text-4xl font-bold">Soluciones <span class="text-blue-400">Backend</span> & <span class="text-green-400">Software a Medida</span></h2>
+          <p class="mb-8 text-lg">Desarrollamos sistemas robustos, escalables e integrados que maximizan la eficiencia operativa y la rentabilidad de tu empresa.</p>
+          <ul class="mb-8 space-y-4">
+            @for (softwareProperty of softwareProperties; track $index) {
+              <li class="flex items-center">
+                <svg class="mr-3 h-4 w-4 {{ softwareProperty.color }}" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" /></svg>
+                <p>{{ softwareProperty.text }}</p>
+              </li>
+            }
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="bg-gray-100 px-6 py-16">
-    <h2 class="mb-6 text-center text-3xl font-bold text-blue-800">Preguntas Frecuentes</h2>
-    <div class="mx-auto max-w-3xl text-gray-800">
-      <div class="mb-6">
-        <h3 class="mb-2 text-xl font-semibold">¿Qué tipo de soluciones ofrecen?</h3>
-        <p>Ofrecemos soluciones de desarrollo web, diseño UX/UI, consultoría técnica, análisis SEO y asesoramiento en tecnologías.</p>
-      </div>
-      <div class="mb-6">
-        <h3 class="mb-2 text-xl font-semibold">¿Cuánto tiempo tarda un proyecto?</h3>
-        <p>El tiempo de entrega depende del alcance del proyecto, pero garantizamos plazos ajustados sin comprometer la calidad.</p>
-      </div>
-      <div class="mb-6">
-        <h3 class="mb-2 text-xl font-semibold">¿Qué tecnologías utilizan?</h3>
-        <p>Trabajamos con tecnologías modernas como Angular, NestJS, TypeScript, Node.js, TailwindCSS, entre otras.</p>
+  </section>
+
+  <section class="bg-gradient-to-br from-purple-600 to-pink-500 py-20">
+    <div class="container mx-auto px-6 text-center text-white">
+      <h2 class="mb-8 text-4xl font-bold md:text-5xl">Impulso en <span class="text-yellow-300">Redes Sociales</span></h2>
+      <p class="mx-auto mb-12 max-w-2xl text-xl">Creamos estrategias digitales que generan engagement y conversiones</p>
+
+      <div class="grid gap-8 md:grid-cols-4">
+        @for (card of socialCards; track $index) {
+          <div class="rounded-2xl bg-white bg-opacity-5 p-5 transition-all hover:scale-105 hover:bg-opacity-20" data-aos="zoom-in">
+            <i class="{{ card.icon }} text-6xl transition-colors duration-300 "></i>
+            <h3 class="mt-4 text-xl font-bold">{{ card.title }}</h3>
+            <p>{{ card.description }}</p>
+          </div>
+        }
       </div>
     </div>
-  </div>
-  <div class="bg-blue-800 px-6 py-24 text-center text-white">
-    <h2 class="mb-6 text-3xl font-bold md:text-4xl">¿Listo para llevar su empresa al siguiente nivel?</h2>
-    <p class="mb-8 text-lg opacity-80 md:text-xl">Contáctenos y juntos crearemos la solución tecnológica perfecta para su negocio.</p>
-    <a routerLink="/contact" class="transform rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-all duration-300 hover:scale-105 hover:bg-gray-100"> Contáctanos </a>
-  </div>
+  </section>
+
+  <!-- TODO: Plan selector -->
+  <!-- <section class="bg-slate-50 py-20">
+    <div class="container mx-auto px-6">
+      <div class="text-center">
+        <h2 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">Planes <span class="text-blue-600">Flexibles</span></h2>
+        <p class="mb-12 text-lg text-gray-600">Elige el paquete que mejor se adapte a tus necesidades</p>
+
+        <div class="mb-16 flex flex-wrap justify-center gap-4">
+          @for (category of pricingCategories; track $index) {
+            <button
+              (click)="setActiveCategory(category.id)"
+              [ngClass]="{ 'bg-blue-600 text-white': isActiveCategory(category.id), 'bg-white text-gray-600': !isActiveCategory(category.id) }"
+              class="rounded-full px-8 py-3 shadow-lg transition-all hover:scale-105"
+            >
+              {{ category.name }}
+            </button>
+          }
+        </div>
+
+        @if (activeCategory) {
+          <div class="grid gap-4 lg:gap-8 text-gray-600 md:grid-cols-3">
+            @for (plan of getActiveCategoryPlans(); track $index) {
+              <div data-aos="fade-up" attr.data-aos-delay="{{ $index * 100 }}" class="flex flex-col justify-end align-bottom">
+                <div class="hover:scale-105 duration-75">
+                  @if (plan.highlighted) {
+                    <div class="bg-blue-600 rounded-t-3xl text-white uppercase font-bold text-xs md:text-sm py-1" >Opción más popular</div>
+                  }
+                  <div [class.border-2]="plan.highlighted" [class.rounded-t-none]="plan.highlighted" class="rounded-3xl shadow-xl border-blue-600 bg-white">
+                    <div class="p-4 lg:p-8">
+                      <h3 class="mb-4 text-xl md:text-2xl font-bold">{{ plan.title }}</h3>
+                      <div class="mb-6 text-2xl md:text-4xl font-bold text-blue-600">
+                        {{ plan.price }}<span class="text-lg md:text-xl text-gray-500">{{ plan.period }}</span>
+                      </div>
+                      <button (click)="goToContact(activeCategory, plan.title)" [class.bg-blue-600]="plan.highlighted" [class.text-white]="plan.highlighted" 
+                        class="w-full mb-8 px-6 py-3 border border-blue-600 font-bold text-blue-600">{{ plan.buttonText }}</button>
+                      <ul class="mb-8 space-y-3">
+                        @for (feature of plan.features; track $index) {
+                          <li>✓ {{ feature }}</li>
+                        }
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section> -->
+  <!-- TODO: WIP Custom plan creation -->
+<!--   <section class="flex flex-col justify-center">
+    <div class="container mx-auto px-6 py-20 text-center text-gray-600">
+      <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">Crea tu propio <span class="text-green-400"> plan</span></h2>
+      <p class="mb-12 text-lg text-gray-200">Selecciona las características que deseas</p>
+
+      <div class="m-auto my-12 rounded-xl bg-gray-100 p-8 shadow-lg">
+        <h3 class="mb-4 text-2xl font-bold">Personalizado</h3>
+        <div class="mb-6 text-4xl font-bold text-blue-600">{{ totalPrice }}€<span class="text-xl text-gray-500">/mes</span></div>
+        <div class="mb-6">
+          @for (feature of customFeatures; track $index) {
+            <div class="mb-3 flex items-center">
+              <input type="checkbox" [id]="feature.id" [(ngModel)]="feature.selected" (change)="updatePrice()" class="mr-2" />
+              <label [for]="feature.id" class="text-gray-700">{{ feature.name }}</label>
+            </div>
+          }
+        </div>
+
+        <div class="mb-6">
+          <div class="w-fit pt-1 text-start">
+            <label for="publicaciones" class="mb-2 block text-gray-700">Número de publicaciones por mes: {{ customPlan.publicaciones }}</label>
+            <input
+              type="range"
+              id="publicaciones"
+              min="5"
+              max="50"
+              step="5"
+              [(ngModel)]="customPlan.publicaciones"
+              (input)="updatePrice()"
+              class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 text-blue-500 accent-blue-600"
+            />
+            <div class="flex justify-between px-2 text-xs">
+              <span class="text-gray-500">5</span>
+              <span class="text-gray-500">50</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-full bg-blue-600 px-6 py-3 text-white">Crear Plan Personalizado</button>
+      </div> 
+    </div>
+  </section> -->
+  <section class="relative overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-700 py-24 text-center text-white">
+    <div class="container mx-auto px-6">
+      <ul class="mb-8 flex flex-wrap justify-center gap-5 text-4xl font-bold md:text-6xl">
+        <li data-aos="fade-up"><p>¿Listo</p></li>
+        <li data-aos="fade-up" data-aos-delay="50"><p>para</p></li>
+        <li data-aos="fade-up" data-aos-delay="100"><p class="text-yellow-400">Revolucionar</p></li>
+        <li data-aos="fade-up" data-aos-delay="150"><p>tu</p></li>
+        <li data-aos="fade-up" data-aos-delay="200"><p>Presencia</p></li>
+        <li data-aos="fade-up" data-aos-delay="250"><p>Digital?</p></li>
+      </ul>
+      <p class="mx-auto mb-12 max-w-2xl text-xl" data-aos="fade-right">Contáctanos hoy mismo y recibe una consultoría gratuita</p>
+      <button
+        routerLink="/consulting/contact"
+        class="rounded-full bg-yellow-400 px-12 py-4 text-lg font-bold text-blue-900 shadow-2xl shadow-yellow-400 transition-all hover:scale-110"
+        data-aos="zoom-in"
+      >
+        Comenzar Ahora
+      </button>
+    </div>
+  </section>
 </div>

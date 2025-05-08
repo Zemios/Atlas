@@ -22,7 +22,7 @@
         @for (member of teamList; track $index) {
           <a [href]="member.url" target="_blank" class="w-44">
             <div class="flex flex-col items-center">
-              <img [src]="member.photo" onerror="this.src='error.svg'" alt="Miembro del equipo" class="mb-4 h-24 w-24 rounded-full" />
+              <img [src]="member.photo" loading="lazy" onerror="this.src='error.svg'" alt="Miembro del equipo" class="mb-4 h-24 w-24 rounded-full" />
               <p class="text-lg font-semibold text-blue-800">
                 {{ member.name }}
               </p>
@@ -81,20 +81,16 @@
         ></textarea>
       </div>
       <div class="flex justify-center">
-        <button type="submit" class="transform rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800">
-          Enviar mensaje
-        </button>
+        <button type="submit" class="button">Enviar mensaje</button>
       </div>
     </form>
   </div>
 
   <!-- Sección de ayuda -->
-  <div class="bg-white py-12">
+  <div class="bg-white px-3 py-12">
     <div class="text-center">
       <h2 class="mb-6 text-3xl font-bold text-blue-800">¿Necesitas ayuda?</h2>
-      <button routerLink="/help" class="mx-3 rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-800">
-        Visita nuestra página de ayuda
-      </button>
+      <button routerLink="/help" class="button">Visita nuestra página de ayuda</button>
     </div>
   </div>
 

@@ -1,13 +1,37 @@
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-@import 'flag-icons/css/flag-icons.min.css';
+@use 'bootstrap-icons/font/bootstrap-icons.min.css';
+
+// @import 'flag-icons/css/flag-icons.min.css';
+@import 'highlight.js/styles/github.css';
 @tailwind base;
 @tailwind components;
+
+.button {
+  @apply rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-800;
+
+  &-highlight {
+    @apply rounded-full bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-600;
+  }
+
+  &-white {
+    @apply rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 hover:bg-gray-100;
+
+    &-outline {
+      @apply rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+    }
+  }
+
+  &-close {
+    @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent px-4 py-3 transition duration-75 hover:scale-105;
+  }
+}
+
 @tailwind utilities;
 
 html,
 body {
   height: 100%;
 }
+
 body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: whitesmoke;
@@ -22,6 +46,22 @@ app-root {
   display: grid;
   min-height: 100vh;
   grid-template-rows: auto 0 1fr auto;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  background-color: rgb(37 99 235);
+  border-radius: 50% !important;
+  width: 1em;
+  height: 1em;
+  appearance: none;
+}
+
+input[type='range']::-moz-range-thumb {
+  background-color: rgb(37 99 235);
+  border-radius: 50% !important;
+  width: 1em;
+  height: 1em;
+  appearance: none;
 }
 
 .banner {
@@ -66,16 +106,20 @@ app-root {
 // @media (width >= 1920px) {
 // }
 
-.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface { background-color: unset !important; }
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  /* prettier-ignore */
+  background-color: unset !important; // eslint-disable-line declaration-no-important
+}
+
 .custom-snackbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 1em;
   box-shadow:
-    0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    0 3px 5px -1px rgb(0 0 0 / 20%),
+    0 6px 10px 0 rgb(0 0 0 / 14%),
+    0 1px 18px 0 rgb(0 0 0 / 12%);
   font-size: 16px;
   color: white;
 }
