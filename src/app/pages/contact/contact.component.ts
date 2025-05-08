@@ -19,7 +19,7 @@ export class ContactComponent {
       name: 'Eliceo',
       title: 'Co-Founder',
       photo: 'images/pfp/eliceo_photo.webp',
-      url: 'https://www.linkedin.com/in/eliceo-león/',
+      url: 'https://www.linkedin.com/in/eliceo-leon/',
     },
   ];
 }
