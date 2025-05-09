@@ -4,6 +4,7 @@
 @import 'highlight.js/styles/github.css';
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 .button {
   @apply rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-800;
@@ -24,8 +25,6 @@
     @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent px-4 py-3 transition duration-75 hover:scale-105;
   }
 }
-
-@tailwind utilities;
 
 html,
 body {

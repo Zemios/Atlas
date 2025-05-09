@@ -12,12 +12,12 @@
       true,
       {
         "ignoreAtRules": [
-          "tailwind",
           "apply",
-          "layer",
           "variants",
           "responsive",
-          "screen"
+          "screen",
+          "layer",
+          "tailwind"
         ]
       }
     ],
