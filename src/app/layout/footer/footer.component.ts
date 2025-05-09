@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
   selector: 'app-footer',
   imports: [RouterLink],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss',
+  styleUrl: './footer.component.css',
 })
 export class FooterComponent {
   @Input() pages: { title: string; url: string; icon: string }[] = [];
