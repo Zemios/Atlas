@@ -1,14 +1,11 @@
 {
   "extends": [
-    "stylelint-config-standard-scss",
+    "stylelint-config-standard",
     "stylelint-config-tailwindcss"
   ],
-  "plugins": [
-    "stylelint-scss"
-  ],
+  "plugins": [],
   "rules": {
-    "at-rule-no-unknown": null,
-    "scss/at-rule-no-unknown": [
+    "at-rule-no-unknown": [
       true,
       {
         "ignoreAtRules": [
@@ -21,9 +18,6 @@
         ]
       }
     ],
-    "scss/dollar-variable-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-    "scss/selector-no-redundant-nesting-selector": true,
-    "scss/double-slash-comment-whitespace-inside": "always",
     "selector-pseudo-element-no-unknown": [
       true,
       {
@@ -41,7 +35,10 @@
     "color-no-invalid-hex": true,
     "declaration-no-important": true,
     "shorthand-property-no-redundant-values": true,
-    "unit-disallowed-list": ["cm", "mm"],
+    "unit-disallowed-list": [
+      "cm",
+      "mm"
+    ],
     "block-no-empty": true,
     "no-empty-source": null,
     "no-descending-specificity": null

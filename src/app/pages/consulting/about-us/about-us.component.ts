@@ -8,7 +8,7 @@ import AOS from 'aos';
   selector: 'app-about-us',
   imports: [ReactiveFormsModule],
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.scss'],
+  styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements AfterViewInit {
   contactForm: FormGroup;
