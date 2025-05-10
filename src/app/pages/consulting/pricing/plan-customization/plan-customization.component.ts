@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-plan-customization',
   templateUrl: './plan-customization.component.html',
-  styleUrl: './plan-customization.component.scss',
+  styleUrl: './plan-customization.component.css',
   standalone: true,
 })
 export class PlanCustomizationComponent {
