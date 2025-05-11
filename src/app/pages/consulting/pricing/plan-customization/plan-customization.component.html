@@ -7,47 +7,105 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1 gap-8">
-    <div>
-      <!-- Tipo de web -->
-      <h3 class="mb-4 text-xl text-blue-900"><i class="bi bi-laptop me-2"></i>¿Qué tipo de web necesitas?</h3>
-      <div class="mb-8 flex flex-wrap gap-4">
-        @for (type of typeOptions; track $index) {
-          <div class="option w-full" [class.active]="selectedType === type.id" (click)="selectedType = type.id">
-            <h4>{{ type.name }}</h4>
-            <p>Desde {{ type.price }}€</p>
-          </div>
-        }
-      </div>
-
-      <!-- Diseño personalizado -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?</h3>
-        <div class="checkbox-wrapper-14">
-          <input id="design-switch" type="checkbox" class="switch" [checked]="selectedDesign === 'custom'" (change)="selectedDesign = $event.target ? 'custom' : 'default'" />
-          <label for="design-switch">
-            {{ selectedDesign === 'custom' ? 'Sí, ¡diseño personalizado (+' + designPrice + '€)' : 'No, diseño básico (Incluido)' }}
+    <h2>Personaliza tu plan</h2>
+  
+    <!-- Sección Web -->
+    <section>
+      <h3>Web</h3>
+      @for (web of webOptions; track $index) {
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="web"
+              [value]="web.id"
+              [(ngModel)]="selectedWeb"
+            />
+            {{ web.name }} - {{ web.price }}€{{ web.monthly ? '/mes' : '' }}
           </label>
         </div>
-      </div>
-
-      <!-- Extras -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-puzzle me-2"></i>Extras</h3>
-        <div class="flex flex-wrap gap-6">
-          @for (extra of extraOptions; track $index) {
-            <div class="checkbox-wrapper-13">
-              <input id="extra-{{ extra.id }}" type="checkbox" [checked]="selectedExtras.includes(extra.id)" (change)="toggleExtra(extra.id)" />
-              <label for="extra-{{ extra.id }}"> {{ extra.name }} +{{ extra.price }}€ </label>
-            </div>
-          }
+      }
+    </section>
+  
+    <!-- Sección Software -->
+    <section>
+      <h3>Software</h3>
+      @for (software of softwareOptions; track $index) {
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="software"
+              [value]="software.id"
+              [(ngModel)]="selectedSoftware"
+            />
+            {{ software.name }} - {{ software.price }}€{{ software.monthly ? '/mes' : '' }}
+          </label>
         </div>
-      </div>
+      }
+    </section>
+  
+    <!-- Sección Redes Sociales -->
+    <section>
+      <h3>Redes Sociales</h3>
+      @for (social of socialOptions; track $index) {
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="social"
+              [value]="social.id"
+              [(ngModel)]="selectedSoftware"
+            />
+            {{ social.name }} - {{ social.price }}€{{ social.monthly ? '/mes' : '' }}
+          </label>
+        </div>
+      }
+    </section>
+  
+    <!-- Diseño personalizado -->
+    <section>
+      <h3>Diseño</h3>
+      <label>
+        <input
+          type="radio"
+          name="design"
+          value="default"
+          [(ngModel)]="selectedDesign"
+        />
+        Plantilla por defecto - 0€
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="design"
+          value="custom"
+          [(ngModel)]="selectedDesign"
+        />
+        Diseño personalizado - 300€
+      </label>
+    </section>
+  
+    <!-- Extras -->
+    <section>
+      <h3>Extras</h3>
+      @for  (extra of extraOptions; track $index) {
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              [value]="extra.id"
+              [checked]="selectedExtras.includes(extra.id)"
+              (change)="toggleExtra(extra.id)"
+            />
+            {{ extra.name }} - {{ extra.price }}€{{ extra.monthly ? '/mes' : '' }}
+          </label>
+        </div>
+      }
+    </section>
 
       <!-- Botón de envío -->
       <div class="text-center">
         <button class="mt-4 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700" (click)="submit()">Enviar configuración</button>
       </div>
     </div>
-  </div>
-</div>
