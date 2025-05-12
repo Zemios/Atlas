@@ -16,7 +16,6 @@ type planOption = {
   id: string;
   name: string;
   price: number;
-  paymentMode?: paymentModeEnum;
   type?: inputType.RADIO | inputType.CHECKBOX;
   group?: string;
 };
@@ -41,29 +40,31 @@ export class PlanCustomizationComponent {
 
   // Sección Web
   webOptions: planOption[] = [
-    { id: 'web-basic', name: 'Página web básica', price: 300, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'tienda', name: 'Tienda online', price: 500, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'app-web', name: 'App web con backend', price: 1200, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'no-web', name: 'Sin página web', price: 0, type: inputType.RADIO, group: 'web' },
+    { id: 'web-basic', name: 'Página web básica', price: 300, type: inputType.RADIO, group: 'web' },
+    { id: 'tienda', name: 'Tienda online', price: 500, type: inputType.RADIO, group: 'web' },
+    { id: 'app-web', name: 'App web con backend', price: 1200, type: inputType.RADIO, group: 'web' },
 
-    { id: 'paginas-extra', name: 'Páginas extra (x2)', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'seo', name: 'SEO', price: 50, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'blog', name: 'Blog', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'multilenguaje', name: 'Multilenguaje (2 idiomas)', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
-    { id: 'analytics', name: 'Google Analytics', price: 25, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'paginas-extra', name: 'Páginas extra (x2)', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
+    { id: 'seo', name: 'SEO', price: 50, type: inputType.CHECKBOX, group: 'web-extra' },
+    { id: 'blog', name: 'Blog', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
+    { id: 'multilenguaje', name: 'Multilenguaje (2 idiomas)', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
+    { id: 'analytics', name: 'Google Analytics', price: 25, type: inputType.CHECKBOX, group: 'web-extra' },
   ];
 
   // Sección Redes Sociales
   socialOptions: planOption[] = [
-    { id: 'social-base', name: 'Red social base', price: 100, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'red-adicional', name: 'Red adicional', price: 50, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'publicaciones-3', name: '3 publicaciones semanales', price: 30, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'publicaciones-4', name: '4 publicaciones semanales', price: 60, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'publicaciones-5', name: '5 publicaciones semanales', price: 90, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'historias', name: 'Historias (por red)', price: 20, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'reels-pack', name: 'Reels/Tiktoks (Pack 4/mes)', price: 100, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'no-social', name: 'Sin gestión de redes sociales', price: 0 },
+    { id: 'social-base', name: 'Red social base', price: 100 },
+    { id: 'red-adicional', name: 'Red adicional', price: 50 },
+    { id: 'publicaciones-3', name: '3 publicaciones semanales', price: 30 },
+    { id: 'publicaciones-4', name: '4 publicaciones semanales', price: 60 },
+    { id: 'publicaciones-5', name: '5 publicaciones semanales', price: 90 },
+    { id: 'historias', name: 'Historias (por red)', price: 20 },
+    { id: 'reels-pack', name: 'Reels/Tiktoks (Pack 4/mes)', price: 100 },
     { id: 'reels-unitario', name: 'Reels/Tiktoks (unidad)', price: 30 },
-    { id: 'informe', name: 'Informe de rendimiento', price: 20, paymentMode: paymentModeEnum.MONTHLY },
-    { id: 'mensajes', name: 'Atención a mensajes (básico)', price: 40, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'informe', name: 'Informe de rendimiento', price: 20 },
+    { id: 'mensajes', name: 'Atención a mensajes (básico)', price: 40 },
     { id: 'campanas', name: 'Gestión de campañas publicitarias', price: 50 },
     { id: 'branding', name: 'Diseño branding redes', price: 60 },
   ];

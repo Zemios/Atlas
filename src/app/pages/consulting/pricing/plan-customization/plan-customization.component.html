@@ -1,15 +1,15 @@
 <div class="m-6 rounded-3xl bg-white p-8 shadow-lg text-gray-800">
   <!-- Encabezado -->
   <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-    <h2 class="text-3xl md:text-4xl font-bold text-blue-800 flex items-center gap-2">
+    <h2 class="text-3xl md:text-4xl font-bold text-blue-800 flex items-center gap-2 py-7">
       <i class="bi bi-ui-checks-grid"></i> Configurador Web
     </h2>
 
     <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-end md:items-center">
-      @if (price > 0) {
+      @if (price > 0 || priceMonthly <= 0) {
         <div class="rounded-xl border-2 border-blue-500 bg-blue-100 px-5 py-3 text-right shadow-sm">
-          <p class="text-sm md:text-base font-medium text-blue-700">Precio Estimado</p>
-          <h1 class="text-3xl md:text-4xl font-bold text-blue-700">{{ price }} €</h1>
+          <p class="text-sm md:text-base font-medium text-blue-700">{{(price > 0 ) ? 'Precio Estimado': 'Introduce Preferencias'}}</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-blue-700">{{ (price > 0) ? (price + ' €') : '' }}</h1>
         </div>
       }
       @if (priceMonthly > 0) {
@@ -28,19 +28,19 @@
       <div class="mb-4 flex flex-wrap gap-3 items-center">
         <h3 class="text-2xl font-bold text-blue-700">Web</h3>
         <button
-          class="rounded-full border border-blue-500 px-4 py-1 text-xs font-medium transition"
+          class="rounded-full border text-blue-700 border-blue-500 px-4 py-1 text-xs font-medium transition"
           [ngClass]="{
-            'bg-blue-100 text-blue-700': paymentMode === 'one-time',
-            'bg-white text-blue-700': paymentMode !== 'one-time'
+            'bg-blue-100': paymentMode === 'one-time',
+            'bg-white': paymentMode !== 'one-time'
           }"
           (click)="paymentMode = paymentModeEnum.ONE_TIME">
           Pago único
         </button>
         <button
-          class="rounded-full border border-blue-400 px-4 py-1 text-xs font-medium transition"
+          class="rounded-full border text-blue-600 border-blue-400 px-4 py-1 text-xs font-medium transition"
           [ngClass]="{
-            'bg-blue-50 text-blue-600': paymentMode === 'monthly',
-            'bg-white text-blue-600': paymentMode !== 'monthly'
+            'bg-blue-50': paymentMode === 'monthly',
+            'bg-white': paymentMode !== 'monthly'
           }"
           (click)="paymentMode = paymentModeEnum.MONTHLY">
           Pago mensual
@@ -58,14 +58,11 @@
                 class="mr-2"
                 [(ngModel)]="selectedWeb"
               />
-              <span class="font-medium">{{ web.name }}</span> –
+              <span class="font-medium">{{ web.name }}</span>
               <span>
-                {{
-                  paymentMode == paymentModeEnum.ONE_TIME
-                    ? web.price + priceAjustment
-                    : (web.price / 10) - 5 + priceAjustment
-                }}€
-                {{ paymentMode == paymentModeEnum.ONE_TIME ? '' : '/mes' }}
+                @if (web.price > 0) {
+                  - {{ paymentMode == paymentModeEnum.ONE_TIME ? web.price + priceAjustment + '€' : (web.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                }
               </span>
             </label>
           }
@@ -86,10 +83,9 @@
               class="mr-2"
               [(ngModel)]="selectedSocial"
             />
-            <span class="font-medium">{{ social.name }}</span> –
+            <span class="font-medium">{{ social.name }}</span> 
             <span>
-              {{ social.price + priceAjustment }}€
-              {{ social.paymentMode == paymentModeEnum.MONTHLY ? '/mes' : '' }}
+              {{ social.price > 0 ? ('- ' + social.price + priceAjustment + '€ /mes') : '' }}
             </span>
           </label>
         }
