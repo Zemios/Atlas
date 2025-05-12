@@ -6,42 +6,41 @@
       <h1 class="m-0 text-5xl text-green-600">{{ price }} €</h1>
     </div>
   </div>
-
-    <h2>Personaliza tu plan</h2>
   
     <!-- Sección Web -->
+    <div class="mb-4 flex gap-4">
+      <button
+        class="rounded-lg border-2 px-4 py-2 font-semibold transition"
+        [ngClass]="{ 'bg-blue-600 text-white': paymentMode === 'one-time', 'bg-white text-blue-600': paymentMode !== 'one-time' }"
+        (click)="paymentMode = paymentModeEnum.ONE_TIME"
+      >
+        Pago único
+      </button>
+      <button
+        class="rounded-lg border-2 px-4 py-2 font-semibold transition"
+        [ngClass]="{ 'bg-blue-600 text-white': paymentMode === 'monthly', 'bg-white text-blue-600': paymentMode !== 'monthly' }"
+        (click)="paymentMode = paymentModeEnum.MONTHLY"
+      >
+        Pago mensual
+      </button>
+    </div>
     <section>
       <h3>Web</h3>
       @for (web of webOptions; track $index) {
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="web"
-              [value]="web.id"
-              [(ngModel)]="selectedWeb"
-            />
-            {{ web.name }} - {{ web.price }}€{{ web.monthly ? '/mes' : '' }}
-          </label>
-        </div>
-      }
-    </section>
-  
-    <!-- Sección Software -->
-    <section>
-      <h3>Software</h3>
-      @for (software of softwareOptions; track $index) {
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="software"
-              [value]="software.id"
-              [(ngModel)]="selectedSoftware"
-            />
-            {{ software.name }} - {{ software.price }}€{{ software.monthly ? '/mes' : '' }}
-          </label>
-        </div>
+        <!-- @if (web.paymentMode === paymentMode) { -->
+          <div>
+            <label>
+              <input
+                type="radio"
+                [name]="web.group || 'web-extras'"
+                [value]="web.id"
+                [(ngModel)]="selectedWeb"
+                [disabled]="web.paymentMode !== paymentMode"
+              />
+              {{ web.name }} - {{ web.price }}€{{ web.paymentMode == paymentModeEnum.MONTHLY ? '/mes' : '' }}
+            </label>
+          </div>
+        <!-- } -->
       }
     </section>
   
@@ -55,50 +54,9 @@
               type="radio"
               name="social"
               [value]="social.id"
-              [(ngModel)]="selectedSoftware"
+              [(ngModel)]="selectedSocial"
             />
-            {{ social.name }} - {{ social.price }}€{{ social.monthly ? '/mes' : '' }}
-          </label>
-        </div>
-      }
-    </section>
-  
-    <!-- Diseño personalizado -->
-    <section>
-      <h3>Diseño</h3>
-      <label>
-        <input
-          type="radio"
-          name="design"
-          value="default"
-          [(ngModel)]="selectedDesign"
-        />
-        Plantilla por defecto - 0€
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="design"
-          value="custom"
-          [(ngModel)]="selectedDesign"
-        />
-        Diseño personalizado - 300€
-      </label>
-    </section>
-  
-    <!-- Extras -->
-    <section>
-      <h3>Extras</h3>
-      @for  (extra of extraOptions; track $index) {
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              [value]="extra.id"
-              [checked]="selectedExtras.includes(extra.id)"
-              (change)="toggleExtra(extra.id)"
-            />
-            {{ extra.name }} - {{ extra.price }}€{{ extra.monthly ? '/mes' : '' }}
+            {{ social.name }} - {{ social.price }}€{{ social.paymentMode == paymentModeEnum.MONTHLY ? '/mes' : '' }}
           </label>
         </div>
       }

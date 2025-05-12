@@ -1,63 +1,73 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+enum inputType {
+  RADIO = 'radio',
+  CHECKBOX = 'checkbox',
+}
+
+enum paymentModeEnum {
+  ONE_TIME = 'one-time',
+  MONTHLY = 'monthly',
+}
+
+type planOption = {
+  id: string;
+  name: string;
+  price: number;
+  paymentMode?: paymentModeEnum;
+  type?: inputType.RADIO | inputType.CHECKBOX;
+  group?: string;
+};
 
 @Component({
   selector: 'app-plan-customization',
   templateUrl: './plan-customization.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   styleUrl: './plan-customization.component.css',
 })
+
+
+
 export class PlanCustomizationComponent {
   selectedWeb: string = '';
-  selectedSoftware: string = '';
-  selectedDesign: string = 'default';
+  paymentModeEnum = paymentModeEnum
+  paymentMode: paymentModeEnum = paymentModeEnum.ONE_TIME;
+
+  selectedSocial: string = '';
   selectedExtras: string[] = [];
 
   // Sección Web
-  webOptions = [
-    { id: 'web-basic', name: 'Página web básica', price: 300 },
-    { id: 'web-basic-mensual', name: 'Web básica (mensual)', price: 30, monthly: true },
-  ];
-
-  // Sección Software
-  softwareOptions = [
-    { id: 'app-web', name: 'App web con backend', price: 1200, monthly: false },
+  webOptions: planOption[] = [
+    { id: 'no-web', name: 'Sin página web', price: 0, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'web-basic', name: 'Página web básica', price: 300, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'tienda', name: 'Tienda online', price: 500, type: inputType.RADIO, group: 'web', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'paginas-extra', name: 'Páginas extra (x2)', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'seo', name: 'SEO', price: 50, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'blog', name: 'Blog', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'multilenguaje', name: 'Multilenguaje (2 idiomas)', price: 100, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'analytics', name: 'Google Analytics', price: 25, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'app-web', name: 'App web con backend', price: 1200, type: inputType.CHECKBOX, group: 'web-extra', paymentMode: paymentModeEnum.ONE_TIME },
+    { id: 'paginas-extra-mensual', name: 'Páginas extra (x2)', price: 10, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'tienda-mensual', name: 'Tienda online', price: 15, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'seo-mensual', name: 'SEO', price: 5, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'multilenguaje-mensual', name: 'Multilenguaje (2 idiomas)', price: 10, paymentMode: paymentModeEnum.MONTHLY },
   ];
 
   // Sección Redes Sociales
-  socialOptions = [
-    { id: 'social-base', name: 'Red social base', price: 100, monthly: true },
-  ];
-
-  // Extras generales
-  extraOptions = [
-    // Web
-    { id: 'paginas-extra', name: 'Páginas extra (x2)', price: 100 },
-    { id: 'seo', name: 'SEO', price: 50 },
-    { id: 'blog', name: 'Blog', price: 100 },
-    { id: 'tienda', name: 'Tienda online', price: 200 },
-    { id: 'multilenguaje', name: 'Multilenguaje (2 idiomas)', price: 100 },
-    { id: 'analytics', name: 'Google Analytics', price: 25 },
-    // Web mensual
-    { id: 'paginas-extra-mensual', name: 'Páginas extra (x2)', price: 10, monthly: true },
-    { id: 'tienda-mensual', name: 'Tienda online', price: 15, monthly: true },
-    { id: 'seo-mensual', name: 'SEO', price: 5, monthly: true },
-    { id: 'multilenguaje-mensual', name: 'Multilenguaje (2 idiomas)', price: 10, monthly: true },
-    // Software
-    { id: 'login-roles', name: 'Login con roles', price: 100 },
-    { id: 'gestion-usuarios', name: 'Gestión de usuarios', price: 150 },
-    { id: 'dashboard', name: 'Dashboard con estadísticas', price: 200 },
-    { id: 'api-rest', name: 'API REST', price: 250 },
-    // Redes Sociales
-    { id: 'red-adicional', name: 'Red adicional', price: 50, monthly: true },
-    { id: 'publicaciones-3', name: '3 publicaciones semanales', price: 30, monthly: true },
-    { id: 'publicaciones-4', name: '4 publicaciones semanales', price: 60, monthly: true },
-    { id: 'publicaciones-5', name: '5 publicaciones semanales', price: 90, monthly: true },
-    { id: 'historias', name: 'Historias (por red)', price: 20, monthly: true },
-    { id: 'reels-pack', name: 'Reels/Tiktoks (Pack 4/mes)', price: 100, monthly: true },
+  socialOptions: planOption[] = [
+    { id: 'no-social', name: 'Sin red social', price: 0, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'social-base', name: 'Red social base', price: 100, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'red-adicional', name: 'Red adicional', price: 50, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'publicaciones-3', name: '3 publicaciones semanales', price: 30, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'publicaciones-4', name: '4 publicaciones semanales', price: 60, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'publicaciones-5', name: '5 publicaciones semanales', price: 90, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'historias', name: 'Historias (por red)', price: 20, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'reels-pack', name: 'Reels/Tiktoks (Pack 4/mes)', price: 100, paymentMode: paymentModeEnum.MONTHLY },
     { id: 'reels-unitario', name: 'Reels/Tiktoks (unidad)', price: 30 },
-    { id: 'informe', name: 'Informe de rendimiento', price: 20, monthly: true },
-    { id: 'mensajes', name: 'Atención a mensajes (básico)', price: 40, monthly: true },
+    { id: 'informe', name: 'Informe de rendimiento', price: 20, paymentMode: paymentModeEnum.MONTHLY },
+    { id: 'mensajes', name: 'Atención a mensajes (básico)', price: 40, paymentMode: paymentModeEnum.MONTHLY },
     { id: 'campanas', name: 'Gestión de campañas publicitarias', price: 50 },
     { id: 'branding', name: 'Diseño branding redes', price: 60 },
   ];
@@ -69,18 +79,8 @@ export class PlanCustomizationComponent {
     const web = this.webOptions.find((w) => w.id === this.selectedWeb);
     if (web) total += web.price;
 
-    const software = this.softwareOptions.find((s) => s.id === this.selectedSoftware);
-    if (software) total += software.price;
-
-    const social = this.socialOptions.find((s) => s.id === 'social-base');
+    const social = this.socialOptions.find((s) => s.id === this.selectedSocial);
     if (social) total += social.price;
-
-    if (this.selectedDesign === 'custom') total += 300;
-
-    this.selectedExtras.forEach((extraId) => {
-      const extra = this.extraOptions.find((e) => e.id === extraId);
-      if (extra) total += extra.price;
-    });
 
     return total;
   }
@@ -94,8 +94,7 @@ export class PlanCustomizationComponent {
   submit() {
     console.log({
       web: this.selectedWeb,
-      software: this.selectedSoftware,
-      design: this.selectedDesign,
+      social: this.selectedSocial,
       extras: this.selectedExtras,
       total: this.price,
     });
