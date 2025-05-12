@@ -6,48 +6,64 @@
       <h1 class="m-0 text-5xl text-green-600">{{ price }} €</h1>
     </div>
   </div>
-
-  <div class="grid grid-cols-1 gap-8">
-    <div>
-      <!-- Tipo de web -->
-      <h3 class="mb-4 text-xl text-blue-900"><i class="bi bi-laptop me-2"></i>¿Qué tipo de web necesitas?</h3>
-      <div class="mb-8 flex flex-wrap gap-4">
-        @for (type of typeOptions; track $index) {
-          <div class="option w-full" [class.active]="selectedType === type.id" (click)="selectedType = type.id">
-            <h4>{{ type.name }}</h4>
-            <p>Desde {{ type.price }}€</p>
+  
+    <!-- Sección Web -->
+    <div class="mb-4 flex gap-4">
+      <button
+        class="rounded-lg border-2 px-4 py-2 font-semibold transition"
+        [ngClass]="{ 'bg-blue-600 text-white': paymentMode === 'one-time', 'bg-white text-blue-600': paymentMode !== 'one-time' }"
+        (click)="paymentMode = paymentModeEnum.ONE_TIME"
+      >
+        Pago único
+      </button>
+      <button
+        class="rounded-lg border-2 px-4 py-2 font-semibold transition"
+        [ngClass]="{ 'bg-blue-600 text-white': paymentMode === 'monthly', 'bg-white text-blue-600': paymentMode !== 'monthly' }"
+        (click)="paymentMode = paymentModeEnum.MONTHLY"
+      >
+        Pago mensual
+      </button>
+    </div>
+    <section>
+      <h3>Web</h3>
+      @for (web of webOptions; track $index) {
+        <!-- @if (web.paymentMode === paymentMode) { -->
+          <div>
+            <label>
+              <input
+                type="radio"
+                [name]="web.group || 'web-extras'"
+                [value]="web.id"
+                [(ngModel)]="selectedWeb"
+                [disabled]="web.paymentMode !== paymentMode"
+              />
+              {{ web.name }} - {{ web.price }}€{{ web.paymentMode == paymentModeEnum.MONTHLY ? '/mes' : '' }}
+            </label>
           </div>
-        }
-      </div>
-
-      <!-- Diseño personalizado -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?</h3>
-        <div class="checkbox-wrapper-14">
-          <input id="design-switch" type="checkbox" class="switch" [checked]="selectedDesign === 'custom'" (change)="selectedDesign = $event.target ? 'custom' : 'default'" />
-          <label for="design-switch">
-            {{ selectedDesign === 'custom' ? 'Sí, ¡diseño personalizado (+' + designPrice + '€)' : 'No, diseño básico (Incluido)' }}
+        <!-- } -->
+      }
+    </section>
+  
+    <!-- Sección Redes Sociales -->
+    <section>
+      <h3>Redes Sociales</h3>
+      @for (social of socialOptions; track $index) {
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="social"
+              [value]="social.id"
+              [(ngModel)]="selectedSocial"
+            />
+            {{ social.name }} - {{ social.price }}€{{ social.paymentMode == paymentModeEnum.MONTHLY ? '/mes' : '' }}
           </label>
         </div>
-      </div>
-
-      <!-- Extras -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-puzzle me-2"></i>Extras</h3>
-        <div class="flex flex-wrap gap-6">
-          @for (extra of extraOptions; track $index) {
-            <div class="checkbox-wrapper-13">
-              <input id="extra-{{ extra.id }}" type="checkbox" [checked]="selectedExtras.includes(extra.id)" (change)="toggleExtra(extra.id)" />
-              <label for="extra-{{ extra.id }}"> {{ extra.name }} +{{ extra.price }}€ </label>
-            </div>
-          }
-        </div>
-      </div>
+      }
+    </section>
 
       <!-- Botón de envío -->
       <div class="text-center">
         <button class="mt-4 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700" (click)="submit()">Enviar configuración</button>
       </div>
     </div>
-  </div>
-</div>
