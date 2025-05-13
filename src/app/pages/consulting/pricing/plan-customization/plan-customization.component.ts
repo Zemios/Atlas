@@ -41,7 +41,6 @@ export class PlanCustomizationComponent {
   selectedSocialPlatforms: string[] = []
   selectedSocialExtras: string[] = [];
   postPerWeek: number = 2;
-  socialExtrasSelected: string[] = [];
 
   // Sección Web
   webOptions: planOption[] = [
@@ -86,12 +85,33 @@ export class PlanCustomizationComponent {
     const webExtras = this.webOptionsExtra.filter((w) => this.selectedWebExtras.includes(w.id));
     if (this.paymentMode === paymentModeEnum.MONTHLY) {
       webExtras.forEach((w) => {
-        if (w.price) total += w.price / 10;
+        if (w.price && ((w.price / 10 - 5) > 0)) total += w.price / 10 - 5;
+        else if (w.price) total += 5;
       });
     }
 
-    // const social = this.socialOptionsExtra.find((s) => s.id === this.selectedSocialExtras);
-    // if (social && social.price) total += social.price;
+    // Precio por páginas
+    if (this.paymentMode === paymentModeEnum.MONTHLY) {
+      if (this.pagesCount > 1) {
+        total += (this.pagesCount - 1) * 5;
+      }
+    }
+
+    // Post per week
+    if (this.postPerWeek > 2) {
+      total += (this.postPerWeek - 2) * 50;
+    }
+
+    // Precio redes sociales
+    const social = this.socialPlatforms.filter((s) => this.selectedSocialPlatforms.includes(s.id));
+    social.forEach((s) => {
+      if (s.price) total += s.price;
+    });
+
+    const socialExtras = this.socialOptionsExtra.filter((s) => this.selectedSocialExtras.includes(s.id));
+    socialExtras.forEach((s) => {
+      if (s.price) total += s.price;
+    });
 
     return total;
   }
@@ -104,8 +124,30 @@ export class PlanCustomizationComponent {
       if (web && web.price) total += web.price;
     }
 
-    // const social = this.socialOptions.find((s) => s.id === this.selectedSocial);
-    // if (social) total += social.price;
+    // Precio por páginas
+    if (this.paymentMode === paymentModeEnum.ONE_TIME) {
+      if (this.pagesCount > 1) {
+        total += (this.pagesCount - 1) * 50;
+      }
+    }
+
+    const webExtras = this.webOptionsExtra.filter((w) => this.selectedWebExtras.includes(w.id));
+    if (this.paymentMode === paymentModeEnum.ONE_TIME) {
+      webExtras.forEach((w) => {
+        if (w.price) total += w.price;
+      });
+    }
+
+    return total;
+  }
+
+  get socialPlatformsPrice(): number {
+    let total = 0;
+
+    const social = this.socialPlatforms.filter((s) => this.selectedSocialPlatforms.includes(s.id));
+    social.forEach((s) => {
+      if (s.price) total += s.price;
+    });
 
     return total;
   }

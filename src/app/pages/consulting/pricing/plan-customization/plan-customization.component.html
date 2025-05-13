@@ -5,7 +5,7 @@
       <i class="bi bi-ui-checks-grid"></i> Configurador Web
     </h2>
 
-    <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-end md:items-center">
+    <div class="flex flex-row gap-4 md:gap-6 justify-end">
       @if (price > 0 || priceMonthly <= 0) {
         <div class="rounded-xl border-2 border-blue-500 bg-blue-100 px-5 py-3 text-right shadow-sm">
           <p class="text-sm md:text-base font-medium text-blue-700">{{(price > 0 ) ? 'Precio Estimado': 'Introduce Preferencias'}}</p>
@@ -82,7 +82,14 @@
           [(ngModel)]="pagesCount"
           class="w-full"
         />
-        <div class="mt-2 text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
+        <div class="flex gap-3 mt-2 items-center">
+          <div class="text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
+          @if (pagesCount > 1 && paymentMode == paymentModeEnum.ONE_TIME) {
+            <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(pagesCount-1) * 50 }}€</span>
+          } @else if (pagesCount > 1 && paymentMode == paymentModeEnum.MONTHLY) {
+            <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(pagesCount-1) * 5 }}€ /mes</span>
+          }
+        </div>
       </div>
 
       <div class="p-4 bg-white rounded-lg border border-gray-200">
@@ -102,7 +109,11 @@
             </div>
             @if (extra.price && extra.price > 0) {
               <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl text-blue-600">
-                {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                @if ((extra.price/10-5) > 0) {
+                  + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                } @else {
+                  + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : 5 + priceAjustment + '€ /mes' }}
+                }
               </p>
             }
           </div>
@@ -111,10 +122,18 @@
     </section>
 
     <!-- Redes Sociales -->
+     
     <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
       <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
         <div class="p-4 bg-white rounded-lg border border-gray-200">
-          <label class="block font-medium mb-2">Redes sociales</label>
+          <div class="flex justify-between mb-2 items-center">
+            <label class="block font-medium">Redes sociales</label>
+            @if (socialPlatformsPrice > 0) {
+              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl text-blue-600">
+                {{socialPlatformsPrice}}€ /mes
+              </p>
+            }
+          </div>
           <div class="flex flex-wrap justify-center gap-2">
             @for (platform of socialPlatforms; track $index) {
               <button class="py-2 px-3 rounded-3xl border font-bold duration-75"
@@ -140,7 +159,12 @@
             [(ngModel)]="postPerWeek"
             class="w-full"
           />
-          <div class="mt-2 text-blue-700 font-bold">{{ postPerWeek }} por semana</div>
+          <div class="flex gap-3 mt-2 items-center">
+            <div class="text-blue-700 font-bold">{{ postPerWeek }} por Semana </div> 
+            @if (postPerWeek > 2) {
+              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(postPerWeek-2) * 50}}€ /mes</span>
+            }
+          </div>
         </div>
         <div class="p-4 bg-white rounded-lg border">
           <label class="block font-medium mb-2">Extras Sociales:</label>
@@ -157,7 +181,7 @@
               <div>
                 <span class="font-medium">{{ extra.name }}</span>
               </div>
-              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">{{ extra.price }}€</span>
+              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{ extra.price }}€ /mes</span>
             </label>
           }
         </div>
