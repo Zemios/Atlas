@@ -1,4 +1,5 @@
-<div class="m-4 rounded-3xl bg-white p-6 shadow-lg text-gray-800">
+<div class="flex justify-center items-center p-4">
+<div class="max-w-[1600px] rounded-3xl bg-white p-6 shadow-lg text-gray-800">
   <!-- Encabezado -->
   <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
     <h2 class="text-3xl md:text-4xl font-bold text-blue-800 flex items-center gap-2 py-7">
@@ -70,7 +71,7 @@
                 [(ngModel)]="selectedWeb"
                 />
                 <span class="font-medium">{{ web.name }}</span>
-                <span class="flex justify-end mt-2">
+                <span class="flex justify-center md:justify-end mt-2">
                 @if (web.price && web.price > 0) {
                   <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl border border-blue-600 text-blue-600">
                     {{ paymentMode == paymentModeEnum.ONE_TIME ? web.price + priceAjustment + '€' : (web.price / 10) - 5 + priceAjustment + '€ /mes' }}
@@ -112,18 +113,18 @@
                 ? selectedWebExtras.splice(selectedWebExtras.indexOf(extra.id), 1)
                 : selectedWebExtras.push(extra.id)"
           >
-            <div>
+            <div class="grid max-[354px]:grid-cols-1 grid-cols-2 gap-2 w-full justify-between items-center p-2">
               <span class="font-medium">{{ extra.name }}</span>
+              @if (extra.price && extra.price > 0) {
+                <p class="bg-blue-100 m-auto me-0 text-xs px-2 w-fit rounded-3xl text-blue-600">
+                  @if ((extra.price/10-5) > 0) {
+                    + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                  } @else {
+                    + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : 5 + priceAjustment + '€ /mes' }}
+                  }
+                </p>
+              }
             </div>
-            @if (extra.price && extra.price > 0) {
-              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl text-blue-600">
-                @if ((extra.price/10-5) > 0) {
-                  + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
-                } @else {
-                  + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : 5 + priceAjustment + '€ /mes' }}
-                }
-              </p>
-            }
           </div>
         }
       </div>
@@ -193,10 +194,10 @@
                   ? selectedSocialExtras.splice(selectedSocialExtras.indexOf(extra.id), 1)
                   : selectedSocialExtras.push(extra.id)"
             >
-              <div>
+            <div class="grid max-[354px]:grid-cols-1 grid-cols-2 gap-2 w-full justify-between items-center p-2">
                 <span class="font-medium">{{ extra.name }}</span>
+                <span class="px-2 text-xs rounded-3xl m-auto me-0 bg-blue-100 text-blue-600">+ {{ extra.price }}€ /mes</span>
               </div>
-              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{ extra.price }}€ /mes</span>
             </label>
           }
         </div>
@@ -210,4 +211,5 @@
       Enviar configuración
     </button>
   </div>
+</div>
 </div>
