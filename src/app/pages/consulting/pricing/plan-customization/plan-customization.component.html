@@ -88,19 +88,20 @@
       <div class="p-4 bg-white rounded-lg border border-gray-200">
         <label class="block font-medium mb-2">Extras:</label>
         @for (extra of webOptionsExtra; track $index) {
-          <div class="flex mb-2 justify-between items-center">
+          <div 
+          class="flex justify-between cursor-pointer hover:bg-blue-100 hover:text-blue-600 hover:border-blue-400 items-center border-2 rounded-3xl mb-2 px-2 py-1"
+          [class]="
+            selectedWebExtras.includes(extra.id) ? 'bg-blue-500 text-white border-blue-600' : ''"
+            (click)="
+              selectedWebExtras.includes(extra.id)
+                ? selectedWebExtras.splice(selectedWebExtras.indexOf(extra.id), 1)
+                : selectedWebExtras.push(extra.id)"
+          >
             <div>
-              <input
-              type="checkbox"
-              [name]="extra.id"
-              [value]="extra.id"
-              class="mr-2"
-              [(ngModel)]="selectedWebExtras"
-              />
               <span class="font-medium">{{ extra.name }}</span>
             </div>
             @if (extra.price && extra.price > 0) {
-              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl border border-blue-600 text-blue-600">
+              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl text-blue-600">
                 {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
               </p>
             }
@@ -115,11 +116,18 @@
         <div class="p-4 bg-white rounded-lg border border-gray-200">
           <label class="block font-medium mb-2">Redes sociales</label>
           <div class="flex flex-wrap justify-center gap-2">
-            <button class="py-2 px-3 rounded-3xl border font-bold from-purple-500 hover:bg-gradient-to-l to-orange-500 hover:text-white duration-75"><i class="bi bi-instagram"></i> Instagram</button>
-            <button class="py-2 px-3 rounded-3xl border font-bold hover:bg-black hover:text-white duration-75"><i class="bi bi-tiktok"></i> TikTok</button>
-            <button class="py-2 px-3 rounded-3xl border font-bold hover:bg-blue-600 hover:text-white duration-75"><i class="bi bi-facebook"></i> Facebook</button>
-            <button class="py-2 px-3 rounded-3xl border font-bold hover:bg-black hover:text-white duration-75"><i class="bi bi-twitter-x"></i> Twitter / X</button>
-            <button class="py-2 px-3 rounded-3xl border font-bold hover:bg-blue-500 hover:text-white duration-75"><i class="bi bi-linkedin"></i> LinkedIn</button>
+            @for (platform of socialPlatforms; track $index) {
+              <button class="py-2 px-3 rounded-3xl border font-bold duration-75"
+                (click)="
+                  selectedSocialPlatforms.includes(platform.id)
+                    ? selectedSocialPlatforms.splice(selectedSocialPlatforms.indexOf(platform.id), 1)
+                    : selectedSocialPlatforms.push(platform.id)"
+                [class]="
+                  selectedSocialPlatforms.includes(platform.id) ? platform.class + ' text-white hover:to-red-400 hover:from-red-400 hover:bg-red-400 ' : platform.hoverClass + ' hover:text-white'"
+              >
+                <i class="bi bi-{{platform.id}}"></i> {{platform.name}}
+              </button>
+            }
           </div>
         </div>
         
@@ -127,31 +135,38 @@
           <label class="block font-medium mb-2">Publicaciones semanales:</label>
           <input
             type="range"
-            min="3"
+            min="2"
             max="5"
             [(ngModel)]="postPerWeek"
             class="w-full"
           />
           <div class="mt-2 text-blue-700 font-bold">{{ postPerWeek }} por semana</div>
         </div>
-        <div class="mt-4">
-          <label class="block font-medium">Extras Sociales:</label>
-          <select
-            multiple
-            [(ngModel)]="socialExtrasSelected"
-            class="w-full rounded-lg border border-gray-300 p-2"
-          >
-            <option *ngFor="let extra of socialOptionsExtra" [value]="extra.id">
-              {{ extra.name }} - {{ extra.price }}€
-            </option>
-          </select>
+        <div class="p-4 bg-white rounded-lg border">
+          <label class="block font-medium mb-2">Extras Sociales:</label>
+          @for (extra of socialOptionsExtra; track $index) {
+            <label 
+            class="flex justify-between cursor-pointer hover:bg-blue-100 hover:text-blue-600 hover:border-blue-400 items-center border-2 rounded-3xl mb-2 px-2 py-1"
+            [class]="
+              selectedSocialExtras.includes(extra.id) ? 'bg-blue-500 text-white border-blue-600' : ''"
+              (click)="
+                selectedSocialExtras.includes(extra.id)
+                  ? selectedSocialExtras.splice(selectedSocialExtras.indexOf(extra.id), 1)
+                  : selectedSocialExtras.push(extra.id)"
+            >
+              <div>
+                <span class="font-medium">{{ extra.name }}</span>
+              </div>
+              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">{{ extra.price }}€</span>
+            </label>
+          }
         </div>
     </section>
   </section>
 
   <!-- Botón de envío -->
   <div class="mt-8 text-center">
-    <button
+    <button (click)="submit()"
       class="rounded-full bg-blue-700 px-6 py-3 text-white font-semibold shadow-md transition hover:bg-blue-800">
       Enviar configuración
     </button>

@@ -38,7 +38,8 @@ export class PlanCustomizationComponent {
   selectedWeb: string = 'no-web';
   pagesCount: number = 1;
   selectedWebExtras: string[] = [];
-  selectedSocial: string = 'no-social';
+  selectedSocialPlatforms: string[] = []
+  selectedSocialExtras: string[] = [];
   postPerWeek: number = 2;
   socialExtrasSelected: string[] = [];
 
@@ -58,6 +59,14 @@ export class PlanCustomizationComponent {
   ]
 
   // Sección Redes Sociales
+
+  socialPlatforms = [
+    { id: 'facebook', name: 'Facebook', price: 50, class: 'bg-blue-700', hoverClass: 'hover:bg-blue-700' },
+    { id: 'instagram', name: 'Instagram', price: 50, class: 'bg-gradient-to-bl from-purple-500 to-orange-500', hoverClass: 'hover:bg-gradient-to-bl from-purple-500 to-orange-500' },
+    { id: 'twitter-x', name: 'Twitter / X', price: 50, class: 'bg-black', hoverClass: 'hover:bg-black' },
+    { id: 'linkedin', name: 'LinkedIn', price: 50, class: 'bg-blue-600', hoverClass: 'hover:bg-blue-600' },
+    { id: 'tiktok', name: 'TikTok', price: 50, class: 'bg-black', hoverClass: 'hover:bg-black' },
+  ]
   socialOptionsExtra: planOption[] = [
     { id: 'informe', name: 'Informe de rendimiento', price: 20 },
     { id: 'mensajes', name: 'Atención a mensajes (básico)', price: 40 },
@@ -74,8 +83,15 @@ export class PlanCustomizationComponent {
       if (web && web.price) total += web.price / 10 - 5;
     }
 
-    const social = this.socialOptionsExtra.find((s) => s.id === this.selectedSocial);
-    if (social && social.price) total += social.price;
+    const webExtras = this.webOptionsExtra.filter((w) => this.selectedWebExtras.includes(w.id));
+    if (this.paymentMode === paymentModeEnum.MONTHLY) {
+      webExtras.forEach((w) => {
+        if (w.price) total += w.price / 10;
+      });
+    }
+
+    // const social = this.socialOptionsExtra.find((s) => s.id === this.selectedSocialExtras);
+    // if (social && social.price) total += social.price;
 
     return total;
   }
@@ -97,7 +113,7 @@ export class PlanCustomizationComponent {
   submit() {
     console.log({
       web: this.selectedWeb,
-      social: this.selectedSocial,
+      social: this.selectedSocialExtras,
       total: this.price,
     });
   }
