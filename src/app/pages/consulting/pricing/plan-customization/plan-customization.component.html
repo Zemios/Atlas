@@ -45,6 +45,12 @@
           (click)="paymentMode = paymentModeEnum.MONTHLY">
           Pago mensual
         </button>
+
+        @if (this.selectedWeb != 'no-web' || this.pagesCount > 1 || this.selectedWebExtras.length > 0) {
+          <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteWeb()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        }
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 items-center justify-around">
@@ -126,7 +132,14 @@
     <!-- Redes Sociales -->
      
     <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
-      <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
+      <div class="flex">
+        <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
+        @if (this.selectedSocialPlatforms.length > 0 || this.postPerWeek > 2 || this.selectedSocialExtras.length > 0) {
+          <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteSocial()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        }
+      </div>
         <div class="p-4 bg-white rounded-lg border border-gray-200">
           <div class="flex justify-between mb-2 items-center">
             <label class="block font-medium">Redes sociales</label>

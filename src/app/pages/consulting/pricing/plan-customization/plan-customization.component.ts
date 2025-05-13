@@ -152,11 +152,28 @@ export class PlanCustomizationComponent {
     return total;
   }
 
+  deleteWeb() {
+    this.selectedWeb = 'no-web';
+    this.pagesCount = 1;
+    this.selectedWebExtras = [];
+  }
+
+  deleteSocial() {
+    this.selectedSocialPlatforms = [];
+    this.postPerWeek = 2;
+    this.selectedSocialExtras = [];
+  }
+
   submit() {
-    console.log({
+    const data = {
       web: this.selectedWeb,
-      social: this.selectedSocialExtras,
-      total: this.price,
-    });
+      pagesCount: this.pagesCount,
+      selectedWebExtras: this.selectedWebExtras,
+      selectedSocialPlatforms: this.selectedSocialPlatforms,
+      postPerWeek: this.postPerWeek,
+      selectedSocialExtras: this.selectedSocialExtras,
+    };
+
+    console.log(data);
   }
 }
