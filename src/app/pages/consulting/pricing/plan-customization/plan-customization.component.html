@@ -1,4 +1,4 @@
-<div class="m-6 rounded-3xl bg-white p-8 shadow-lg text-gray-800">
+<div class="m-4 rounded-3xl bg-white p-6 shadow-lg text-gray-800">
   <!-- Encabezado -->
   <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
     <h2 class="text-3xl md:text-4xl font-bold text-blue-800 flex items-center gap-2 py-7">
@@ -24,8 +24,8 @@
   <!-- Opciones -->
   <section class="grid gap-6 md:grid-cols-2">
     <!-- Web -->
-    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
-      <div class="mb-4 flex flex-wrap gap-3 items-center">
+    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
+      <div class="flex flex-wrap gap-3 items-center">
         <h3 class="text-2xl font-bold text-blue-700">Web</h3>
         <button
           class="rounded-full border text-blue-700 border-blue-500 px-4 py-1 text-xs font-medium transition"
@@ -47,81 +47,60 @@
         </button>
       </div>
 
-      <div class="space-y-3">
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 items-center justify-around">
         @for (web of webOptions; track $index) {
-          @if (web.group) {
-            <label class="block rounded-lg border border-gray-200 bg-white p-3 hover:border-blue-500 cursor-pointer transition">
-              <input
+              <label class="rounded-lg border flex-col items-center w-full flex border-gray-200 bg-white p-3 hover:border-blue-500 cursor-pointer transition">
+                @if (web.id == 'web_basic' || web.id == 'web_app' || web.id == 'web_ecommerce') {
+                <img src="images/consulting/plan_{{web.id}}.svg" class="w-32 md:w-40 lg:w-52 m-4">
+                }
+              <div>
+                <input
                 type="radio"
                 [name]="web.group || 'web-extras'"
                 [value]="web.id"
                 class="mr-2"
                 [(ngModel)]="selectedWeb"
-              />
-              <span class="font-medium">{{ web.name }}</span>
-              <span>
+                />
+                <span class="font-medium">{{ web.name }}</span>
+                <span class="flex justify-end mt-2">
                 @if (web.price && web.price > 0) {
-                  - {{ paymentMode == paymentModeEnum.ONE_TIME ? web.price + priceAjustment + '€' : (web.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                  <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl border border-blue-600 text-blue-600">
+                    {{ paymentMode == paymentModeEnum.ONE_TIME ? web.price + priceAjustment + '€' : (web.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                  </p>
                 }
-              </span>
-            </label>
-
-            @if (web.options) {
-              <div class="ml-5">
-                @for (extra of web.options; track $index) {
-                  <label class="block rounded-lg border border-gray-200 bg-white p-3 hover:border-blue-500 cursor-pointer transition">
-                    <input
-                      type="radio"
-                      [name]="web.group || 'web-extras'"
-                      [value]="extra.id"
-                      class="mr-2"
-                      [(ngModel)]="selectedWeb"
-                    />
-                    <span class="font-medium">{{ extra.name }}</span>
-                    <span>
-                      @if (extra.price && extra.price > 0) {
-                        - {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
-                      }
-                    </span>
-                  </label>
-                }
+                </span>
               </div>
-            }
+            </label>
+        }
+      </div>
+      <div class="p-4 bg-white rounded-lg border border-gray-200">
+        <label class="block font-medium mb-2">Páginas Web:</label>
+        <input
+          type="range"
+          min="1"
+          max="4"
+          [(ngModel)]="pagesCount"
+          class="w-full"
+        />
+        <div class="mt-2 text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
+      </div>
+
+      <div class="mt-4">
+        <label class="block font-medium">Extras Web:</label>
+        <select multiple [(ngModel)]="webExtrasSelected" class="w-full rounded-lg border border-gray-300 p-2">
+          @for (extra of webOptionsExtra; track $index) {
+            <option [value]="extra.id">
+              {{ extra.name }} - {{ extra.price }} €
+            </option>
           }
-        }
-
-        @if (selectedWeb === 'web-personalizada') {
-          <div class="p-4 bg-white rounded-lg border border-gray-200">
-            <label class="block font-medium mb-2">Páginas personalizadas:</label>
-            <input
-              type="range"
-              min="1"
-              max="4"
-              [(ngModel)]="pagesCount"
-              class="w-full"
-            />
-            <div class="mt-2 text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
-          </div>
-        }
-
-        <div class="mt-4">
-          <label for="block font-medium mb-2">Extras Web:</label>
-          <select multiple [(ngModel)]="webExtrasSelected" class="w-full rounded-lg border border-gray-300 p-2">
-            @for (extra of webOptionsExtra; track $index) {
-              <option [value]="extra.id">
-                {{ extra.name }} - {{ extra.price }} €
-              </option>
-            }
-          </select>
-        </div>
+        </select>
       </div>
     </section>
 
     <!-- Redes Sociales -->
-    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
-      <h3 class="text-2xl font-bold text-blue-700 mb-4">Redes Sociales</h3>
-      <div class="space-y-3">
-        <div class="mb-4 p-4 bg-white rounded-lg border border-gray-200">
+    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
+      <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
+        <div class="p-4 bg-white rounded-lg border border-gray-200">
           <label class="block font-medium mb-2">Redes sociales</label>
           <div class="flex flex-wrap justify-center gap-2">
             <button class="py-2 px-3 rounded-3xl border font-bold from-purple-500 hover:bg-gradient-to-l to-orange-500 hover:text-white duration-75"><i class="bi bi-instagram"></i> Instagram</button>
@@ -132,7 +111,7 @@
           </div>
         </div>
         
-        <div class="mb-4 p-4 bg-white rounded-lg border border-gray-200">
+        <div class="p-4 bg-white rounded-lg border border-gray-200">
           <label class="block font-medium mb-2">Publicaciones semanales:</label>
           <input
             type="range"
@@ -144,7 +123,7 @@
           <div class="mt-2 text-blue-700 font-bold">{{ postPerWeek }} por semana</div>
         </div>
         <div class="mt-4">
-          <label class="block font-medium mb-2">Extras Sociales:</label>
+          <label class="block font-medium">Extras Sociales:</label>
           <select
             multiple
             [(ngModel)]="socialExtrasSelected"
@@ -155,7 +134,6 @@
             </option>
           </select>
         </div>
-      </div>
     </section>
   </section>
 

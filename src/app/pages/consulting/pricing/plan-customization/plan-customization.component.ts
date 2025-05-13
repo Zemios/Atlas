@@ -44,11 +44,9 @@ export class PlanCustomizationComponent {
 
   // Sección Web
   webOptions: planOption[] = [
-    { id: 'no-web', name: 'Sin página web', price: 0, type: inputType.RADIO, group: 'web' },
-    { id: 'web-basic', name: 'Página web básica', price: 300, type: inputType.RADIO, group: 'web' },
-    { id: 'tienda', name: 'Tienda online', price: 500, type: inputType.RADIO, group: 'web' },
-    { id: 'app-web', name: 'App web con backend', price: 1200, type: inputType.RADIO, group: 'web' },
-    { id: 'web-personalizada', name: 'Página web personalizada', type: inputType.CHECKBOX, group: 'web' },
+    { id: 'web_basic', name: 'Web Básica', price: 300, type: inputType.RADIO, group: 'web' },
+    { id: 'web_ecommerce', name: 'Tienda Online', price: 500, type: inputType.RADIO, group: 'web' },
+    { id: 'web_app', name: 'Aplicación Web', price: 1200, type: inputType.RADIO, group: 'web' },
   ];
 
   webOptionsExtra: planOption[] = [
