@@ -37,7 +37,7 @@ export class PlanCustomizationComponent {
 
   selectedWeb: string = 'no-web';
   pagesCount: number = 1;
-  webExtrasSelected: string[] = [];
+  selectedWebExtras: string[] = [];
   selectedSocial: string = 'no-social';
   postPerWeek: number = 2;
   socialExtrasSelected: string[] = [];

@@ -56,7 +56,7 @@
               <div>
                 <input
                 type="radio"
-                [name]="web.group || 'web-extras'"
+                name="web"
                 [value]="web.id"
                 class="mr-2"
                 [(ngModel)]="selectedWeb"
@@ -85,15 +85,27 @@
         <div class="mt-2 text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
       </div>
 
-      <div class="mt-4">
-        <label class="block font-medium">Extras Web:</label>
-        <select multiple [(ngModel)]="webExtrasSelected" class="w-full rounded-lg border border-gray-300 p-2">
-          @for (extra of webOptionsExtra; track $index) {
-            <option [value]="extra.id">
-              {{ extra.name }} - {{ extra.price }} €
-            </option>
-          }
-        </select>
+      <div class="p-4 bg-white rounded-lg border border-gray-200">
+        <label class="block font-medium mb-2">Extras:</label>
+        @for (extra of webOptionsExtra; track $index) {
+          <div class="flex mb-2 justify-between items-center">
+            <div>
+              <input
+              type="checkbox"
+              [name]="extra.id"
+              [value]="extra.id"
+              class="mr-2"
+              [(ngModel)]="selectedWebExtras"
+              />
+              <span class="font-medium">{{ extra.name }}</span>
+            </div>
+            @if (extra.price && extra.price > 0) {
+              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl border border-blue-600 text-blue-600">
+                {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
+              </p>
+            }
+          </div>
+        }
       </div>
     </section>
 
