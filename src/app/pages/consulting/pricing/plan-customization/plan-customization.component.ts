@@ -15,9 +15,10 @@ enum paymentModeEnum {
 type planOption = {
   id: string;
   name: string;
-  price: number;
+  price?: number;
   type?: inputType.RADIO | inputType.CHECKBOX;
   group?: string;
+  options?: planOption[]
 };
 
 @Component({
@@ -31,11 +32,11 @@ type planOption = {
 
 export class PlanCustomizationComponent {
   priceAjustment = 0;
-  selectedWeb: string = '';
+  selectedWeb: string = 'no-web';
   paymentModeEnum = paymentModeEnum
   paymentMode: paymentModeEnum = paymentModeEnum.ONE_TIME;
 
-  selectedSocial: string = '';
+  selectedSocial: string = 'no-social';
   selectedExtras: string[] = [];
 
   // Sección Web
@@ -44,13 +45,23 @@ export class PlanCustomizationComponent {
     { id: 'web-basic', name: 'Página web básica', price: 300, type: inputType.RADIO, group: 'web' },
     { id: 'tienda', name: 'Tienda online', price: 500, type: inputType.RADIO, group: 'web' },
     { id: 'app-web', name: 'App web con backend', price: 1200, type: inputType.RADIO, group: 'web' },
+    {
+      id: 'web-personalizada', name: 'Página web personalizada', type: inputType.CHECKBOX, group: 'web', options: [
+        { id: 'web-personalizada-1', name: '1 página', price: 0, type: inputType.RADIO, group: 'web-extra' },
+        { id: 'web-personalizada-2', name: '2 páginas', price: 200, type: inputType.RADIO, group: 'web' },
+        { id: 'web-personalizada-3', name: '3 páginas', price: 400, type: inputType.RADIO, group: 'web' },
+        { id: 'web-personalizada-4', name: '4 páginas', price: 600, type: inputType.RADIO, group: 'web' },
+      ]
+    },
+  ];
 
+  webOptionsExtra: planOption[] = [
     { id: 'paginas-extra', name: 'Páginas extra (x2)', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
     { id: 'seo', name: 'SEO', price: 50, type: inputType.CHECKBOX, group: 'web-extra' },
     { id: 'blog', name: 'Blog', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
     { id: 'multilenguaje', name: 'Multilenguaje (2 idiomas)', price: 100, type: inputType.CHECKBOX, group: 'web-extra' },
     { id: 'analytics', name: 'Google Analytics', price: 25, type: inputType.CHECKBOX, group: 'web-extra' },
-  ];
+  ]
 
   // Sección Redes Sociales
   socialOptions: planOption[] = [
@@ -69,17 +80,18 @@ export class PlanCustomizationComponent {
     { id: 'branding', name: 'Diseño branding redes', price: 60 },
   ];
 
+
   get priceMonthly(): number {
     let total = 0;
 
     // Precio base
     const web = this.webOptions.find((w) => w.id === this.selectedWeb);
     if (this.paymentMode === paymentModeEnum.MONTHLY) {
-      if (web) total += web.price / 10 - 5;
+      if (web && web.price) total += web.price / 10 - 5;
     }
 
     const social = this.socialOptions.find((s) => s.id === this.selectedSocial);
-    if (social) total += social.price;
+    if (social && social.price) total += social.price;
 
     return total;
   }
@@ -89,7 +101,7 @@ export class PlanCustomizationComponent {
     // Precio base
     const web = this.webOptions.find((w) => w.id === this.selectedWeb);
     if (this.paymentMode === paymentModeEnum.ONE_TIME) {
-      if (web) total += web.price;
+      if (web && web.price) total += web.price;
     }
 
     // const social = this.socialOptions.find((s) => s.id === this.selectedSocial);
