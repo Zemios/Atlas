@@ -153,12 +153,12 @@
           <div class="flex flex-wrap justify-center gap-2">
             @for (platform of socialPlatforms; track $index) {
               <button class="py-2 px-3 rounded-3xl border font-bold duration-75"
+              [class]="
+                selectedSocialPlatforms.includes(platform.id) ? platform.class + ' text-white hover:opacity-75 ' : platform.hoverClass + ' active:text-white focus-visible:text-white'"
                 (click)="
                   selectedSocialPlatforms.includes(platform.id)
                     ? selectedSocialPlatforms.splice(selectedSocialPlatforms.indexOf(platform.id), 1)
                     : selectedSocialPlatforms.push(platform.id)"
-                [class]="
-                  selectedSocialPlatforms.includes(platform.id) ? platform.class + ' text-white hover:to-red-400 hover:from-red-400 hover:bg-red-400 ' : platform.hoverClass + ' active:text-white'"
               >
                 <i class="bi bi-{{platform.id}}"></i> {{platform.name}}
               </button>

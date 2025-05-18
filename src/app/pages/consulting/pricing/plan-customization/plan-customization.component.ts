@@ -44,9 +44,9 @@ export class PlanCustomizationComponent {
 
   // Sección Web
   webOptions: planOption[] = [
-    { id: 'web_basic', name: 'Web Básica', price: 300, type: inputType.RADIO, group: 'web' },
-    { id: 'web_ecommerce', name: 'Tienda Online', price: 500, type: inputType.RADIO, group: 'web' },
-    { id: 'web_app', name: 'Aplicación Web', price: 1200, type: inputType.RADIO, group: 'web' },
+    { id: 'web_basic', name: 'Web Básica', price: 500, type: inputType.RADIO, group: 'web' },
+    { id: 'web_ecommerce', name: 'Tienda Online', price: 1500, type: inputType.RADIO, group: 'web' },
+    { id: 'web_app', name: 'Aplicación Web', price: 2000, type: inputType.RADIO, group: 'web' },
   ];
 
   webOptionsExtra: planOption[] = [
@@ -60,11 +60,15 @@ export class PlanCustomizationComponent {
   // Sección Redes Sociales
 
   socialPlatforms = [
-    { id: 'facebook', name: 'Facebook', price: 50, class: 'bg-blue-700', hoverClass: 'hover:bg-blue-700' },
-    { id: 'instagram', name: 'Instagram', price: 50, class: 'bg-gradient-to-bl from-purple-500 to-orange-500', hoverClass: 'hover:bg-gradient-to-bl from-purple-500 to-orange-500' },
-    { id: 'twitter-x', name: 'Twitter / X', price: 50, class: 'bg-black', hoverClass: 'hover:bg-black' },
-    { id: 'linkedin', name: 'LinkedIn', price: 50, class: 'bg-blue-600', hoverClass: 'hover:bg-blue-600' },
-    { id: 'tiktok', name: 'TikTok', price: 50, class: 'bg-black', hoverClass: 'hover:bg-black' },
+    { id: 'facebook', name: 'Facebook', price: 50, class: 'bg-blue-700', hoverClass: 'focus-visible:bg-blue-700 active:bg-blue-800' },
+    {
+      id: 'instagram', name: 'Instagram', price: 50,
+      class: 'bg-gradient-to-bl from-purple-500 to-orange-500',
+      hoverClass: 'focus-visible:bg-gradient-to-bl focus-visible:from-purple-500 focus-visible:to-orange-500 active:bg-gradient-to-bl active:from-purple-600 active:to-orange-600'
+    },
+    { id: 'twitter-x', name: 'Twitter / X', price: 50, class: 'bg-black', hoverClass: 'focus-visible:bg-black active:bg-neutral-800' },
+    { id: 'linkedin', name: 'LinkedIn', price: 60, class: 'bg-blue-600', hoverClass: 'focus-visible:bg-blue-600 active:bg-blue-700' },
+    { id: 'tiktok', name: 'TikTok', price: 60, class: 'bg-black', hoverClass: 'focus-visible:bg-black active:bg-neutral-800' },
   ]
   socialOptionsExtra: planOption[] = [
     { id: 'informe', name: 'Informe de rendimiento', price: 20 },
