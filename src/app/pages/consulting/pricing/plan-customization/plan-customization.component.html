@@ -47,10 +47,12 @@
           Pago mensual
         </button>
 
-        @if (this.selectedWeb != 'no-web' || this.pagesCount > 1 || this.selectedWebExtras.length > 0) {
-          <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteWeb()">
-            <i class="bi bi-x-lg"></i>
-          </button>
+        @if (this.selectedWeb != 'no-web') {
+          @if (this.selectedWeb != 'no-web' || this.pagesCount > 1 || this.selectedWebExtras.length > 0) {
+            <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteWeb()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
         }
       </div>
 
@@ -82,7 +84,8 @@
             </label>
         }
       </div>
-      <div class="p-4 bg-white rounded-lg border border-gray-200">
+      @if (this.selectedWeb != 'no-web') {
+      <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-left">
         <label class="block font-medium mb-2">Páginas Web:</label>
         <input
           type="range"
@@ -101,8 +104,8 @@
         </div>
       </div>
 
-      <div class="p-4 bg-white rounded-lg border border-gray-200">
-        <label class="block font-medium mb-2">Extras:</label>
+      <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-right">
+        <label class="block font-medium mb-2" >Extras:</label>
         @for (extra of webOptionsExtra; track $index) {
           <div 
           class="flex justify-between cursor-pointer active:bg-blue-100 active:text-blue-600 active:border-blue-400 items-center border-2 rounded-3xl mb-2 px-2 py-1"
@@ -128,6 +131,8 @@
           </div>
         }
       </div>
+    }
+
     </section>
 
     <!-- Redes Sociales -->
@@ -135,10 +140,12 @@
     <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
       <div class="flex">
         <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
-        @if (this.selectedSocialPlatforms.length > 0 || this.postPerWeek > 2 || this.selectedSocialExtras.length > 0) {
-          <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteSocial()">
-            <i class="bi bi-x-lg"></i>
-          </button>
+        @if (this.selectedSocialPlatforms.length > 0) {
+          @if (this.selectedSocialPlatforms.length > 0 || this.postPerWeek > 2 || this.selectedSocialExtras.length > 0) {
+            <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteSocial()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
         }
       </div>
         <div class="p-4 bg-white rounded-lg border border-gray-200">
@@ -166,23 +173,26 @@
           </div>
         </div>
         
-        <div class="p-4 bg-white rounded-lg border border-gray-200">
-          <label class="block font-medium mb-2">Publicaciones semanales:</label>
-          <input
+        @if (this.selectedSocialPlatforms.length > 0) {
+          <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-left">
+            <label class="block font-medium mb-2">Publicaciones semanales:</label>
+            <input
             type="range"
             min="2"
             max="5"
+            [disabled]="selectedSocialPlatforms.length == 0"
             [(ngModel)]="postPerWeek"
             class="w-full"
-          />
-          <div class="flex gap-3 mt-2 items-center">
-            <div class="text-blue-700 font-bold">{{ postPerWeek }} por Semana </div> 
-            @if (postPerWeek > 2) {
-              <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(postPerWeek-2) * 50}}€ /mes</span>
-            }
+            />
+            <div class="flex gap-3 mt-2 items-center">
+              <div class="text-blue-700 font-bold">{{ postPerWeek }} por Semana </div> 
+              @if (postPerWeek > 2) {
+                <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(postPerWeek-2) * 50}}€ /mes</span>
+              }
+            </div>
           </div>
-        </div>
-        <div class="p-4 bg-white rounded-lg border">
+
+        <div class="p-4 bg-white rounded-lg border" data-aos="flip-right">
           <label class="block font-medium mb-2">Extras Sociales:</label>
           @for (extra of socialOptionsExtra; track $index) {
             <label 
@@ -201,6 +211,7 @@
             </label>
           }
         </div>
+      }
     </section>
   </section>
 

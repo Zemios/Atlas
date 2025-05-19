@@ -1,6 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import AOS from 'aos';
 
 enum inputType {
   RADIO = 'radio',
@@ -41,6 +43,17 @@ export class PlanCustomizationComponent {
   selectedSocialPlatforms: string[] = []
   selectedSocialExtras: string[] = [];
   postPerWeek: number = 2;
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private route: ActivatedRoute,
+  ) { }
+  ngOnInit() {
+
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.init();
+    }
+  }
 
   // Sección Web
   webOptions: planOption[] = [
@@ -101,10 +114,6 @@ export class PlanCustomizationComponent {
       }
     }
 
-    // Post per week
-    if (this.postPerWeek > 2) {
-      total += (this.postPerWeek - 2) * 50;
-    }
 
     // Precio redes sociales
     const social = this.socialPlatforms.filter((s) => this.selectedSocialPlatforms.includes(s.id));
@@ -112,9 +121,14 @@ export class PlanCustomizationComponent {
       if (s.price) total += s.price;
     });
 
+    // Post per week
+    if (this.postPerWeek > 2 && social.length > 0) {
+      total += (this.postPerWeek - 2) * 50;
+    }
+
     const socialExtras = this.socialOptionsExtra.filter((s) => this.selectedSocialExtras.includes(s.id));
     socialExtras.forEach((s) => {
-      if (s.price) total += s.price;
+      if (s.price && social.length > 0) total += s.price;
     });
 
     return total;
