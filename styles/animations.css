@@ -1,0 +1,101 @@
+@import '../global.css';
+@keyframes body-color { 
+    0% { background-color: var(--initial-background-color); }
+    100% { background-color: var(--final-background-color); }
+}
+@keyframes initial-appear {
+    0% {
+        margin-right: -5em;
+    }
+    100% {
+        margin-right: 0;
+    }
+}
+@keyframes lightmode-expanding-circle {
+    0% {
+        width: 0em;
+        height: 0em;
+    }
+    100% {
+        width: 3000px;
+        height: 3000px;
+        display: none;
+    }
+}
+@keyframes bounce {
+    0% {
+        transform: translateY(-300px);
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 1);
+    }
+    20%, 55%, 80% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.5, 1, 1, 1);
+    }
+    40% {
+        transform: translateY(-150px);
+        animation-timing-function: cubic-bezier(0.7, 0, 1, 1);
+    }
+    70% {
+        transform: translateY(-75px);
+        animation-timing-function: cubic-bezier(0.7, 0, 1, 1);
+    }
+    90% {
+        transform: translateY(-30px);
+        animation-timing-function: cubic-bezier(0.7, 0, 1, 1);
+    }
+    100% {
+        transform: translateY(0);
+        display: none;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        filter: blur(0.2em);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+        filter: blur(0.1em);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+        filter: blur(0);
+        color: var(--initial-background-color);
+        text-shadow: 0px 0px 0.2em var(--final-background-color), 0px 0px 0.4em var(--final-background-color), 0px 0px 0.6em var(--final-background-color), 0px 0px 0.8em var(--final-background-color), 0px 0px 1em var(--final-background-color);
+    }
+}
+
+@keyframes expaned-circle {
+    0% {
+        width: 0px;
+        height: 0px;
+    }
+    10% {
+        width: 200px;
+        height: 200px;
+    }
+    20% {
+        width: 100px;
+        height: 100px;
+    }
+    30% {
+        width: 300px;
+        height: 300px;
+    }
+    40% {
+        width: 150px;
+        height: 150px;
+    }
+
+    100% {
+        width: 3500px;
+        height: 3500px;
+        display: none;
+    }
+}
