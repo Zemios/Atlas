@@ -1,4 +1,4 @@
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import AOS from 'aos';
 import { Router, RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-consulting',
   imports: [RouterLink, FormsModule],
   templateUrl: './consulting.component.html',
-  styleUrls: ['consulting.component.scss'],
+  styleUrls: ['consulting.component.css'],
 })
 export class ConsultingComponent implements OnInit {
   constructor(

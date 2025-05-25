@@ -1,53 +1,226 @@
-<div class="m-5 max-w-[1200px] rounded-3xl bg-white p-8 text-gray-700">
-  <div class="mb-8 flex items-center justify-between">
-    <h2 class="text-4xl font-bold text-blue-700"><i class="bi bi-ui-checks-grid me-2"></i>Configurador Web</h2>
-    <div class="rounded-xl border-2 border-green-500 bg-green-100 p-4 text-right">
-      <p class="m-0 text-lg font-semibold text-green-600">Precio Estimado</p>
-      <h1 class="m-0 text-5xl text-green-600">{{ price }} €</h1>
+<div class="flex justify-center items-center p-4">
+<div class="max-w-[1600px] rounded-3xl bg-white p-6 shadow-lg text-gray-800">
+  <!-- Encabezado -->
+  <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-blue-800 flex items-center gap-2 py-7">
+      <i class="bi bi-ui-checks-grid"></i> Configurador Web
+    </h2>
+
+    <div class="flex flex-row gap-4 md:gap-6 justify-end">
+      @if (price > 0 || priceMonthly <= 0) {
+        <div class="rounded-xl border-2 border-blue-500 bg-blue-100 px-5 py-3 text-right shadow-sm">
+          <p class="text-sm md:text-base font-medium text-blue-700">{{(price > 0 ) ? 'Precio Estimado': 'Introduce Preferencias'}}</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-blue-700">{{ (price > 0) ? (price + ' €') : '' }}</h1>
+        </div>
+      }
+      @if (priceMonthly > 0) {
+        <div class="rounded-xl border-2 border-blue-400 bg-blue-50 px-5 py-3 text-right shadow-sm">
+          <p class="text-sm md:text-base font-medium text-blue-600">Precio Mensual</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-blue-600">{{ priceMonthly }} €</h1>
+        </div>
+      }
     </div>
   </div>
 
-  <div class="grid grid-cols-1 gap-8">
-    <div>
-      <!-- Tipo de web -->
-      <h3 class="mb-4 text-xl text-blue-900"><i class="bi bi-laptop me-2"></i>¿Qué tipo de web necesitas?</h3>
-      <div class="mb-8 flex flex-wrap gap-4">
-        @for (type of typeOptions; track $index) {
-          <div class="option w-full" [class.active]="selectedType === type.id" (click)="selectedType = type.id">
-            <h4>{{ type.name }}</h4>
-            <p>Desde {{ type.price }}€</p>
-          </div>
+  <!-- Opciones -->
+  <section class="grid gap-6 md:grid-cols-2">
+    <!-- Web -->
+    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
+      <div class="flex flex-wrap gap-3 items-center">
+        <h3 class="text-2xl font-bold text-blue-700">Web</h3>
+        <button
+          class="rounded-full border text-blue-700 border-blue-500 px-4 py-1 text-xs font-medium transition"
+          [ngClass]="{
+            'bg-blue-100': paymentMode === 'one-time',
+            'bg-white': paymentMode !== 'one-time'
+          }"
+          (click)="paymentMode = paymentModeEnum.ONE_TIME">
+          Pago único
+        </button>
+        <button
+          class="rounded-full border text-blue-600 border-blue-400 px-4 py-1 text-xs font-medium transition"
+          [ngClass]="{
+            'bg-blue-50': paymentMode === 'monthly',
+            'bg-white': paymentMode !== 'monthly'
+          }"
+          (click)="paymentMode = paymentModeEnum.MONTHLY">
+          Pago mensual
+        </button>
+
+        @if (this.selectedWeb != 'no-web') {
+          @if (this.selectedWeb != 'no-web' || this.pagesCount > 1 || this.selectedWebExtras.length > 0) {
+            <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteWeb()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
         }
       </div>
 
-      <!-- Diseño personalizado -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-brush me-2"></i>¿Quieres diseño personalizado?</h3>
-        <div class="checkbox-wrapper-14">
-          <input id="design-switch" type="checkbox" class="switch" [checked]="selectedDesign === 'custom'" (change)="selectedDesign = $event.target ? 'custom' : 'default'" />
-          <label for="design-switch">
-            {{ selectedDesign === 'custom' ? 'Sí, ¡diseño personalizado (+' + designPrice + '€)' : 'No, diseño básico (Incluido)' }}
-          </label>
-        </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 items-center justify-around">
+        @for (web of webOptions; track $index) {
+              <label class="rounded-lg border flex-col items-center w-full flex bg-white p-3 hover:border-blue-500 cursor-pointer transition"
+                [class]="selectedWeb == web.id ? 'border-blue-500' : 'border-gray-200'"
+              >
+                @if (web.id == 'web_basic' || web.id == 'web_app' || web.id == 'web_ecommerce') {
+                <img src="images/consulting/plan_{{web.id}}.svg" class="w-32 md:w-40 lg:w-52 m-4">
+                }
+              <div>
+                <input
+                type="radio"
+                name="web"
+                [value]="web.id"
+                class="mr-2"
+                [(ngModel)]="selectedWeb"
+                />
+                <span class="font-medium">{{ web.name }}</span>
+                <span class="flex justify-center md:justify-end mt-2">
+                @if (web.price && web.price > 0) {
+                  <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl border border-blue-600 text-blue-600">
+                    {{ paymentMode == paymentModeEnum.ONE_TIME ? web.price + priceAjustment + '€' : (web.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                  </p>
+                }
+                </span>
+              </div>
+            </label>
+        }
       </div>
-
-      <!-- Extras -->
-      <div>
-        <h3 class="mb-4 flex items-center text-xl text-blue-900"><i class="bi bi-puzzle me-2"></i>Extras</h3>
-        <div class="flex flex-wrap gap-6">
-          @for (extra of extraOptions; track $index) {
-            <div class="checkbox-wrapper-13">
-              <input id="extra-{{ extra.id }}" type="checkbox" [checked]="selectedExtras.includes(extra.id)" (change)="toggleExtra(extra.id)" />
-              <label for="extra-{{ extra.id }}"> {{ extra.name }} +{{ extra.price }}€ </label>
-            </div>
+      @if (this.selectedWeb != 'no-web') {
+      <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-left">
+        <label class="block font-medium mb-2">Páginas Web:</label>
+        <input
+          type="range"
+          min="1"
+          max="4"
+          [(ngModel)]="pagesCount"
+          class="w-full"
+        />
+        <div class="flex gap-3 mt-2 items-center">
+          <div class="text-blue-700 font-bold">{{ pagesCount }} Página{{ pagesCount > 1 ? 's' : ''}}</div>
+          @if (pagesCount > 1 && paymentMode == paymentModeEnum.ONE_TIME) {
+            <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(pagesCount-1) * 50 }}€</span>
+          } @else if (pagesCount > 1 && paymentMode == paymentModeEnum.MONTHLY) {
+            <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(pagesCount-1) * 5 }}€ /mes</span>
           }
         </div>
       </div>
 
-      <!-- Botón de envío -->
-      <div class="text-center">
-        <button class="mt-4 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700" (click)="submit()">Enviar configuración</button>
+      <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-right">
+        <label class="block font-medium mb-2" >Extras:</label>
+        @for (extra of webOptionsExtra; track $index) {
+          <div 
+          class="flex justify-between cursor-pointer active:bg-blue-100 active:text-blue-600 active:border-blue-400 items-center border-2 rounded-3xl mb-2 px-2 py-1"
+          [class]="
+            selectedWebExtras.includes(extra.id) ? 'bg-blue-500 text-white border-blue-600' : ''"
+            (click)="
+              selectedWebExtras.includes(extra.id)
+                ? selectedWebExtras.splice(selectedWebExtras.indexOf(extra.id), 1)
+                : selectedWebExtras.push(extra.id)"
+          >
+            <div class="grid max-[354px]:grid-cols-1 grid-cols-2 gap-2 w-full justify-between items-center p-2">
+              <span class="font-medium">{{ extra.name }}</span>
+              @if (extra.price && extra.price > 0) {
+                <p class="bg-blue-100 m-auto me-0 text-xs px-2 w-fit rounded-3xl text-blue-600">
+                  @if ((extra.price/10-5) > 0) {
+                    + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : (extra.price / 10) - 5 + priceAjustment + '€ /mes' }}
+                  } @else {
+                    + {{ paymentMode == paymentModeEnum.ONE_TIME ? extra.price + priceAjustment + '€' : 5 + priceAjustment + '€ /mes' }}
+                  }
+                </p>
+              }
+            </div>
+          </div>
+        }
       </div>
-    </div>
+    }
+
+    </section>
+
+    <!-- Redes Sociales -->
+     
+    <section class="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-4 shadow-sm">
+      <div class="flex">
+        <h3 class="text-2xl font-bold text-blue-700 ">Redes Sociales</h3>
+        @if (this.selectedSocialPlatforms.length > 0) {
+          @if (this.selectedSocialPlatforms.length > 0 || this.postPerWeek > 2 || this.selectedSocialExtras.length > 0) {
+            <button class="me-0 m-auto text-xl bg-red-600 text-white p-2 py-1 rounded-xl cursor-pointer" (click)="deleteSocial()">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          }
+        }
+      </div>
+        <div class="p-4 bg-white rounded-lg border border-gray-200">
+          <div class="flex justify-between mb-2 items-center">
+            <label class="block font-medium">Redes sociales</label>
+            @if (socialPlatformsPrice > 0) {
+              <p class="bg-blue-100 text-xs px-2 w-fit rounded-3xl text-blue-600">
+                {{socialPlatformsPrice}}€ /mes
+              </p>
+            }
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            @for (platform of socialPlatforms; track $index) {
+              <button class="py-2 px-3 rounded-3xl border font-bold duration-75"
+              [class]="
+                selectedSocialPlatforms.includes(platform.id) ? platform.class + ' text-white hover:opacity-75 ' : platform.hoverClass + ' active:text-white focus-visible:text-white'"
+                (click)="
+                  selectedSocialPlatforms.includes(platform.id)
+                    ? selectedSocialPlatforms.splice(selectedSocialPlatforms.indexOf(platform.id), 1)
+                    : selectedSocialPlatforms.push(platform.id)"
+              >
+                <i class="bi bi-{{platform.id}}"></i> {{platform.name}}
+              </button>
+            }
+          </div>
+        </div>
+        
+        @if (this.selectedSocialPlatforms.length > 0) {
+          <div class="p-4 bg-white rounded-lg border border-gray-200" data-aos="flip-left">
+            <label class="block font-medium mb-2">Publicaciones semanales:</label>
+            <input
+            type="range"
+            min="2"
+            max="5"
+            [disabled]="selectedSocialPlatforms.length == 0"
+            [(ngModel)]="postPerWeek"
+            class="w-full"
+            />
+            <div class="flex gap-3 mt-2 items-center">
+              <div class="text-blue-700 font-bold">{{ postPerWeek }} por Semana </div> 
+              @if (postPerWeek > 2) {
+                <span class="px-2 text-xs rounded-3xl bg-blue-100 text-blue-600">+ {{(postPerWeek-2) * 50}}€ /mes</span>
+              }
+            </div>
+          </div>
+
+        <div class="p-4 bg-white rounded-lg border" data-aos="flip-right">
+          <label class="block font-medium mb-2">Extras Sociales:</label>
+          @for (extra of socialOptionsExtra; track $index) {
+            <label 
+            class="flex justify-between cursor-pointer active:bg-blue-100 active:text-blue-600 active:border-blue-400 items-center border-2 rounded-3xl mb-2 px-2 py-1"
+            [class]="
+              selectedSocialExtras.includes(extra.id) ? 'bg-blue-500 text-white border-blue-600' : ''"
+              (click)="
+                selectedSocialExtras.includes(extra.id)
+                  ? selectedSocialExtras.splice(selectedSocialExtras.indexOf(extra.id), 1)
+                  : selectedSocialExtras.push(extra.id)"
+            >
+            <div class="grid max-[354px]:grid-cols-1 grid-cols-2 gap-2 w-full justify-between items-center p-2">
+                <span class="font-medium">{{ extra.name }}</span>
+                <span class="px-2 text-xs rounded-3xl m-auto me-0 bg-blue-100 text-blue-600">+ {{ extra.price }}€ /mes</span>
+              </div>
+            </label>
+          }
+        </div>
+      }
+    </section>
+  </section>
+
+  <!-- Botón de envío -->
+  <div class="mt-8 text-center">
+    <button (click)="submit()"
+      class="rounded-full bg-blue-700 px-6 py-3 text-white font-semibold shadow-md transition hover:bg-blue-800">
+      Enviar configuración
+    </button>
   </div>
+</div>
 </div>

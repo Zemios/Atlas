@@ -1,29 +1,30 @@
-@use 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import url('bootstrap-icons/font/bootstrap-icons.min.css');
+@import url('highlight.js/styles/github.css');
 
-// @import 'flag-icons/css/flag-icons.min.css';
-@import 'highlight.js/styles/github.css';
+/* @import 'flag-icons/css/flag-icons.min.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .button {
   @apply rounded-full bg-blue-900 px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-800;
+}
 
-  &-highlight {
-    @apply rounded-full bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-600;
-  }
+.button-highlight {
+  @apply rounded-full bg-blue-500 px-4 py-2 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105 hover:bg-blue-600;
+}
 
-  &-white {
-    @apply rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 hover:bg-gray-100;
+.button-white {
+  @apply rounded-full bg-white px-8 py-3 text-lg font-semibold text-blue-900 transition-transform duration-75 hover:scale-105 hover:bg-gray-100;
+}
 
-    &-outline {
-      @apply rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
-    }
-  }
+.button-white-outline {
+  @apply rounded-full border-2 border-white bg-transparent px-8 py-3 text-lg font-semibold text-white transition-transform duration-75 hover:scale-105;
+}
 
-  &-close {
-    @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent px-4 py-3 transition duration-75 hover:scale-105;
-  }
+.button-close {
+  @apply absolute right-0 top-0 flex items-center justify-center rounded-full bg-transparent px-4 py-3 transition duration-75 hover:scale-105;
 }
 
 html,
@@ -65,8 +66,10 @@ input[type='range']::-moz-range-thumb {
 
 .banner {
   min-height: calc(100vh - 76px);
+}
 
-  @media (width >= 1024px) {
+@media (width >= 1024px) {
+  .banner {
     min-height: calc(100vh - 88px);
   }
 }
@@ -90,24 +93,23 @@ input[type='range']::-moz-range-thumb {
 }
 
 /* MEDIA QUERYS TEMPLATE */
-// @media (width >= 480px) {
-// }
 
-// @media (width >= 768px) {
-// }
-
-// @media (width >= 1024px) {
-// }
-
-// @media (width >= 1200px) {
-// }
-
-// @media (width >= 1920px) {
-// }
+/* @media (width >= 480px) {
+}
+@media (width >= 768px) {
+}
+@media (width >= 1024px) {
+}
+@media (width >= 1200px) {
+}
+@media (width >= 1920px) {
+} */
 
 .mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
   /* prettier-ignore */
-  background-color: unset !important; // eslint-disable-line declaration-no-important
+  background-color: unset !important;
+
+  /* eslint-disable-line declaration-no-important */
 }
 
 .custom-snackbar {
@@ -135,6 +137,6 @@ input[type='range']::-moz-range-thumb {
   background-color: #dc3545;
 }
 
-// .custom-snackbar span {
-//   padding: 4px 8px;
-// }
+/* .custom-snackbar span {
+  padding: 4px 8px;
+} */
